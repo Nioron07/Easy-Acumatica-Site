@@ -1,0 +1,148 @@
+<template>
+  <div>
+    <v-container fluid>
+      <v-row>
+        <v-col cols="12" md="9">
+          <v-container>
+            <section id="introduction" class="mb-12">
+              <h1 class="text-h3 text-primary font-weight-bold">
+                Codes Service
+              </h1>
+              <p class="mt-4 text-body-1" style="max-width: 800px;">
+                The `CodesService` is used to create various payroll-related "Code" entities in Acumatica. This service works in tandem with the Code Builders to construct and send the necessary payloads to the API.
+              </p>
+              <v-alert
+                type="info"
+                variant="tonal"
+                class="mt-4"
+                border="start"
+                density="compact"
+              >
+                Ensure the Payroll and US Payroll features are enabled in your Acumatica instance (CS100000) to use this service.
+              </v-alert>
+            </section>
+
+            <section id="importing-helpers" class="mb-12">
+              <h2 class="text-h4 font-weight-medium mb-4">Importing Helpers</h2>
+              <p class="text-body-1 mb-4">
+                To create the different types of codes, you will need to import their corresponding builder classes from `easy_acumatica.models.code_builder`.
+              </p>
+              <CodeSnippet :code="importingExample" />
+            </section>
+
+            <section id="methods" class="mb-12">
+                <h2 class="text-h4 font-weight-medium mb-4">Service Methods</h2>
+
+                <v-card id="create_deduction_benefit_code" class="mb-8" variant="outlined">
+                    <v-card-title class="text-h5"><code>create_deduction_benefit_code(api_version, builder)</code></v-card-title>
+                    <v-card-text>
+                        <p class="mb-4">This method creates a new Deduction or Benefit code, which is used to manage employee payroll deductions (like health insurance) or company contributions (like a 401k match). You must provide a `DeductionBenefitCodeBuilder` object containing all the necessary details.</p>
+                        <CodeSnippet :code="createDeductionExample" />
+                    </v-card-text>
+                </v-card>
+
+                <v-card id="create_earning_type_code" class="mb-8" variant="outlined">
+                    <v-card-title class="text-h5"><code>create_earning_type_code(api_version, builder)</code></v-card-title>
+                    <v-card-text>
+                        <p class="mb-4">This method creates a new Earning Type code, which defines different types of compensation an employee can receive, such as regular wages, overtime, bonuses, or commissions.</p>
+                        <CodeSnippet :code="createEarningExample" />
+                    </v-card-text>
+                </v-card>
+
+                <v-card id="create_payroll_wcc_code" class="mb-8" variant="outlined">
+                    <v-card-title class="text-h5"><code>create_payroll_wcc_code(api_version, builder)</code></v-card-title>
+                    <v-card-text>
+                        <p class="mb-4">This method is used to define Workers' Compensation Class (WCC) codes for a specific country. The builder for this method is structured to first set the country, and then add one or more WCC codes to it.</p>
+                        <CodeSnippet :code="createWccExample" />
+                    </v-card-text>
+                </v-card>
+            </section>
+
+          </v-container>
+        </v-col>
+
+        <v-col md="3" class="d-none d-md-block">
+          <OnPageNav :items="onPageNavItems" />
+        </v-col>
+      </v-row>
+    </v-container>
+    <PageFooter />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import PageFooter from '~/components/PythonPageFooter.vue';
+import CodeSnippet from '~/components/CodeSnippet.vue';
+import OnPageNav from '~/components/OnPageNav.vue';
+
+const onPageNavItems = ref([
+  { id: 'introduction', title: 'Introduction' },
+  { id: 'importing-helpers', title: 'Importing Helpers' },
+  { id: 'methods', title: 'Service Methods' },
+  { id: 'create_deduction_benefit_code', title: '  - Deduction/Benefit Code' },
+  { id: 'create_earning_type_code', title: '  - Earning Type Code' },
+  { id: 'create_payroll_wcc_code', title: '  - Payroll WCC Code' },
+]);
+
+const importingExample = ref(`
+from easy_acumatica.models.code_builder import (
+    DeductionBenefitCodeBuilder,
+    EarningTypeCodeBuilder,
+    PayrollWCCCodeBuilder
+)
+`);
+
+const createDeductionExample = ref(`
+# 1. Build the payload for a new 401k deduction code
+deduction_payload = (
+    DeductionBenefitCodeBuilder()
+    .code_id("401K")
+    .description("Employee 401k Contribution")
+    .contribution_type("DED")  # 'DED' for Deduction, 'BEN' for Benefit
+    .active(True)
+    .employee_deduction(calculation_method="GRS", percent=5.0)
+    .gl_accounts(deduction_liability_account="210100")
+)
+
+# 2. Call the service method to create the code
+new_code = client.codes.create_deduction_benefit_code(
+    "24.200.001",
+    builder=deduction_payload
+)
+`);
+
+const createEarningExample = ref(`
+# 1. Build the payload for a 'Bonus' earning type
+earning_payload = (
+    EarningTypeCodeBuilder()
+    .code_id("BONUS")
+    .description("Discretionary Bonus")
+    .category("Wage")
+    .accrue_time_off(False)
+    .active(True)
+)
+
+# 2. Call the service method
+new_earning_type = client.codes.create_earning_type_code(
+    "24.200.001",
+    builder=earning_payload
+)
+`);
+
+const createWccExample = ref(`
+# 1. Build the payload for US-based WCC codes
+wcc_payload = (
+    PayrollWCCCodeBuilder()
+    .country("US")
+    .add_wcc_code(wcc_code="8810", description="Clerical Office Employees")
+    .add_wcc_code(wcc_code="7219", description="Trucking and Hauling")
+)
+
+# 2. Call the service method
+new_wcc_codes = client.codes.create_payroll_wcc_code(
+    "24.200.001",
+    builder=wcc_payload
+)
+`);
+</script>
