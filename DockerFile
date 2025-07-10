@@ -1,0 +1,28 @@
+# Stage 1: Build the Nuxt.js application
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --frozen-lockfile # Use --frozen-lockfile for consistent builds
+COPY . .
+RUN npm run build
+
+# Stage 2: Create the production image
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV production
+ENV HOST 0.0.0.0
+ENV PORT 8080 # Cloud Run expects applications to listen on port 8080
+
+# Copy the entire built application output to the current working directory
+# The trailing slash on 'app/' means we're copying the contents *into* /app/ in the runner stage.
+COPY --from=build /app/.output/ ./
+
+# If package.json and node_modules are absolutely needed for some reason outside of .output,
+# you'd copy them like this. However, for a standard Nuxt 3 deployment on Nitro, they might be redundant.
+# Let's remove them for now to see if it fixes your error and reduces image size.
+# If your app fails to start after this change, we can re-add specific files.
+# COPY --from=build /app/package.json ./package.json
+# COPY --from=build /app/node_modules/ ./node_modules/ # This line is often unnecessary for Nuxt 3
+
+EXPOSE 8080
+CMD ["node", "server/index.mjs"] # This is the typical Nuxt 3 production entry point
