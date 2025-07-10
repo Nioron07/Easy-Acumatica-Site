@@ -1,0 +1,46 @@
+runtime: nodejs20
+env: standard
+
+instance_class: F2
+
+handlers:
+# 1. Handler for user-defined static files from your original `public/` directory
+# (e.g., favicon.ico, images, robots.txt copied to .output/public/)
+# This handles files like: /favicon.ico, /my-image.png etc.
+- url: /(.*\.(ico|jpg|jpeg|png|gif|webp|svg|woff|woff2|ttf|eot|xml|txt))$
+  static_files: .output/public/\1
+  upload: .output/public/.*\.(ico|jpg|jpeg|png|gif|webp|svg|woff|woff2|ttf|eot|xml|txt)$
+  expiration: 7d 0h
+  secure: always
+  redirect_http_response_code: 301
+
+# 2. Handler for ALL Nuxt.js generated static client-side assets (JS, CSS chunks, fonts, etc.)
+# This includes all files that Nuxt compiles and puts under .output/public/_nuxt/
+# It will catch /_nuxt/some-file.js, /_nuxt/css/style.css, etc.
+# We are intentionally NOT trying to exclude `builds/` here.
+# App Engine will try to serve these as static files.
+- url: /_nuxt/(.*) # Simple regex to match anything under /_nuxt/
+  static_files: .output/public/_nuxt/\1 # Serve from the corresponding path
+  upload: .output/public/_nuxt/.* # Upload anything under _nuxt/
+  expiration: 30d 0h
+  secure: always
+  redirect_http_response_code: 301
+
+# 3. CATCH-ALL: Everything else.
+# This is crucial for your SSR site. All your pages and any internal Nuxt assets
+# (like `_nuxt/builds/meta/*.json` and payload JSON files) that are *not*
+# actual physical static files in .output/public/_nuxt/ will be handled by your Node.js server.
+- url: /.*
+  script: auto # This will run your `npm run start` script
+  secure: always
+  redirect_http_response_code: 301
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 5
+  min_idle_instances: automatic
+  max_idle_instances: automatic
+  target_cpu_utilization: 0.6
+  target_throughput_utilization: 0.6
+
+entrypoint: npm run start
