@@ -6,7 +6,7 @@
           <strong>Easy-Acumatica v0.3.6</strong> — Created by Matthew Hirstius (Nioron07).
         </div>
         <div class="text-caption mt-1">
-          Want to see the NPM version? See it <a href="http://localhost:3000/npm/home">here</a>
+          Want to see the NPM version? See it <a href="http://easyacumatica.com/npm/home">here</a>
         </div>
         <div class="mt-2">
           <v-btn
