@@ -18,11 +18,10 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
   },
 ogImage: {
-    // You can define global defaults here
     defaults: {
-      component: 'OgImageTemplate', // We will create this component next
-      width: 1200,
-      height: 630,
+      component: 'OgImageTemplate', 
+      width: 1280,
+      height: 640,
     }
   },
   devtools: { enabled: true },

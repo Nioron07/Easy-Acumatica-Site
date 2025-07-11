@@ -3,7 +3,7 @@
     <v-row justify="center" align="center" class="text-center">
       <v-col cols="12" md="8">
         <div class="text-body-2">
-          <strong>Easy-Acumatica v0.3.7</strong> — Created and Developed by Matthew Hirstius (<a href="https://github.com/Nioron07">Nioron07</a>).
+          <strong>Easy-Acumatica v0.3.9</strong> — Created and Developed by Matthew Hirstius (<a href="https://github.com/Nioron07">Nioron07</a>).
         </div>
         <div class="text-caption mt-1">
           <div>Significant Contributions made by <a href="https://www.chrisyxu.com/">Chris Xu</a></div>

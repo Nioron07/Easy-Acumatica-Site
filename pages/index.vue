@@ -221,11 +221,11 @@ useSeoMeta({
   description: 'Simplify Acumatica ERP integrations with Easy-Acumatica. Python and Node.js wrappers for session management, OData querying, and fluent API calls. Automate business logic with ease.',
   ogTitle: 'Easy-Acumatica | Seamless Acumatica API Integration for Python & Node.js',
   ogDescription: 'Leverage Easy-Acumatica to quickly build robust integrations with Acumatica ERP. Handle complex REST API interactions with simple, intuitive code.',
-  ogImage: 'https://www.easyacumatica.com/social-images/home.png', // Ensure this absolute URL is correct
+  ogImage: 'https://easyacumatica.com/social-images/home.png', // Ensure this absolute URL is correct
   twitterCard: 'summary_large_image',
   twitterTitle: 'Easy-Acumatica: Acumatica REST API Made Easy',
   twitterDescription: 'Python and Node.js wrappers for Acumatica ERP REST API. Simplify development, automate tasks, and streamline your integrations.',
-  twitterImage: 'https://www.easyacumatica.com/social-images/home.png', // Ensure this absolute URL is correct
+  twitterImage: 'https://easyacumatica.com/social-images/home.png', // Ensure this absolute URL is correct
 });
 
 

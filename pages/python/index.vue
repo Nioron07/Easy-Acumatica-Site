@@ -7,7 +7,7 @@
             Easy-Acumatica for Python
           </h1>
           <div class="text-h6 text-grey-darken-1 font-weight-medium mt-2">
-            Version v0.3.7
+            Version v0.3.9
           </div>
           <p class="mt-4 text-body-1" style="max-width: 800px;">
             Easy-Acumatica is a typed Python wrapper for Acumatica ERP's contract-based REST API. It removes the boilerplate of manual HTTP calls while keeping everything transparent and test-friendly.
