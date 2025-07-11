@@ -42,7 +42,22 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
+useSeoMeta({
+  title: 'Companies Service | Acumatica Organization Structure API',
+  description: 'Retrieve your Acumatica organization\'s complete company and branch structure programmatically using the Easy-Acumatica CompaniesService.',
+  ogTitle: 'Acumatica Companies Service - Easy-Acumatica Docs',
+  ogDescription: 'A guide to fetching your Acumatica company and branch hierarchy using the Easy-Acumatica API wrapper.',
+  ogImage: '/__og_image__/og.png', // Uses the dynamically generated OG image
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Company & Branch API',
+  twitterDescription: 'Access your Acumatica organizational structure with the Easy-Acumatica CompaniesService.',
+  twitterImage: '/__og_image__/og.png', // Uses the dynamically generated OG image
+});
 
+defineOgImage({
+  title: 'Acumatica Companies Service',
+  description: 'Retrieve your organization\'s company and branch structure with Easy-Acumatica.',
+});
 const onPageNavItems = ref([
   { id: 'introduction', title: 'Introduction' },
   { id: 'methods', title: 'Service Method' },

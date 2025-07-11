@@ -5,7 +5,9 @@ export default defineNuxtConfig({
   // Add the @nuxtjs/seo module to the modules array
   modules: [
     'vuetify-nuxt-module',
-    '@nuxtjs/seo'
+    '@nuxtjs/seo',
+    '@nuxtjs/sitemap', // Keep this
+    '@nuxtjs/robots',  // Keep this
   ],
 
   // Add the site configuration object

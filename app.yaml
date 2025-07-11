@@ -1,34 +1,47 @@
 runtime: nodejs20
-env:     standard
+env: standard
 instance_class: F2
 
 handlers:
+  # 1. IMPORTANT: Explicitly route sitemap.xml to your Nuxt app.
+  # This ensures the Nuxt SEO module generates it dynamically.
+  - url: /sitemap.xml
+    script: auto
+    secure: always
+    redirect_http_response_code: 301
 
-# User-supplied static assets
-- url: /(.*\.(ico|jpg|jpeg|png|gif|webp|svg|woff2?|ttf|eot|xml|txt))$
-  static_files: .output/public/\1
-  upload:       .output/public/.*\.(ico|jpg|jpeg|png|gif|webp|svg|woff2?|ttf|eot|xml|txt)$
-  expiration: 7d 0h
-  secure: always
-  redirect_http_response_code: 301
+  # 2. IMPORTANT: Explicitly route robots.txt to your Nuxt app.
+  - url: /robots.txt
+    script: auto
+    secure: always
+    redirect_http_response_code: 301
 
-# 1️⃣  Manifest & other dynamic Nitro endpoints
-- url: /_nuxt/builds/.*
-  script: auto               # let your Node server generate the JSON
+  # User-supplied static assets (UPDATED: removed .xml and .txt)
+  # This handler should come after the specific dynamic routes for sitemap/robots.txt
+  - url: /(.*\.(ico|jpg|jpeg|png|gif|webp|svg|woff2?|ttf|eot))$
+    static_files: .output/public/\1
+    upload: .output/public/.*\.(ico|jpg|jpeg|png|gif|webp|svg|woff2?|ttf|eot)$
+    expiration: 7d 0h
+    secure: always
+    redirect_http_response_code: 301
 
-# 2️⃣  All remaining client assets (JS/CSS/fonts, etc.)
-- url: /_nuxt/(.*)
-  static_files: .output/public/_nuxt/\1
-  upload:      .output/public/_nuxt/.*
-  expiration: 30d 0h
-  secure: always
-  redirect_http_response_code: 301
+  # 1️⃣  Manifest & other dynamic Nitro endpoints
+  - url: /_nuxt/builds/.*
+    script: auto
 
-# Catch-all → SSR
-- url: /.*
-  script: auto
+  # 2️⃣  All remaining client assets (JS/CSS/fonts, etc.)
+  - url: /_nuxt/(.*)
+    static_files: .output/public/_nuxt/\1
+    upload: .output/public/_nuxt/.*
+    expiration: 30d 0h
+    secure: always
+    redirect_http_response_code: 301
 
-entrypoint: npm run start    # Nuxt’s default runs `node .output/server/index.mjs`
+  # Catch-all → SSR (this should always be the last handler)
+  - url: /.*
+    script: auto
+
+entrypoint: npm run start # Nuxt’s default runs `node .output/server/index.mjs`
 automatic_scaling:
   min_instances: 0
   max_instances: 5
