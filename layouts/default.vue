@@ -2,7 +2,7 @@
   <v-layout>
     <v-app-bar color="primary" density="compact" elevation="2">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-card color="white" width="35" height="35" class="mx-2 rounded" elevation="5" v-ripple>
+      <v-card color="white" width="30" height="30" class="mx-2 rounded" style="padding: 3px;" elevation="5" v-ripple>
         <v-img src="../assets/EasyAcumaticaLogo.png" alt="Logo" @click="$router.push('/')" class="hover"></v-img>
       </v-card>
 

@@ -60,5 +60,21 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 
-const installCommand = ref('pip install easy_acumatica');
+// --- SEO & OG Image Configuration ---
+
+// 1. Define the primary SEO metadata for this page.
+useSeoMeta({
+  title: 'How to Install Easy-Acumatica | Python Package (PyPI)',
+  description: "Learn how to install the easy-acumatica Python package from PyPI using pip. This guide covers all prerequisites for connecting to the Acumatica REST API.",
+});
+
+// 2. Tell Nuxt OG Image to generate an image for this page using your default template.
+defineOgImage({
+  title: 'Easy-Acumatica Installation',
+  description: 'Learn how to install the Python package using pip.',
+});
+
+// --- Page Content Data ---
+
+const installCommand = ref('pip install easy-acumatica');
 </script>

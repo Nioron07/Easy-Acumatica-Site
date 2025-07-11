@@ -83,6 +83,21 @@ import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 
+// --- SEO & OG Image Configuration ---
+
+useSeoMeta({
+  title: 'Accounts Service | Easy-Acumatica Docs',
+  description: 'Manage General Ledger (GL) Accounts and Account Groups in Acumatica using the Easy-Acumatica Python library AccountsService.',
+});
+
+defineOgImage({
+  title: 'Accounts Service',
+  description: 'Learn how to manage GL Accounts and Account Groups with the Easy-Acumatica library.',
+});
+
+
+// --- Page Content Data ---
+
 const onPageNavItems = ref([
   { id: 'introduction', title: 'Introduction' },
   { id: 'importing-helpers', title: 'Importing Helpers' },

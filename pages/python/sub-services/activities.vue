@@ -66,6 +66,21 @@ import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 
+// --- SEO & OG Image Configuration ---
+
+useSeoMeta({
+  title: 'Activities Service | Easy-Acumatica Docs',
+  description: 'Learn to create and link activities like notes, tasks, or events to records such as Cases, Customers, or Leads in Acumatica using the Easy-Acumatica Python library.',
+});
+
+defineOgImage({
+  title: 'Activities Service',
+  description: 'Create and link activities to any record in Acumatica with the Easy-Acumatica library.',
+});
+
+
+// --- Page Content Data ---
+
 const onPageNavItems = ref([
   { id: 'introduction', title: 'Introduction' },
   { id: 'linking-process', title: 'The Linking Process' },

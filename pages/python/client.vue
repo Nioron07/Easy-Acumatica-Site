@@ -92,6 +92,17 @@ import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 
+useSeoMeta({
+  // The page title displayed in the browser tab and search results.
+  // It should be specific, compelling, and include target keywords.
+  title: 'AcumaticaClient Guide for Python | Easy-Acumatica Docs',
+
+  // The meta description shown in search results. It should be a concise
+  // summary of the page content (approx. 155-160 characters).
+  description: 'In-depth guide to the AcumaticaClient, the core of the easy-acumatica Python package. Learn about initialization, session management, and accessing sub-services.',
+});
+defineOgImage({ 
+});
 // Data for the on-page navigation
 const onPageNavItems = ref([
   { id: 'introduction', title: 'Introduction' },

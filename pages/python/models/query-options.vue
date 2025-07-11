@@ -66,7 +66,12 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
-
+useSeoMeta({
+  title: 'QueryOptions & CustomField - Easy-Acumatica Python',
+  description: 'Learn how to use the QueryOptions container to bundle OData parameters and handle custom fields and filters in the easy-acumatica Python library.',
+  ogTitle: 'QueryOptions & CustomField Guide',
+  ogDescription: 'A guide to building powerful OData queries with QueryOptions for the easy-acumatica Python library.',
+})
 const onPageNavItems = ref([
   { id: 'introduction', title: 'Introduction' },
   { id: 'importing-helpers', title: 'Importing Helpers' },

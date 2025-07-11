@@ -67,6 +67,21 @@ import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 
+// --- SEO & OG Image Configuration ---
+
+useSeoMeta({
+  title: 'Actions Service | Easy-Acumatica Docs',
+  description: 'Learn how to execute business logic and custom actions on Acumatica records, like "Confirm Shipment" or "Release from Hold," using the ActionsService in the Easy-Acumatica Python library.',
+});
+
+defineOgImage({
+  title: 'Actions Service',
+  description: 'Execute business logic and custom actions on Acumatica records with the Easy-Acumatica library.',
+});
+
+
+// --- Page Content Data ---
+
 const onPageNavItems = ref([
   { id: 'introduction', title: 'Introduction' },
   { id: 'importing-helpers', title: 'Importing Helpers' },

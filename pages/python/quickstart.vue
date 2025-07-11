@@ -95,6 +95,23 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 
+// --- SEO & OG Image Configuration ---
+
+// 1. Define the primary SEO metadata for this page.
+useSeoMeta({
+  title: 'Easy-Acumatica Quickstart Guide | Python REST API',
+  description: 'Follow this quickstart guide to learn the fundamental workflow of the easy-acumatica Python package, from client initialization to filtering data with QueryOptions.',
+});
+
+// 2. Tell Nuxt OG Image to generate an image for this page using your default template.
+defineOgImage({
+  title: 'Easy-Acumatica Quickstart',
+  description: 'Learn the fundamental workflow of the Python library for the Acumatica REST API.',
+});
+
+
+// --- Page Content Data ---
+
 const clientInitializationCode = ref(`
 from easy_acumatica import AcumaticaClient
 

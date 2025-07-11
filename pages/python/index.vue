@@ -7,7 +7,7 @@
             Easy-Acumatica for Python
           </h1>
           <div class="text-h6 text-grey-darken-1 font-weight-medium mt-2">
-            Version v0.3.6
+            Version v0.3.7
           </div>
           <p class="mt-4 text-body-1" style="max-width: 800px;">
             Easy-Acumatica is a typed Python wrapper for Acumatica ERP's contract-based REST API. It removes the boilerplate of manual HTTP calls while keeping everything transparent and test-friendly.
@@ -69,6 +69,26 @@
 <script setup>
 import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
+
+// --- SEO & OG Image Configuration ---
+
+// 1. Define the page's primary metadata. This is required.
+useSeoMeta({
+  title: 'Easy-Acumatica for Python | A REST API Wrapper',
+  description: "Official documentation for the Easy-Acumatica Python package. A typed wrapper for Acumatica's contract-based REST API that removes boilerplate and simplifies integration.",
+});
+
+// 2. Tell Nuxt OG Image to generate an image for this page.
+// It will automatically use the title and description from useSeoMeta
+// and pass them as props to your default template (`OgImageTemplate.vue`).
+defineOgImage({
+  // You can override the props sent to your template here if you want
+  // a different title or description just for the image.
+  title: 'Easy-Acumatica for Python',
+  description: "The official docs for the Python wrapper for Acumatica's REST API.",
+});
+
+// --- Page Content Data ---
 
 const features = ref([
   {

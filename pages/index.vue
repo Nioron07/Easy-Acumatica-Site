@@ -7,16 +7,13 @@
       style="background: linear-gradient(45deg, #1976D2 30%, #64B5F6 90%); color: white;"
     >
       <v-col cols="12" md="10">
-        <v-card color="white" class="rounded-lg" width="fit-content" style="justify-self: center;" elevation="20">
+        <v-card color="white" class="rounded-lg pa-4" width="fit-content" style="justify-self: center;" elevation="20">
         <v-img
-          src="../assets/EasyAcumaticaLogo.png"
+          src="../assets/LargeEasyAcumaticaLogo.png"
           alt="Easy Acumatica Logo"
-          height="220"
-          width="220"
+          height="250"
+          width="600"
         ></v-img></v-card>
-        <h1 class="text-h2 text-md-h1 font-weight-light mb-4" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.3);">
-          easy-acumatica
-        </h1>
         <p class="text-h6 font-weight-regular mt-4 mx-auto" style="max-width: 700px;">
           A lightweight wrapper for Acumatica’s contract-based REST API, available for Python and Node.js.
         </p>
@@ -88,6 +85,25 @@ definePageMeta({
   layout: 'landing',
 });
 
+// --- SEO & OG Image Configuration ---
+
+// 1. Define the primary SEO metadata for the homepage.
+useSeoMeta({
+  title: 'Easy-Acumatica | Python & JS Wrappers for the Acumatica REST API',
+  description: 'The official documentation for Easy-Acumatica, a lightweight wrapper for Acumatica’s contract-based REST API, available for both Python and Node.js.',
+  ogTitle: 'Easy-Acumatica | Python & JS REST API Wrappers',
+  ogDescription: 'Simplify your Acumatica integration with a lightweight wrapper that handles sessions, OData queries, and payload creation for you.',
+  // It's best to have a dedicated, high-quality static image for your main homepage.
+  ogImage: '/social-images/home.png',
+  twitterCard: 'summary_large_image',
+});
+
+// 2. Since this is the main landing page, we won't use the dynamic generator.
+// Instead, you should create a high-quality static image named `home.png`
+// and place it in your `public/social-images/` directory.
+
+// --- Page Content Data ---
+
 const benefits = ref([
   {
     icon: 'mdi-cogs',
@@ -111,7 +127,6 @@ const benefits = ref([
   }
 ]);
 </script>
-
 <style scoped>
 .flex-grow-1 {
   flex-grow: 1;
