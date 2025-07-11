@@ -12,7 +12,7 @@ export default defineNuxtConfig({
 
   // Add the site configuration object
   site: {
-    url: 'https://www.easyacumatica.com', // Replace with your production domain
+    url: 'https://easyacumatica.com', // Replace with your production domain
     name: 'Easy-Acumatica Docs',
     description: 'A lightweight wrapper for Acumatica’s contract-based REST API, available for Python and Node.js.',
     defaultLocale: 'en',
