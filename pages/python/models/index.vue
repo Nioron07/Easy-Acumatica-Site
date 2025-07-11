@@ -56,6 +56,8 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 
 const builders = ref([
+  { title: 'BillBuilder', icon: 'mdi-page-next-outline', description: 'Constructs payloads to create or update Bill records. ', link: '/python/models/bill-builder'},
+  { title: 'BomBuilder', icon: 'mdi-family-tree', description:'Constructs payloads for creating Bill of Materials (BOM)', link: '/python/models/bom-builder'},
   { title: 'CaseBuilder', icon: 'mdi-face-agent', description: 'Constructs payloads for creating and updating Case records.', link: '/python/models/case-builder' },
   { title: 'Code Builders', icon: 'mdi-pound-box-outline', description: 'Build payloads for payroll-related code entities.', link: '/python/models/code-builder' },
   { title: 'ConfigurationEntryBuilder', icon: 'mdi-cogs', description: 'Builds payloads for product configurations in manufacturing.', link: '/python/models/configuration-entry-builder' },

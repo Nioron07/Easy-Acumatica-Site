@@ -68,6 +68,9 @@ const pythonNav = [
       { title: 'Accounts', link: '/python/sub-services/accounts' }, 
       { title: 'Actions', link: '/python/sub-services/actions' },
       { title: 'Activities', link: '/python/sub-services/activities' }, 
+      { title: 'Bills', link: '/python/sub-services/bills' },
+      { title: 'BOMs', link: '/python/sub-services/boms'},
+      { title: 'Business Accounts', link: '/python/sub-services/business-accounts'},
       { title: 'Cases', link: '/python/sub-services/cases' },
       { title: 'Codes', link: '/python/sub-services/codes' },
       { title: 'Companies', link: '/python/sub-services/companies' },
@@ -97,6 +100,8 @@ const pythonNav = [
     icon: 'mdi-hammer-wrench',
     items: [
       { title: 'Overview', link: '/python/models' },
+      { title: 'BillBuilder',  link: '/python/models/bill-builder'},
+      { title: 'BomBuilder', link: '/python/models/bom-builder'},
       { title: 'CaseBuilder', link: '/python/models/case-builder' },
       { title: 'CodeBuilder', link: '/python/models/code-builder' },
       { title: 'ConfigurationEntryBuilder', link: '/python/models/configuration-entry-builder' },
