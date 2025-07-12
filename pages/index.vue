@@ -1,19 +1,10 @@
 <template>
   <v-container fluid class="pa-0">
-    <v-row
-      justify="center"
-      align="center"
-      class="text-center py-16"
-      style="background: linear-gradient(45deg, #1976D2 30%, #64B5F6 90%); color: white;"
-    >
+    <v-row justify="center" align="center" class="text-center py-16"
+      style="background: linear-gradient(45deg, #1976D2 30%, #64B5F6 90%); color: white;">
       <v-col cols="12" md="10">
         <v-card color="white" class="rounded-lg pa-4" width="fit-content" style="justify-self: center;" elevation="20">
-          <v-img
-            src="../assets/LargeEasyAcumaticaLogo.png"
-            alt="Easy Acumatica Logo"
-            height="250"
-            width="600"
-          ></v-img>
+          <v-img src="../assets/LargeEasyAcumaticaLogo.webp" alt="Easy Acumatica Logo" height="250" width="600"></v-img>
         </v-card>
         <h1 class="text-h3 font-weight-bold mt-8" style="color: white;">
           Easy-Acumatica: Simplify Your Acumatica API Integrations
@@ -53,27 +44,25 @@
       <v-col cols="12" md="8" class="text-center">
         <h2 class="text-h4 font-weight-bold mb-4 text-primary">What is Easy-Acumatica?</h2>
         <p class="body-1 text-grey-darken-3" style="font-size: 1.1rem; line-height: 1.8;">
-          This package handles the complexities of Acumatica's REST API—like session management, URL building, and OData querying—so you can focus on your business logic. It provides a clean, object-oriented interface with fluent "builder" classes to make your integration code simple, readable, and maintainable.
+          This package handles the complexities of Acumatica's REST API—like session management, URL building, and OData
+          querying—so you can focus on your business logic. It provides a clean, object-oriented interface with fluent
+          "builder" classes to make your integration code simple, readable, and maintainable.
         </p>
       </v-col>
     </v-row>
 
     <v-row justify="center" class="py-16 bg-blue-lighten-5">
-       <v-col cols="12" class="text-center mb-8">
-          <h2 class="text-h4 font-weight-bold text-primary">Why Use This Package?</h2>
-        </v-col>
-      <v-col
-        v-for="benefit in benefits"
-        :key="benefit.title"
-        cols="12"
-        sm="6"
-        md="4"
-        class="d-flex me-1"
-      >
-        <v-card class="text-center pa-6 flex-grow-1" variant="outlined" elevation="8" style="border-top: 4px solid #1976D2;">
+      <v-col cols="12" class="text-center mb-8">
+        <h2 class="text-h4 font-weight-bold text-primary">Why Use This Package?</h2>
+      </v-col>
+      <v-col v-for="benefit in benefits" :key="benefit.title" cols="12" sm="6" md="4" class="d-flex me-1">
+        <v-card class="text-center pa-6 flex-grow-1" variant="outlined" elevation="8"
+          style="border-top: 4px solid #1976D2;">
           <v-icon :icon="benefit.icon" size="60" color="primary" class="mb-5"></v-icon>
           <h3 class="text-h6 font-weight-bold mb-2">{{ benefit.title }}</h3>
-          <p class="body-2 text-grey-darken-3">{{ benefit.description }}</p>
+          <p class="body-2 text-grey-darken-3">
+            {{ benefit.description }}
+          </p>
         </v-card>
       </v-col>
     </v-row>
@@ -86,7 +75,8 @@
         </p>
       </v-col>
       <v-col cols="20" sm="10" md="5" class="d-flex">
-        <v-card hover elevation="8" class="pa-6 flex-grow-1" to="/python/installation" style="border-top: 4px solid #1e89e3;">
+        <v-card hover elevation="8" class="pa-6 flex-grow-1" to="/python/installation"
+          style="border-top: 4px solid #1e89e3;">
           <v-card-item class="text-center">
             <v-icon size="60" color="blue-darken-1" class="mb-4">mdi-language-python</v-icon>
             <v-card-title class="text-h5 font-weight-medium">
@@ -97,7 +87,8 @@
         </v-card>
       </v-col>
       <v-col cols="20" sm="10" md="5" class="d-flex">
-        <v-card hover elevation="8" class="pa-6 flex-grow-1" to="/python/quickstart" style="border-top: 4px solid #41a243;">
+        <v-card hover elevation="8" class="pa-6 flex-grow-1" to="/python/quickstart"
+          style="border-top: 4px solid #41a243;">
           <v-card-item class="text-center">
             <v-icon size="60" color="green-darken-1" class="mb-4">mdi-rocket-launch</v-icon>
             <v-card-title class="text-h5 font-weight-medium">
@@ -146,7 +137,8 @@
             <v-card-title class="text-h5 font-weight-medium text-blue-darken-4">
               Explore Python Docs
             </v-card-title>
-            <v-card-subtitle class="mb-4">Access detailed guides for Python services and model builders.</v-card-subtitle>
+            <v-card-subtitle class="mb-4">Access detailed guides for Python services and model
+              builders.</v-card-subtitle>
           </v-card-item>
           <v-card-actions class="justify-center">
             <v-btn color="blue-darken-1" variant="flat" to="/python/sub-services">
@@ -168,7 +160,8 @@
             <v-card-title class="text-h5 font-weight-medium text-red-darken-4">
               Explore NPM Docs
             </v-card-title>
-            <v-card-subtitle class="mb-4">Access detailed guides for Node.js services and model builders.</v-card-subtitle>
+            <v-card-subtitle class="mb-4">Access detailed guides for Node.js services and model
+              builders.</v-card-subtitle>
           </v-card-item>
           <v-card-actions class="justify-center">
             <v-btn color="red-darken-1" variant="flat" to="/npm/sub-services">
@@ -192,7 +185,8 @@
         </p>
       </v-col>
       <v-col cols="12" md="4" class="d-flex">
-        <v-card hover elevation="8" class="pa-6 flex-grow-1" href="https://github.com/Nioron07/Easy-Acumatica" target="_blank" style="border-top: 4px solid #1976D2;">
+        <v-card hover elevation="8" class="pa-6 flex-grow-1" href="https://github.com/Nioron07/Easy-Acumatica"
+          target="_blank" style="border-top: 4px solid #1976D2;">
           <v-card-item class="text-center">
             <v-icon size="60" color="black" class="mb-4">mdi-github</v-icon>
             <v-card-title class="text-h5 font-weight-medium">
@@ -217,7 +211,7 @@ definePageMeta({
 
 // --- SEO & OG Image Configuration ---
 useSeoMeta({
-  title: 'Easy-Acumatica: Acumatica REST API Wrappers',
+  title: 'Easy-Acumatica: Acumatica API Wrapper', // Shorter title
   description: 'A lightweight wrapper for the Acumatica REST API. Simplify session management, OData queries, and API calls to Acumatica',
   ogTitle: 'Easy-Acumatica | Seamless Acumatica API Integration',
   ogDescription: 'Leverage Easy-Acumatica to quickly build robust integrations with Acumatica ERP. Handle complex REST API interactions with simple, intuitive code.',
@@ -225,7 +219,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterTitle: 'Easy-Acumatica: Acumatica REST API Made Easy',
   twitterDescription: 'Python and Node.js wrappers for Acumatica ERP REST API. Simplify development, automate tasks, and streamline your integrations.',
-  twitterImage: 'https://www.easyacumatica.com/social-images/home.png', 
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 
