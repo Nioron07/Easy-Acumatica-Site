@@ -27,7 +27,9 @@ handlers:
 
   # 1️⃣  Manifest & other dynamic Nitro endpoints
   - url: /_nuxt/builds/.*
+    secure: always
     script: auto
+    redirect_http_response_code: 301
 
   # 2️⃣  All remaining client assets (JS/CSS/fonts, etc.)
   - url: /_nuxt/(.*)
@@ -39,7 +41,9 @@ handlers:
 
   # Catch-all → SSR (this should always be the last handler)
   - url: /.*
+    secure: always
     script: auto
+    redirect_http_response_code: 301
 
 entrypoint: npm run start # Nuxt’s default runs `node .output/server/index.mjs`
 automatic_scaling:

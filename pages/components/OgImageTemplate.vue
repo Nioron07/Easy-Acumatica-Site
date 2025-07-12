@@ -9,7 +9,7 @@
       </p>
     </div>
     <div style="display: flex; align-items: center;">
-      <img src="../../assets/OGFullLogo.png" width="80" height="80" style="margin-right: 20px;" />
+      <img src="../../assets/OGFullLogo.png" width="1280" height="640" style="margin-right: 20px;" />
       <div style="font-size: 28px; color: #1e293b; font-weight: bold;">
         easyacumatica.com
       </div>

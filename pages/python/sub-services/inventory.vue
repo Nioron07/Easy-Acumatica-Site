@@ -170,11 +170,11 @@ useSeoMeta({
   description: 'A guide to managing inventory in Acumatica using the Easy-Acumatica InventoryService. Learn to create inventory issues, check stock levels, and more.',
   ogTitle: 'Acumatica Inventory Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage inventory programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Inventory API',
   twitterDescription: 'A guide to managing inventory with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

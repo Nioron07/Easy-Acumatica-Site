@@ -101,16 +101,11 @@ useSeoMeta({
   description: 'Follow this quickstart guide to learn the fundamental workflow of the easy-acumatica Python package, from client initialization to filtering data with QueryOptions.',
   ogTitle: 'Easy-Acumatica Python Quickstart Guide',
   ogDescription: 'Learn the fundamental workflow of the easy-acumatica Python package, from client initialization to filtering data with QueryOptions.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Easy-Acumatica Python Quickstart',
   twitterDescription: 'A step-by-step guide to get started with the Easy-Acumatica Python package for the Acumatica REST API.',
-  twitterImage: '/public/social-images/home.png',
-});
-
-defineOgImage({
-  title: 'Easy-Acumatica Quickstart',
-  description: 'Learn the fundamental workflow of the Python library for the Acumatica REST API.',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 

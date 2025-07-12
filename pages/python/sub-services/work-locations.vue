@@ -120,11 +120,11 @@ useSeoMeta({
   description: 'A guide to creating and retrieving work locations in Acumatica using the Easy-Acumatica WorkLocationsService.',
   ogTitle: 'Acumatica Work Locations Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage work locations programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Work Locations API',
   twitterDescription: 'A guide to creating and retrieving work locations with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

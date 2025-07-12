@@ -90,11 +90,11 @@ useSeoMeta({
   description: 'A guide to creating and updating tax categories in Acumatica using the Easy-Acumatica TaxCategoryService.',
   ogTitle: 'Acumatica Tax Category Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage tax categories programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Tax Category API',
   twitterDescription: 'A guide to creating and updating tax categories with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

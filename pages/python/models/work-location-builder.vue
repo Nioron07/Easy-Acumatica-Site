@@ -167,11 +167,11 @@ useSeoMeta({
   description: 'A guide to building JSON payloads for work locations in Acumatica using the Easy-Acumatica WorkLocationBuilder.',
   ogTitle: 'Acumatica WorkLocationBuilder - Easy-Acumatica Docs',
   ogDescription: 'Learn how to construct work location payloads for the Acumatica API with the fluent WorkLocationBuilder.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica WorkLocationBuilder API',
   twitterDescription: 'A guide to creating work location payloads with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

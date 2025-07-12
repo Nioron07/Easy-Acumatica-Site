@@ -134,11 +134,11 @@ useSeoMeta({
   description: 'A guide to managing file attachments in Acumatica using the Easy-Acumatica FilesService. Learn to upload, download, and delete files.',
   ogTitle: 'Acumatica Files Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage file attachments programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Files API',
   twitterDescription: 'A guide to managing file attachments with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

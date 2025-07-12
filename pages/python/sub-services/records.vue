@@ -225,11 +225,11 @@ useSeoMeta({
   description: 'A guide to performing generic CRUD operations on any Acumatica entity using the Easy-Acumatica RecordsService.',
   ogTitle: 'Acumatica Records Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to perform generic CRUD operations programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Records API',
   twitterDescription: 'A guide to performing generic CRUD operations with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

@@ -173,11 +173,11 @@ useSeoMeta({
   description: 'A guide to creating, retrieving, updating, and deleting contacts in Acumatica using the Easy-Acumatica ContactsService.',
   ogTitle: 'Acumatica Contacts Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage contacts programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Contacts API',
   twitterDescription: 'A guide to creating, retrieving, updating, and deleting contacts with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

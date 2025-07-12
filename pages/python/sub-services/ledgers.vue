@@ -96,11 +96,11 @@ useSeoMeta({
   description: 'A guide to retrieving General Ledger records in Acumatica using the Easy-Acumatica LedgersService.',
   ogTitle: 'Acumatica Ledgers Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to retrieve General Ledger records programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Ledgers API',
   twitterDescription: 'A guide to retrieving General Ledger records with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

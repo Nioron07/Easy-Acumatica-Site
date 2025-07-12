@@ -217,15 +217,15 @@ definePageMeta({
 
 // --- SEO & OG Image Configuration ---
 useSeoMeta({
-  title: 'Easy-Acumatica: Wrappers for Acumatica REST API',
-  description: 'Simplify Acumatica ERP integrations with Easy-Acumatica. Python and Node.js wrappers for session management, OData querying, and fluent API calls. Automate business logic with ease.',
-  ogTitle: 'Easy-Acumatica | Seamless Acumatica API Integration for Python & Node.js',
+  title: 'Easy-Acumatica: Acumatica REST API Wrappers',
+  description: 'A lightweight wrapper for the Acumatica REST API. Simplify session management, OData queries, and API calls to Acumatica',
+  ogTitle: 'Easy-Acumatica | Seamless Acumatica API Integration',
   ogDescription: 'Leverage Easy-Acumatica to quickly build robust integrations with Acumatica ERP. Handle complex REST API interactions with simple, intuitive code.',
-  ogImage: 'https://easyacumatica.com/social-images/home.png', // Ensure this absolute URL is correct
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Easy-Acumatica: Acumatica REST API Made Easy',
   twitterDescription: 'Python and Node.js wrappers for Acumatica ERP REST API. Simplify development, automate tasks, and streamline your integrations.',
-  twitterImage: 'https://easyacumatica.com/social-images/home.png', // Ensure this absolute URL is correct
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png', 
 });
 
 

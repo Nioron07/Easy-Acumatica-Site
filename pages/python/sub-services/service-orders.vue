@@ -94,11 +94,11 @@ useSeoMeta({
   description: 'A guide to retrieving Service Orders in Acumatica using the Easy-Acumatica ServiceOrdersService.',
   ogTitle: 'Acumatica Service Orders Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to retrieve Service Orders programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Service Orders API',
   twitterDescription: 'A guide to retrieving Service Orders with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

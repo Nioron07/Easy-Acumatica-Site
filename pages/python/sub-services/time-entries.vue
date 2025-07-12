@@ -127,11 +127,11 @@ useSeoMeta({
   description: 'A guide to creating and retrieving time entry records in Acumatica using the Easy-Acumatica TimeEntriesService.',
   ogTitle: 'Acumatica Time Entries Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage time entries programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Time Entries API',
   twitterDescription: 'A guide to creating and retrieving time entries with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

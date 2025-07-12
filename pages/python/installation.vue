@@ -66,16 +66,11 @@ useSeoMeta({
   description: "Learn how to install the easy-acumatica Python package from PyPI using pip. This guide covers all prerequisites for connecting to the Acumatica REST API.",
   ogTitle: 'Easy-Acumatica Python Package Installation',
   ogDescription: 'A step-by-step guide on how to install the easy-acumatica Python package from PyPI using pip, including all necessary prerequisites.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Install Easy-Acumatica for Python',
   twitterDescription: "Get started with Easy-Acumatica by installing the package from PyPI. This guide covers all the prerequisites you'll need.",
-  twitterImage: '/public/social-images/home.png',
-});
-
-defineOgImage({
-  title: 'Easy-Acumatica Installation',
-  description: 'Learn how to install the Python package using pip.',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 // --- Page Content Data ---

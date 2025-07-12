@@ -99,11 +99,11 @@ useSeoMeta({
   description: 'A guide to retrieving General Ledger transactions in Acumatica using the Easy-Acumatica TransactionsService.',
   ogTitle: 'Acumatica Transactions Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to retrieve General Ledger transactions programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Transactions API',
   twitterDescription: 'A guide to retrieving General Ledger transactions with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

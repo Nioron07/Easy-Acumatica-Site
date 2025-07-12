@@ -107,11 +107,11 @@ useSeoMeta({
   description: 'Retrieve vendor and customer business accounts using the Easy-Acumatica API wrapper for Acumatica ERP.',
   ogTitle: 'Business Accounts API - Easy-Acumatica Docs',
   ogDescription: 'Learn how to retrieve and filter business account data (vendors/customers) using the Easy-Acumatica integration toolkit.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Business Accounts API',
   twitterDescription: 'Retrieve business accounts from Acumatica ERP using Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

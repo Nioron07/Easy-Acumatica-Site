@@ -160,11 +160,11 @@ useSeoMeta({
   description: 'Build JSON payloads for Bill of Materials in Acumatica using Easy-Acumatica’s fluent BOMBuilder interface.',
   ogTitle: 'Acumatica BOMBuilder - Easy-Acumatica Docs',
   ogDescription: 'Create and structure Acumatica BOM records programmatically using the Easy-Acumatica BOMBuilder. Supports multiple operations and materials.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica BOMBuilder API',
   twitterDescription: 'Define Bill of Materials for Acumatica using Easy-Acumatica’s fluent BOMBuilder interface.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

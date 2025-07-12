@@ -126,11 +126,11 @@ useSeoMeta({
   description: 'A guide to building JSON payloads for tax categories in Acumatica using the Easy-Acumatica TaxCategoryBuilder.',
   ogTitle: 'Acumatica TaxCategoryBuilder - Easy-Acumatica Docs',
   ogDescription: 'Learn how to construct tax category payloads for the Acumatica API with the fluent TaxCategoryBuilder.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica TaxCategoryBuilder API',
   twitterDescription: 'A guide to creating tax category payloads with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

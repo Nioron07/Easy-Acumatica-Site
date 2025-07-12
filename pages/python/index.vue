@@ -74,18 +74,11 @@ import PageFooter from '~/components/PythonPageFooter.vue';
 useSeoMeta({
   title: 'Easy-Acumatica for Python | A REST API Wrapper',
   description: "Official documentation for the Easy-Acumatica Python package. A typed wrapper for Acumatica's contract-based REST API that removes boilerplate and simplifies integration.",
-  ogTitle: 'Easy-Acumatica for Python | REST API Wrapper',
-  ogDescription: 'The official documentation for the Easy-Acumatica Python package. Simplify your Acumatica integration with a fluent, typed API client.',
-  ogImage: '/public/social-images/home.png',
   twitterCard: 'summary_large_image',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterTitle: 'Easy-Acumatica for Python',
   twitterDescription: "A typed Python wrapper for Acumatica's contract-based REST API that removes boilerplate and simplifies integration.",
-  twitterImage: '/public/social-images/home.png',
-});
-
-defineOgImage({
-  title: 'Easy-Acumatica for Python',
-  description: "The official docs for the Python wrapper for Acumatica's REST API.",
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 // --- Page Content Data ---

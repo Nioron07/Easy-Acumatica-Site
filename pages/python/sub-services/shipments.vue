@@ -167,11 +167,11 @@ useSeoMeta({
   description: 'A guide to managing shipments in Acumatica using the Easy-Acumatica ShipmentsService. Learn to create, update, and confirm shipments.',
   ogTitle: 'Acumatica Shipments Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage shipments programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Shipments API',
   twitterDescription: 'A guide to managing shipments with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

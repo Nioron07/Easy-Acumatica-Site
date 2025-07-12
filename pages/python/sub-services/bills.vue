@@ -132,11 +132,11 @@ useSeoMeta({
   description: 'Create, approve, and release retainage on vendor bills in Acumatica using the Easy-Acumatica BillsService.',
   ogTitle: 'Acumatica Bills Service - Easy-Acumatica Docs',
   ogDescription: 'A guide to managing vendor bills, including retainage and approvals, using the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png', //changing the path might be required later 
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png', //changing the path might be required later 
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Vendor Bills API',
   twitterDescription: 'Manage vendor bills with Easy-Acumatica, including approvals and retainage workflows.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

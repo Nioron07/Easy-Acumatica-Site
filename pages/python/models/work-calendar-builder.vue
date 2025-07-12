@@ -159,11 +159,11 @@ useSeoMeta({
   description: 'A guide to building JSON payloads for work calendars in Acumatica using the Easy-Acumatica WorkCalendarBuilder.',
   ogTitle: 'Acumatica WorkCalendarBuilder - Easy-Acumatica Docs',
   ogDescription: 'Learn how to construct work calendar payloads for the Acumatica API with the fluent WorkCalendarBuilder.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica WorkCalendarBuilder API',
   twitterDescription: 'A guide to creating work calendar payloads with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

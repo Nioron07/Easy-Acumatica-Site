@@ -181,11 +181,11 @@ useSeoMeta({
   description: 'A guide to managing Sales Orders in Acumatica using the Easy-Acumatica SalesOrdersService.',
   ogTitle: 'Acumatica Sales Orders Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to create, update, and manage Sales Orders programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Sales Orders API',
   twitterDescription: 'A guide to managing Sales Orders with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

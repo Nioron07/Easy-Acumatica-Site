@@ -163,11 +163,11 @@ useSeoMeta({
   description: 'A guide to building JSON payloads for time entries in Acumatica using the Easy-Acumatica TimeEntryBuilder.',
   ogTitle: 'Acumatica TimeEntryBuilder - Easy-Acumatica Docs',
   ogDescription: 'Learn how to construct time entry payloads for the Acumatica API with the fluent TimeEntryBuilder.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica TimeEntryBuilder API',
   twitterDescription: 'A guide to creating time entry payloads with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

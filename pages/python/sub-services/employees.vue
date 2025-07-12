@@ -162,11 +162,11 @@ useSeoMeta({
   description: 'A guide to creating and managing employees and their payroll settings in Acumatica using the Easy-Acumatica EmployeesService.',
   ogTitle: 'Acumatica Employees Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage employees programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Employees API',
   twitterDescription: 'A guide to creating and managing employees with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

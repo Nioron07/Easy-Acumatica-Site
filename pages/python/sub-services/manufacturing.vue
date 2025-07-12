@@ -115,11 +115,11 @@ useSeoMeta({
   description: 'A guide to managing product configurations in Acumatica using the Easy-Acumatica ManufacturingService.',
   ogTitle: 'Acumatica Manufacturing Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage product configurations programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Manufacturing API',
   twitterDescription: 'A guide to managing product configurations with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

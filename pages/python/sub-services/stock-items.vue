@@ -173,11 +173,11 @@ useSeoMeta({
   description: 'A guide to managing stock items in Acumatica using the Easy-Acumatica StockItemsService. Learn to create, update, and manage attachments.',
   ogTitle: 'Acumatica Stock Items Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage stock items programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Stock Items API',
   twitterDescription: 'A guide to managing stock items with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

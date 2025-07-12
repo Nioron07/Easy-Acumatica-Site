@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     '@nuxtjs/seo',
     '@nuxtjs/sitemap', // Keep this
-    '@nuxtjs/robots',  // Keep this
+    '@nuxtjs/robots',
+    'nuxt-gtag'  // Keep this
   ],
 
   // Add the site configuration object
@@ -16,6 +17,17 @@ export default defineNuxtConfig({
     name: 'Easy-Acumatica Docs',
     description: 'A lightweight wrapper for Acumatica’s contract-based REST API, available for Python and Node.js.',
     defaultLocale: 'en',
+  },
+  gtag: {
+    id: 'G-CYQE1J3RH4' 
+  },
+vuetify: {
+    // Correctly configure ssr as a boolean
+    ssr: true, 
+    // Move client hints to their own object
+    ssrClientHints: {
+      clientWidthHints: true,
+    }
   },
 ogImage: {
     defaults: {

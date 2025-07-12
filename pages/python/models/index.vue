@@ -90,11 +90,11 @@ useSeoMeta({
   description: 'Explore the available model builders for creating complex JSON payloads for Acumatica API requests.',
   ogTitle: 'Acumatica Model Builders - Easy-Acumatica Docs',
   ogDescription: 'A comprehensive list of model builders for constructing Acumatica API payloads.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Model Builders API',
   twitterDescription: 'Explore the available model builders for constructing Acumatica API payloads.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

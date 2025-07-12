@@ -95,11 +95,11 @@ useSeoMeta({
   description: 'Explore the available sub-services for interacting with Acumatica API endpoints, including Customers, Invoices, and more.',
   ogTitle: 'Acumatica Sub-Services - Easy-Acumatica Docs',
   ogDescription: 'A comprehensive list of sub-services for managing Acumatica entities through the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Sub-Services API',
   twitterDescription: 'Explore the available sub-services for interacting with Acumatica API endpoints.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

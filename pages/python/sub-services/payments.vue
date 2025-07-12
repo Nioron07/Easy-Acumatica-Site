@@ -128,11 +128,11 @@ useSeoMeta({
   description: 'A guide to managing AR payments in Acumatica using the Easy-Acumatica PaymentsService. Learn to create, retrieve, and release payments.',
   ogTitle: 'Acumatica Payments Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to manage AR payments programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Payments API',
   twitterDescription: 'A guide to managing AR payments with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({

@@ -8,7 +8,7 @@
               AcumaticaClient
             </h1>
             <div class="text-h6 text-grey-darken-1 font-weight-medium mt-2">
-              Version v0.3.6
+              Version v0.3.9
             </div>
             <p class="mt-4 text-body-1" style="max-width: 800px;">
               The `AcumaticaClient` is the core of the package. It's the primary object you'll interact with to manage sessions, access API services, and configure connection behavior. This page provides an in-depth guide to every aspect of the client.
@@ -97,16 +97,11 @@ useSeoMeta({
   description: 'In-depth guide to the AcumaticaClient, the core of the easy-acumatica Python package. Learn about initialization, session management, and accessing sub-services.',
   ogTitle: 'AcumaticaClient Guide - Easy-Acumatica Docs',
   ogDescription: 'A comprehensive guide to configuring the AcumaticaClient for Python, including session management, credentials, and sub-service access.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'AcumaticaClient Guide | Python REST API',
   twitterDescription: 'Learn how to configure and use the AcumaticaClient in the Easy-Acumatica Python library for seamless API integration.',
-  twitterImage: '/public/social-images/home.png',
-});
-
-defineOgImage({ 
-  title: 'AcumaticaClient for Python',
-  description: 'The core of the Easy-Acumatica package. Manage sessions, access API services, and configure connection behavior.',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 // Data for the on-page navigation
 const onPageNavItems = ref([

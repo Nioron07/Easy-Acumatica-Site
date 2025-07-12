@@ -91,11 +91,11 @@ useSeoMeta({
   description: 'A guide to creating Purchase Orders in Acumatica using the Easy-Acumatica PurchaseOrdersService.',
   ogTitle: 'Acumatica Purchase Orders Service - Easy-Acumatica Docs',
   ogDescription: 'Learn how to create Purchase Orders programmatically with the Easy-Acumatica API wrapper.',
-  ogImage: '/public/social-images/home.png',
+  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Purchase Orders API',
   twitterDescription: 'A guide to creating Purchase Orders with Easy-Acumatica.',
-  twitterImage: '/public/social-images/home.png',
+  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
 });
 
 defineOgImage({
