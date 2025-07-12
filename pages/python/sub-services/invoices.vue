@@ -91,7 +91,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import InvoiceBuilder, QueryOptions, F
+from easy_acumatica.models.invoice_builder import InvoiceBuilder  
+from easy_acumatica.models.query_builder import QueryOptions, CustomField  
+from easy_acumatica.models.filter_builder import F
 `);
 
 const getInvoicesExample = ref(`
@@ -151,4 +153,23 @@ client.invoices.release_invoice(
 )
 print("Invoice released successfully.")
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Invoices Service | Acumatica AR Invoice API',
+  description: 'A guide to managing AR Invoices in Acumatica using the Easy-Acumatica InvoicesService. Learn to create, update, and release invoices.',
+  ogTitle: 'Acumatica Invoices Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage AR Invoices programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Invoices API',
+  twitterDescription: 'A guide to managing AR Invoices with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Invoices Service',
+  description: 'Create, update, and release AR Invoices using the Easy-Acumatica API wrapper.',
+});
+
 </script>

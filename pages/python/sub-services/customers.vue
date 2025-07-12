@@ -109,7 +109,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import F, QueryOptions, CustomerBuilder
+from easy_acumatica.models.filter_builder import F  
+from easy_acumatica.models.query_builder import QueryOptions, CustomField  
+from easy_acumatica.models.customer_builder import CustomerBuilder
 `);
 
 const getCustomersExample = ref(`
@@ -183,4 +185,23 @@ client.customers.update_customer_currency_overriding(
     currency_rate_type="SPOT"  # Optional, defaults to 'SPOT'
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Customers Service | Acumatica CRM API',
+  description: 'A guide to creating, retrieving, and updating customers in Acumatica using the Easy-Acumatica CustomersService.',
+  ogTitle: 'Acumatica Customers Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage customers programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Customers API',
+  twitterDescription: 'A guide to creating, retrieving, and updating customers with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Customers Service',
+  description: 'Create, retrieve, and update customers using the Easy-Acumatica API wrapper.',
+});
+
 </script>

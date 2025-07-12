@@ -59,7 +59,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import LeadBuilder
+from easy_acumatica.models.lead_builder import LeadBuilder
 `);
 
 const createLeadExample = ref(`
@@ -80,4 +80,23 @@ new_lead = client.leads.create_lead(
 # The response will contain the full lead/contact record
 print(f"Successfully created lead with NoteID: {new_lead['NoteID']['value']}")
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Leads Service | Acumatica CRM API',
+  description: 'A guide to creating new leads in Acumatica using the Easy-Acumatica LeadsService.',
+  ogTitle: 'Acumatica Leads Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to create new leads programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Leads API',
+  twitterDescription: 'A guide to creating new leads with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Leads Service',
+  description: 'Create new leads using the Easy-Acumatica API wrapper.',
+});
+
 </script>

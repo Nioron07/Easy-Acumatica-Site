@@ -100,7 +100,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import StockItemBuilder, QueryOptions, F
+from easy_acumatica.models.stock_item_builder import StockItemBuilder
+from easy_acumatica.models.query_builder import QueryOptions
+from easy_acumatica.models.filter_builder import F
 `);
 
 const getStockItemsExample = ref(`
@@ -164,4 +166,23 @@ if attachments:
     for file in attachments:
         print(f" - {file['name']}")
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Stock Items Service | Acumatica Inventory API',
+  description: 'A guide to managing stock items in Acumatica using the Easy-Acumatica StockItemsService. Learn to create, update, and manage attachments.',
+  ogTitle: 'Acumatica Stock Items Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage stock items programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Stock Items API',
+  twitterDescription: 'A guide to managing stock items with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Stock Items Service',
+  description: 'Create, update, and manage stock items using the Easy-Acumatica API wrapper.',
+});
+
 </script>

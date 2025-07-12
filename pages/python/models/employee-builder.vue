@@ -98,7 +98,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import EmployeeBuilder
+from easy_acumatica.models.employee_builder import EmployeeBuilder
 `);
 
 const contactInfoExample = ref(`

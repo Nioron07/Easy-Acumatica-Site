@@ -59,7 +59,8 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import PurchaseOrderBuilder, QueryOptions
+from easy_acumatica.models.purchase_order_builder import PurchaseOrderBuilder
+from easy_acumatica.models.query_builder import QueryOptions
 `);
 
 const createPurchaseOrderExample = ref(`
@@ -83,4 +84,23 @@ new_po = client.purchase_orders.create_purchase_order(
     builder=po_payload
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Purchase Orders Service | Acumatica Procurement API',
+  description: 'A guide to creating Purchase Orders in Acumatica using the Easy-Acumatica PurchaseOrdersService.',
+  ogTitle: 'Acumatica Purchase Orders Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to create Purchase Orders programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Purchase Orders API',
+  twitterDescription: 'A guide to creating Purchase Orders with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Purchase Orders Service',
+  description: 'Create Purchase Orders using the Easy-Acumatica API wrapper.',
+});
+
 </script>

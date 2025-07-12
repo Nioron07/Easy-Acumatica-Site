@@ -161,11 +161,11 @@ useSeoMeta({
   description: 'Build JSON payloads for vendor bills using Easy-Acumatica\'s BillBuilder. Supports standalone lines and PO/receipt-linked details.',
   ogTitle: 'Acumatica BillBuilder - Easy-Acumatica Docs',
   ogDescription: 'Build and structure Acumatica vendor bill payloads using the Easy-Acumatica BillBuilder. Ideal for integrating with the BillsService.',
-  ogImage: '/__og_image__/og.png',
+  ogImage: '/public/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica BillBuilder API',
   twitterDescription: 'Use Easy-Acumatica to build vendor bill payloads for Acumatica ERP.',
-  twitterImage: '/__og_image__/og.png',
+  twitterImage: '/public/social-images/home.png',
 });
 
 defineOgImage({

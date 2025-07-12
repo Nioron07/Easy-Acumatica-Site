@@ -95,11 +95,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import (
-    InventoryIssueBuilder,
-    ItemWarehouseBuilder,
-    InquiryBuilder
-)
+from easy_acumatica.models.inventory_issue_builder import InventoryIssueBuilder
+from easy_acumatica.models.item_warehouse_builder import ItemWarehouseBuilder
+from easy_acumatica.models.inquiry_builder import InquiryBuilder
 `);
 
 const createIssueExample = ref(`
@@ -165,4 +163,23 @@ updated_details = client.inventory.update_item_warehouse_details(
     builder=item_warehouse_payload
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Inventory Service | Acumatica Inventory Management API',
+  description: 'A guide to managing inventory in Acumatica using the Easy-Acumatica InventoryService. Learn to create inventory issues, check stock levels, and more.',
+  ogTitle: 'Acumatica Inventory Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage inventory programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Inventory API',
+  twitterDescription: 'A guide to managing inventory with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Inventory Service',
+  description: 'Manage inventory transactions, inquiries, and warehouse settings using the Easy-Acumatica API wrapper.',
+});
+
 </script>

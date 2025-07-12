@@ -78,8 +78,27 @@ const builders = ref([
   { title: 'SalesOrderBuilder', icon: 'mdi-clipboard-text-outline', description: 'Constructs payloads for creating and updating Sales Orders.', link: '/python/models/sales-order-builder' },
   { title: 'ShipmentBuilder', icon: 'mdi-truck-delivery-outline', description: 'Constructs payloads for creating and updating Shipment records.', link: '/python/models/shipment-builder' },
   { title: 'StockItemBuilder', icon: 'mdi-cube-outline', description: 'Constructs payloads for creating and updating Stock Item records.', link: '/python/models/stock-item-builder' },
-
-  
-  // Add other builders here as their pages are created
+  { title: 'TaxCategoryBuilder', icon: 'mdi-calculator', description: 'Constructs payloads for creating and updating Tax Category records.', link: '/python/models/tax-category-builder' },
+  { title: 'TimeEntryBuilder', icon: 'mdi-clock-outline', description: 'Constructs payloads for creating and retrieving Time Entry records.', link: '/python/models/time-entry-builder' },
+  { title: 'WorkCalendarBuilder', icon: 'mdi-calendar-month', description: 'Constructs payloads for creating and retrieving Work Calendar records.', link: '/python/models/work-calendar-builder' },
+  { title: 'WorkLocationBuilder', icon: 'mdi-map-marker-radius', description: 'Constructs payloads for creating and retrieving Work Location records.', link: '/python/models/work-location-builder' },
 ]);
+
+//SEO
+useSeoMeta({
+  title: 'Model Builders | Easy-Acumatica Docs',
+  description: 'Explore the available model builders for creating complex JSON payloads for Acumatica API requests.',
+  ogTitle: 'Acumatica Model Builders - Easy-Acumatica Docs',
+  ogDescription: 'A comprehensive list of model builders for constructing Acumatica API payloads.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Model Builders API',
+  twitterDescription: 'Explore the available model builders for constructing Acumatica API payloads.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Model Builders',
+  description: 'Explore the available model builders for constructing Acumatica API payloads.',
+});
 </script>

@@ -91,7 +91,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import RecordBuilder
+from easy_acumatica.models.record_builder import RecordBuilder
 `);
 
 const executeActionExample1 = ref(`

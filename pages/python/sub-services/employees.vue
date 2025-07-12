@@ -86,13 +86,10 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import (
-    EmployeeBuilder,
-    EmployeePayrollClassBuilder,
-    EmployeePayrollSettingsBuilder,
-    QueryOptions,
-    F
-)
+from easy_acumatica.models.employee_builder import EmployeeBuilder
+from easy_acumatica.models.employee_payroll_class_builder import EmployeePayrollClassBuilder
+from easy_acumatica.models.employee_payroll_settings_builder import EmployeePayrollSettingsBuilder
+from easy_acumatica.models.query_builder import QueryOptions
 `);
 
 const getEmployeesExample = ref(`
@@ -158,4 +155,23 @@ updated_settings = client.employees.update_employee_payroll_settings(
     builder=payroll_settings_payload
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Employees Service | Acumatica HR & Payroll API',
+  description: 'A guide to creating and managing employees and their payroll settings in Acumatica using the Easy-Acumatica EmployeesService.',
+  ogTitle: 'Acumatica Employees Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage employees programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Employees API',
+  twitterDescription: 'A guide to creating and managing employees with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Employees Service',
+  description: 'Create, retrieve, and update employees using the Easy-Acumatica API wrapper.',
+});
+
 </script>

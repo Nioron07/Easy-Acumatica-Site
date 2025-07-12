@@ -71,10 +71,8 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import (
-    EmployeePayrollClassBuilder,
-    EmployeePayrollSettingsBuilder
-)
+from easy_acumatica.models.employee_payroll_class_builder import EmployeePayrollClassBuilder
+from easy_acumatica.models.employee_payroll_settings_builder import EmployeePayrollSettingsBuilder
 `);
 
 const payrollClassExample = ref(`

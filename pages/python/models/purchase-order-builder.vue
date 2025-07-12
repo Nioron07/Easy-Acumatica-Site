@@ -76,7 +76,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import PurchaseOrderBuilder
+from easy_acumatica.models.payment_builder import PaymentBuilder
 `);
 
 const standardFieldsExample = ref(`

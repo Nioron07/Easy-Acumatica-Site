@@ -67,11 +67,11 @@ useSeoMeta({
   description: 'A guide to fetching your Acumatica Bill of Materials using the Easy-Acumatica API wrapper',
   ogTitle: 'Acumatica Companies Service - Easy-Acumatica Docs',
   ogDescription: 'A guide to fetching your Acumatica Bill of Materials using the Easy-Acumatica API wrapper.',
-  ogImage: '/__og_image__/og.png', // Uses the dynamically generated OG image
+  ogImage: '/public/social-images/home.png', // Uses the dynamically generated OG image
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Bill of Materials API',
   twitterDescription: 'Access and modify your Acumatica Bill of Materials',
-  twitterImage: '/__og_image__/og.png', // Uses the dynamically generated OG image
+  twitterImage: '/public/social-images/home.png', // Uses the dynamically generated OG image
 });
 
 defineOgImage({
@@ -150,11 +150,11 @@ useSeoMeta({
   description: 'A guide to creating and retrieving Acumatica Bill of Materials (BOMs) using the Easy-Acumatica BomsService.',
   ogTitle: 'Acumatica BOMs Service - Easy-Acumatica Docs',
   ogDescription: 'A guide to creating and retrieving Bill of Materials from Acumatica using the Easy-Acumatica API wrapper.',
-  ogImage: '/__og_image__/og.png',
+  ogImage: '/public/social-images/home.png',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica BOMs API',
   twitterDescription: 'Create and manage your Acumatica Bill of Materials using the Easy-Acumatica API.',
-  twitterImage: '/__og_image__/og.png',
+  twitterImage: '/public/social-images/home.png',
 });
 
 defineOgImage({

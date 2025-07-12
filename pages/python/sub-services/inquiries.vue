@@ -68,11 +68,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import (
-    InquiryBuilder, 
-    QueryOptions, 
-    F
-)
+from easy_acumatica.models.inquiry_builder import InquiryOptions
+from easy_acumatica.models.filter_builder import F
+from easy_acumatica.models.query_builder import QueryOptions
 `);
 
 const inquiryFormExample = ref(`
@@ -109,4 +107,23 @@ active_customers = client.inquiries.execute_generic_inquiry(
 for customer in active_customers.get("value", []):
     print(customer["CustomerName"])
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Inquiries Service | Acumatica Generic Inquiry API',
+  description: 'A guide to running both contract-based and OData Generic Inquiries in Acumatica using the Easy-Acumatica InquiriesService.',
+  ogTitle: 'Acumatica Inquiries Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to run Generic Inquiries programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Inquiries API',
+  twitterDescription: 'A guide to running Generic Inquiries with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Inquiries Service',
+  description: 'Run Generic Inquiries using the Easy-Acumatica API wrapper.',
+});
+
 </script>

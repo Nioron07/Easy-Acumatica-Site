@@ -77,7 +77,8 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import PaymentBuilder, QueryOptions
+from easy_acumatica.models.payment_builder import PaymentBuilder  
+from easy_acumatica.models.query_builder import QueryOptions
 `);
 
 const createPaymentExample = ref(`
@@ -120,4 +121,23 @@ client.payments.release_payment(
 
 print("Payment has been released.")
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Payments Service | Acumatica AR Payments API',
+  description: 'A guide to managing AR payments in Acumatica using the Easy-Acumatica PaymentsService. Learn to create, retrieve, and release payments.',
+  ogTitle: 'Acumatica Payments Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage AR payments programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Payments API',
+  twitterDescription: 'A guide to managing AR payments with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Payments Service',
+  description: 'Create, retrieve, and release AR payments using the Easy-Acumatica API wrapper.',
+});
+
 </script>

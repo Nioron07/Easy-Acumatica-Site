@@ -90,7 +90,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import InvoiceBuilder
+from easy_acumatica.models.invoice_builder import InvoiceBuilder
 `);
 
 const topLevelExample = ref(`

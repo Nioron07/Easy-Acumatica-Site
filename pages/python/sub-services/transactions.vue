@@ -68,8 +68,8 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from datetime import datetime
-from easy_acumatica.models import QueryOptions
+from datetime import datetime  
+from easy_acumatica.models.query_builder import QueryOptions
 `);
 
 const getTransactionsExample = ref(`
@@ -92,4 +92,23 @@ ledger_transactions = client.transactions.get_ledger_transactions(
 for trx in ledger_transactions.get("Results", []):
     print(f"Ref: {trx['RefNumber']['value']}, Desc: {trx['TransactionDescription']['value']}")
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Transactions Service | Acumatica GL API',
+  description: 'A guide to retrieving General Ledger transactions in Acumatica using the Easy-Acumatica TransactionsService.',
+  ogTitle: 'Acumatica Transactions Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to retrieve General Ledger transactions programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Transactions API',
+  twitterDescription: 'A guide to retrieving General Ledger transactions with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Transactions Service',
+  description: 'Retrieve General Ledger transactions using the Easy-Acumatica API wrapper.',
+});
+
 </script>

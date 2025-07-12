@@ -76,7 +76,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import StockItemBuilder
+from easy_acumatica.models.stock_item_builder import StockItemBuilder
 `);
 
 const standardFieldsExample = ref(`

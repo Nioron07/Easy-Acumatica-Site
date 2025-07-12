@@ -78,7 +78,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import PaymentBuilder
+from easy_acumatica.models.payment_builder import PaymentBuilder
 `);
 
 const topLevelExample = ref(`

@@ -77,7 +77,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import ConfigurationEntryBuilder
+from easy_acumatica.models.configuration_entry_builder import ConfigurationEntryBuilder
 `);
 
 const getEntryExample = ref(`
@@ -108,4 +108,23 @@ updated_config = client.manufacturing.update_configuration_entry(
     builder=config_update_payload
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Manufacturing Service | Acumatica Manufacturing API',
+  description: 'A guide to managing product configurations in Acumatica using the Easy-Acumatica ManufacturingService.',
+  ogTitle: 'Acumatica Manufacturing Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage product configurations programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Manufacturing API',
+  twitterDescription: 'A guide to managing product configurations with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Manufacturing Service',
+  description: 'Manage product configurations using the Easy-Acumatica API wrapper.',
+});
+
 </script>

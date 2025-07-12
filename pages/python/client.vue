@@ -93,15 +93,20 @@ import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 
 useSeoMeta({
-  // The page title displayed in the browser tab and search results.
-  // It should be specific, compelling, and include target keywords.
   title: 'AcumaticaClient Guide for Python | Easy-Acumatica Docs',
-
-  // The meta description shown in search results. It should be a concise
-  // summary of the page content (approx. 155-160 characters).
   description: 'In-depth guide to the AcumaticaClient, the core of the easy-acumatica Python package. Learn about initialization, session management, and accessing sub-services.',
+  ogTitle: 'AcumaticaClient Guide - Easy-Acumatica Docs',
+  ogDescription: 'A comprehensive guide to configuring the AcumaticaClient for Python, including session management, credentials, and sub-service access.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'AcumaticaClient Guide | Python REST API',
+  twitterDescription: 'Learn how to configure and use the AcumaticaClient in the Easy-Acumatica Python library for seamless API integration.',
+  twitterImage: '/public/social-images/home.png',
 });
+
 defineOgImage({ 
+  title: 'AcumaticaClient for Python',
+  description: 'The core of the Easy-Acumatica package. Manage sessions, access API services, and configure connection behavior.',
 });
 // Data for the on-page navigation
 const onPageNavItems = ref([

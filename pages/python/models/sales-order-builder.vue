@@ -94,7 +94,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import SalesOrderBuilder
+from easy_acumatica.models.sales_order_builder import SalesOrderBuilder
 `);
 
 const standardFieldsExample = ref(`

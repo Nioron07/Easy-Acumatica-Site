@@ -77,7 +77,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import ConfigurationEntryBuilder
+from easy_acumatica.models.configuration_entry_builder import ConfigurationEntryBuilder
 `);
 
 const standardFieldsExample = ref(`

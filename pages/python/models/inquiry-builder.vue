@@ -85,7 +85,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import InquiryBuilder
+from easy_acumatica.models.inquiry_builder import InquiryBuilder
 `);
 
 const paramExample = ref(`

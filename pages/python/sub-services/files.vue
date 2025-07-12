@@ -127,4 +127,23 @@ file_id_to_delete = "9be45eb7-f97d-400b-96a5-1c4cf82faa96"
 client.files.delete_file("24.200.001", file_id_to_delete)
 print(f"File {file_id_to_delete} deleted successfully.")
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Files Service | Acumatica Attachments API',
+  description: 'A guide to managing file attachments in Acumatica using the Easy-Acumatica FilesService. Learn to upload, download, and delete files.',
+  ogTitle: 'Acumatica Files Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage file attachments programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Files API',
+  twitterDescription: 'A guide to managing file attachments with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Files Service',
+  description: 'Upload, download, and manage file attachments using the Easy-Acumatica API wrapper.',
+});
+
 </script>

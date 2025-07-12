@@ -77,7 +77,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import ItemWarehouseBuilder
+from easy_acumatica.models.item_warehouse_builder import ItemWarehouseBuilder
 `);
 
 const identifyingExample = ref(`

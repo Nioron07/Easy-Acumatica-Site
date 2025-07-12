@@ -82,7 +82,8 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import QueryOptions, CustomField, F
+from easy_acumatica.models.filter_builder import F  
+from easy_acumatica.models.query_builder import QueryOptions, CustomField
 `);
 
 const basicExample = ref(`

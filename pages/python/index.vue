@@ -71,19 +71,19 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 
 // --- SEO & OG Image Configuration ---
-
-// 1. Define the page's primary metadata. This is required.
 useSeoMeta({
   title: 'Easy-Acumatica for Python | A REST API Wrapper',
   description: "Official documentation for the Easy-Acumatica Python package. A typed wrapper for Acumatica's contract-based REST API that removes boilerplate and simplifies integration.",
+  ogTitle: 'Easy-Acumatica for Python | REST API Wrapper',
+  ogDescription: 'The official documentation for the Easy-Acumatica Python package. Simplify your Acumatica integration with a fluent, typed API client.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Easy-Acumatica for Python',
+  twitterDescription: "A typed Python wrapper for Acumatica's contract-based REST API that removes boilerplate and simplifies integration.",
+  twitterImage: '/public/social-images/home.png',
 });
 
-// 2. Tell Nuxt OG Image to generate an image for this page.
-// It will automatically use the title and description from useSeoMeta
-// and pass them as props to your default template (`OgImageTemplate.vue`).
 defineOgImage({
-  // You can override the props sent to your template here if you want
-  // a different title or description just for the image.
   title: 'Easy-Acumatica for Python',
   description: "The official docs for the Python wrapper for Acumatica's REST API.",
 });

@@ -96,14 +96,18 @@ import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 
 // --- SEO & OG Image Configuration ---
-
-// 1. Define the primary SEO metadata for this page.
 useSeoMeta({
   title: 'Easy-Acumatica Quickstart Guide | Python REST API',
   description: 'Follow this quickstart guide to learn the fundamental workflow of the easy-acumatica Python package, from client initialization to filtering data with QueryOptions.',
+  ogTitle: 'Easy-Acumatica Python Quickstart Guide',
+  ogDescription: 'Learn the fundamental workflow of the easy-acumatica Python package, from client initialization to filtering data with QueryOptions.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Easy-Acumatica Python Quickstart',
+  twitterDescription: 'A step-by-step guide to get started with the Easy-Acumatica Python package for the Acumatica REST API.',
+  twitterImage: '/public/social-images/home.png',
 });
 
-// 2. Tell Nuxt OG Image to generate an image for this page using your default template.
 defineOgImage({
   title: 'Easy-Acumatica Quickstart',
   description: 'Learn the fundamental workflow of the Python library for the Acumatica REST API.',
@@ -131,7 +135,7 @@ all_customers = client.customers.get_customers(api_version="24.200.001")
 `);
 
 const builderCode = ref(`
-from easy_acumatica.models import CustomerBuilder
+from easy_acumatica.models.customer_builder import CustomerBuilder
 
 # Create a builder instance for a new customer
 customer_builder = (
@@ -146,7 +150,8 @@ customer_builder = (
 `);
 
 const filteringCode = ref(`
-from easy_acumatica.models import F, QueryOptions
+from easy_acumatica.models.filter_builder import F
+from easy_acumatica.models.query_builder import QueryOptions
 
 # Define query options to get the top 5 active customers,
 # selecting only their ID and name.

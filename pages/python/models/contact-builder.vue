@@ -105,7 +105,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import ContactBuilder, Attribute
+from easy_acumatica.models.contact_builder import ContactBuilder, Attribute
 `);
 
 const attributeExample = ref(`

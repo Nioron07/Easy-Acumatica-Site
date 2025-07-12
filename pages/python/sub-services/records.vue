@@ -117,7 +117,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import RecordBuilder, QueryOptions, F
+from easy_acumatica.models.filter_builder import F 
+from easy_acumatica.models.query_builder import QueryOptions 
+from easy_acumatica.models.record_builder import RecordBuilder
 `);
 
 const createRecordExample = ref(`
@@ -216,4 +218,23 @@ response = client.records.request_report(
 with open("cash_summary.pdf", "wb") as f:
     f.write(response.content)
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Records Service | Acumatica Generic CRUD API',
+  description: 'A guide to performing generic CRUD operations on any Acumatica entity using the Easy-Acumatica RecordsService.',
+  ogTitle: 'Acumatica Records Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to perform generic CRUD operations programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Records API',
+  twitterDescription: 'A guide to performing generic CRUD operations with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Records Service',
+  description: 'Perform generic CRUD operations on any Acumatica entity using the Easy-Acumatica API wrapper.',
+});
+
 </script>

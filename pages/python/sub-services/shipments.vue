@@ -103,7 +103,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import ShipmentBuilder, QueryOptions, F
+from easy_acumatica.models.shipment_builder import ShipmentBuilder
+from easy_acumatica.models.query_builder import QueryOptions
+from easy_acumatica.models.filter_builder import F
 `);
 
 const getShipmentsExample = ref(`
@@ -158,4 +160,23 @@ client.shipments.prepare_invoice(
     shipment_nbr="SH001234"
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Shipments Service | Acumatica Shipping API',
+  description: 'A guide to managing shipments in Acumatica using the Easy-Acumatica ShipmentsService. Learn to create, update, and confirm shipments.',
+  ogTitle: 'Acumatica Shipments Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage shipments programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Shipments API',
+  twitterDescription: 'A guide to managing shipments with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Shipments Service',
+  description: 'Create, update, and confirm shipments using the Easy-Acumatica API wrapper.',
+});
+
 </script>

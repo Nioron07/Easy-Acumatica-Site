@@ -136,7 +136,7 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterTitle: 'Acumatica Vendor Bills API',
   twitterDescription: 'Manage vendor bills with Easy-Acumatica, including approvals and retainage workflows.',
-  twitterImage: '/__og_image__/og.png',
+  twitterImage: '/public/social-images/home.png',
 });
 
 defineOgImage({

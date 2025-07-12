@@ -103,7 +103,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import SalesOrderBuilder, QueryOptions, F
+from easy_acumatica.models.sales_order_builder import SalesOrderBuilder
+from easy_acumatica.models.query_builder import QueryOptions
+from easy_acumatica.models.filter_builder import F
 `);
 
 const getSalesOrdersExample = ref(`
@@ -172,4 +174,23 @@ client.sales_orders.create_shipment(
     warehouse_id=warehouse_id
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Sales Orders Service | Acumatica Sales API',
+  description: 'A guide to managing Sales Orders in Acumatica using the Easy-Acumatica SalesOrdersService.',
+  ogTitle: 'Acumatica Sales Orders Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to create, update, and manage Sales Orders programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Sales Orders API',
+  twitterDescription: 'A guide to managing Sales Orders with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Sales Orders Service',
+  description: 'Create, update, and manage Sales Orders using the Easy-Acumatica API wrapper.',
+});
+
 </script>

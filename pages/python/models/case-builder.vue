@@ -86,7 +86,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import CaseBuilder
+from easy_acumatica.models.case_builder import CaseBuilder
 `);
 
 const standardFieldsExample = ref(`

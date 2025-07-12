@@ -19,7 +19,7 @@
                 density="compact"
                 icon="mdi-alert-circle-outline"
               >
-                <strong>Please Note:</strong> This service is currently untested due to limitations in the development environment. If you encounter any issues, please report them on the project's GitHub page.
+                <strong>Please Note:</strong> This service is currently untested due to limitations in the development environment. If you encounter any issues, please report them on the project's <a href="https://github.com/Nioron07/Easy-Acumatica">GitHub</a> page.
               </v-alert>
             </section>
 
@@ -69,7 +69,8 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import QueryOptions, F
+from easy_acumatica.models.query_builder import QueryOptions
+from easy_acumatica.filters import F
 `);
 
 const getServiceOrdersExample = ref(`
@@ -86,4 +87,23 @@ open_service_orders = client.service_orders.get_service_orders(
     options=opts
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Service Orders Service | Acumatica Field Service API',
+  description: 'A guide to retrieving Service Orders in Acumatica using the Easy-Acumatica ServiceOrdersService.',
+  ogTitle: 'Acumatica Service Orders Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to retrieve Service Orders programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Service Orders API',
+  twitterDescription: 'A guide to retrieving Service Orders with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Service Orders Service',
+  description: 'Retrieve Service Orders using the Easy-Acumatica API wrapper.',
+});
+
 </script>

@@ -80,7 +80,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import CustomerBuilder
+from easy_acumatica.models.customer_builder import CustomerBuilder
 `);
 
 const shortcutExample = ref(`

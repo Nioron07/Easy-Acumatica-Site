@@ -104,7 +104,9 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import ContactBuilder, QueryOptions, F
+from easy_acumatica.models.filter_builder import F  
+from easy_acumatica.models.query_builder import QueryOptions, CustomField  
+from easy_acumatica.models.contact_builder import ContactBuilder
 `);
 
 const getContactsExample = ref(`
@@ -164,4 +166,23 @@ client.contacts.link_contact_to_customer(
     business_account="ABAKERY"
 )
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Contacts Service | Acumatica CRM API',
+  description: 'A guide to creating, retrieving, updating, and deleting contacts in Acumatica using the Easy-Acumatica ContactsService.',
+  ogTitle: 'Acumatica Contacts Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to manage contacts programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Contacts API',
+  twitterDescription: 'A guide to creating, retrieving, updating, and deleting contacts with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Contacts Service',
+  description: 'Create, retrieve, update, and delete contacts using the Easy-Acumatica API wrapper.',
+});
+
 </script>

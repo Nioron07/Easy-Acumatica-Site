@@ -115,7 +115,7 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import F, QueryOptions
+from easy_acumatica.models.filter_builder import F
 `);
 
 const comparisonExample = ref(`

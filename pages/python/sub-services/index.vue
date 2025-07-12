@@ -82,6 +82,28 @@ const services = ref([
   { title: 'Service Orders', icon: 'mdi-wrench', description: 'Retrieve Service Order records.', link: '/python/sub-services/service-orders' },
   { title: 'Shipments', icon: 'mdi-truck-delivery-outline', description: 'Manage the full shipment lifecycle, from creation to confirmation.', link: '/python/sub-services/shipments' },
   { title: 'Stock Items', icon: 'mdi-cube-outline', description: 'Manage stock item records and their file attachments.', link: '/python/sub-services/stock-items' },
+  { title: 'Tax Categories', icon: 'mdi-calculator', description: 'Create and update tax categories.', link: '/python/sub-services/tax-categories' },
+  { title: 'Time Entries', icon: 'mdi-clock-outline', description: 'Create and retrieve time entry records.', link: '/python/sub-services/time-entries' },
   { title: 'Transactions', icon: 'mdi-finance', description: 'Retrieve financial transaction data from the General Ledger.', link: '/python/sub-services/transactions' },
+  { title: 'Work Calendars', icon: 'mdi-calendar-month', description: 'Create and retrieve work calendar records.', link: '/python/sub-services/work-calendars' },
+  { title: 'Work Locations', icon: 'mdi-map-marker-radius', description: 'Create and retrieve work location records.', link: '/python/sub-services/work-locations' },
 ]);
+
+//SEO
+useSeoMeta({
+  title: 'Sub-Services | Easy-Acumatica Docs',
+  description: 'Explore the available sub-services for interacting with Acumatica API endpoints, including Customers, Invoices, and more.',
+  ogTitle: 'Acumatica Sub-Services - Easy-Acumatica Docs',
+  ogDescription: 'A comprehensive list of sub-services for managing Acumatica entities through the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Sub-Services API',
+  twitterDescription: 'Explore the available sub-services for interacting with Acumatica API endpoints.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Sub-Services',
+  description: 'Explore the available sub-services for interacting with Acumatica API endpoints.',
+});
 </script>

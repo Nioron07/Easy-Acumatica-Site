@@ -66,7 +66,8 @@ const onPageNavItems = ref([
 ]);
 
 const importingExample = ref(`
-from easy_acumatica.models import QueryOptions, F
+from easy_acumatica.models.query_builder import QueryOptions  
+from easy_acumatica.models.filter_builder import F
 `);
 
 const getLedgersExample1 = ref(`
@@ -88,4 +89,23 @@ opts = QueryOptions(filter=ledger_filter)
 # Fetch the specific ledger
 actual_ledger_list = client.ledgers.get_ledgers("24.200.001", options=opts)
 `);
+
+//SEO
+useSeoMeta({
+  title: 'Ledgers Service | Acumatica GL API',
+  description: 'A guide to retrieving General Ledger records in Acumatica using the Easy-Acumatica LedgersService.',
+  ogTitle: 'Acumatica Ledgers Service - Easy-Acumatica Docs',
+  ogDescription: 'Learn how to retrieve General Ledger records programmatically with the Easy-Acumatica API wrapper.',
+  ogImage: '/public/social-images/home.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Acumatica Ledgers API',
+  twitterDescription: 'A guide to retrieving General Ledger records with Easy-Acumatica.',
+  twitterImage: '/public/social-images/home.png',
+});
+
+defineOgImage({
+  title: 'Acumatica Ledgers Service',
+  description: 'Retrieve General Ledger records using the Easy-Acumatica API wrapper.',
+});
+
 </script>
