@@ -101,7 +101,7 @@
         </v-col>
         <v-col cols="12" md="6" class="text-md-end">
           <p class="footer-copyright mb-0">
-            © 2024 Easy-Acumatica. MIT License.
+            © 2025 Easy-Acumatica. MIT License.
           </p>
         </v-col>
       </v-row>

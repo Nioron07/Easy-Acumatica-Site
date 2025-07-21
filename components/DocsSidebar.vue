@@ -5,6 +5,8 @@
     :rail="rail"
     :width="320"
     class="modern-sidebar"
+    @mouseenter="rail = false"
+    @mouseleave="rail = true"
   >
     <!-- Sidebar Header -->
     <div class="sidebar-header">
@@ -17,19 +19,10 @@
             class="mr-3"
           />
           <div>
-            <h3 class="text-h6 font-weight-bold">{{ currentTitle }}</h3>
-            <p class="text-caption text-grey-darken-1 mb-0">{{ currentSubtitle }}</p>
+            <h3 class="text-h6 font-weight-bold" v-if="!rail">{{ currentTitle }}</h3>
+            <p class="text-caption text-grey-darken-1 mb-0" v-if="!rail">{{ currentSubtitle }}</p>
           </div>
         </div>
-        <v-btn
-          icon
-          variant="text"
-          size="small"
-          @click="rail = !rail"
-          class="d-none d-lg-flex"
-        >
-          <v-icon>{{ rail ? 'mdi-chevron-right' : 'mdi-chevron-left' }}</v-icon>
-        </v-btn>
       </div>
     </div>
 
@@ -177,7 +170,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const route = useRoute();
 const search = ref('');
-const rail = ref(false);
+const rail = ref(true);
 
 const model = computed({
   get: () => props.modelValue,
@@ -475,6 +468,7 @@ watch(() => route.path, () => {
 .modern-sidebar {
   background: white;
   border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+  min-width:70px;
 }
 
 .sidebar-header {
@@ -562,5 +556,14 @@ watch(() => route.path, () => {
 
 .v-navigation-drawer__content::-webkit-scrollbar-thumb:hover {
   background: #7e57c2;
+}
+.modern-sidebar.v-navigation-drawer--rail .nav-item.active-item,
+.modern-sidebar.v-navigation-drawer--rail .group-item.v-list-item--active {
+  width: 40px; /* Override Vuetify's default */
+}
+
+/* Ensure the icon prepend slot doesn't have extra margin */
+.modern-sidebar.v-navigation-drawer--rail .v-list-item__prepend {
+  margin-inline-end: 0;
 }
 </style>

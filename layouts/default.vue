@@ -1,49 +1,31 @@
-<!-- layouts/default.vue -->
 <template>
   <v-app>
-    <!-- Modern App Bar -->
     <v-app-bar 
       flat
-      class="navbar-gradient"
+      class="app-bar-style ps-4"
       height="72"
     >
-      <v-container class="d-flex align-center px-4">
-        <!-- Mobile Menu -->
-        <v-app-bar-nav-icon 
-          @click="drawer = !drawer"
-          class="d-md-none"
-          color="white"
-        />
-        
-        <!-- Logo Section -->
-        <div class="d-flex align-center">
-          <v-card 
-            class="logo-card mr-3" 
-            @click="$router.push('/')"
-            flat
-          >
-            <v-img 
-              src="../assets/EasyAcumaticaLogo.webp" 
-              alt="Easy-Acumatica Logo" 
-              width="36"
-              height="36"
-            />
-          </v-card>
-          
+        <div class="d-flex align-center" style="cursor: pointer;" @click="$router.push('/')">
+          <v-img 
+            src="../assets/EasyAcumaticaLogo.webp" 
+            alt="Easy-Acumatica Logo" 
+            width="36"
+            height="36"
+            class="mr-3"
+          />
           <div>
-            <div class="text-h6 font-weight-bold text-white">Easy-Acumatica</div>
-            <div class="text-caption text-white-darken-2">Documentation</div>
+            <div class="text-h6 font-weight-bold text-grey-darken-4">Easy-Acumatica</div>
+            <div class="text-caption text-grey-darken-1">Documentation</div>
           </div>
         </div>
 
         <v-spacer />
 
-        <!-- Desktop Navigation -->
         <div class="d-none d-md-flex align-center">
           <v-btn
             variant="text"
-            color="white"
-            class="mx-1"
+            color="grey-darken-3"
+            class="mx-1 font-weight-medium"
             to="/python"
           >
             <v-icon start>mdi-language-python</v-icon>
@@ -52,20 +34,20 @@
           
           <v-btn
             variant="text"
-            color="white"
-            class="mx-1"
+            color="grey-darken-3"
+            class="mx-1 font-weight-medium"
             to="/npm/home"
           >
             <v-icon start>mdi-npm</v-icon>
             Node.js
           </v-btn>
 
-          <v-divider vertical class="mx-3" color="white" opacity="0.3" />
+          <v-divider vertical class="mx-3" />
 
           <v-btn
             icon
             variant="text"
-            color="white"
+            color="grey-darken-2"
             href="https://github.com/Nioron07/Easy-Acumatica"
             target="_blank"
             rel="noopener"
@@ -76,7 +58,7 @@
           <v-btn
             icon
             variant="text"
-            color="white"
+            color="grey-darken-2"
             href="https://pypi.org/project/easy-acumatica/"
             target="_blank"
             rel="noopener"
@@ -84,13 +66,10 @@
             <v-icon>mdi-package-variant</v-icon>
           </v-btn>
         </div>
-      </v-container>
     </v-app-bar>
 
-    <!-- Modern Navigation Drawer -->
     <ModernDocsSidebar v-model="drawer" />
 
-    <!-- Main Content -->
     <v-main class="main-content">
       <Head>
         <Link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -114,24 +93,10 @@ const drawer = ref(null);
 </script>
 
 <style scoped>
-.navbar-gradient {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 25%, #5e35b1 50%, #7e57c2 100%);
-}
-
-.logo-card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  padding: 6px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.logo-card:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.app-bar-style {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #E0E0E0 !important;
 }
 
 .main-content {

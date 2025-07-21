@@ -1,42 +1,29 @@
-<!-- layouts/landing.vue -->
 <template>
   <v-app>
-    <!-- Transparent App Bar for Landing -->
     <v-app-bar 
       flat
-      class="landing-navbar"
+      class="app-bar-style"
       height="72"
-      absolute
-      color="transparent"
     >
       <v-container class="d-flex align-center px-4">
-        <!-- Logo Section -->
-        <div class="d-flex align-center">
-          <v-card 
-            class="logo-card-landing mr-3" 
-            flat
-          >
-            <v-img 
-              src="../assets/EasyAcumaticaLogo.webp" 
-              alt="Easy-Acumatica Logo" 
-              width="40"
-              height="40"
-            />
-          </v-card>
-          
-          <div>
-            <div class="text-h5 font-weight-bold text-white">Easy-Acumatica</div>
-          </div>
+        <div class="d-flex align-center" style="cursor: pointer;" @click="$router.push('/')">
+          <v-img 
+            src="../assets/EasyAcumaticaLogo.webp" 
+            alt="Easy-Acumatica Logo" 
+            width="36"
+            height="36"
+            class="mr-3"
+          />
+          <div class="text-h5 font-weight-bold text-grey-darken-4">Easy-Acumatica</div>
         </div>
 
         <v-spacer />
 
-        <!-- Landing Navigation -->
         <div class="d-none d-md-flex align-center">
           <v-btn
             variant="text"
-            color="white"
-            class="mx-2"
+            color="grey-darken-3"
+            class="mx-1 font-weight-medium"
             to="/python"
           >
             <v-icon start>mdi-language-python</v-icon>
@@ -45,19 +32,19 @@
           
           <v-btn
             variant="text"
-            color="white"
-            class="mx-2"
+            color="grey-darken-3"
+            class="mx-1 font-weight-medium"
             to="/npm/home"
           >
             <v-icon start>mdi-npm</v-icon>
             Node.js Docs
           </v-btn>
 
-          <v-divider vertical class="mx-3" color="white" opacity="0.3" />
+          <v-divider vertical class="mx-3" />
 
           <v-btn
             variant="outlined"
-            color="white"
+            color="grey-darken-3"
             class="mx-2"
             href="https://github.com/Nioron07/Easy-Acumatica"
             target="_blank"
@@ -68,13 +55,12 @@
           </v-btn>
         </div>
 
-        <!-- Mobile Menu -->
         <v-menu>
           <template v-slot:activator="{ props }">
             <v-btn
               icon
               v-bind="props"
-              color="white"
+              color="grey-darken-3"
               class="d-md-none"
             >
               <v-icon>mdi-menu</v-icon>
@@ -124,54 +110,14 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
-
-// Handle navbar transparency on scroll
-const handleScroll = () => {
-  const navbar = document.querySelector('.landing-navbar');
-  if (navbar) {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  }
-};
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+// No script logic needed for the header anymore!
 </script>
 
 <style scoped>
-.landing-navbar {
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.1) !important;
-}
-
-.landing-navbar.scrolled {
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 25%, #5e35b1 50%, #7e57c2 100%) !important;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-.logo-card-landing {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  padding: 8px;
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.logo-card-landing:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+.app-bar-style {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #E0E0E0 !important;
 }
 
 .mobile-menu {
