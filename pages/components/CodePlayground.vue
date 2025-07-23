@@ -1,3 +1,4 @@
+<!-- pages/components/CodePlayground.vue -->
 <template>
   <v-card class="code-playground" elevation="4">
     <div class="playground-gradient"></div>
@@ -9,29 +10,9 @@
           <span class="font-weight-bold">{{ title }}</span>
         </div>
         <div class="d-flex align-center" style="gap: 0.5rem">
-          <v-btn
-            variant="text"
-            size="small"
-            @click="resetCode"
-            :disabled="code === initialCode"
-          >
-            <v-icon start>mdi-restore</v-icon>
-            Reset
-          </v-btn>
           <v-btn variant="text" size="small" @click="copyCode" color="primary">
             <v-icon start>{{ copyIcon }}</v-icon>
             {{ copyText }}
-          </v-btn>
-          <v-btn
-            v-if="runnable"
-            variant="flat"
-            size="small"
-            color="primary"
-            @click="runCode"
-            :loading="running"
-          >
-            <v-icon start>mdi-play</v-icon>
-            Run
           </v-btn>
         </div>
       </div>
@@ -39,87 +20,86 @@
 
     <v-divider />
 
-    <div ref="editorRef" style="padding: 1%; background-color: #282c35;"></div>
+    <div class="code-container">
+      <pre class="language-python"><code class="language-python" v-html="highlightedCode"></code></pre>
+    </div>
   </v-card>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
-
-// CodeMirror imports
-import { EditorView, keymap } from '@codemirror/view';
-import { EditorState } from '@codemirror/state';
-import { defaultKeymap, indentWithTab } from '@codemirror/commands';
-import { python } from '@codemirror/lang-python';
-import { oneDark } from '@codemirror/theme-one-dark';
+import { ref, computed, onMounted, nextTick, watch } from 'vue';
 
 const props = defineProps({
   title: { type: String, required: true },
   initialCode: { type: String, required: true },
-  language: { type: String, default: 'python' }, // Kept for future use
-  runnable: { type: Boolean, default: false },
+  language: { type: String, default: 'python' },
+  runnable: { type: Boolean, default: false }, // Kept for backward compatibility but ignored
 });
-
-const emit = defineEmits(['run']);
 
 // State
-const code = ref(props.initialCode);
 const copyText = ref('Copy');
 const copyIcon = ref('mdi-content-copy');
-const running = ref(false);
+let Prism = null;
 
-// Template Ref for CodeMirror's mount point
-const editorRef = ref(null);
-let editorView = null;
+// Load Prism.js
+onMounted(async () => {
+  // Check if Prism is already loaded
+  if (window.Prism) {
+    Prism = window.Prism;
+    return;
+  }
 
-// This function creates the listener that syncs CodeMirror's content
-// with our component's `code` ref.
-const updateListener = EditorView.updateListener.of((update) => {
-  if (update.docChanged) {
-    code.value = update.state.doc.toString();
+  // Load Prism CSS
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  document.head.appendChild(link);
+
+  // Load Prism JS
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+  script.async = true;
+  
+  // Load Python language support
+  const pythonScript = document.createElement('script');
+  pythonScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js';
+  pythonScript.async = true;
+  
+  script.onload = () => {
+    document.head.appendChild(pythonScript);
+    pythonScript.onload = () => {
+      Prism = window.Prism;
+      // Force re-render
+      highlightedCode.value;
+    };
+  };
+  
+  document.head.appendChild(script);
+});
+
+// Compute highlighted code
+const highlightedCode = computed(() => {
+  if (Prism && Prism.languages.python) {
+    return Prism.highlight(props.initialCode, Prism.languages.python, 'python');
+  }
+  // Fallback: just escape HTML
+  return props.initialCode
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+});
+
+// Watch for Prism loading
+watch(() => window.Prism, (newVal) => {
+  if (newVal) {
+    Prism = newVal;
   }
 });
 
-onMounted(() => {
-  const startState = EditorState.create({
-    doc: code.value,
-    extensions: [
-      python(),
-      oneDark, // Theme
-      keymap.of([...defaultKeymap, indentWithTab]), // Basic keymaps + Tab support
-      updateListener, // Our sync listener
-      EditorView.lineWrapping, // Wrap long lines
-    ],
-  });
-
-  editorView = new EditorView({
-    state: startState,
-    parent: editorRef.value,
-  });
-});
-
-// Clean up the editor when the component is destroyed
-onBeforeUnmount(() => {
-  if (editorView) {
-    editorView.destroy();
-  }
-});
-
-// Watch for external changes to the initial code (e.g., from a reset button)
-watch(() => props.initialCode, (newCode) => {
-    code.value = newCode;
-    if (editorView) {
-        editorView.dispatch({
-            changes: { from: 0, to: editorView.state.doc.length, insert: newCode }
-        });
-    }
-});
-
-
-// --- Component Methods ---
+// Methods
 const copyCode = async () => {
   try {
-    await navigator.clipboard.writeText(code.value);
+    await navigator.clipboard.writeText(props.initialCode);
     copyText.value = 'Copied!';
     copyIcon.value = 'mdi-check';
     setTimeout(() => {
@@ -130,37 +110,12 @@ const copyCode = async () => {
     console.error('Failed to copy:', err);
   }
 };
-
-const resetCode = () => {
-  // This will trigger the watch effect to update the editor
-  props.initialCode = props.initialCode;
-  if (editorView) {
-    editorView.dispatch({
-        changes: { from: 0, to: editorView.state.doc.length, insert: props.initialCode }
-    });
-  }
-};
-
-const runCode = async () => {
-  running.value = true;
-  try {
-    emit('run', code.value);
-  } finally {
-    running.value = false;
-  }
-};
 </script>
 
-<style>
-/* Style CodeMirror to match the v-card theme */
-.code-playground .cm-editor {
-  background-color: #282c34;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.875rem;
-}
-.code-playground .cm-gutters {
-  background-color: #282c34;
-  border-right: 1px solid #3a404c;
+<style scoped>
+.code-playground {
+  position: relative;
+  overflow: hidden;
 }
 
 .playground-header {
@@ -175,5 +130,80 @@ const runCode = async () => {
   background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
   opacity: 0.05;
   pointer-events: none;
+}
+
+.code-container {
+  background-color: #2d2d2d;
+  padding: 0;
+  overflow-x: auto;
+}
+
+/* Override Prism theme to match our design */
+.code-container :deep(pre[class*="language-"]) {
+  margin: 0;
+  padding: 1rem;
+  background: #2d2d2d;
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.code-container :deep(code[class*="language-"]) {
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* Custom scrollbar for code container */
+.code-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.code-container::-webkit-scrollbar-track {
+  background: #21252b;
+}
+
+.code-container::-webkit-scrollbar-thumb {
+  background: #3a404c;
+  border-radius: 4px;
+}
+
+.code-container::-webkit-scrollbar-thumb:hover {
+  background: #4a525f;
+}
+
+/* Additional token colors to match One Dark theme */
+.code-container :deep(.token.comment) {
+  color: #5c6370;
+}
+
+.code-container :deep(.token.string) {
+  color: #98c379;
+}
+
+.code-container :deep(.token.keyword) {
+  color: #c678dd;
+}
+
+.code-container :deep(.token.builtin) {
+  color: #61afef;
+}
+
+.code-container :deep(.token.number) {
+  color: #d19a66;
+}
+
+.code-container :deep(.token.operator) {
+  color: #56b6c2;
+}
+
+.code-container :deep(.token.class-name) {
+  color: #e5c07b;
+}
+
+.code-container :deep(.token.function) {
+  color: #61afef;
+}
+
+.code-container :deep(.token.decorator) {
+  color: #e5c07b;
 }
 </style>

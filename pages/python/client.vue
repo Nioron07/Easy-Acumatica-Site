@@ -1,128 +1,65 @@
+<!-- pages/python/client.vue -->
 <template>
   <div>
-    <v-container fluid class="pa-0">
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="hero-gradient"></div>
-        <v-container class="hero-content">
-          <v-row justify="center" align="center">
-            <v-col cols="12" md="10" lg="8">
-              <div class="version-badge mb-4">
-                <v-chip color="white" size="large" class="font-weight-bold">
-                  <v-icon start>mdi-rocket-launch</v-icon>
-                  Version 0.4.0
-                </v-chip>
-              </div>
-
-              <h1 class="hero-title">
-                AcumaticaClient <span class="gradient-text">v0.4.0</span>
-              </h1>
-
-              <p class="hero-subtitle">
-                The intelligent core that dynamically adapts to your Acumatica instance
-              </p>
-
-              <div class="hero-features">
-                <div class="feature-pill">
-                  <v-icon start size="small">mdi-dna</v-icon>
-                  Dynamic Model Generation
-                </div>
-                <div class="feature-pill">
-                  <v-icon start size="small">mdi-api</v-icon>
-                  Auto-Service Discovery
-                </div>
-                <div class="feature-pill">
-                  <v-icon start size="small">mdi-shield-check</v-icon>
-                  Type-Safe Runtime
-                </div>
-              </div>
-            </v-col>
-          </v-row>
-        </v-container>
-      </section>
-
-      <!-- Connection Banner -->
-      <section class="connection-banner" v-if="!isConnected">
-        <v-container>
-          <v-row justify="center">
-            <v-col cols="12" md="10" lg="8">
-              <v-card class="connection-card" elevation="8">
-                <div class="connection-gradient"></div>
-                <v-card-item>
-                  <v-row align="center">
-                    <v-col cols="12" md="8">
-                      <h3 class="text-h5 font-weight-bold mb-2">
-                        <v-icon start color="primary">mdi-power-plug</v-icon>
-                        Connect to Your Instance
-                      </h3>
-                      <p class="text-body-1 mb-0">
-                        Run live examples directly on your Acumatica instance. Your credentials are stored locally and
-                        never sent to our servers.
-                      </p>
-                      <p class="text-caption text-medium-emphasis mt-2">
-                        <v-icon size="x-small">mdi-information</v-icon>
-                        Note: Due to browser security, connections are routed through a CORS proxy for demonstration
-                        purposes.
-                      </p>
-                    </v-col>
-                    <v-col cols="12" md="4" class="text-md-end">
-                      <v-btn color="primary" size="large" rounded="pill" @click="connectionDialog = true"
-                        prepend-icon="mdi-connection">
-                        Connect Now
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-card-item>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </section>
-
-      <!-- Pyodide Loading Status -->
-      <v-container v-if="pyodideLoading" class="mt-4">
-        <v-row justify="center">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-gradient"></div>
+      <v-container class="hero-content">
+        <v-row justify="center" align="center">
           <v-col cols="12" md="10" lg="8">
-            <v-alert type="info" variant="tonal" border="start">
-              <v-alert-title>Loading Python Environment</v-alert-title>
-              <p class="mb-2">Initializing Pyodide and installing easy-acumatica package...</p>
-              <v-progress-linear indeterminate color="primary" height="4" />
-            </v-alert>
+            <div class="hero-badge mb-4">
+              <v-chip color="white" size="large" class="font-weight-bold">
+                <v-icon start>mdi-lightning-bolt</v-icon>
+                Dynamic Client
+              </v-chip>
+            </div>
+            
+            <h1 class="hero-title">
+              <span class="gradient-text">AcumaticaClient</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+              The intelligent, self-configuring API client that adapts to your instance
+            </p>
+            
+            <div class="hero-features">
+              <div class="feature-pill">
+                <v-icon start size="small">mdi-auto-fix</v-icon>
+                Self-Configuring
+              </div>
+              <div class="feature-pill">
+                <v-icon start size="small">mdi-shield-check</v-icon>
+                Type-Safe
+              </div>
+              <div class="feature-pill">
+                <v-icon start size="small">mdi-rocket</v-icon>
+                Zero Boilerplate
+              </div>
+            </div>
           </v-col>
         </v-row>
       </v-container>
+    </section>
 
-      <!-- Pyodide Error Status -->
-      <v-container v-if="!pyodideLoading && !pyodideReady" class="mt-4">
-        <v-row justify="center">
-          <v-col cols="12" md="10" lg="8">
-            <v-alert type="error" variant="tonal" border="start">
-              <v-alert-title>Python Environment Error</v-alert-title>
-              <p>Failed to load the Python environment. Please refresh the page to try again.</p>
-            </v-alert>
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <!-- Main Content -->
-      <v-container fluid>
+    <v-container fluid class="py-0">
+      <v-container class="py-8">
         <v-row>
-          <!-- Content Column -->
           <v-col cols="12" md="9">
-            <v-container>
+            <v-container class="pa-0">
               <!-- Introduction Section -->
-              <section id="introduction" class="mb-12">
-                <h2 class="section-title mb-4">Introduction</h2>
+              <section id="introduction" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-book-open-variant</v-icon>
+                  Introduction
+                </h2>
                 <p class="text-body-1 mb-4">
-                  The <code class="inline-code">AcumaticaClient</code> in v0.4.0 represents a paradigm shift in ERP
-                  integration.
+                  The <code class="inline-code">AcumaticaClient</code> is the heart of Easy-Acumatica's v0.4.0 revolution.
                   Unlike traditional static APIs, it dynamically discovers your instance's capabilities and generates a
-                  perfectly-fitted
-                  client at runtime.
+                  perfectly-fitted client at runtime.
                 </p>
 
-                <v-alert type="info" variant="tonal" border="start" class="mb-6">
-                  <v-alert-title>What's Revolutionary in v0.4.0</v-alert-title>
+                <v-alert type="info" variant="tonal" border="start" class="feature-alert mb-6">
+                  <v-alert-title class="font-weight-bold">What's Revolutionary in v0.4.0</v-alert-title>
                   <ul class="mt-2">
                     <li>Zero static code - everything is generated at runtime</li>
                     <li>Automatic discovery of custom fields and endpoints</li>
@@ -131,31 +68,47 @@
                   </ul>
                 </v-alert>
 
-                <!-- Live Example -->
-                <CodePlayground title="Your First Connection" :initial-code="introExample" :runnable="true"
-                  @run="executeCode" />
+                <!-- Static Example -->
+                <CodePlayground title="Your First Connection" :initial-code="introExample" />
               </section>
 
               <!-- Initialization Section -->
-              <section id="initialization" class="mb-12">
-                <h2 class="section-title mb-4">Initialization</h2>
+              <section id="initialization" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-power-plug</v-icon>
+                  Initialization
+                </h2>
                 <p class="text-body-1 mb-4">
                   When you create an <code class="inline-code">AcumaticaClient</code>, it immediately connects to your
-                  instance,
-                  discovers all available endpoints, and builds a complete type-safe interface tailored to your
+                  instance, discovers all available endpoints, and builds a complete type-safe interface tailored to your
                   configuration.
                 </p>
 
-                <h3 class="text-h5 font-weight-bold mb-3">Parameters</h3>
+                <h3 class="subsection-title">Parameters</h3>
                 <ParameterTable :parameters="initializationParams" />
 
-                <CodePlayground title="Advanced Initialization" :initial-code="advancedInitExample" :runnable="true"
-                  @run="executeCode" class="mt-6" />
+                <CodePlayground title="Advanced Initialization" :initial-code="advancedInitExample" class="mt-6" />
+              </section>
+
+              <!-- Configuration Section -->
+              <section id="configuration" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-cog</v-icon>
+                  Configuration
+                </h2>
+                <p class="text-body-1 mb-4">
+                  Use the <code class="inline-code">AcumaticaConfig</code> class for centralized configuration management.
+                </p>
+
+                <CodePlayground title="Using AcumaticaConfig" :initial-code="configExample" />
               </section>
 
               <!-- Dynamic Discovery Section -->
-              <section id="discovery" class="mb-12">
-                <h2 class="section-title mb-4">Dynamic Discovery</h2>
+              <section id="discovery" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-magnify-scan</v-icon>
+                  Dynamic Discovery
+                </h2>
                 <p class="text-body-1 mb-4">
                   The magic happens during initialization. The client interrogates your instance and builds everything
                   it needs.
@@ -164,62 +117,71 @@
                 <v-row class="mb-6">
                   <v-col cols="12" md="4">
                     <FeatureCard icon="mdi-magnify-scan" title="Endpoint Discovery"
-                      description="Automatically finds all available API endpoints and their versions" />
+                      description="Automatically finds all available API endpoints and their versions" 
+                      color="primary" />
                   </v-col>
                   <v-col cols="12" md="4">
                     <FeatureCard icon="mdi-cube-scan" title="Model Generation"
-                      description="Creates type-safe dataclasses for every entity in your instance" />
+                      description="Creates type-safe dataclasses for every entity in your instance" 
+                      color="secondary" />
                   </v-col>
                   <v-col cols="12" md="4">
                     <FeatureCard icon="mdi-cogs" title="Service Creation"
-                      description="Builds service methods that match your exact API surface" />
+                      description="Builds service methods that match your exact API surface" 
+                      color="accent" />
                   </v-col>
                 </v-row>
 
-                <CodePlayground title="Explore Your Instance" :initial-code="discoveryExample" :runnable="true"
-                  @run="executeCode" />
+                <CodePlayground title="Explore Your Instance" :initial-code="discoveryExample" />
               </section>
 
               <!-- Dynamic Models Section -->
-              <section id="models" class="mb-12">
-                <h2 class="section-title mb-4">Dynamic Models</h2>
+              <section id="models" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-cube-outline</v-icon>
+                  Dynamic Models
+                </h2>
                 <p class="text-body-1 mb-4">
                   All models are generated at runtime and attached to <code class="inline-code">client.models</code>.
                   They include your custom fields and provide perfect IDE support.
                 </p>
 
-                <CodePlayground title="Working with Dynamic Models" :initial-code="modelsExample" :runnable="true"
-                  @run="executeCode" />
+                <CodePlayground title="Working with Dynamic Models" :initial-code="modelsExample" />
 
-                <v-alert type="success" variant="tonal" border="start" class="mt-6">
-                  <v-alert-title>Pro Tip</v-alert-title>
+                <v-alert type="success" variant="tonal" border="start" class="tip-alert mt-6">
+                  <v-alert-title class="font-weight-bold">Pro Tip</v-alert-title>
                   Your IDE will provide autocomplete for all dynamically generated models and their fields!
                 </v-alert>
               </section>
 
               <!-- Dynamic Services Section -->
-              <section id="services" class="mb-12">
-                <h2 class="section-title mb-4">Dynamic Services</h2>
+              <section id="services" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-api</v-icon>
+                  Dynamic Services
+                </h2>
                 <p class="text-body-1 mb-4">
                   Services are dynamically attached to the client based on your available endpoints.
                   Each service provides methods that correspond exactly to your API operations.
                 </p>
 
-                <CodePlayground title="Using Dynamic Services" :initial-code="servicesExample" :runnable="true"
-                  @run="executeCode" />
+                <CodePlayground title="Using Dynamic Services" :initial-code="servicesExample" />
 
-                <h3 class="text-h5 font-weight-bold mt-8 mb-4">Service Method Patterns</h3>
+                <h3 class="subsection-title mt-8">Service Method Patterns</h3>
                 <MethodPatternTable :patterns="servicePatterns" />
               </section>
 
               <!-- Session Management Section -->
-              <section id="session" class="mb-12">
-                <h2 class="section-title mb-4">Session Management</h2>
+              <section id="session" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-shield-key</v-icon>
+                  Session Management
+                </h2>
                 <p class="text-body-1 mb-4">
                   The client handles all session complexity for you, with intelligent retry logic and automatic cleanup.
                 </p>
 
-                <v-tabs v-model="sessionTab" class="mb-6">
+                <v-tabs v-model="sessionTab" class="mb-6 modern-tabs">
                   <v-tab value="persistent">Persistent Sessions</v-tab>
                   <v-tab value="non-persistent">Non-Persistent Sessions</v-tab>
                   <v-tab value="retry">Retry Logic</v-tab>
@@ -227,135 +189,111 @@
 
                 <v-tabs-window v-model="sessionTab">
                   <v-tabs-window-item value="persistent">
-                    <CodePlayground title="Persistent Session (Default)" :initial-code="persistentSessionExample"
-                      :runnable="true" @run="executeCode" />
+                    <CodePlayground title="Persistent Session (Default)" :initial-code="persistentSessionExample" />
                   </v-tabs-window-item>
 
                   <v-tabs-window-item value="non-persistent">
-                    <CodePlayground title="Non-Persistent Session" :initial-code="nonPersistentSessionExample"
-                      :runnable="true" @run="executeCode" />
+                    <CodePlayground title="Non-Persistent Session" :initial-code="nonPersistentSessionExample" />
                   </v-tabs-window-item>
 
                   <v-tabs-window-item value="retry">
-                    <CodePlayground title="Automatic Retry on Session Timeout" :initial-code="retryExample"
-                      :runnable="true" @run="executeCode" />
+                    <CodePlayground title="Automatic Retry on Session Timeout" :initial-code="retryExample" />
                   </v-tabs-window-item>
                 </v-tabs-window>
               </section>
 
-              <!-- Advanced Features Section -->
-              <section id="advanced" class="mb-12">
-                <h2 class="section-title mb-4">Advanced Features</h2>
+              <!-- Exception Handling Section -->
+              <section id="exceptions" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-alert-circle</v-icon>
+                  Exception Handling
+                </h2>
+                <p class="text-body-1 mb-4">
+                  Easy-Acumatica provides specific exception types for different error scenarios.
+                </p>
 
-                <v-expansion-panels variant="accordion" class="mb-6">
+                <CodePlayground title="Handling Exceptions" :initial-code="exceptionExample" />
+              </section>
+
+              <!-- Advanced Features Section -->
+              <section id="advanced" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-rocket</v-icon>
+                  Advanced Features
+                </h2>
+
+                <v-expansion-panels variant="accordion" class="modern-expansion mb-6">
                   <v-expansion-panel>
-                    <v-expansion-panel-title>
+                    <v-expansion-panel-title class="expansion-title">
                       <v-icon start>mdi-file-upload</v-icon>
                       File Attachments
                     </v-expansion-panel-title>
                     <v-expansion-panel-text>
-                      <CodePlayground title="Working with Files" :initial-code="fileExample" :runnable="true"
-                        @run="executeCode" />
+                      <CodePlayground title="Working with Files" :initial-code="fileExample" />
                     </v-expansion-panel-text>
                   </v-expansion-panel>
 
                   <v-expansion-panel>
-                    <v-expansion-panel-title>
-                      <v-icon start>mdi-filter</v-icon>
-                      Complex Queries with OData
+                    <v-expansion-panel-title class="expansion-title">
+                      <v-icon start>mdi-speedometer</v-icon>
+                      Rate Limiting
                     </v-expansion-panel-title>
                     <v-expansion-panel-text>
-                      <CodePlayground title="Advanced Filtering" :initial-code="odataExample" :runnable="true"
-                        @run="executeCode" />
+                      <CodePlayground title="Rate Limit Configuration" :initial-code="rateLimitExample" />
                     </v-expansion-panel-text>
                   </v-expansion-panel>
 
                   <v-expansion-panel>
-                    <v-expansion-panel-title>
-                      <v-icon start>mdi-cog-play</v-icon>
+                    <v-expansion-panel-title class="expansion-title">
+                      <v-icon start>mdi-cog-clockwise</v-icon>
                       Executing Actions
                     </v-expansion-panel-title>
                     <v-expansion-panel-text>
-                      <CodePlayground title="Business Logic Actions" :initial-code="actionsExample" :runnable="true"
-                        @run="executeCode" />
+                      <CodePlayground title="Business Logic Actions" :initial-code="actionsExample" />
                     </v-expansion-panel-text>
                   </v-expansion-panel>
                 </v-expansion-panels>
-              </section>
-
-              <!-- Best Practices Section -->
-              <section id="practices" class="mb-12">
-                <h2 class="section-title mb-4">Best Practices</h2>
-
-                <v-row>
-                  <v-col cols="12" md="6">
-                    <BestPracticeCard icon="mdi-check-circle" title="Do" color="success" :items="bestPracticesDo" />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <BestPracticeCard icon="mdi-close-circle" title="Don't" color="error" :items="bestPracticesDont" />
-                  </v-col>
-                </v-row>
               </section>
             </v-container>
           </v-col>
 
           <!-- Sticky Navigation -->
           <v-col cols="12" md="3" class="d-none d-md-block">
-            <OnPageNav :items="navItems" :connection-status="isConnected" @connect="connectionDialog = true" />
+            <div class="sticky-container">
+              <OnPageNav :items="navItems" />
+            </div>
           </v-col>
         </v-row>
       </v-container>
     </v-container>
-
-    <!-- Connection Dialog -->
-    <ConnectionDialog v-model="connectionDialog" @connected="handleConnection" />
-
-    <!-- Code Output Dialog -->
-    <CodeOutputDialog v-model="outputDialog" :output="codeOutput" :error="codeError" :loading="codeLoading" />
 
     <PageFooter />
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, provide } from 'vue';
+import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodePlayground from '../components/CodePlayground.vue';
-import ConnectionDialog from '../components/ConnectionDialog.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 import ParameterTable from '../components/ParameterTable.vue';
 import FeatureCard from '../components/FeatureCard.vue';
 import MethodPatternTable from '../components/MethodPatternTable.vue';
-import BestPracticeCard from '../components/BestPracticeCard.vue';
-import CodeOutputDialog from '../components/CodeOutputDialog.vue';
 
 // State
-const connectionDialog = ref(false);
-const outputDialog = ref(false);
-const isConnected = ref(false);
-const credentials = ref(null);
 const sessionTab = ref('persistent');
-const codeOutput = ref('');
-const codeError = ref('');
-const codeLoading = ref(false);
-const pyodide = ref(null);
-const pyodideLoading = ref(true);
-const pyodideReady = ref(false);
-const worker = ref(null);
-
-// Provide connection status to child components
-provide('isConnected', isConnected);
 
 // Navigation items
 const navItems = ref([
   { id: 'introduction', title: 'Introduction', icon: 'mdi-book-open-variant' },
   { id: 'initialization', title: 'Initialization', icon: 'mdi-power-plug' },
+  { id: 'configuration', title: 'Configuration', icon: 'mdi-cog' },
   { id: 'discovery', title: 'Dynamic Discovery', icon: 'mdi-magnify-scan' },
   { id: 'models', title: 'Dynamic Models', icon: 'mdi-cube-outline' },
   { id: 'services', title: 'Dynamic Services', icon: 'mdi-api' },
   { id: 'session', title: 'Session Management', icon: 'mdi-shield-key' },
+  { id: 'exceptions', title: 'Exception Handling', icon: 'mdi-alert-circle' },
   { id: 'advanced', title: 'Advanced Features', icon: 'mdi-rocket' },
-  { id: 'practices', title: 'Best Practices', icon: 'mdi-check-decagram' },
 ]);
 
 // Code examples
@@ -378,523 +316,425 @@ print(f"Available models: {dir(client.models)}")
 print(f"Available services: {[attr for attr in dir(client) if attr.endswith('s') and not attr.startswith('_')]}")
 
 # Use them immediately with full type safety!
-customers = client.customers.get_list()
-print(f"Found {len(customers)} customers")`);
+new_customer = client.models.Customer(
+    CustomerID="DYNAMIC01",
+    CustomerName="Dynamic Customer"
+)
+result = client.customers.create(new_customer)`);
 
-const advancedInitExample = ref(`# Advanced initialization with all options
-from easy_acumatica import AcumaticaClient
+const advancedInitExample = ref(`from easy_acumatica import AcumaticaClient
+
+# Using environment variables (recommended)
+client = AcumaticaClient()  # Reads from ACUMATICA_* env vars
+
+# With custom endpoint and version
+client = AcumaticaClient(
+    base_url="https://your-instance.acumatica.com",
+    username="api_user",
+    password="secure_password",
+    tenant="Company",
+    endpoint_name="CustomEndpoint",
+    endpoint_version="24.200.001",
+    rate_limit_calls_per_second=5.0,  # Custom rate limit
+    timeout=120  # 2 minute timeout
+)
+
+# Non-persistent sessions for short operations
+client = AcumaticaClient(
+    base_url="https://your-instance.acumatica.com",
+    username="api_user",
+    password="secure_password",
+    tenant="Company",
+    persistent_login=False  # Login/logout for each request
+)`);
+
+const configExample = ref(`from easy_acumatica import AcumaticaClient, AcumaticaConfig
+
+# Create a configuration object
+config = AcumaticaConfig(
+    base_url="https://your-instance.acumatica.com",
+    username="api_user",
+    password="secure_password",
+    tenant="Company",
+    branch="MAIN",
+    endpoint_name="Default",
+    endpoint_version="24.200.001",
+    rate_limit_calls_per_second=10.0,
+    timeout=60,
+    verify_ssl=True,
+    persistent_login=True,
+    retry_on_idle_logout=True
+)
+
+# Pass config to client
+client = AcumaticaClient(config=config)
+
+# Or load from environment with custom prefix
+config = AcumaticaConfig.from_env(prefix="MY_ACU_")
+client = AcumaticaClient(config=config)
+
+# Override specific settings
+config.rate_limit_calls_per_second = 20.0
+config.timeout = 30
+client = AcumaticaClient(config=config)`);
+
+const discoveryExample = ref(`# After initialization, explore what's available
+
+# List all discovered endpoints
+print("Available endpoints:", client.endpoints)
+
+# See all generated models
+models = [name for name in dir(client.models) if not name.startswith('_')]
+print(f"Generated {len(models)} models:", models[:5], "...")
+
+# Check available services
+services = [attr for attr in dir(client) if attr.endswith('s') and not attr.startswith('_')]
+print(f"Created {len(services)} services:", services[:5], "...")
+
+# Inspect a model's fields
+customer_fields = client.models.Customer.__dataclass_fields__.keys()
+print(f"Customer model has {len(customer_fields)} fields")
+
+# Check custom fields on your instance
+if hasattr(client.models.SalesOrder, 'UsrCustomField'):
+    print("Found custom field UsrCustomField on SalesOrder!")`);
+
+const modelsExample = ref(`# All models follow Python dataclass patterns
+
+# Create a new customer
+customer = client.models.Customer(
+    CustomerID="PYTHN001",
+    CustomerName="Python Customer",
+    CustomerClass="DEFAULT",
+    # Your custom fields are here too!
+    UsrCustomField="Custom Value" if hasattr(client.models.Customer, 'UsrCustomField') else None
+)
+
+# Models support all standard operations
+print(customer.CustomerID)  # PYTHN001
+print(customer.__dict__)    # See all fields
+
+# Nested models work seamlessly
+order = client.models.SalesOrder(
+    OrderType="SO",
+    CustomerID="PYTHN001",
+    Details=[
+        client.models.SalesOrderDetail(
+            InventoryID="WIDGET",
+            Quantity=5
+        )
+    ]
+)
+
+# Type hints work perfectly in your IDE
+# Your editor knows all fields and their types!`);
+
+const servicesExample = ref(`# Services provide intuitive CRUD operations
+
+# GET - Retrieve by keys
+customer = client.customers.get(["PYTHN001"])
+
+# GET - With field selection
+customer = client.customers.get(
+    keys=["PYTHN001"],
+    select="CustomerID,CustomerName,Balance"
+)
+
+# LIST - Get multiple records
+all_customers = client.customers.list()
+
+# LIST - With filtering using Filter class
+from easy_acumatica import Filter
+
+active_customers = client.customers.list(
+    filter=Filter(Status="Active") & Filter(CustomerClass="LOCAL"),
+    select="CustomerID,CustomerName",
+    top=10
+)
+
+# CREATE - Add new record
+new_customer = client.models.Customer(
+    CustomerID="PYTHN002",
+    CustomerName="Another Python Customer"
+)
+created = client.customers.create(new_customer)
+
+# UPDATE - Modify existing
+customer.CustomerName = "Updated Name"
+updated = client.customers.update(customer)
+
+# DELETE - Remove record
+client.customers.delete(["PYTHN002"])`);
+
+const persistentSessionExample = ref(`# Default behavior - one login, multiple operations
+
+client = AcumaticaClient(
+    base_url="https://your-instance.acumatica.com",
+    username="api_user",
+    password="secure_password",
+    tenant="Company"
+    # persistent_login=True is the default
+)
+
+# Session established once during __init__
+# All operations use the same session
+customers = client.customers.list()
+orders = client.sales_orders.list()
+invoices = client.invoices.list()
+
+# Session automatically cleaned up on exit
+# Or explicitly:
+client.logout()`);
+
+const nonPersistentSessionExample = ref(`# For scripts or short-lived operations
 
 client = AcumaticaClient(
     base_url="https://your-instance.acumatica.com",
     username="api_user",
     password="secure_password",
     tenant="Company",
-    branch="MAIN",
-    locale="en-US",
-    verify_ssl=True,  # Important for production
-    persistent_login=True,  # Efficient for multiple operations
-    retry_on_idle_logout=True,  # Auto-reconnect on timeout
-    endpoint_name="Default",  # Can use custom endpoints
-    endpoint_version="24.200.001"  # Pin to specific version
+    persistent_login=False
 )
 
-# The client is now fully initialized with:
-# - All models generated and attached to client.models
-# - All services created and attached as client.<entity>s
-# - Session established and ready for operations
+# Each operation logs in and out automatically
+customer = client.customers.get(["CUST001"])  # Login -> Get -> Logout
+order = client.sales_orders.get(["SO001"])    # Login -> Get -> Logout
 
-print(f"Connected to: {client.base_url}")
-print(f"Using endpoint: {client.endpoints['Default']['version']}")`);
+# No cleanup needed - each operation is self-contained`);
 
-const discoveryExample = ref(`# Explore what was discovered during initialization
-
-# 1. Check available endpoints
-print("Available endpoints:")
-for name, info in client.endpoints.items():
-    print(f"  - {name}: version {info['version']}")
-
-# 2. Explore generated models
-print(f"\\nGenerated {len(dir(client.models))} models:")
-# Show first 10 models
-for model_name in sorted(dir(client.models))[:10]:
-    if not model_name.startswith('_'):
-        model_class = getattr(client.models, model_name)
-        print(f"  - {model_name}: {len(model_class.__annotations__)} fields")
-
-# 3. Explore available services
-print(f"\\nAvailable services:")
-for attr in sorted(dir(client)):
-    if attr.endswith('s') and not attr.startswith('_'):
-        service = getattr(client, attr)
-        print(f"  - client.{attr}: {type(service).__name__}")
-
-# 4. Inspect a specific model's fields
-if hasattr(client.models, 'Customer'):
-    print(f"\\nCustomer model fields:")
-    for field_name, field_type in client.models.Customer.__annotations__.items():
-        print(f"  - {field_name}: {field_type}")`);
-
-const modelsExample = ref(`# Working with dynamically generated models
-
-# 1. Create a new customer using the generated model
-new_customer = client.models.Customer(
-    CustomerID="DYNAMIC001",
-    CustomerName="Dynamically Created Customer",
-    CustomerClass="DEFAULT",
-    # Your custom fields are here too!
-    # UsrCustomField="Value"  # If you have custom fields
-)
-
-# 2. The model knows how to convert itself to Acumatica format
-payload = new_customer.to_acumatica_payload()
-print(f"Generated payload: {payload}")
-
-# 3. Use it with the service
-created = client.customers.put_entity(new_customer)
-print(f"Created customer: {created['CustomerID']['value']}")
-
-# 4. Models support all your entity's fields
-invoice = client.models.Invoice(
-    Type="Invoice",
-    Customer="DYNAMIC001",
-    Date="2025-01-15T00:00:00",
-    Description="Created with dynamic model"
-)
-
-# Add detail lines (also dynamic!)
-detail = client.models.InvoiceDetail(
-    InventoryID="ITEM001",
-    Amount=5,
-    UnitPrice=99.99
-)
-
-# Models handle nested structures automatically
-invoice.Details = [detail]`);
-
-const servicesExample = ref(`# Dynamic services adapt to your exact API
-
-# 1. Standard CRUD operations are generated automatically
-# GET operations
-all_items = client.stock_items.get_list()
-specific_item = client.stock_items.get_by_id("*Item ID here*")
-
-# PUT operations (create/update)
-new_item = client.models.StockItem(
-    InventoryID="NEWITEM001",
-    Description="Dynamically created item"
-)
-created_item = client.stock_items.put_entity(new_item)
-
-# DELETE operations
-# client.stock_items.delete_by_id("OLDITEM001")
-
-# 2. OData query support is built-in
-from easy_acumatica import QueryOptions, F
-
-options = QueryOptions(
-    filter=F.DefaultWarehouseID == 'MAIN',
-    select=['InventoryID', 'Description', 'BasePrice'],
-    top=10
-)
-active_items = client.stock_items.get_list(options=options)
-
-# 3. Actions are dynamically discovered too
-# If your entity has actions, they're available as methods
-# client.sales_orders.invoke_action(action_invocation)
-
-# 4. File operations (if supported by the entity)
-# client.stock_items.put_file(
-#     entity_id="ITEM001",
-#     filename="product_image.jpg",
-#     data=image_bytes,
-#     comment="Product photo"
-# )`);
-
-const persistentSessionExample = ref(`# Persistent sessions (default) - most efficient
-
-# The client logs in once during initialization
-client = AcumaticaClient(
-    base_url="https://your-instance.acumatica.com",
-    username="your_username",
-    password="your_password",
-    tenant="YourTenant",
-    persistent_login=True  # This is the default
-)
-
-# All subsequent operations reuse the same session
-for i in range(100):
-    # No login/logout overhead between calls
-    customer = client.customers.get_by_id(f"CUST{i:03d}")
-    print(f"Processing {customer['CustomerName']['value']}")
-
-# Session is automatically cleaned up on exit
-# Or you can manually logout
-client.logout()
-
-# Benefits:
-# - Single login for entire script lifetime
-# - Much faster for multiple operations
-# - Automatic cleanup via atexit hooks
-# - Perfect for batch processing`);
-
-const nonPersistentSessionExample = ref(`# Non-persistent sessions - for serverless/stateless
-
-# Each operation handles its own session
-client = AcumaticaClient(
-    base_url="https://your-instance.acumatica.com",
-    username="your_username", 
-    password="your_password",
-    tenant="YourTenant",
-    persistent_login=False  # Key difference
-)
-
-# Each call does: login -> operation -> logout
-customer = client.customers.get_by_id("CUST001")
-# Session is already closed
-
-# Another call creates a new session
-invoice = client.invoices.get_list()
-# Session is closed again
-
-# Benefits:
-# - No session state to manage
-# - Safe for serverless functions
-# - Works in distributed systems
-# - Each request is independent
-
-# Trade-off: Slower due to login/logout overhead`);
-
-const retryExample = ref(`# Automatic retry on session timeout
-
-import time
+const retryExample = ref(`# Automatic retry on idle timeout (401 errors)
 
 client = AcumaticaClient(
     base_url="https://your-instance.acumatica.com",
-    username="your_username",
-    password="your_password", 
-    tenant="YourTenant",
-    retry_on_idle_logout=True  # Enable auto-retry (default)
+    username="api_user",
+    password="secure_password",
+    tenant="Company",
+    retry_on_idle_logout=True  # Default
 )
 
-# Simulate a long-running process
-customers = client.customers.get_list()
-print(f"Processing {len(customers)} customers...")
+# Long running process...
+for customer_id in large_customer_list:
+    # If session times out, client automatically:
+    # 1. Catches the 401 error
+    # 2. Logs in again
+    # 3. Retries the operation
+    # 4. Returns the result seamlessly
+    customer = client.customers.get([customer_id])
+    process_customer(customer)
+    time.sleep(60)  # Even with delays, it just works`);
 
-# Simulate session timeout (e.g., lunch break)
-print("Simulating 2-hour delay...")
-# time.sleep(7200)  # Don't actually run this!
+const exceptionExample = ref(`from easy_acumatica import (
+    AcumaticaException,
+    AcumaticaAuthError,
+    AcumaticaAPIError,
+    AcumaticaNetworkError,
+    AcumaticaTimeoutError,
+    AcumaticaNotFoundError
+)
 
-# The next call would normally fail with 401
-# But retry_on_idle_logout makes it transparent
 try:
-    # This automatically:
-    # 1. Detects the 401 error
-    # 2. Re-authenticates 
-    # 3. Retries the request
-    # 4. Returns the result as if nothing happened
-    more_customers = client.customers.get_list()
-    print(f"Still working! Got {len(more_customers)} customers")
-except Exception as e:
-    print(f"Failed even after retry: {e}")`);
+    # This might fail in various ways
+    customer = client.customers.get(["UNKNOWN"])
+    
+except AcumaticaNotFoundError as e:
+    # Record doesn't exist
+    print(f"Customer not found: {e}")
+    
+except AcumaticaAuthError as e:
+    # Authentication failed
+    print(f"Auth error: {e}")
+    # Maybe refresh credentials
+    
+except AcumaticaTimeoutError as e:
+    # Request timed out
+    print(f"Timeout after {e.timeout}s")
+    # Maybe retry with longer timeout
+    
+except AcumaticaAPIError as e:
+    # API returned an error
+    print(f"API error {e.status_code}: {e.message}")
+    print(f"Details: {e.details}")
+    
+except AcumaticaNetworkError as e:
+    # Network-level error
+    print(f"Network error: {e}")
+    
+except AcumaticaException as e:
+    # Catch-all for any Acumatica-related error
+    print(f"Acumatica error: {e}")`);
 
-const fileExample = ref(`# Working with file attachments
+const fileExample = ref(`# Upload files to any entity
 
-# 1. Upload a file to a stock item
-with open('product_photo.jpg', 'rb') as f:
-    image_data = f.read()
+# Get a sales order
+order = client.sales_orders.get(["SO001"])
 
-client.stock_items.put_file(
-    entity_id="ITEM001",
-    filename="main_product_image.jpg",
-    data=image_data,
-    comment="Primary product photo - high resolution"
+# Attach a file
+with open("invoice.pdf", "rb") as f:
+    client.sales_orders.attach_file(
+        keys=["SO001"],
+        filename="invoice.pdf",
+        content=f.read()
+    )
+
+# List attached files
+files = client.sales_orders.get_files(["SO001"])
+for file in files:
+    print(f"{file['filename']} - {file['id']}")
+
+# Download a file
+file_content = client.sales_orders.get_file(
+    keys=["SO001"],
+    file_id=files[0]["id"]
 )
 
-# 2. List files attached to an entity
-files = client.stock_items.get_files("ITEM001")
-for file_info in files:
-    print(f"File: {file_info['filename']} - {file_info['comment']}")
+# Delete a file
+client.sales_orders.delete_file(
+    keys=["SO001"],
+    file_id=files[0]["id"]
+)`);
 
-# 3. The generic approach works for any entity supporting files
-# Upload to a customer
-client.customers.put_file(
-    entity_id="CUST001",
-    filename="contract.pdf",
-    data=contract_bytes,
-    comment="Signed service agreement"
+const rateLimitExample = ref(`from easy_acumatica import AcumaticaClient
+
+# Configure rate limiting at initialization
+client = AcumaticaClient(
+    base_url="https://your-instance.acumatica.com",
+    username="api_user",
+    password="secure_password",
+    tenant="Company",
+    rate_limit_calls_per_second=5.0  # Max 5 calls per second
 )
 
-# 4. Files are automatically linked to the entity
-# They appear in the Acumatica UI immediately`);
+# The client automatically throttles requests
+# This loop will take at least 10 seconds (50 calls at 5/sec)
+for i in range(50):
+    customer = client.customers.get([f"CUST{i:03d}"])
+    # No need to add delays - handled automatically
 
-const odataExample = ref(`# Advanced OData filtering with the F object
-from easy_acumatica import QueryOptions, F
+# Burst handling
+# Even if you make many calls at once, they're queued and rate-limited
+results = []
+for customer_id in customer_ids[:100]:
+    # These are fired rapidly but executed at 5/second
+    results.append(client.customers.get([customer_id]))
 
-# 1. Complex filter with multiple conditions
-complex_filter = (
-    (F.CustomerClass == 'WHOLESALE') & 
-    (F.Balance > 1000) &
-    (F.Status == 'Active')
-)
+# For parallel operations, rate limit is shared across threads
+from concurrent.futures import ThreadPoolExecutor
 
-options = QueryOptions(
-    filter=complex_filter,
-    select=['CustomerID', 'CustomerName', 'Balance'],
-    orderby='Balance desc',
-    top=20
-)
+def fetch_customer(cid):
+    return client.customers.get([cid])
 
-top_wholesale = client.customers.get_list(options=options)
+with ThreadPoolExecutor(max_workers=10) as executor:
+    # All threads share the same rate limit
+    futures = [executor.submit(fetch_customer, cid) for cid in customer_ids]
+    results = [f.result() for f in futures]`);
 
-# 2. Working with dates
-from datetime import datetime, timedelta
+const actionsExample = ref(`# Execute built-in and custom actions
 
-last_month = datetime.now() - timedelta(days=30)
-recent_orders = QueryOptions(
-    filter=F.OrderDate >= last_month.isoformat(),
-    expand=['Details', 'Customer'],
-    select=['OrderNbr', 'OrderTotal', 'Customer/CustomerName']
-)
-
-orders = client.sales_orders.get_list(options=recent_orders)
-
-# 3. Nested property filtering
-# Filter by related entity properties
-options = QueryOptions(
-    filter=F.MainContact.Email.endswith('@important.com'),
-    select=['CustomerID', 'CustomerName', 'MainContact/Email']
-)
-
-vip_customers = client.customers.get_list(options=options)`);
-
-const actionsExample = ref(`# Executing business logic actions
-
-# 1. Simple action without parameters
-# Create an action invocation using the generated model
-release_action = client.models.ReleaseInvoiceAction(
-    entity={
-        "Type": {"value": "Invoice"},
-        "ReferenceNbr": {"value": "INV001234"}
+# Release a sales order
+client.sales_orders.invoke_action(
+    name="ReleaseSalesOrder",
+    payload={
+        "entity": {
+            "OrderType": "SO",
+            "OrderNbr": "SO001"
+        }
     }
 )
 
-# Execute the action
-result = client.invoices.invoke_action(release_action)
-print(f"Invoice released: {result}")
-
-# 2. Action with parameters
-confirm_shipment = client.models.ConfirmShipmentAction(
-    entity={
-        "ShipmentNbr": {"value": "SH001234"}
-    },
-    parameters={
-        "ShipmentDate": {"value": "2025-01-15T00:00:00"}
+# Run a custom action
+result = client.custom_endpoint.invoke_action(
+    name="ProcessBatch",
+    payload={
+        "BatchID": "BATCH001",
+        "ProcessDate": "2024-01-15"
     }
 )
 
-result = client.shipments.invoke_action(confirm_shipment)
+# Actions return results
+print(f"Processed {result.get('RecordsProcessed', 0)} records")
 
-# 3. Complex action example
-# Process a return with multiple parameters
-process_return = client.models.ProcessReturnAction(
-    entity={
-        "OrderType": {"value": "SO"},
-        "OrderNbr": {"value": "SO001234"}
-    },
-    parameters={
-        "ReturnReason": {"value": "Defective"},
-        "RestockingFee": {"value": 25.00},
-        "CreateCreditMemo": {"value": True}
+# Actions with parameters
+client.invoices.invoke_action(
+    name="EmailInvoice",
+    payload={
+        "entity": {"Type": "INV", "ReferenceNbr": "INV001"},
+        "parameters": {
+            "EmailTo": "customer@example.com",
+            "EmailCC": "accounting@company.com"
+        }
     }
-)
+)`);
 
-result = client.sales_orders.invoke_action(process_return)`);
-
-// Parameters table data
+// Initialize parameters
 const initializationParams = ref([
-  { name: 'base_url', type: 'str', required: true, description: 'Root URL of your Acumatica instance' },
-  { name: 'username', type: 'str', required: true, description: 'API user credentials' },
-  { name: 'password', type: 'str', required: true, description: 'API user password' },
-  { name: 'tenant', type: 'str', required: true, description: 'Target tenant (company) code' },
-  { name: 'branch', type: 'str', required: false, description: 'Branch code within the tenant' },
-  { name: 'locale', type: 'str', required: false, description: 'UI locale (e.g., "en-US")' },
-  { name: 'verify_ssl', type: 'bool', required: false, description: 'Validate TLS certificates (default: True)' },
-  { name: 'persistent_login', type: 'bool', required: false, description: 'Keep session alive between calls (default: True)' },
-  { name: 'retry_on_idle_logout', type: 'bool', required: false, description: 'Auto-retry on session timeout (default: True)' },
+  { name: 'base_url', type: 'str', required: false, description: 'Root URL of your Acumatica instance (or use env var)' },
+  { name: 'username', type: 'str', required: false, description: 'API username (or use env var)' },
+  { name: 'password', type: 'str', required: false, description: 'API password (or use env var)' },
+  { name: 'tenant', type: 'str', required: false, description: 'Tenant/Company name (or use env var)' },
+  { name: 'branch', type: 'str', required: false, description: 'Branch code (optional)' },
+  { name: 'locale', type: 'str', required: false, description: 'Locale like "en-US" (optional)' },
+  { name: 'verify_ssl', type: 'bool', required: false, description: 'Verify SSL certificates (default: True)' },
+  { name: 'persistent_login', type: 'bool', required: false, description: 'Keep session alive (default: True)' },
+  { name: 'retry_on_idle_logout', type: 'bool', required: false, description: 'Auto-retry on timeout (default: True)' },
   { name: 'endpoint_name', type: 'str', required: false, description: 'API endpoint name (default: "Default")' },
-  { name: 'endpoint_version', type: 'str', required: false, description: 'Specific API version to use' },
+  { name: 'endpoint_version', type: 'str', required: false, description: 'Specific API version (optional)' },
+  { name: 'config', type: 'AcumaticaConfig', required: false, description: 'Config object (overrides other params)' },
+  { name: 'rate_limit_calls_per_second', type: 'float', required: false, description: 'API rate limit (default: 10.0)' },
+  { name: 'timeout', type: 'int', required: false, description: 'Request timeout in seconds (default: 60)' },
 ]);
 
+// Service patterns
 const servicePatterns = ref([
-  { pattern: 'get_list(options)', description: 'Retrieve all entities with optional filtering' },
-  { pattern: 'get_by_id(entity_id, options)', description: 'Get a specific entity by ID' },
-  { pattern: 'put_entity(data, options)', description: 'Create or update an entity' },
-  { pattern: 'delete_by_id(entity_id)', description: 'Delete an entity' },
-  { pattern: 'invoke_action(invocation)', description: 'Execute a business action' },
-  { pattern: 'put_file(entity_id, filename, data)', description: 'Attach a file to an entity' },
-  { pattern: 'get_files(entity_id)', description: 'List files attached to an entity' },
+  { method: 'get(keys, select=None, expand=None)', description: 'Retrieve a single record by its keys' },
+  { method: 'list(top=None, skip=None, filter=None, select=None, orderby=None, expand=None)', description: 'List records with optional OData parameters' },
+  { method: 'create(entity)', description: 'Create a new record' },
+  { method: 'update(entity)', description: 'Update an existing record' },
+  { method: 'delete(keys)', description: 'Delete a record by its keys' },
+  { method: 'get_by_id(id)', description: 'Get a record by its internal ID' },
+  { method: 'invoke_action(name, payload)', description: 'Execute an action' },
+  { method: 'attach_file(keys, filename, content)', description: 'Attach a file to a record' },
+  { method: 'get_files(keys)', description: 'List files attached to a record' },
+  { method: 'get_file(keys, file_id)', description: 'Download a specific file' },
+  { method: 'delete_file(keys, file_id)', description: 'Delete a file attached to an entity' },
 ]);
-
-const bestPracticesDo = ref([
-  'Let the client discover your instance structure',
-  'Use generated models for type safety',
-  'Leverage IDE autocomplete for field names',
-  'Handle exceptions appropriately',
-  'Use persistent sessions for batch operations',
-  'Let the client manage session lifecycle',
-]);
-
-const bestPracticesDont = ref([
-  'Hard-code field names or structures',
-  'Manually construct API payloads',
-  'Create multiple clients for the same instance',
-  'Ignore SSL verification in production',
-  'Leave sessions open indefinitely',
-  'Bypass the dynamic model system',
-]);
-
-// Methods
-const handleConnection = (creds) => {
-  credentials.value = creds;
-  isConnected.value = true;
-  connectionDialog.value = false;
-  // Store in localStorage
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('acumatica_demo_creds', JSON.stringify(creds));
-  }
-};
-
-const executeCode = async (code) => {
-  if (!isConnected.value || !credentials.value) {
-    connectionDialog.value = true;
-    return;
-  }
-
-  if (!pyodideReady.value) {
-    codeError.value = 'Python environment is still loading. Please wait...';
-    outputDialog.value = true;
-    return;
-  }
-
-  codeOutput.value = '';
-  codeError.value = '';
-  codeLoading.value = true;
-  outputDialog.value = true;
-
-  let executableCode = code;
-  if (credentials.value) {
-    const corsProxy = 'http://localhost:3001/raw?url=';
-    const proxiedBaseUrl = corsProxy + credentials.value.base_url;
-
-    // Replace all placeholders with actual credential values
-    executableCode = executableCode
-      .replace(/https:\/\/your-instance\.acumatica\.com/g, proxiedBaseUrl)
-      .replace(/your_username/g, credentials.value.username)
-      .replace(/your_password/g, credentials.value.password)
-      .replace(/YourTenant/g, credentials.value.tenant)
-      .replace(/api_user/g, credentials.value.username)
-      .replace(/secure_password/g, credentials.value.password)
-      .replace(/Company/g, credentials.value.tenant);
-
-    // Handle branch replacement
-    if (credentials.value.branch) {
-      executableCode = executableCode
-        .replace(/YourBranch/g, credentials.value.branch)
-        .replace(/MAIN/g, credentials.value.branch);
-    } else {
-      // If no branch is provided, remove the line from the code
-      executableCode = executableCode.replace(/^\s*branch=.*,?\s*$/gm, '');
-    }
-  }
-  
-  worker.value.postMessage({ code: executableCode });
-};
-
-// --- LIFECYCLE HOOKS ---
-onMounted(() => {
-  if (typeof window !== 'undefined') {
-    const stored = localStorage.getItem('acumatica_demo_creds');
-    if (stored) {
-      credentials.value = JSON.parse(stored);
-      isConnected.value = true;
-    }
-
-    worker.value = new Worker(new URL('./pyodide-worker.js', import.meta.url), { type: 'module' });
-
-    worker.value.onmessage = (event) => {
-      const { type, output, error } = event.data;
-      if (type === 'ready') {
-        pyodideLoading.value = false;
-        pyodideReady.value = true;
-        console.log("✅ Pyodide worker is ready.");
-      } else if (type === 'success') {
-        codeLoading.value = false;
-        codeOutput.value = output;
-        codeError.value = '';
-      } else if (type === 'error') {
-        codeLoading.value = false;
-        codeOutput.value = '';
-        codeError.value = error;
-      }
-    };
-  }
-});
-
-onUnmounted(() => {
-  // Terminate the worker when the component is removed
-  if (worker.value) {
-    worker.value.terminate();
-  }
-});
-
-
-// SEO
-useSeoMeta({
-  title: 'AcumaticaClient v0.4.0 | Dynamic Python API Client',
-  description: 'Learn about the revolutionary AcumaticaClient v0.4.0 that dynamically adapts to your Acumatica instance with zero static code.',
-  ogTitle: 'AcumaticaClient v0.4.0 - Dynamic ERP Integration',
-  ogDescription: 'The intelligent Python client that discovers your Acumatica instance and generates a perfect API interface at runtime.',
-  ogImage: 'https://www.easyacumatica.com/social-images/python-client-v4.png',
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'AcumaticaClient v0.4.0 - Zero Static Code',
-  twitterDescription: 'Dynamic model generation, automatic service discovery, perfect type safety.',
-  twitterImage: 'https://www.easyacumatica.com/social-images/python-client-v4.png',
-});
 </script>
 
 <style scoped>
 /* Hero Section */
 .hero-section {
   position: relative;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
+  background: #0a0e27;
   overflow: hidden;
+  padding: 4rem 0 3rem;
 }
 
 .hero-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #1a237e 0%, #3949ab 25%, #5e35b1 50%, #7e57c2 100%);
-  opacity: 0.95;
+  background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
+  opacity: 0.85;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
-  padding: 3rem 0;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 900;
+  font-size: 3.5rem;
+  font-weight: 800;
   color: white;
+  line-height: 1.1;
   margin-bottom: 1rem;
-  line-height: 1.2;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #b39ddb 0%, #e1bee7 100%);
+  background: linear-gradient(135deg, #82b1ff 0%, #b388ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -903,8 +743,8 @@ useSeoMeta({
 .hero-subtitle {
   font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 2rem;
   font-weight: 300;
+  margin-bottom: 2rem;
 }
 
 .hero-features {
@@ -915,50 +755,45 @@ useSeoMeta({
 }
 
 .feature-pill {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-/* Connection Banner */
-.connection-banner {
-  background: #f8f9fa;
-  padding: 2rem 0;
+.feature-pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
-.connection-card {
+/* Content Sections */
+.content-section {
+  margin-bottom: 4rem;
   position: relative;
-  overflow: hidden;
-  border-radius: 16px !important;
 }
 
-.connection-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
-  opacity: 0.05;
-}
-
-/* Section Styles */
 .section-title {
   font-size: 2rem;
-  font-weight: 800;
-  color: #1a237e;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   position: relative;
-  padding-bottom: 0.5rem;
 }
 
 .section-title::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -0.5rem;
   left: 0;
   width: 60px;
   height: 4px;
@@ -966,30 +801,94 @@ useSeoMeta({
   border-radius: 2px;
 }
 
-/* Code Styles */
+.section-icon {
+  color: #5e35b1;
+  font-size: 1.75rem;
+}
+
+.subsection-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+/* Inline Code */
 .inline-code {
-  background: rgba(94, 53, 177, 0.1);
-  padding: 0.125rem 0.375rem;
-  border-radius: 4px;
+  background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.375rem;
   font-family: 'Fira Code', monospace;
   font-size: 0.875em;
   color: #5e35b1;
+  box-shadow: 0 1px 3px rgba(94, 53, 177, 0.1);
+}
+
+/* Alerts */
+.feature-alert {
+  background: linear-gradient(135deg, #5e35b108 0%, #7e57c208 100%);
+  border-left: 4px solid #5e35b1;
+  box-shadow: 0 2px 8px rgba(94, 53, 177, 0.1);
+}
+
+.tip-alert {
+  background: linear-gradient(135deg, #4caf5008 0%, #8bc34a08 100%);
+  border-left: 4px solid #4caf50;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+}
+
+/* Tabs */
+.modern-tabs :deep(.v-tab) {
+  text-transform: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.modern-tabs :deep(.v-tab--selected) {
+  background: linear-gradient(135deg, #5e35b115 0%, #7e57c215 100%);
+}
+
+/* Expansion Panels */
+.modern-expansion {
+  box-shadow: 0 2px 8px rgba(94, 53, 177, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.expansion-title {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.modern-expansion :deep(.v-expansion-panel-title:hover) {
+  background: linear-gradient(135deg, #5e35b108 0%, #7e57c208 100%);
 }
 
 /* Sticky Navigation */
-.sticky-nav {
+.sticky-container {
   position: sticky;
-  top: 88px;
+  top: 80px;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 /* Responsive */
 @media (max-width: 960px) {
-  .hero-features {
-    justify-content: center;
+  .hero-title {
+    font-size: 2.5rem;
   }
-
-  .feature-pill {
-    font-size: 0.875rem;
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
   }
 }
 </style>

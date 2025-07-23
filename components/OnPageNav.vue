@@ -1,18 +1,31 @@
+<!-- pages/components/OnPageNav.vue -->
 <template>
-  <v-card flat bordered rounded="xl" class="sticky-nav">
-    <v-list density="compact" nav class="pa-2">
-      <v-list-subheader class="nav-subheader">ON THIS PAGE</v-list-subheader>
-      <v-list-item
-        v-for="item in items"
-        :key="item.id"
-        :title="item.title"
-        @click="scrollTo(item.id)"
-        rounded="lg"
-        class="nav-item"
-        :class="{ 'active-nav-item': activeId === item.id }"
-      ></v-list-item>
-    </v-list>
-  </v-card>
+  <div class="on-page-nav">
+    <v-card elevation="2" class="sticky-nav">
+      <v-card-title class="text-subtitle-1 font-weight-bold">
+        On this page
+      </v-card-title>
+      
+      <v-divider />
+      
+      <v-list density="compact" nav>
+        <v-list-item
+          v-for="item in items"
+          :key="item.id"
+          :href="`#${item.id}`"
+          @click.prevent="scrollToSection(item.id)"
+          :class="{ 'v-list-item--active': activeSection === item.id }"
+        >
+          <template v-slot:prepend>
+            <v-icon size="small">{{ item.icon }}</v-icon>
+          </template>
+          <v-list-item-title class="text-body-2">
+            {{ item.title }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </div>
 </template>
 
 <script setup>
@@ -21,89 +34,65 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const props = defineProps({
   items: {
     type: Array,
-    required: true,
-  },
+    required: true
+  }
 });
 
-const activeId = ref(props.items.length ? props.items[0].id : null);
-let observer = null;
+const activeSection = ref('');
 
-// Function to smoothly scroll to a section
-const scrollTo = (id) => {
+const scrollToSection = (id) => {
   const element = document.getElementById(id);
   if (element) {
-    // Offset for the 72px fixed app bar
-    const offset = 72 + 24; // AppBar height + margin
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - offset;
-
+    const offset = 80; // Account for fixed header
+    const top = element.offsetTop - offset;
     window.scrollTo({
-      top: offsetPosition,
+      top,
       behavior: 'smooth'
     });
   }
 };
 
-// Set up IntersectionObserver to track active section on scroll
-onMounted(() => {
-  const observerCallback = (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        activeId.value = entry.target.id;
-      }
-    });
-  };
-  
-  observer = new IntersectionObserver(observerCallback, {
-    rootMargin: "-20% 0px -70% 0px", // a threshold to trigger the change in the middle of the screen
-    threshold: 0
-  });
+const updateActiveSection = () => {
+  const sections = props.items.map(item => ({
+    id: item.id,
+    element: document.getElementById(item.id)
+  })).filter(section => section.element);
 
-  props.items.forEach(item => {
-    const el = document.getElementById(item.id);
-    if (el) observer.observe(el);
-  });
+  const scrollPosition = window.scrollY + 100;
+
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const section = sections[i];
+    if (section.element.offsetTop <= scrollPosition) {
+      activeSection.value = section.id;
+      break;
+    }
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', updateActiveSection);
+  updateActiveSection();
 });
 
-// Clean up the observer when the component is unmounted
 onUnmounted(() => {
-  if (observer) {
-    observer.disconnect();
-  }
+  window.removeEventListener('scroll', updateActiveSection);
 });
 </script>
 
 <style scoped>
 .sticky-nav {
   position: sticky;
-  /* Top position accounts for the 72px app bar + 24px margin */
-  top: 96px; 
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
-.nav-subheader {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+.v-list-item--active {
+  background-color: rgba(94, 53, 177, 0.08);
+}
+
+.v-list-item--active :deep(.v-list-item-title) {
   color: #5e35b1;
-  padding-inline-start: 12px !important;
-  margin-bottom: 8px;
-}
-
-.nav-item {
-  color: #424242; /* Dark grey text for readability */
-  transition: all 0.2s ease-in-out;
-  margin-bottom: 4px;
-}
-
-.nav-item:not(.active-nav-item):hover {
-  background-color: rgba(94, 53, 177, 0.05);
-  color: #5e35b1;
-}
-
-.active-nav-item {
-  background: linear-gradient(135deg, rgba(94, 53, 177, 0.1) 0%, rgba(126, 87, 194, 0.1) 100%);
-  color: #5e35b1;
-  font-weight: 500;
-  border-left: 3px solid #7e57c2;
+  font-weight: 600;
 }
 </style>
