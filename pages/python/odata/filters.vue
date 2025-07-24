@@ -797,6 +797,456 @@ useSeoMeta({
   0%, 100% { transform: translateY(0) rotate(0deg); }
   25% { transform: translateY(-20px) rotate(10deg); }
   50% { transform: translateY(0) rotate(-10deg); }
-  75% { transform: translateY(-20px) rotate(10deg); }
+  75% { transform: translateY(20px) rotate(5deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-chip {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 1rem 0;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.hero-demo {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo-transform {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.demo-python, .demo-odata {
+  text-align: center;
+}
+
+.demo-label {
+  display: block;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.demo-python code, .demo-odata code {
+  font-size: 1.25rem;
+  color: white;
+  font-family: 'Fira Code', monospace;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: block;
+}
+
+.transform-arrow {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 2rem;
+  animation: pulse-arrow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-arrow {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* Translator Section */
+.translator-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+}
+
+.translator-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.translator-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.translator-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 0.5rem;
+}
+
+.translator-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.translator-input, .translator-output {
+  height: 100%;
+}
+
+.input-label, .output-label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input-examples {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.examples-label {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.example-chip {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.example-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.output-box {
+  background: #2d2d2d;
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 120px;
+  position: relative;
+}
+
+.output-box pre {
+  margin: 0;
+  color: #e6e6e6;
+}
+
+.output-box code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.copy-btn:hover {
+  color: white;
+}
+
+/* Content Sections */
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+/* Info Card */
+.info-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.feature-item v-icon {
+  font-size: 1.25rem;
+}
+
+/* Operator Cards */
+.operator-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.operator-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #667eea;
+}
+
+.operator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.operator-symbol {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #667eea;
+  font-family: 'Fira Code', monospace;
+}
+
+.operator-desc {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Example Card */
+.example-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Function Cards */
+.function-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.function-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #667eea;
+}
+
+.function-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a237e;
+  margin-bottom: 0.5rem;
+  font-family: 'Fira Code', monospace;
+}
+
+.function-desc {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Date Function Cards */
+.date-function-card {
+  background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.date-function-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.date-func-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #5e35b1;
+  margin-bottom: 0.5rem;
+}
+
+.date-func-desc {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.date-func-example {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875rem;
+  color: #4527a0;
+}
+
+/* Advanced Panels */
+.advanced-panels {
+  background: transparent;
+}
+
+.advanced-panels :deep(.v-expansion-panel) {
+  background: white;
+  border-radius: 12px !important;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Practice Cards */
+.practice-card {
+  border-radius: 12px;
+  height: 100%;
+}
+
+.good-practice {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  border: 1px solid #a5d6a7;
+}
+
+.bad-practice {
+  background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%);
+  border: 1px solid #ef9a9a;
+}
+
+.practice-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+/* Reference Card */
+.reference-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.reference-card :deep(.v-table) {
+  background: transparent;
+}
+
+.reference-card :deep(th) {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #1a237e;
+}
+
+.reference-card :deep(td) {
+  vertical-align: middle;
+}
+
+.reference-card code {
+  background: #e8eaf6;
+  color: #5e35b1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875rem;
+}
+
+/* Inline Code */
+.inline-code {
+  background: #e8eaf6;
+  color: #5e35b1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875em;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .demo-transform {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .transform-arrow {
+    transform: rotate(90deg);
+  }
+  
+  @keyframes pulse-arrow {
+    0%, 100% { transform: rotate(90deg) translateX(0); }
+    50% { transform: rotate(90deg) translateX(5px); }
+  }
 }
 </style>

@@ -1,4 +1,4 @@
-<!-- components/ModernDocsSidebar.vue -->
+<!-- components/DocsSidebar.vue -->
 <template>
   <v-navigation-drawer
     v-model="model"
@@ -92,8 +92,8 @@
               </v-list-item-title>
               <template v-slot:append>
                 <v-icon 
-                  :icon="isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                  size="20"
+                  :icon="isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down'" 
+                  size="small"
                 />
               </template>
             </v-list-item>
@@ -102,15 +102,13 @@
           <!-- Group Items -->
           <v-list-item
             v-for="item in section.items"
-            :key="item.title"
+            :key="item.link"
             :to="item.link"
             rounded="lg"
             class="nested-item"
             :class="{ 'active-item': isActiveRoute(item.link) }"
           >
-            <v-list-item-title class="text-body-2">
-              {{ item.title }}
-            </v-list-item-title>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list-group>
 
@@ -118,43 +116,22 @@
         <v-list-item
           v-else-if="section.type === 'item'"
           :to="section.link"
+          :prepend-icon="section.icon"
           rounded="lg"
           class="nav-item"
           :class="{ 'active-item': isActiveRoute(section.link) }"
         >
-          <template v-slot:prepend>
-            <v-icon :icon="section.icon" :color="section.color || 'grey-darken-1'" />
-          </template>
           <v-list-item-title class="font-weight-medium">
             {{ section.title }}
           </v-list-item-title>
           <template v-slot:append v-if="section.badge">
-            <v-chip 
-              size="x-small" 
-              :color="section.badgeColor || 'primary'"
-              variant="tonal"
-            >
+            <v-chip size="x-small" :color="section.badgeColor || 'primary'">
               {{ section.badge }}
             </v-chip>
           </template>
         </v-list-item>
-
       </template>
     </v-list>
-
-    <!-- Version Info -->
-    <template v-slot:append v-if="!rail">
-      <v-divider />
-      <div class="pa-4 text-center">
-        <v-chip 
-          size="small" 
-          variant="outlined"
-          :color="currentColor"
-        >
-          {{ currentVersion }}
-        </v-chip>
-      </div>
-    </template>
   </v-navigation-drawer>
 </template>
 
@@ -162,28 +139,40 @@
 import { ref, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
+// Props
 const props = defineProps({
-  modelValue: Boolean
+  modelValue: Boolean,
+  section: {
+    type: String,
+    default: 'python'
+  }
 });
 
+// Emits
 const emit = defineEmits(['update:modelValue']);
 
+// Route
 const route = useRoute();
-const search = ref('');
-const rail = ref(true);
 
+// Model for drawer
 const model = computed({
   get: () => props.modelValue,
   set: (value) => emit('update:modelValue', value)
 });
 
-// Determine current section based on route
+// State
+const search = ref('');
+const rail = ref(false);
+
+// Current section based on route
 const currentSection = computed(() => {
-  if (route.path.startsWith('/python')) return 'python';
-  if (route.path.startsWith('/npm')) return 'npm';
+  const path = route.path;
+  if (path.startsWith('/python')) return 'python';
+  if (path.startsWith('/npm')) return 'npm';
   return 'home';
 });
 
+// Dynamic title based on current section
 const currentTitle = computed(() => {
   return currentSection.value === 'python' ? 'Python Docs' : 
          currentSection.value === 'npm' ? 'Node.js Docs' : 
@@ -229,154 +218,57 @@ const pythonNav = [
   { type: 'item', title: 'Model Factory', icon: 'mdi-shape-outline', link: '/python/model-factory' },
   
   { type: 'divider' },
-  { type: 'header', title: 'Services', icon: 'mdi-api', color: 'indigo' },
+  { type: 'header', title: 'OData & Queries', icon: 'mdi-database-search', color: 'blue' },
+  { type: 'item', title: 'Query Options', icon: 'mdi-tune', link: '/python/odata/queryoptions' },
+  { type: 'item', title: 'Filters & F Factory', icon: 'mdi-filter', link: '/python/odata/filters' },
+  
+  { type: 'divider' },
+  { type: 'header', title: 'Dynamic Services', icon: 'mdi-api', color: 'indigo' },
+  { type: 'item', title: 'Service Architecture', icon: 'mdi-architecture', link: '/python/services/architecture' },
+  { type: 'item', title: 'Available Methods', icon: 'mdi-function', link: '/python/services/methods' },
+  { type: 'item', title: 'Custom Endpoints', icon: 'mdi-puzzle', link: '/python/services/custom' },
+  
+  { type: 'divider' },
+  { type: 'header', title: 'Advanced Topics', icon: 'mdi-school', color: 'purple' },
+  { type: 'item', title: 'Configuration', icon: 'mdi-cog', link: '/python/configuration' },
+  { type: 'item', title: 'Error Handling', icon: 'mdi-alert', link: '/python/error-handling' },
+  { type: 'item', title: 'Best Practices', icon: 'mdi-check-decagram', link: '/python/best-practices' },
   {
     type: 'group',
-    title: 'Core Services',
-    icon: 'mdi-layers-outline',
-    color: 'indigo',
-    items: [
-      { title: 'Actions', link: '/python/sub-services/actions' },
-      { title: 'Companies', link: '/python/sub-services/companies' },
-      { title: 'Files', link: '/python/sub-services/files' },
-      { title: 'Inquiries', link: '/python/sub-services/inquiries' },
-      { title: 'Records', link: '/python/sub-services/records' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'Financial Services',
-    icon: 'mdi-finance',
-    color: 'green',
-    items: [
-      { title: 'Accounts', link: '/python/sub-services/accounts' },
-      { title: 'Bills', link: '/python/sub-services/bills' },
-      { title: 'Invoices', link: '/python/sub-services/invoices' },
-      { title: 'Ledgers', link: '/python/sub-services/ledgers' },
-      { title: 'Payments', link: '/python/sub-services/payments' },
-      { title: 'Tax Categories', link: '/python/sub-services/tax-categories' },
-      { title: 'Transactions', link: '/python/sub-services/transactions' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'CRM Services',
-    icon: 'mdi-account-group',
-    color: 'blue',
-    items: [
-      { title: 'Activities', link: '/python/sub-services/activities' },
-      { title: 'Business Accounts', link: '/python/sub-services/business-accounts' },
-      { title: 'Cases', link: '/python/sub-services/cases' },
-      { title: 'Contacts', link: '/python/sub-services/contacts' },
-      { title: 'Customers', link: '/python/sub-services/customers' },
-      { title: 'Leads', link: '/python/sub-services/leads' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'Inventory & Supply Chain',
-    icon: 'mdi-package-variant',
-    color: 'orange',
-    items: [
-      { title: 'Inventory', link: '/python/sub-services/inventory' },
-      { title: 'Purchase Orders', link: '/python/sub-services/purchase-orders' },
-      { title: 'Sales Orders', link: '/python/sub-services/sales-orders' },
-      { title: 'Shipments', link: '/python/sub-services/shipments' },
-      { title: 'Stock Items', link: '/python/sub-services/stock-items' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'Manufacturing & Field Service',
-    icon: 'mdi-factory',
-    color: 'brown',
-    items: [
-      { title: 'BOMs', link: '/python/sub-services/boms' },
-      { title: 'Manufacturing', link: '/python/sub-services/manufacturing' },
-      { title: 'Service Orders', link: '/python/sub-services/service-orders' },
-      { title: 'Work Calendars', link: '/python/sub-services/work-calendars' },
-      { title: 'Work Locations', link: '/python/sub-services/work-locations' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'HR & Payroll',
-    icon: 'mdi-account-tie',
+    title: 'Examples',
+    icon: 'mdi-code-tags',
     color: 'teal',
     items: [
-      { title: 'Codes', link: '/python/sub-services/codes' },
-      { title: 'Employees', link: '/python/sub-services/employees' },
-      { title: 'Time Entries', link: '/python/sub-services/time-entries' },
+      { title: 'Basic CRUD', link: '/python/examples/crud' },
+      { title: 'Batch Operations', link: '/python/examples/batch' },
+      { title: 'File Attachments', link: '/python/examples/files' },
+      { title: 'Custom Actions', link: '/python/examples/actions' },
+      { title: 'Complex Queries', link: '/python/examples/queries' },
     ]
   },
   
   { type: 'divider' },
-  { type: 'header', title: 'Model Builders', icon: 'mdi-hammer-wrench', color: 'purple' },
+  { type: 'header', title: 'Model Builders', icon: 'mdi-hammer', color: 'orange' },
   {
     type: 'group',
-    title: 'Query & Generic',
-    icon: 'mdi-filter-variant',
+    title: 'Common Builders',
+    icon: 'mdi-star',
     items: [
-      { title: 'FilterBuilder', link: '/python/models/filter-builder' },
-      { title: 'InquiryBuilder', link: '/python/models/inquiry-builder' },
-      { title: 'QueryOptions', link: '/python/models/query-options' },
-      { title: 'RecordBuilder', link: '/python/models/record-builder' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'Financial Builders',
-    icon: 'mdi-cash-multiple',
-    items: [
-      { title: 'BillBuilder', link: '/python/models/bill-builder' },
-      { title: 'InvoiceBuilder', link: '/python/models/invoice-builder' },
-      { title: 'PaymentBuilder', link: '/python/models/payment-builder' },
-      { title: 'TaxCategoryBuilder', link: '/python/models/tax-category-builder' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'CRM & Contact Builders',
-    icon: 'mdi-account-box-multiple',
-    items: [
-      { title: 'CaseBuilder', link: '/python/models/case-builder' },
-      { title: 'ContactBuilder', link: '/python/models/contact-builder' },
       { title: 'CustomerBuilder', link: '/python/models/customer-builder' },
-      { title: 'LeadBuilder', link: '/python/models/lead-builder' },
+      { title: 'VendorBuilder', link: '/python/models/vendor-builder' },
+      { title: 'InvoiceBuilder', link: '/python/models/invoice-builder' },
+      { title: 'BillBuilder', link: '/python/models/bill-builder' },
+      { title: 'PaymentBuilder', link: '/python/models/payment-builder' },
     ]
   },
   {
     type: 'group',
-    title: 'Inventory & Sales Builders',
-    icon: 'mdi-dolly',
+    title: 'Advanced Builders',
+    icon: 'mdi-rocket',
     items: [
-      { title: 'InventoryIssueBuilder', link: '/python/models/inventory-issue-builder' },
-      { title: 'ItemWarehouseBuilder', link: '/python/models/item-warehouse-builder' },
-      { title: 'PurchaseOrderBuilder', link: '/python/models/purchase-order-builder' },
-      { title: 'SalesOrderBuilder', link: '/python/models/sales-order-builder' },
-      { title: 'ShipmentBuilder', link: '/python/models/shipment-builder' },
-      { title: 'StockItemBuilder', link: '/python/models/stock-item-builder' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'HR & Payroll Builders',
-    icon: 'mdi-account-details',
-    items: [
-      { title: 'Code Builders', link: '/python/models/code-builder' },
-      { title: 'Employee Builders', link: '/python/models/employee-payroll-builders' },
-      { title: 'TimeEntryBuilder', link: '/python/models/time-entry-builder' },
-      { title: 'WorkCalendarBuilder', link: '/python/models/work-calendar-builder' },
-      { title: 'WorkLocationBuilder', link: '/python/models/work-location-builder' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'Manufacturing Builders',
-    icon: 'mdi-wall',
-    items: [
-      { title: 'BomBuilder', link: '/python/models/bom-builder' },
-      { title: 'ConfigurationEntryBuilder', link: '/python/models/configuration-entry-builder' },
+      { title: 'Custom Field Builder', link: '/python/models/custom-fields' },
+      { title: 'Dynamic Builder', link: '/python/models/dynamic-builder' },
+      { title: 'Builder Patterns', link: '/python/models/patterns' },
     ]
   },
 ];
@@ -385,30 +277,18 @@ const npmNav = [
   { type: 'header', title: 'Getting Started', icon: 'mdi-rocket-launch', color: 'success' },
   { type: 'item', title: 'Installation', icon: 'mdi-npm', link: '/npm/installation' },
   { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/npm/quickstart' },
-  { type: 'item', title: 'AcumaticaClient', icon: 'mdi-cog-outline', link: '/npm/client' },
+  { type: 'item', title: 'TypeScript Setup', icon: 'mdi-language-typescript', link: '/npm/typescript' },
   
   { type: 'divider' },
-  { type: 'header', title: 'Services', icon: 'mdi-api', color: 'teal' },
-  {
-    type: 'group',
-    title: 'Sub-Services',
-    icon: 'mdi-view-grid-outline',
-    items: [
-      { title: 'Customers', link: '/npm/sub-services/customers' },
-      { title: 'Invoices', link: '/npm/sub-services/invoices' },
-      { title: 'Payments', link: '/npm/sub-services/payments' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'Model Builders',
-    icon: 'mdi-hammer-wrench',
-    items: [
-      { title: 'CustomerBuilder', link: '/npm/models/customer-builder' },
-      { title: 'InvoiceBuilder', link: '/npm/models/invoice-builder' },
-      { title: 'PaymentBuilder', link: '/npm/models/payment-builder' },
-    ]
-  },
+  { type: 'header', title: 'Core', icon: 'mdi-cube-outline', color: 'teal' },
+  { type: 'item', title: 'AcumaticaClient', icon: 'mdi-cog-outline', link: '/npm/client' },
+  { type: 'item', title: 'Configuration', icon: 'mdi-tune', link: '/npm/configuration' },
+  
+  { type: 'divider' },
+  { type: 'header', title: 'API Reference', icon: 'mdi-api', color: 'cyan' },
+  { type: 'item', title: 'Methods', icon: 'mdi-function', link: '/npm/api/methods' },
+  { type: 'item', title: 'Types', icon: 'mdi-format-list-bulleted-type', link: '/npm/api/types' },
+  { type: 'item', title: 'Interfaces', icon: 'mdi-share-variant', link: '/npm/api/interfaces' },
 ];
 
 // Get navigation based on current section
