@@ -226,51 +226,7 @@ const pythonNav = [
   { type: 'header', title: 'Dynamic Services', icon: 'mdi-api', color: 'indigo' },
   { type: 'item', title: 'Service Architecture', icon: 'mdi-architecture', link: '/python/services/architecture' },
   { type: 'item', title: 'Available Methods', icon: 'mdi-function', link: '/python/services/methods' },
-  { type: 'item', title: 'Custom Endpoints', icon: 'mdi-puzzle', link: '/python/services/custom' },
-  
-  { type: 'divider' },
-  { type: 'header', title: 'Advanced Topics', icon: 'mdi-school', color: 'purple' },
-  { type: 'item', title: 'Configuration', icon: 'mdi-cog', link: '/python/configuration' },
-  { type: 'item', title: 'Error Handling', icon: 'mdi-alert', link: '/python/error-handling' },
-  { type: 'item', title: 'Best Practices', icon: 'mdi-check-decagram', link: '/python/best-practices' },
-  {
-    type: 'group',
-    title: 'Examples',
-    icon: 'mdi-code-tags',
-    color: 'teal',
-    items: [
-      { title: 'Basic CRUD', link: '/python/examples/crud' },
-      { title: 'Batch Operations', link: '/python/examples/batch' },
-      { title: 'File Attachments', link: '/python/examples/files' },
-      { title: 'Custom Actions', link: '/python/examples/actions' },
-      { title: 'Complex Queries', link: '/python/examples/queries' },
-    ]
-  },
-  
-  { type: 'divider' },
-  { type: 'header', title: 'Model Builders', icon: 'mdi-hammer', color: 'orange' },
-  {
-    type: 'group',
-    title: 'Common Builders',
-    icon: 'mdi-star',
-    items: [
-      { title: 'CustomerBuilder', link: '/python/models/customer-builder' },
-      { title: 'VendorBuilder', link: '/python/models/vendor-builder' },
-      { title: 'InvoiceBuilder', link: '/python/models/invoice-builder' },
-      { title: 'BillBuilder', link: '/python/models/bill-builder' },
-      { title: 'PaymentBuilder', link: '/python/models/payment-builder' },
-    ]
-  },
-  {
-    type: 'group',
-    title: 'Advanced Builders',
-    icon: 'mdi-rocket',
-    items: [
-      { title: 'Custom Field Builder', link: '/python/models/custom-fields' },
-      { title: 'Dynamic Builder', link: '/python/models/dynamic-builder' },
-      { title: 'Builder Patterns', link: '/python/models/patterns' },
-    ]
-  },
+  { type: 'item', title: 'Custom Endpoints', icon: 'mdi-puzzle', link: '/python/services/custom' }
 ];
 
 const npmNav = [
