@@ -1,5 +1,5 @@
 <template>
-  <div class="odata-page">
+  <div class="queryoptions-page">
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-gradient"></div>
@@ -54,181 +54,181 @@ options = QueryOptions(
                   OData queries for the Acumatica REST API. It handles all the complex URL encoding and parameter 
                   formatting, letting you focus on your business logic.
                 </p>
+                
+                <v-alert type="info" variant="tonal" class="mt-4">
+                  <strong>Pro tip:</strong> QueryOptions works seamlessly with the F factory for building filters. 
+                  All parameters are optional and can be combined as needed.
+                </v-alert>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
       </section>
 
-      <!-- Basic Usage -->
+      <!-- Quick Start Examples -->
       <section class="content-section">
-        <h2 class="section-title">Basic Usage</h2>
+        <h2 class="section-title">Quick Start Examples</h2>
         
         <v-row>
           <v-col cols="12">
-            <div class="example-card">
-              <h3 class="example-title">Import and Initialize</h3>
-              <CodePlayground
-                :initial-code="basicUsageCode"
-                language="python"
-              />
-            </div>
-          </v-col>
-        </v-row>
-      </section>
+            <v-tabs v-model="quickStartTab" class="mb-4">
+              <v-tab value="simple">Simple Query</v-tab>
+              <v-tab value="filtered">Filtered Query</v-tab>
+              <v-tab value="complex">Complex Query</v-tab>
+            </v-tabs>
 
-      <!-- Parameters -->
-      <section class="content-section">
-        <h2 class="section-title">Available Parameters</h2>
-        
-        <v-row>
-          <v-col v-for="param in parameters" :key="param.name" cols="12" md="6">
-            <v-card class="parameter-card h-100" elevation="0">
-              <v-card-text>
-                <div class="parameter-header">
-                  <code class="parameter-name">{{ param.name }}</code>
-                  <v-chip size="small" color="primary" variant="tonal">
-                    {{ param.type }}
-                  </v-chip>
-                </div>
-                <p class="parameter-desc mt-3">{{ param.description }}</p>
-                <div class="parameter-example mt-3">
-                  <CodePlayground
-                    :initial-code="param.example"
-                    language="python"
-                    :show-copy-button="true"
-                  />
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </section>
-
-      <!-- Advanced Examples -->
-      <section class="content-section">
-        <h2 class="section-title">Advanced Examples</h2>
-        
-        <v-tabs v-model="exampleTab" class="example-tabs mb-6">
-          <v-tab v-for="example in advancedExamples" :key="example.title" :value="example.title">
-            {{ example.title }}
-          </v-tab>
-        </v-tabs>
-
-        <v-window v-model="exampleTab">
-          <v-window-item v-for="example in advancedExamples" :key="example.title" :value="example.title">
-            <v-card class="example-card" elevation="0">
-              <v-card-text>
-                <p class="example-description mb-4">{{ example.description }}</p>
-                <CodePlayground
-                  :initial-code="example.code"
+            <v-tabs-window v-model="quickStartTab">
+              <v-tabs-window-item value="simple">
+                <CodeSnippet
+                  :code="simpleQueryExample"
                   language="python"
                 />
-                <div v-if="example.notes" class="mt-4">
-                  <v-alert type="info" variant="tonal" density="compact">
-                    <div v-html="example.notes"></div>
-                  </v-alert>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-window-item>
-        </v-window>
+              </v-tabs-window-item>
+
+              <v-tabs-window-item value="filtered">
+                <CodeSnippet
+                  :code="filteredQueryExample"
+                  language="python"
+                />
+              </v-tabs-window-item>
+
+              <v-tabs-window-item value="complex">
+                <CodeSnippet
+                  :code="complexQueryExample"
+                  language="python"
+                />
+              </v-tabs-window-item>
+            </v-tabs-window>
+          </v-col>
+        </v-row>
       </section>
 
-      <!-- Best Practices -->
+      <!-- Parameters Reference -->
       <section class="content-section">
-        <h2 class="section-title">Best Practices</h2>
+        <h2 class="section-title">Parameters Reference</h2>
+        
+        <v-card>
+          <v-card-text>
+            <p class="mb-4">All QueryOptions parameters with examples:</p>
+            
+            <v-expansion-panels variant="accordion">
+              <v-expansion-panel v-for="param in allParameters" :key="param.name">
+                <v-expansion-panel-title>
+                  <div class="d-flex align-center">
+                    <code class="param-name">{{ param.name }}</code>
+                    <v-chip size="small" class="ml-3" :color="param.required ? 'error' : 'default'">
+                      {{ param.required ? 'Required' : 'Optional' }}
+                    </v-chip>
+                    <span class="ml-3 text-grey">{{ param.type }}</span>
+                  </div>
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
+                  <p class="mb-3">{{ param.description }}</p>
+                  <CodeSnippet
+                    :code="param.example"
+                    language="python"
+                  />
+                  <v-alert v-if="param.note" type="info" variant="tonal" class="mt-3">
+                    {{ param.note }}
+                  </v-alert>
+                </v-expansion-panel-text>
+              </v-expansion-panel>
+            </v-expansion-panels>
+          </v-card-text>
+        </v-card>
+      </section>
+
+      <!-- Advanced Usage Patterns -->
+      <section class="content-section">
+        <h2 class="section-title">Advanced Usage Patterns</h2>
         
         <v-row>
-          <v-col cols="12" md="6">
-            <v-card class="tip-card h-100">
+          <v-col v-for="pattern in advancedPatterns" :key="pattern.title" cols="12">
+            <v-card class="pattern-card">
+              <v-card-title>
+                <v-icon :icon="pattern.icon" class="mr-2"></v-icon>
+                {{ pattern.title }}
+              </v-card-title>
+              <v-card-subtitle>{{ pattern.description }}</v-card-subtitle>
               <v-card-text>
-                <div class="d-flex align-center mb-3">
-                  <v-icon color="success" size="28" class="mr-3">mdi-lightbulb</v-icon>
-                  <h3 class="text-h6 font-weight-bold">Performance Tips</h3>
-                </div>
-                <ul class="tip-list">
-                  <li>Use <code>select</code> to limit fields and reduce payload size</li>
-                  <li>Apply <code>filter</code> early to minimize data transfer</li>
-                  <li>Use <code>top</code> with pagination for large datasets</li>
-                  <li>Only <code>expand</code> entities you actually need</li>
-                </ul>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          
-          <v-col cols="12" md="6">
-            <v-card class="tip-card h-100">
-              <v-card-text>
-                <div class="d-flex align-center mb-3">
-                  <v-icon color="warning" size="28" class="mr-3">mdi-alert</v-icon>
-                  <h3 class="text-h6 font-weight-bold">Common Pitfalls</h3>
-                </div>
-                <ul class="tip-list">
-                  <li>Remember that <code>skip</code> without <code>top</code> has no effect</li>
-                  <li>Field names in <code>select</code> are case-sensitive</li>
-                  <li>Complex filters may impact query performance</li>
-                  <li>Some custom fields require special <code>custom</code> parameter</li>
-                </ul>
+                <CodeSnippet
+                  :code="pattern.code"
+                  language="python"
+                />
+                <v-alert v-if="pattern.warning" type="warning" variant="tonal" class="mt-4">
+                  <strong>Warning:</strong> {{ pattern.warning }}
+                </v-alert>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
       </section>
 
-      <!-- API Reference -->
+      <!-- QueryOptions Methods -->
       <section class="content-section">
-        <h2 class="section-title">API Reference</h2>
+        <h2 class="section-title">QueryOptions Methods</h2>
         
-        <v-card class="reference-card">
+        <v-card>
           <v-card-text>
-            <h3 class="mb-4">QueryOptions Class</h3>
-            <div class="reference-code">
-              <pre><code class="language-python">class QueryOptions:
-    def __init__(
-        self,
-        select: Optional[List[str]] = None,
-        filter: Optional[Union[str, Filter]] = None,
-        expand: Optional[List[str]] = None,
-        custom: Optional[List[Union[str, CustomField]]] = None,
-        order_by: Optional[str] = None,
-        top: Optional[int] = None,
-        skip: Optional[int] = None
-    ):
-        """
-        Initialize query options for OData requests.
-        
-        All parameters are optional and can be combined as needed.
-        """</code></pre>
-            </div>
+            <p class="mb-4">Available methods on QueryOptions instances:</p>
             
-            <h4 class="mt-6 mb-3">Methods</h4>
             <v-table>
               <thead>
                 <tr>
                   <th>Method</th>
                   <th>Description</th>
                   <th>Returns</th>
+                  <th>Example</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><code>to_dict()</code></td>
-                  <td>Convert options to dictionary format for API calls</td>
-                  <td><code>Dict[str, Any]</code></td>
-                </tr>
-                <tr>
-                  <td><code>to_params()</code></td>
-                  <td>Convert options to URL parameters</td>
-                  <td><code>Dict[str, str]</code></td>
-                </tr>
-                <tr>
-                  <td><code>copy(**kwargs)</code></td>
-                  <td>Create a copy with updated parameters</td>
-                  <td><code>QueryOptions</code></td>
+                <tr v-for="method in queryOptionsMethods" :key="method.name">
+                  <td><code>{{ method.name }}</code></td>
+                  <td>{{ method.description }}</td>
+                  <td><code>{{ method.returns }}</code></td>
+                  <td><code>{{ method.example }}</code></td>
                 </tr>
               </tbody>
             </v-table>
+          </v-card-text>
+        </v-card>
+      </section>
+
+      <!-- Filter Functions Reference -->
+      <section class="content-section">
+        <h2 class="section-title">Filter Functions Reference</h2>
+        
+        <v-card>
+          <v-card-text>
+            <div class="d-flex align-center mb-4">
+              <v-icon color="primary" size="28" class="mr-3">mdi-filter-variant</v-icon>
+              <div>
+                <h3 class="text-h6 mb-1">Need help with filter functions?</h3>
+                <p class="text-body-2 text-grey-darken-1">
+                  The filter parameter accepts Filter objects created with the F factory, which provides
+                  a comprehensive set of functions for building OData queries.
+                </p>
+              </div>
+            </div>
+            
+            <v-btn
+              color="primary"
+              variant="flat"
+              size="large"
+              to="/python/odata/filters"
+              class="text-none"
+            >
+              <v-icon start>mdi-book-open-variant</v-icon>
+              View Complete Filter Reference
+            </v-btn>
+            
+            <v-divider class="my-4"></v-divider>
+            
+            <h4 class="mb-3">Quick Examples</h4>
+            <CodeSnippet
+              :code="filterQuickExamples"
+              language="python"
+            />
           </v-card-text>
         </v-card>
       </section>
@@ -239,7 +239,7 @@ options = QueryOptions(
           <v-card-text>
             <h2 class="text-h4 font-weight-bold mb-4">Next Steps</h2>
             <v-row>
-              <v-col cols="12" md="6">
+              <v-col>
                 <v-btn
                   size="large"
                   color="primary"
@@ -250,19 +250,6 @@ options = QueryOptions(
                 >
                   <v-icon start>mdi-filter</v-icon>
                   Learn About Filters
-                </v-btn>
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-btn
-                  size="large"
-                  color="secondary"
-                  variant="tonal"
-                  block
-                  to="/python/sub-services/records"
-                  class="text-none"
-                >
-                  <v-icon start>mdi-database</v-icon>
-                  Using with Records Service
                 </v-btn>
               </v-col>
             </v-row>
@@ -277,118 +264,64 @@ options = QueryOptions(
 
 <script setup>
 import { ref } from 'vue';
-import PageFooter from '~/components/CodeSnippet.vue';
-import CodePlayground from '~/components/CodeSnippet.vue';
+import PageFooter from '~/components/PythonPageFooter.vue';
+import CodeSnippet from '~/components/CodeSnippet.vue';
 
-// Active tab for examples
-const exampleTab = ref('Complex Queries');
+// Active tab
+const quickStartTab = ref('simple');
 
-// Basic usage example
-const basicUsageCode = `from easy_acumatica import QueryOptions, F
+// Example code
+const simpleQueryExample = `from easy_acumatica import QueryOptions
 
-# Create a simple query
+# Get top 10 customers
+options = QueryOptions(top=10)
+customers = client.customers.get_list(options)
+
+# Get specific fields only
 options = QueryOptions(
-    filter=F.Status == "Active",
-    top=10
-)
-
-# Use with a service
-active_customers = client.customers.get_list(options)`;
-
-// Parameters definition
-const parameters = ref([
-  {
-    name: 'filter',
-    type: 'Filter | str',
-    description: 'OData filter expression to limit results. Can use the F factory for type-safe filters or raw OData strings.',
-    example: `# Using F factory (recommended)
-options = QueryOptions(
-    filter=F.Amount > 1000
-)
-
-# Using raw OData string
-options = QueryOptions(
-    filter="Amount gt 1000"
-)`
-  },
-  {
-    name: 'select',
-    type: 'List[str]',
-    description: 'List of field names to include in the response. Reduces payload size by only returning specified fields.',
-    example: `options = QueryOptions(
     select=["CustomerID", "CustomerName", "Email"]
 )
+customers = client.customers.get_list(options)`;
 
-# Returns only specified fields`
-  },
-  {
-    name: 'expand',
-    type: 'List[str]',
-    description: 'List of related entities to include in the response. Follows navigation properties.',
-    example: `options = QueryOptions(
-    expand=["BillingContact", "ShippingAddress", "Details"]
+const filteredQueryExample = `from easy_acumatica import QueryOptions, F
+
+# Filter active customers with balance > 1000
+options = QueryOptions(
+    filter=(F.Status == "Active") & (F.Balance > 1000),
+    order_by="Balance desc",
+    top=50
 )
+customers = client.customers.get_list(options)
 
-# Includes related entity data`
-  },
-  {
-    name: 'order_by',
-    type: 'str',
-    description: 'Field name and direction for sorting results. Use "desc" suffix for descending order.',
-    example: `# Ascending order (default)
-options = QueryOptions(order_by="CustomerName")
-
-# Descending order
-options = QueryOptions(order_by="CreatedDate desc")`
-  },
-  {
-    name: 'top',
-    type: 'int',
-    description: 'Maximum number of records to return. Essential for pagination and performance.',
-    example: `# Get first 50 records
+# Complex filter with string functions
 options = QueryOptions(
-    top=50,
-    filter=F.Status == "Active"
-)`
-  },
-  {
-    name: 'skip',
-    type: 'int',
-    description: 'Number of records to skip. Used with top for pagination. Requires top to be set.',
-    example: `# Get records 51-100
-options = QueryOptions(
-    top=50,
-    skip=50
-)`
-  },
-  {
-    name: 'custom',
-    type: 'List[CustomField | str]',
-    description: 'List of custom fields to include. Use CustomField helper for proper formatting.',
-    example: `from easy_acumatica import CustomField
+    filter=(
+        F.CustomerName.startswith("ABC") & 
+        F.Email.endswith("@company.com") &
+        (F.CustomerClass == "WHOLESALE")
+    ),
+    select=["CustomerID", "CustomerName", "Email", "Balance"]
+)`;
 
-options = QueryOptions(
-    custom=[
-        CustomField.field("ItemSettings", "UsrRepairType")
-    ]
-)`
-  }
-]);
+const complexQueryExample = `from easy_acumatica import QueryOptions, F, CustomField
 
-// Advanced examples
-const advancedExamples = ref([
-  {
-    title: 'Complex Queries',
-    description: 'Combine multiple parameters for sophisticated data retrieval',
-    code: `from easy_acumatica import QueryOptions, F, CustomField
-
-# Complex query with all parameters
+# Complex query with all features
 options = QueryOptions(
-    # Filter by multiple conditions
-    filter=(F.Status == "Active") & (F.Balance > 1000) & (F.CustomerClass == "WHOLESALE"),
+    # Multiple filter conditions
+    filter=(
+        (F.Status == "Active") & 
+        (F.Balance > 1000) & 
+        (F.LastOrderDate.year() == 2024)
+    ),
     
     # Select specific fields
-    select=["CustomerID", "CustomerName", "Balance", "CreditLimit"],
+    select=[
+        "CustomerID", 
+        "CustomerName", 
+        "Balance", 
+        "CreditLimit",
+        "LastOrderDate"
+    ],
     
     # Include related entities
     expand=["MainContact", "DefaultLocation"],
@@ -396,71 +329,227 @@ options = QueryOptions(
     # Include custom fields
     custom=[
         CustomField.field("CustomerSettings", "UsrVIPStatus"),
-        CustomField.field("CustomerSettings", "UsrLoyaltyPoints")
+        CustomField.field("CustomerSettings", "UsrLoyaltyLevel")
     ],
     
-    # Sort by balance descending
-    order_by="Balance desc",
+    # Sort by multiple fields
+    order_by=["CustomerClass", "Balance desc"],
     
-    # Limit to top 20
+    # Pagination
+    top=20,
+    skip=0
+)
+
+# Execute the query
+results = client.customers.get_list(options)
+
+# Process results
+for customer in results:
+    print(f"{customer.CustomerID}: {customer.Balance}")`;
+
+// All parameters
+const allParameters = ref([
+  {
+    name: 'filter',
+    type: 'Filter | str',
+    required: false,
+    description: 'OData filter expression to limit results. Use the F factory for type-safe filters.',
+    example: `# Using F factory (recommended)
+options = QueryOptions(
+    filter=F.Status == "Active"
+)
+
+# Complex filter
+options = QueryOptions(
+    filter=(F.Amount > 1000) & (F.CustomerClass == "WHOLESALE")
+)
+
+# String filter (not recommended)
+options = QueryOptions(
+    filter="Status eq 'Active'"
+)`,
+    note: 'Always use the F factory for type-safe, readable filters. String filters are error-prone.'
+  },
+  {
+    name: 'select',
+    type: 'List[str]',
+    required: false,
+    description: 'List of field names to return. Reduces payload size by only returning specified fields.',
+    example: `# Select specific fields
+options = QueryOptions(
+    select=["CustomerID", "CustomerName", "Email", "Phone"]
+)
+
+# Combine with filter
+options = QueryOptions(
+    filter=F.Status == "Active",
+    select=["CustomerID", "Balance"]
+)`,
+    note: 'Selecting only needed fields improves performance and reduces bandwidth.'
+  },
+  {
+    name: 'expand',
+    type: 'List[str]',
+    required: false,
+    description: 'List of related entities to include in the response.',
+    example: `# Expand single entity
+options = QueryOptions(
+    expand=["MainContact"]
+)
+
+# Expand multiple entities
+options = QueryOptions(
+    expand=["MainContact", "DefaultLocation", "ShippingAddress"]
+)
+
+# Expand with filter and select
+options = QueryOptions(
+    filter=F.Status == "Active",
+    select=["CustomerID", "CustomerName"],
+    expand=["MainContact", "CreditTerms"]
+)`,
+    note: 'Expanded entities are automatically included when using custom fields that reference them.'
+  },
+  {
+    name: 'top',
+    type: 'int',
+    required: false,
+    description: 'Maximum number of records to return. Essential for pagination and performance.',
+    example: `# Get first 50 records
+options = QueryOptions(
+    top=50
+)
+
+# Combine with filter and sort
+options = QueryOptions(
+    filter=F.Status == "Active",
+    order_by="CreatedDate desc",
+    top=10
+)`,
+    note: 'Always use top to limit results, especially during development and testing.'
+  },
+  {
+    name: 'skip',
+    type: 'int',
+    required: false,
+    description: 'Number of records to skip. Used with top for pagination.',
+    example: `# Skip first 50, get next 50 (page 2)
+options = QueryOptions(
+    top=50,
+    skip=50
+)
+
+# Pagination helper
+def get_page(page_number, page_size=20):
+    return QueryOptions(
+        top=page_size,
+        skip=(page_number - 1) * page_size,
+        order_by="CustomerID"  # Always use order_by with pagination
+    )`,
+    note: 'Always use order_by with skip to ensure consistent pagination results.'
+  },
+  {
+    name: 'order_by',
+    type: 'str | List[str]',
+    required: false,
+    description: 'Field(s) to sort by. Use "field desc" for descending order.',
+    example: `# Single field sort
+options = QueryOptions(
+    order_by="CustomerName"
+)
+
+# Descending sort
+options = QueryOptions(
+    order_by="Balance desc"
+)
+
+# Multiple fields
+options = QueryOptions(
+    order_by=["CustomerClass", "Balance desc"]
+)`,
+    note: 'Field names are case-sensitive. Use desc for descending, default is ascending.'
+  },
+  {
+    name: 'custom',
+    type: 'List[CustomField | str]',
+    required: false,
+    description: 'List of custom fields to include in the response.',
+    example: `from easy_acumatica import CustomField
+
+# Single custom field
+options = QueryOptions(
+    custom=[
+        CustomField.field("CustomerSettings", "UsrVIPStatus")
+    ]
+)
+
+# Multiple custom fields with entity reference
+options = QueryOptions(
+    custom=[
+        CustomField.field("ItemSettings", "UsrRepairType", "InventoryItem"),
+        CustomField.field("Document", "UsrApprovalStatus")
+    ],
+    expand=["InventoryItem"]  # Automatically added if not present
+)`,
+    note: 'Custom fields require exact field type, view name, and field name from Acumatica.'
+  },
+  {
+    name: 'count',
+    type: 'bool',
+    required: false,
+    description: 'Include total count of matching records (OData v4 only).',
+    example: `# Request count with results
+options = QueryOptions(
+    filter=F.Status == "Active",
+    top=10,
+    count=True
+)
+
+# The response will include @odata.count`,
+    note: 'Only available in OData v4. Check your Acumatica version.'
+  },
+  {
+    name: 'search',
+    type: 'str',
+    required: false,
+    description: 'Free-text search across searchable fields (OData v4 only).',
+    example: `# Search across all searchable fields
+options = QueryOptions(
+    search="john smith",
     top=20
 )
 
-# Execute query
-top_customers = client.customers.get_list(options)`,
-    notes: 'This example shows how to combine all QueryOptions parameters for a comprehensive query.'
-  },
-  {
-    title: 'Pagination',
-    description: 'Implement efficient pagination for large datasets',
-    code: `def get_all_active_invoices(client, page_size=100):
-    """Retrieve all active invoices using pagination."""
-    all_invoices = []
-    skip = 0
-    
-    while True:
-        options = QueryOptions(
-            filter=F.Status == "Open",
-            top=page_size,
-            skip=skip,
-            order_by="Date desc"
-        )
-        
-        # Get page of results
-        page = client.invoices.get_list(options)
-        
-        # Add to results
-        all_invoices.extend(page)
-        
-        # Check if we got a full page
-        if len(page) < page_size:
-            break
-            
-        # Move to next page
-        skip += page_size
-    
-    return all_invoices
+# Combine with filter
+options = QueryOptions(
+    search="urgent",
+    filter=F.Status == "Open"
+)`,
+    note: 'Search behavior depends on Acumatica configuration. Not all fields are searchable.'
+  }
+]);
 
-# Usage
-invoices = get_all_active_invoices(client)
-print(f"Retrieved {len(invoices)} invoices")`,
-    notes: 'Always use <code>order_by</code> with pagination to ensure consistent results.'
-  },
+// Advanced patterns
+const advancedPatterns = ref([
   {
-    title: 'Dynamic Queries',
-    description: 'Build queries dynamically based on user input or conditions',
+    title: 'Dynamic Query Building',
+    icon: 'mdi-cog-outline',
+    description: 'Build queries dynamically based on runtime conditions',
     code: `def build_customer_query(
-    status=None, 
-    min_balance=None, 
+    status=None,
+    min_balance=None,
     customer_class=None,
-    include_contacts=False
+    include_contacts=False,
+    page=1,
+    page_size=20
 ):
-    """Build a dynamic query based on parameters."""
+    """Build a dynamic customer query based on parameters."""
     
     # Start with base options
-    options = {
+    options_dict = {
         "select": ["CustomerID", "CustomerName", "Balance", "Status"],
-        "top": 100
+        "order_by": "CustomerName",
+        "top": page_size,
+        "skip": (page - 1) * page_size
     }
     
     # Build filter conditions
@@ -480,62 +569,282 @@ print(f"Retrieved {len(invoices)} invoices")`,
         filter_expr = conditions[0]
         for condition in conditions[1:]:
             filter_expr = filter_expr & condition
-        options["filter"] = filter_expr
+        options_dict["filter"] = filter_expr
     
     # Add expansion if requested
     if include_contacts:
-        options["expand"] = ["MainContact", "Contacts"]
+        options_dict["expand"] = ["MainContact", "Contacts"]
+        options_dict["select"].extend(["MainContact.Email", "MainContact.Phone"])
     
-    return QueryOptions(**options)
+    return QueryOptions(**options_dict)
 
 # Usage examples
 query1 = build_customer_query(status="Active", min_balance=5000)
-query2 = build_customer_query(customer_class="RETAIL", include_contacts=True)`,
-    notes: 'Building queries dynamically allows for flexible, reusable query logic.'
+query2 = build_customer_query(customer_class="RETAIL", include_contacts=True, page=2)
+query3 = build_customer_query()  # No filters, just pagination`,
+    warning: 'Always validate user inputs before building queries to prevent injection attacks.'
+  },
+  {
+    title: 'Efficient Pagination',
+    icon: 'mdi-book-open-page-variant',
+    description: 'Implement efficient pagination for large datasets',
+    code: `class PaginatedQuery:
+    """Helper class for paginated queries."""
+    
+    def __init__(self, client, service_name, page_size=50):
+        self.client = client
+        self.service = getattr(client, service_name)
+        self.page_size = page_size
+    
+    def get_all(self, base_options=None):
+        """Get all records using pagination."""
+        all_records = []
+        skip = 0
+        
+        while True:
+            # Build options for this page
+            options_dict = {
+                "top": self.page_size,
+                "skip": skip,
+                "order_by": "id"  # Consistent ordering required
+            }
+            
+            # Merge with base options
+            if base_options:
+                if hasattr(base_options, 'to_dict'):
+                    base_dict = base_options.to_dict()
+                else:
+                    base_dict = base_options
+                options_dict.update(base_dict)
+            
+            options = QueryOptions(**options_dict)
+            
+            # Get page
+            page = self.service.get_list(options)
+            
+            if not page:
+                break
+                
+            all_records.extend(page)
+            
+            # Check if we got a full page
+            if len(page) < self.page_size:
+                break
+            
+            skip += self.page_size
+            
+        return all_records
+    
+    def get_page(self, page_number, base_options=None):
+        """Get a specific page of results."""
+        options_dict = {
+            "top": self.page_size,
+            "skip": (page_number - 1) * self.page_size,
+            "order_by": "id"
+        }
+        
+        if base_options:
+            if hasattr(base_options, 'to_dict'):
+                base_dict = base_options.to_dict()
+            else:
+                base_dict = base_options
+            options_dict.update(base_dict)
+        
+        options = QueryOptions(**options_dict)
+        return self.service.get_list(options)
+
+# Usage
+paginator = PaginatedQuery(client, "customers", page_size=100)
+
+# Get all active customers
+base_options = QueryOptions(filter=F.Status == "Active")
+all_active = paginator.get_all(base_options)
+
+# Get specific page
+page_3 = paginator.get_page(3, base_options)`,
+    warning: 'Large datasets can impact performance. Consider using server-side filtering instead of retrieving all records.'
   },
   {
     title: 'Performance Optimization',
-    description: 'Optimize queries for better performance',
+    icon: 'mdi-speedometer',
+    description: 'Optimize queries for maximum performance',
     code: `# BAD: Retrieving all fields when you only need a few
 bad_options = QueryOptions(
     filter=F.Status == "Active"
 )
+# This returns ALL fields for each record
 
 # GOOD: Select only needed fields
 good_options = QueryOptions(
     filter=F.Status == "Active",
-    select=["CustomerID", "CustomerName", "Email"]
+    select=["CustomerID", "CustomerName", "Email", "Balance"]
 )
-
-# BAD: Expanding everything
-bad_options = QueryOptions(
-    expand=["*"]  # Don't do this!
-)
+# Much smaller payload, faster response
 
 # GOOD: Expand only what you need
 good_options = QueryOptions(
     expand=["MainContact"],
-    select=["CustomerID", "CustomerName", "MainContact.Email"]
+    select=[
+        "CustomerID", 
+        "CustomerName", 
+        "MainContact.Email",
+        "MainContact.Phone"
+    ]
 )
 
-# GOOD: Use server-side filtering instead of client-side
-# Instead of:
+# BAD: Client-side filtering
 all_customers = client.customers.get_list()
 active = [c for c in all_customers if c.Status == "Active"]
 
-# Do this:
+# GOOD: Server-side filtering
 options = QueryOptions(filter=F.Status == "Active")
-active = client.customers.get_list(options)`,
-    notes: 'Proper use of QueryOptions can significantly improve API performance and reduce bandwidth usage.'
+active = client.customers.get_list(options)
+
+# Monitoring query performance
+import time
+
+def measure_query(options):
+    start = time.time()
+    results = client.customers.get_list(options)
+    duration = time.time() - start
+    
+    print(f"Query took {duration:.2f} seconds")
+    print(f"Retrieved {len(results)} records")
+    
+    if hasattr(results, '__sizeof__'):
+        size = sys.getsizeof(results) / 1024
+        print(f"Payload size: ~{size:.1f} KB")
+    
+    return results
+
+# Test different approaches
+measure_query(QueryOptions(top=10))  # Baseline
+measure_query(QueryOptions(top=10, select=["CustomerID"]))  # Minimal`,
+    warning: ''
+  },
+  {
+    title: 'Copying and Modifying Queries',
+    icon: 'mdi-content-copy',
+    description: 'Create variations of existing queries',
+    code: `# Base query
+base_options = QueryOptions(
+    select=["CustomerID", "CustomerName", "Balance"],
+    order_by="CustomerName"
+)
+
+# Method 1: Using copy() method
+active_options = base_options.copy(
+    filter=F.Status == "Active"
+)
+
+# Method 2: Convert to dict and modify
+base_dict = base_options.to_dict()
+base_dict["filter"] = F.Status == "Inactive"
+inactive_options = QueryOptions(**base_dict)
+
+# Method 3: Build query templates
+class QueryTemplates:
+    @staticmethod
+    def customer_summary(status=None, min_balance=None):
+        """Standard customer summary query."""
+        options = {
+            "select": [
+                "CustomerID",
+                "CustomerName", 
+                "Balance",
+                "CreditLimit",
+                "Status"
+            ],
+            "order_by": "Balance desc"
+        }
+        
+        filters = []
+        if status:
+            filters.append(F.Status == status)
+        if min_balance is not None:
+            filters.append(F.Balance >= min_balance)
+            
+        if filters:
+            filter_expr = filters[0]
+            for f in filters[1:]:
+                filter_expr = filter_expr & f
+            options["filter"] = filter_expr
+            
+        return QueryOptions(**options)
+    
+    @staticmethod
+    def customer_details(customer_id):
+        """Detailed customer query."""
+        return QueryOptions(
+            filter=F.CustomerID == customer_id,
+            expand=[
+                "MainContact",
+                "DefaultLocation",
+                "CreditTerms",
+                "Contacts",
+                "Locations"
+            ]
+        )
+
+# Usage
+summary = QueryTemplates.customer_summary(status="Active", min_balance=1000)
+details = QueryTemplates.customer_details("CUST001")`,
+    warning: ''
   }
 ]);
+
+// QueryOptions methods
+const queryOptionsMethods = ref([
+  {
+    name: 'to_dict()',
+    description: 'Convert QueryOptions to a dictionary',
+    returns: 'Dict[str, Any]',
+    example: 'options.to_dict()'
+  },
+  {
+    name: 'to_params()',
+    description: 'Convert to URL parameters with $ prefixes',
+    returns: 'Dict[str, str]',
+    example: 'options.to_params()'
+  },
+  {
+    name: 'copy(**kwargs)',
+    description: 'Create a copy with updated parameters',
+    returns: 'QueryOptions',
+    example: 'options.copy(top=50)'
+  }
+]);
+
+// Filter quick examples
+const filterQuickExamples = `from easy_acumatica import QueryOptions, F
+
+# Basic comparisons
+options = QueryOptions(filter=F.Status == "Active")
+options = QueryOptions(filter=(F.Amount > 1000) & (F.Amount <= 5000))
+
+# String functions
+options = QueryOptions(filter=F.CustomerName.startswith("ABC"))
+options = QueryOptions(filter=F.Email.contains("@company.com"))
+
+# Date functions
+options = QueryOptions(filter=F.CreatedDate.year() == 2024)
+options = QueryOptions(filter=(F.Date >= "2024-01-01") & (F.Date < "2024-07-01"))
+
+# Complex filters
+options = QueryOptions(
+    filter=(
+        (F.Status == "Active") & 
+        (F.CustomerClass.in_(["WHOLESALE", "RETAIL"])) &
+        (F.Balance > 0)
+    )
+)`;
 
 // SEO
 useSeoMeta({
   title: 'QueryOptions - OData Query Builder | Easy-Acumatica Python',
   description: 'Learn how to use QueryOptions to build powerful OData queries in Easy-Acumatica. Filter, select, expand, and paginate your Acumatica data efficiently.',
   ogTitle: 'QueryOptions - Easy-Acumatica OData Builder',
-  ogDescription: 'Build type-safe OData queries with QueryOptions. Complete guide with examples.',
+  ogDescription: 'Build type-safe OData queries with QueryOptions. Complete guide with examples and function reference.',
 });
 </script>
 
@@ -636,10 +945,11 @@ useSeoMeta({
 .code-preview {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
-  margin-top: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  display: inline-block;
+  text-align: left;
 }
 
 .code-preview pre {
@@ -648,12 +958,12 @@ useSeoMeta({
 }
 
 .code-preview code {
-  font-family: 'Fira Code', 'Consolas', monospace;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-/* Content Sections */
+/* Content */
 .content-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -680,172 +990,85 @@ useSeoMeta({
   transform: translateY(-50%);
   width: 4px;
   height: 70%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
   border-radius: 2px;
 }
 
 /* Cards */
 .info-card {
-  background: white;
+  background: #f8f9fa;
   border-radius: 16px;
   overflow: hidden;
+}
+
+.gradient-border {
   position: relative;
+  background: white;
 }
 
 .gradient-border::before {
   content: '';
   position: absolute;
-  inset: 0;
-  padding: 2px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  border-radius: 16px;
-  pointer-events: none;
-}
-
-.parameter-card {
-  background: #f8f9fa;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  border: 1px solid #e0e0e0;
-}
-
-.parameter-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border-color: #667eea;
-}
-
-.parameter-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.parameter-name {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #667eea;
-  font-family: 'Fira Code', monospace;
-}
-
-.parameter-desc {
-  color: #666;
-  line-height: 1.6;
-}
-
-.inline-code {
-  background: #e8eaf6;
-  color: #5e35b1;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.875em;
-}
-
-/* Example Cards */
-.example-card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.example-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #1a237e;
-  margin-bottom: 1rem;
-}
-
-.example-description {
-  color: #666;
-  line-height: 1.6;
-}
-
-.example-tabs :deep(.v-tabs) {
-  background: #f8f9fa;
-  border-radius: 12px;
-}
-
-.example-tabs :deep(.v-tab) {
-  text-transform: none;
-  font-weight: 500;
-}
-
-/* Tip Cards */
-.tip-card {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-}
-
-.tip-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tip-list li {
-  padding: 0.75rem 0;
-  position: relative;
-  padding-left: 1.5rem;
-  color: #666;
-}
-
-.tip-list li::before {
-  content: '→';
-  position: absolute;
+  top: 0;
   left: 0;
-  color: #667eea;
-  font-weight: bold;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 }
 
-.tip-list code {
-  background: #e8eaf6;
-  color: #5e35b1;
-  padding: 0.1rem 0.3rem;
-  border-radius: 3px;
-  font-size: 0.875em;
+.pattern-card {
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
 }
 
-/* Reference Card */
-.reference-card {
+.pattern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.next-steps-card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
 }
 
-.reference-code {
-  background: #2d2d2d;
-  border-radius: 8px;
-  padding: 1.5rem;
-  overflow-x: auto;
-}
-
-.reference-code pre {
-  margin: 0;
-  color: #e6e6e6;
-}
-
-.reference-code code {
+/* Code */
+.inline-code {
+  background: rgba(102, 126, 234, 0.1);
+  color: #5e35b1;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
   font-family: 'Fira Code', monospace;
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-size: 0.875em;
 }
 
-/* Next Steps Card */
-.next-steps-card {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  border-radius: 16px;
-  margin-top: 3rem;
+.param-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1a237e;
 }
 
-/* Responsive */
+/* Tables */
+.v-table {
+  background: transparent;
+}
+
+.v-table thead tr {
+  background: #f5f5f5;
+}
+
+.v-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.v-table code {
+  background: #f5f5f5;
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* Mobile */
 @media (max-width: 960px) {
   .hero-title {
     font-size: 2.5rem;
@@ -853,6 +1076,11 @@ useSeoMeta({
   
   .hero-subtitle {
     font-size: 1.25rem;
+  }
+  
+  .code-preview {
+    max-width: 100%;
+    overflow-x: auto;
   }
   
   .section-title {
