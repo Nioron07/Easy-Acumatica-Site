@@ -53,20 +53,6 @@
                   It automatically discovers your endpoints, generates models, and creates type-safe services - all at runtime.
                 </p>
 
-                <FeatureCard 
-                  title="Why AcumaticaClient?"
-                  icon="mdi-star"
-                  color="primary"
-                >
-                  <ul class="feature-list">
-                    <li>🔍 <strong>Auto-Discovery</strong>: Detects all available endpoints and entities</li>
-                    <li>🏗️ <strong>Dynamic Generation</strong>: Creates models and services at runtime</li>
-                    <li>🛡️ <strong>Type Safety</strong>: Full IDE support with autocompletion</li>
-                    <li>🔄 <strong>Smart Sessions</strong>: Automatic retry and session management</li>
-                    <li>⚡ <strong>Zero Boilerplate</strong>: No manual model definitions needed</li>
-                  </ul>
-                </FeatureCard>
-
                 <CodeSnippet :code="introExample" />
               </section>
 
@@ -111,7 +97,6 @@
                 <CodeSnippet :code="discoveryExample" />
 
                 <v-alert class="mt-4" type="info" variant="tonal">
-                  <v-icon slot="prepend">mdi-lightbulb</v-icon>
                   Discovery happens once during initialization. The client caches the structure for optimal performance.
                 </v-alert>
               </section>
@@ -130,7 +115,6 @@
                 <CodeSnippet :code="modelsExample" />
 
                 <v-alert class="mt-4" type="success" variant="tonal">
-                  <v-icon slot="prepend">mdi-check-circle</v-icon>
                   Models provide full IDE support with autocompletion and type hints!
                 </v-alert>
               </section>
@@ -823,17 +807,17 @@ const initializationParams = ref([
 
 // Service patterns
 const servicePatterns = ref([
-  { method: 'get(keys, select=None, expand=None)', description: 'Retrieve a single record by its keys' },
-  { method: 'list(top=None, skip=None, filter=None, select=None, orderby=None, expand=None)', description: 'List records with optional OData parameters' },
-  { method: 'create(entity)', description: 'Create a new record' },
-  { method: 'update(entity)', description: 'Update an existing record' },
-  { method: 'delete(keys)', description: 'Delete a record by its keys' },
-  { method: 'get_by_id(id)', description: 'Get a record by its internal ID' },
-  { method: 'invoke_action(name, payload)', description: 'Execute an action' },
-  { method: 'attach_file(keys, filename, content)', description: 'Attach a file to a record' },
-  { method: 'get_files(keys)', description: 'List files attached to a record' },
-  { method: 'get_file(keys, file_id)', description: 'Download a specific file' },
-  { method: 'delete_file(keys, file_id)', description: 'Delete a file attached to an entity' },
+  { pattern: 'get(keys, select=None, expand=None)', description: 'Retrieve a single record by its keys' },
+  { pattern: 'list(top=None, skip=None, filter=None, select=None, orderby=None, expand=None)', description: 'List records with optional OData parameters' },
+  { pattern: 'create(entity)', description: 'Create a new record' },
+  { pattern: 'update(entity)', description: 'Update an existing record' },
+  { pattern: 'delete(keys)', description: 'Delete a record by its keys' },
+  { pattern: 'get_by_id(id)', description: 'Get a record by its internal ID' },
+  { pattern: 'invoke_action(name, payload)', description: 'Execute an action' },
+  { pattern: 'attach_file(keys, filename, content)', description: 'Attach a file to a record' },
+  { pattern: 'get_files(keys)', description: 'List files attached to a record' },
+  { pattern: 'get_file(keys, file_id)', description: 'Download a specific file' },
+  { pattern: 'delete_file(keys, file_id)', description: 'Delete a file attached to an entity' },
 ]);
 </script>
 

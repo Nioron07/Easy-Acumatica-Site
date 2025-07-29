@@ -13,7 +13,7 @@
           </p>
           <div class="version-info mt-3">
             <v-chip size="small" variant="outlined" color="white">
-              v0.4.0
+              v0.4.7
             </v-chip>
             <v-chip size="small" variant="outlined" color="white" class="ml-2">
               Python 3.7+

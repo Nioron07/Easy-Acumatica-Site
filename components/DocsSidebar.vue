@@ -162,7 +162,7 @@ const model = computed({
 
 // State
 const search = ref('');
-const rail = ref(false);
+const rail = ref(true);
 
 // Current section based on route
 const currentSection = computed(() => {

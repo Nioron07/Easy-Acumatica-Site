@@ -459,7 +459,7 @@ filter = F.Description != None`
   },
   {
     title: 'Logical Operations',
-    icon: 'mdi-logic-buffer',
+    icon: 'mdi-brain',
     color: 'success',
     description: 'Combine filters with &, |, and ~',
     code: `# AND operation
