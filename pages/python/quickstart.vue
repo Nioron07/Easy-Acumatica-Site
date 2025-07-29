@@ -70,9 +70,8 @@
           <div class="step-content">
             <v-row>
               <v-col cols="12" xl="7">
-                <CodePlayground 
-                  title="Initialize Client" 
-                  :initial-code="initCode" 
+                <CodeSnippet 
+                  :code="initCode" 
                   language="python" 
                 />
               </v-col>
@@ -113,9 +112,8 @@
           <div class="step-content">
             <v-row>
               <v-col cols="12" xl="8">
-                <CodePlayground 
-                  title="Discover Available Services" 
-                  :initial-code="discoverCode" 
+                <CodeSnippet
+                  :code="discoverCode" 
                   language="python" 
                 />
                 
@@ -135,23 +133,20 @@
                   
                   <v-window v-model="selectedServiceTab" class="mt-4">
                     <v-window-item value="customers">
-                      <CodePlayground 
-                        title="Customer Service Methods" 
-                        :initial-code="customerServiceCode" 
+                      <CodeSnippet
+                        :code="customerServiceCode" 
                         language="python" 
                       />
                     </v-window-item>
                     <v-window-item value="invoices">
-                      <CodePlayground 
-                        title="Invoice Service Methods" 
-                        :initial-code="invoiceServiceCode" 
+                      <CodeSnippet
+                        :code="invoiceServiceCode" 
                         language="python" 
                       />
                     </v-window-item>
                     <v-window-item value="sales_orders">
-                      <CodePlayground 
-                        title="Sales Order Service Methods" 
-                        :initial-code="salesOrderServiceCode" 
+                      <CodeSnippet
+                        :code="salesOrderServiceCode" 
                         language="python" 
                       />
                     </v-window-item>
@@ -252,9 +247,8 @@
                     <v-window-item value="create">
                       <v-row>
                         <v-col cols="12" xl="8">
-                          <CodePlayground 
-                            title="Creating a Customer" 
-                            :initial-code="createModelCode" 
+                          <CodeSnippet
+                            :code="createModelCode" 
                             language="python" 
                           />
                         </v-col>
@@ -275,9 +269,8 @@
                     <v-window-item value="update">
                       <v-row>
                         <v-col cols="12" xl="8">
-                          <CodePlayground 
-                            title="Updating an Invoice" 
-                            :initial-code="updateModelCode" 
+                          <CodeSnippet
+                            :code="updateModelCode" 
                             language="python" 
                           />
                         </v-col>
@@ -291,9 +284,8 @@
                     </v-window-item>
                     
                     <v-window-item value="complex">
-                      <CodePlayground 
-                        title="Complex Entity with Details" 
-                        :initial-code="complexModelCode" 
+                      <CodeSnippet
+                        :code="complexModelCode" 
                         language="python" 
                       />
                     </v-window-item>
@@ -322,9 +314,8 @@
             <v-row>
               <v-col cols="12">
                 <div class="odata-intro mb-6">
-                  <CodePlayground 
-                    title="Using QueryOptions and Filter Builder" 
-                    :initial-code="odataIntroCode" 
+                  <CodeSnippet
+                    :code="odataIntroCode" 
                     language="python" 
                   />
                 </div>
@@ -340,9 +331,8 @@
                       <div class="odata-card">
                         <h4 class="odata-title">{{ example.title }}</h4>
                         <p class="odata-description">{{ example.description }}</p>
-                        <CodePlayground 
-                          :title="example.title" 
-                          :initial-code="example.code" 
+                        <CodeSnippet
+                          :code="example.code" 
                           language="python" 
                         />
                       </div>
@@ -368,9 +358,8 @@
                   Putting it all together - a real-world integration
                 </p>
                 
-                <CodePlayground 
-                  title="sales_integration.py" 
-                  :initial-code="completeExampleCode" 
+                <CodeSnippet
+                  :code="completeExampleCode" 
                   language="python" 
                 />
               </div>
@@ -434,7 +423,7 @@
 <script setup>
 import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
-import CodePlayground from '../components/CodePlayground.vue';
+import CodeSnippet from '../../components/CodeSnippet.vue';
 
 // State
 const selectedServiceTab = ref('customers');

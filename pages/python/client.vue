@@ -67,7 +67,7 @@
                   </ul>
                 </FeatureCard>
 
-                <CodePlayground title="From Zero to Hero in 5 Lines" :initial-code="introExample" />
+                <CodeSnippet :code="introExample" />
               </section>
 
               <!-- Initialization Section -->
@@ -80,7 +80,7 @@
                   Initialize your client with credentials. The client will automatically discover and configure everything else.
                 </p>
 
-                <CodePlayground title="Multiple Ways to Initialize" :initial-code="initExample" />
+                <CodeSnippet :code="initExample" />
 
                 <ParameterTable :parameters="initializationParams" />
               </section>
@@ -95,7 +95,7 @@
                   Configure advanced behaviors with optional parameters.
                 </p>
 
-                <CodePlayground title="Advanced Configuration" :initial-code="configExample" />
+                <CodeSnippet :code="configExample" />
               </section>
 
               <!-- Dynamic Discovery Section -->
@@ -108,7 +108,7 @@
                   The client automatically discovers your Acumatica instance structure on initialization.
                 </p>
 
-                <CodePlayground title="Explore Your Instance" :initial-code="discoveryExample" />
+                <CodeSnippet :code="discoveryExample" />
 
                 <v-alert class="mt-4" type="info" variant="tonal">
                   <v-icon slot="prepend">mdi-lightbulb</v-icon>
@@ -127,7 +127,7 @@
                   They include all standard fields and your custom fields automatically.
                 </p>
 
-                <CodePlayground title="Working with Dynamic Models" :initial-code="modelsExample" />
+                <CodeSnippet :code="modelsExample" />
 
                 <v-alert class="mt-4" type="success" variant="tonal">
                   <v-icon slot="prepend">mdi-check-circle</v-icon>
@@ -146,7 +146,7 @@
                   Each service provides methods that correspond exactly to your API operations.
                 </p>
 
-                <CodePlayground title="Using Dynamic Services" :initial-code="servicesExample" />
+                <CodeSnippet :code="servicesExample" />
 
                 <h3 class="subsection-title mt-8">Service Method Patterns</h3>
                 <MethodPatternTable :patterns="servicePatterns" />
@@ -170,20 +170,19 @@
 
                 <v-tabs-window v-model="odataTab">
                   <v-tabs-window-item value="filters">
-                    <CodePlayground title="Using the F Filter Factory" :initial-code="filterExample" />
+                    <CodeSnippet :code="filterExample" />
                   </v-tabs-window-item>
 
                   <v-tabs-window-item value="queryoptions">
-                    <CodePlayground title="QueryOptions for Complex Queries" :initial-code="queryOptionsExample" />
+                    <CodeSnippet :code="queryOptionsExample" />
                   </v-tabs-window-item>
 
                   <v-tabs-window-item value="advanced">
-                    <CodePlayground title="Advanced OData Scenarios" :initial-code="advancedOdataExample" />
+                    <CodeSnippet :code="advancedOdataExample" />
                   </v-tabs-window-item>
                 </v-tabs-window>
 
                 <v-alert class="mt-4" type="info" variant="tonal">
-                  <v-icon slot="prepend">mdi-information</v-icon>
                   The <code>F</code> factory creates filter expressions that work with both OData v3 and v4.
                   Function names are automatically lowercased for compatibility.
                 </v-alert>
@@ -207,15 +206,15 @@
 
                 <v-tabs-window v-model="sessionTab">
                   <v-tabs-window-item value="persistent">
-                    <CodePlayground title="Persistent Session (Default)" :initial-code="persistentSessionExample" />
+                    <CodeSnippet :code="persistentSessionExample" />
                   </v-tabs-window-item>
 
                   <v-tabs-window-item value="non-persistent">
-                    <CodePlayground title="Non-Persistent Session" :initial-code="nonPersistentSessionExample" />
+                    <CodeSnippet :code="nonPersistentSessionExample" />
                   </v-tabs-window-item>
 
                   <v-tabs-window-item value="retry">
-                    <CodePlayground title="Automatic Retry on Session Timeout" :initial-code="retryExample" />
+                    <CodeSnippet :code="retryExample" />
                   </v-tabs-window-item>
                 </v-tabs-window>
               </section>
@@ -230,7 +229,7 @@
                   Easy-Acumatica provides specific exception types for different error scenarios.
                 </p>
 
-                <CodePlayground title="Handling Exceptions" :initial-code="exceptionExample" />
+                <CodeSnippet :code="exceptionExample" />
               </section>
 
               <!-- Advanced Features Section -->
@@ -247,7 +246,7 @@
                       File Attachments
                     </v-expansion-panel-title>
                     <v-expansion-panel-text>
-                      <CodePlayground title="Working with Files" :initial-code="fileExample" />
+                      <CodeSnippet :code="fileExample" />
                     </v-expansion-panel-text>
                   </v-expansion-panel>
 
@@ -257,7 +256,7 @@
                       Rate Limiting
                     </v-expansion-panel-title>
                     <v-expansion-panel-text>
-                      <CodePlayground title="Rate Limit Configuration" :initial-code="rateLimitExample" />
+                      <CodeSnippet :code="rateLimitExample" />
                     </v-expansion-panel-text>
                   </v-expansion-panel>
 
@@ -267,7 +266,7 @@
                       Executing Actions
                     </v-expansion-panel-title>
                     <v-expansion-panel-text>
-                      <CodePlayground title="Business Logic Actions" :initial-code="actionsExample" />
+                      <CodeSnippet :code="actionsExample" />
                     </v-expansion-panel-text>
                   </v-expansion-panel>
                 </v-expansion-panels>
@@ -292,7 +291,7 @@
 <script setup>
 import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
-import CodePlayground from '../components/CodePlayground.vue';
+import CodeSnippet from '../../components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 import ParameterTable from '../components/ParameterTable.vue';
 import FeatureCard from '../components/FeatureCard.vue';
