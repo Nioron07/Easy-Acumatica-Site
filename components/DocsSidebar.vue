@@ -198,7 +198,7 @@ const currentColor = computed(() => {
 });
 
 const currentVersion = computed(() => {
-  return currentSection.value === 'python' ? 'Python v0.4.0' : 
+  return currentSection.value === 'python' ? 'Python v0.4.7' : 
          currentSection.value === 'npm' ? 'NPM v1.0.0' : 
          'Easy-Acumatica';
 });
@@ -220,13 +220,7 @@ const pythonNav = [
   { type: 'divider' },
   { type: 'header', title: 'OData & Queries', icon: 'mdi-database-search', color: 'blue' },
   { type: 'item', title: 'Query Options', icon: 'mdi-tune', link: '/python/odata/queryoptions' },
-  { type: 'item', title: 'Filters & F Factory', icon: 'mdi-filter', link: '/python/odata/filters' },
-  
-  { type: 'divider' },
-  { type: 'header', title: 'Dynamic Services', icon: 'mdi-api', color: 'indigo' },
-  { type: 'item', title: 'Service Architecture', icon: 'mdi-architecture', link: '/python/services/architecture' },
-  { type: 'item', title: 'Available Methods', icon: 'mdi-function', link: '/python/services/methods' },
-  { type: 'item', title: 'Custom Endpoints', icon: 'mdi-puzzle', link: '/python/services/custom' }
+  { type: 'item', title: 'Filters & F Factory', icon: 'mdi-filter', link: '/python/odata/filters' }
 ];
 
 const npmNav = [

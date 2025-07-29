@@ -29,7 +29,6 @@
             <li><a href="/python/client">Client Guide</a></li>
             <li><a href="/python/service-factory">Services</a></li>
             <li><a href="/python/model-factory">Models</a></li>
-            <li><a href="/python/api-reference">API Reference</a></li>
           </ul>
         </v-col>
 
@@ -39,7 +38,6 @@
           <ul class="footer-links">
             <li><a href="/python/examples">Examples</a></li>
             <li><a href="/python/migration">Migration Guide</a></li>
-            <li><a href="/python/faq">FAQ</a></li>
             <li><a href="/python/changelog">Changelog</a></li>
             <li><a href="https://github.com/Nioron07/Easy-Acumatica/issues" target="_blank">Support</a></li>
           </ul>
