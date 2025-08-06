@@ -34,7 +34,7 @@
             variant="text"
             color="grey-darken-3"
             class="mx-1 font-weight-medium"
-            to="/npm/home"
+            to="/npm"
           >
             <v-icon start>mdi-npm</v-icon>
             Node.js Docs
@@ -71,7 +71,7 @@
             <v-list-item to="/python" prepend-icon="mdi-language-python">
               <v-list-item-title>Python Docs</v-list-item-title>
             </v-list-item>
-            <v-list-item to="/npm/home" prepend-icon="mdi-npm">
+            <v-list-item to="/npm">
               <v-list-item-title>Node.js Docs</v-list-item-title>
             </v-list-item>
             <v-divider />

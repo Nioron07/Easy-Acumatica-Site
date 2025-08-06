@@ -254,7 +254,7 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
-import MethodPatternTable from '../components/MethodPatternTable.vue';
+import MethodPatternTable from '../../components/MethodPatternTable.vue';
 
 // SEO Configuration
 useSeoMeta({

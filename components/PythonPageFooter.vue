@@ -9,11 +9,11 @@
           <h3 class="footer-title mb-3">Easy-Acumatica Python</h3>
           <p class="footer-text">
             A dynamic API wrapper that adapts to your Acumatica instance. 
-            Version 0.4.0 introduces fully dynamic service and model generation.
+            Version 0.4.8 introduces fully dynamic service and model generation.
           </p>
           <div class="version-info mt-3">
             <v-chip size="small" variant="outlined" color="white">
-              v0.4.7
+              v0.4.8
             </v-chip>
             <v-chip size="small" variant="outlined" color="white" class="ml-2">
               Python 3.7+

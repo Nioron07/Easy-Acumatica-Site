@@ -36,7 +36,7 @@
             variant="text"
             color="grey-darken-3"
             class="mx-1 font-weight-medium"
-            to="/npm/home"
+            to="/npm"
           >
             <v-icon start>mdi-npm</v-icon>
             Node.js
@@ -44,7 +44,7 @@
 
           <v-divider vertical class="mx-3" />
 
-          <v-btn
+          <v-btn v-if="$route.fullPath.includes('python')"
             icon
             variant="text"
             color="grey-darken-2"
@@ -55,11 +55,36 @@
             <v-icon>mdi-github</v-icon>
           </v-btn>
           
-          <v-btn
+
+          <v-btn v-else
+            icon
+            variant="text"
+            color="grey-darken-2"
+            href="https://github.com/joebewon/Easy-Acumatica"
+            target="_blank"
+            rel="noopener"
+          >
+            <v-icon>mdi-github</v-icon>
+          </v-btn>
+
+          <v-btn v-if="$route.fullPath.includes('python')"
             icon
             variant="text"
             color="grey-darken-2"
             href="https://pypi.org/project/easy-acumatica/"
+            target="_blank"
+            rel="noopener"
+          >
+            <v-icon>mdi-package-variant</v-icon>
+          </v-btn>
+
+          
+
+          <v-btn v-else
+            icon
+            variant="text"
+            color="grey-darken-2"
+            href="https://www.npmjs.com/package/easy-acumatica"
             target="_blank"
             rel="noopener"
           >

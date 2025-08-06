@@ -54,7 +54,7 @@
               </h2>
               
               <v-alert type="info" variant="tonal" class="mb-6">
-                <strong>Major Architecture Change:</strong> v0.4.0 introduces a completely dynamic approach where models and services are generated at runtime from your Acumatica instance's schema. No more static model definitions!
+                <strong>Major Architecture Change:</strong> v0.4.8 introduces a completely dynamic approach where models and services are generated at runtime from your Acumatica instance's schema. No more static model definitions!
               </v-alert>
 
               <v-card elevation="2">
@@ -526,7 +526,7 @@ const migrationSteps = ref([
   {
     title: 'Update Package',
     content: `<p class="mb-3">First, update to the latest version of easy-acumatica:</p>`,
-    code: `pip install --upgrade easy-acumatica>=0.4.7`
+    code: `pip install --upgrade easy-acumatica>=0.4.8`
   },
   {
     title: 'Update Imports',

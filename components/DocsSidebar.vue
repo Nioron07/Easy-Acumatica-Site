@@ -180,7 +180,7 @@ const currentTitle = computed(() => {
 });
 
 const currentSubtitle = computed(() => {
-  return currentSection.value === 'python' ? 'v0.4.0 - Dynamic Generation' : 
+  return currentSection.value === 'python' ? 'v0.4.8 - Dynamic Generation' : 
          currentSection.value === 'npm' ? 'TypeScript Ready' : 
          'Choose your platform';
 });
@@ -198,7 +198,7 @@ const currentColor = computed(() => {
 });
 
 const currentVersion = computed(() => {
-  return currentSection.value === 'python' ? 'Python v0.4.7' : 
+  return currentSection.value === 'python' ? 'Python v0.4.8' : 
          currentSection.value === 'npm' ? 'NPM v1.0.0' : 
          'Easy-Acumatica';
 });
@@ -210,6 +210,7 @@ const pythonNav = [
   { type: 'item', title: 'Installation', icon: 'mdi-download', link: '/python/installation' },
   { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/python/quickstart', badge: 'New' },
   { type: 'item', title: 'Migration Guide', icon: 'mdi-swap-horizontal', link: '/python/migration' },
+  { type: 'item', title: 'Examples', icon: 'mdi-code-brackets', link: '/python/examples' },
   
   { type: 'divider' },
   { type: 'header', title: 'Core Concepts', icon: 'mdi-cube-outline', color: 'deep-purple' },
@@ -224,21 +225,21 @@ const pythonNav = [
 ];
 
 const npmNav = [
-  { type: 'header', title: 'Getting Started', icon: 'mdi-rocket-launch', color: 'success' },
-  { type: 'item', title: 'Installation', icon: 'mdi-npm', link: '/npm/installation' },
-  { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/npm/quickstart' },
-  { type: 'item', title: 'TypeScript Setup', icon: 'mdi-language-typescript', link: '/npm/typescript' },
+//   { type: 'header', title: 'Getting Started', icon: 'mdi-rocket-launch', color: 'success' },
+//   { type: 'item', title: 'Installation', icon: 'mdi-npm', link: '/npm/installation' },
+//   { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/npm/quickstart' },
+//   { type: 'item', title: 'TypeScript Setup', icon: 'mdi-language-typescript', link: '/npm/typescript' },
   
-  { type: 'divider' },
-  { type: 'header', title: 'Core', icon: 'mdi-cube-outline', color: 'teal' },
-  { type: 'item', title: 'AcumaticaClient', icon: 'mdi-cog-outline', link: '/npm/client' },
-  { type: 'item', title: 'Configuration', icon: 'mdi-tune', link: '/npm/configuration' },
+//   { type: 'divider' },
+//   { type: 'header', title: 'Core', icon: 'mdi-cube-outline', color: 'teal' },
+//   { type: 'item', title: 'AcumaticaClient', icon: 'mdi-cog-outline', link: '/npm/client' },
+//   { type: 'item', title: 'Configuration', icon: 'mdi-tune', link: '/npm/configuration' },
   
-  { type: 'divider' },
-  { type: 'header', title: 'API Reference', icon: 'mdi-api', color: 'cyan' },
-  { type: 'item', title: 'Methods', icon: 'mdi-function', link: '/npm/api/methods' },
-  { type: 'item', title: 'Types', icon: 'mdi-format-list-bulleted-type', link: '/npm/api/types' },
-  { type: 'item', title: 'Interfaces', icon: 'mdi-share-variant', link: '/npm/api/interfaces' },
+//   { type: 'divider' },
+//   { type: 'header', title: 'API Reference', icon: 'mdi-api', color: 'cyan' },
+//   { type: 'item', title: 'Methods', icon: 'mdi-function', link: '/npm/api/methods' },
+//   { type: 'item', title: 'Types', icon: 'mdi-format-list-bulleted-type', link: '/npm/api/types' },
+//   { type: 'item', title: 'Interfaces', icon: 'mdi-share-variant', link: '/npm/api/interfaces' },
 ];
 
 // Get navigation based on current section

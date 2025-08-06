@@ -54,7 +54,7 @@
                 variant="flat"
                 rounded="pill"
                 class="hero-btn hero-btn-secondary"
-                to="/npm/home"
+                to="/npm"
                 elevation="8"
                 block
               >
@@ -219,7 +219,7 @@
                   rounded="pill"
                   size="large"
                   class="mt-6 tech-btn"
-                  to="/npm/home"
+                  to="/npm"
                   variant="flat"
                   block
                 >

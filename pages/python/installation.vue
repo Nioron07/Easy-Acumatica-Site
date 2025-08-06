@@ -15,7 +15,7 @@
             <div class="hero-badge mb-4">
               <v-chip color="white" variant="outlined" size="large" class="hero-chip">
                 <v-icon start>mdi-package-variant</v-icon>
-                v0.4.0 Latest
+                v0.4.8 Latest
               </v-chip>
             </div>
             
@@ -175,7 +175,7 @@ pip install -e .</code></pre>
                     <h4 class="mb-3">Specific Version</h4>
                     <p class="mb-4">Install a particular version:</p>
                     <div class="code-block mb-6">
-                      <pre><code>pip install easy-acumatica==0.4.0</code></pre>
+                      <pre><code>pip install easy-acumatica==0.4.8</code></pre>
                     </div>
 
                     <h4 class="mb-3">Virtual Environment (Recommended)</h4>

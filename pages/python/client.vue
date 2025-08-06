@@ -277,9 +277,8 @@ import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '../../components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
-import ParameterTable from '../components/ParameterTable.vue';
-import FeatureCard from '../components/FeatureCard.vue';
-import MethodPatternTable from '../components/MethodPatternTable.vue';
+import ParameterTable from '../../components/ParameterTable.vue';
+import MethodPatternTable from '../../components/MethodPatternTable.vue';
 
 // State
 const sessionTab = ref('persistent');
@@ -300,7 +299,7 @@ const navItems = ref([
 ]);
 
 // Code examples
-const introExample = ref(`# The v0.4.0 way - everything is dynamic!
+const introExample = ref(`# The v0.4.8 way - everything is dynamic!
 from easy_acumatica import AcumaticaClient
 
 # Initialize - this discovers your entire instance
