@@ -72,26 +72,6 @@
         </v-row>
       </v-container>
     </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-      <v-container>
-        <v-row>
-          <v-col 
-            v-for="stat in stats" 
-            :key="stat.label"
-            cols="6" 
-            md="3"
-          >
-            <div class="stat-card">
-              <div class="stat-number">{{ stat.value }}</div>
-              <div class="stat-label">{{ stat.label }}</div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
-
     <!-- Demo Section -->
     <section class="demo-section">
       <v-container>
@@ -452,13 +432,6 @@ useSeoMeta({
 // Data
 const activeTab = ref('dynamic');
 
-const stats = ref([
-  { value: '∞', label: 'Services' },
-  { value: '100%', label: 'Type Safe' },
-  { value: '0', label: 'Maintenance' },
-  { value: '∞', label: 'Flexibility' }
-]);
-
 const demoCode = `from easy_acumatica import AcumaticaClient
 
 # Initialize and connect
@@ -817,44 +790,6 @@ const communityLinks = ref([
 
 .quick-install {
   animation: fadeInUp 0.8s ease 0.6s both;
-}
-
-/* Stats Section */
-.stats-section {
-  padding: 4rem 0;
-  background: white;
-}
-
-.stat-card {
-  text-align: center;
-  padding: 2rem;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%);
-  border: 1px solid rgba(102,126,234,0.1);
-  transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(102,126,234,0.15);
-}
-
-.stat-number {
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-size: 0.875rem;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
 }
 
 /* Demo Section */

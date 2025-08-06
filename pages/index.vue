@@ -233,28 +233,6 @@
       </v-row>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section py-16">
-      <v-row justify="center">
-        <v-col cols="12" md="10">
-          <v-row>
-            <v-col 
-              v-for="(stat, i) in stats" 
-              :key="i"
-              cols="6" 
-              md="3"
-              class="text-center"
-            >
-              <div class="stat-item">
-                <div class="stat-number" :data-value="stat.value">{{ stat.value }}</div>
-                <div class="stat-label">{{ stat.label }}</div>
-              </div>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </section>
-
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="cta-gradient"></div>
@@ -389,14 +367,6 @@ const benefits = ref([
     description: 'Battle-tested session management, automatic retries, and robust error handling for production use.'
   }
 ]);
-
-const stats = ref([
-  { value: '30+', label: 'Services' },
-  { value: '100%', label: 'Type Safe' },
-  { value: '2', label: 'Platforms' },
-  { value: '∞', label: 'Flexibility' }
-]);
-
 // Add scroll animations
 onMounted(() => {
   const observerOptions = {
@@ -829,39 +799,6 @@ onMounted(() => {
   position: absolute;
   left: 0;
   color: #4caf50;
-}
-
-/* Stats Section */
-.stats-section {
-  background: #f8f9fa;
-}
-
-.stat-item {
-  opacity: 0;
-  transform: scale(0.8);
-}
-
-.stat-item.animate-in {
-  opacity: 1;
-  transform: scale(1);
-  transition: all 0.6s ease;
-}
-
-.stat-number {
-  font-size: 4rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-size: 1.25rem;
-  color: #666;
-  font-weight: 500;
 }
 
 /* CTA Section */
