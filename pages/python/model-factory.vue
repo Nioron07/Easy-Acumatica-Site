@@ -1,295 +1,150 @@
 <template>
-  <div>
+  <div class="model-factory-page">
     <!-- Hero Section -->
     <section class="hero-section">
       <v-container>
         <v-row align="center" justify="center">
-          <v-col cols="12" md="10" lg="8" class="text-center">
-            <h1 class="hero-title">Model Factory</h1>
-            <p class="hero-subtitle">
-              Type-safe dataclasses generated dynamically from your Acumatica schema
-            </p>
-            <div class="hero-features">
-              <div class="feature-pill">
-                <v-icon size="small">mdi-shape-outline</v-icon>
-                Dynamic Models
-              </div>
-              <div class="feature-pill">
-                <v-icon size="small">mdi-shield-check</v-icon>
-                Type Safety
-              </div>
-              <div class="feature-pill">
-                <v-icon size="small">mdi-puzzle</v-icon>
-                Custom Fields
-              </div>
+          <v-col cols="12" lg="10" class="text-center">
+            <div class="hero-content">
+              <h1 class="hero-title">Dynamic Models</h1>
+              <p class="hero-subtitle">
+                Type-safe Python dataclasses generated from your Acumatica schema
+              </p>
             </div>
           </v-col>
         </v-row>
       </v-container>
     </section>
 
-    <!-- Main Content -->
-    <v-container class="main-content pb-16">
-      <v-container class="content-container">
+    <v-container fluid class="main-content">
+      <v-container>
         <v-row>
           <v-col cols="12" md="9">
-            <!-- Architecture Overview -->
-            <section id="architecture" class="content-section">
-              <h2 class="section-title">
-                <v-icon class="section-icon">mdi-office-building</v-icon>
-                Architecture Overview
-              </h2>
-              
-              <v-card elevation="2" class="mb-6">
-                <v-card-text>
-                  <p class="mb-4">
-                    The Model Factory creates Python dataclasses at runtime from your Acumatica schema definitions. This ensures your models always match your instance's exact structure, including custom fields and modifications.
-                  </p>
-                  
-                  <v-alert type="info" variant="tonal" class="mb-4">
-                    <strong>Key Benefit:</strong> No more maintaining model definitions! Models are generated fresh from your instance's schema every time you connect.
-                  </v-alert>
+            <v-container>
+              <!-- Overview -->
+              <section id="overview" class="doc-section">
+                <h2>Overview</h2>
+                <p>
+                  When you initialize the <NuxtLink to="/python/client">AcumaticaClient</NuxtLink>, it automatically generates
+                  Python dataclass models for every entity in your Acumatica instance. These models provide type hints, IDE
+                  autocomplete, and validation for working with Acumatica data.
+                </p>
+                <CodeSnippet :code="overviewExample" language="python" />
+              </section>
 
-                  <h3 class="subsection-title mt-6 mb-3">Generation Process</h3>
-                  <ol class="process-list">
-                    <li><strong>Schema Analysis:</strong> Parse OpenAPI components/schemas section</li>
-                    <li><strong>Type Mapping:</strong> Convert JSON Schema types to Python type hints</li>
-                    <li><strong>Dataclass Creation:</strong> Build dataclasses with proper inheritance</li>
-                    <li><strong>Reference Resolution:</strong> Handle circular references and forward declarations</li>
-                    <li><strong>Attachment to Client:</strong> Models become available via <code>client.models.*</code></li>
-                  </ol>
-                </v-card-text>
-              </v-card>
-            </section>
+              <!-- Accessing Models -->
+              <section id="accessing-models" class="doc-section">
+                <h2>Accessing Models</h2>
+                <p>Models are accessed via <code>client.models</code> using the entity name:</p>
+                <CodeSnippet :code="accessingExample" language="python" />
+              </section>
 
-            <!-- Model Structure -->
-            <section id="structure" class="content-section">
-              <h2 class="section-title">
-                <v-icon class="section-icon">mdi-file-tree</v-icon>
-                Model Structure
-              </h2>
+              <!-- Creating Entities -->
+              <section id="creating-entities" class="doc-section">
+                <h2>Creating Entities</h2>
+                <p>Instantiate models with field values as keyword arguments:</p>
+                <CodeSnippet :code="creatingExample" language="python" />
+              </section>
 
-              <v-tabs v-model="structureTab" class="modern-tabs mb-6">
-                <v-tab value="anatomy">Model Anatomy</v-tab>
-                <v-tab value="inheritance">Inheritance</v-tab>
-                <v-tab value="types">Type System</v-tab>
-              </v-tabs>
+              <!-- Field Types -->
+              <section id="field-types" class="doc-section">
+                <h2>Field Types</h2>
+                <p>Models use Python type hints that correspond to Acumatica field types:</p>
+                <CodeSnippet :code="fieldTypesExample" language="python" />
+                <p class="note">
+                  Most fields are <code>Optional</code> to support partial updates and missing data.
+                  Only explicitly required fields in the schema are non-optional.
+                </p>
+              </section>
 
-              <v-tabs-window v-model="structureTab">
-                <v-tabs-window-item value="anatomy">
-                  <v-card elevation="1">
-                    <v-card-text>
-                      <h3 class="subsection-title mb-3">Anatomy of a Generated Model</h3>
-                      <p class="mb-4">
-                        Every generated model is a Python dataclass that inherits from <code>BaseDataClassModel</code>:
-                      </p>
-                      
-                      <CodeSnippet :code="modelAnatomyCode" />
-                      
-                      <p class="mt-4">
-                        Models include all fields from your schema, with proper type annotations and optional markers.
-                      </p>
-                    </v-card-text>
-                  </v-card>
-                </v-tabs-window-item>
+              <!-- Complex Fields -->
+              <section id="complex-fields" class="doc-section">
+                <h2>Complex Fields</h2>
+                <p>Entities with detail lines or related objects use nested models:</p>
 
-                <v-tabs-window-item value="inheritance">
-                  <v-card elevation="1">
-                    <v-card-text>
-                      <h3 class="subsection-title mb-3">Inheritance Chain</h3>
-                      
-                      <div class="inheritance-diagram mb-4">
-                        <div class="inheritance-level">
-                          <v-chip color="primary" label>BaseDataClassModel</v-chip>
-                          <div class="inheritance-desc">Base class with serialization methods</div>
-                        </div>
-                        <div class="inheritance-arrow">↓</div>
-                        <div class="inheritance-level">
-                          <v-chip color="secondary" label>Entity</v-chip>
-                          <div class="inheritance-desc">Common entity fields (id, custom, files)</div>
-                        </div>
-                        <div class="inheritance-arrow">↓</div>
-                        <div class="inheritance-level">
-                          <v-chip color="accent" label>YourModel</v-chip>
-                          <div class="inheritance-desc">Your specific entity (Bill, Contact, etc.)</div>
-                        </div>
-                      </div>
-                      
-                      <CodeSnippet :code="inheritanceExample" />
-                    </v-card-text>
-                  </v-card>
-                </v-tabs-window-item>
+                <h3>Detail Lines</h3>
+                <CodeSnippet :code="detailLinesExample" language="python" />
 
-                <v-tabs-window-item value="types">
-                  <v-card elevation="1">
-                    <v-card-text>
-                      <h3 class="subsection-title mb-3">Type System</h3>
-                      <p class="mb-4">
-                        The Model Factory maps Acumatica types to Python types intelligently:
-                      </p>
-                      
-                      <v-table density="comfortable" class="type-mapping-table mb-4">
-                        <thead>
-                          <tr>
-                            <th>Acumatica Type</th>
-                            <th>Python Type</th>
-                            <th>Example</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="mapping in typeMappings" :key="mapping.acumatica">
-                            <td><code>{{ mapping.acumatica }}</code></td>
-                            <td><code>{{ mapping.python }}</code></td>
-                            <td><code>{{ mapping.example }}</code></td>
-                          </tr>
-                        </tbody>
-                      </v-table>
-                      
-                      <p>
-                        All fields are marked as <code>Optional</code> to handle partial updates and missing data gracefully.
-                      </p>
-                    </v-card-text>
-                  </v-card>
-                </v-tabs-window-item>
-              </v-tabs-window>
-            </section>
+                <h3>Related Entities</h3>
+                <CodeSnippet :code="relatedEntitiesExample" language="python" />
+              </section>
 
-            <!-- Implementation Details -->
-            <section id="implementation" class="content-section">
-              <h2 class="section-title">
-                <v-icon class="section-icon">mdi-cog-outline</v-icon>
-                Implementation Details
-              </h2>
+              <!-- Custom Fields -->
+              <section id="custom-fields" class="doc-section">
+                <h2>Custom Fields</h2>
+                <p>
+                  Custom fields defined in your Acumatica instance are included in the generated models.
+                  They appear alongside standard fields with appropriate type hints:
+                </p>
+                <CodeSnippet :code="customFieldsExample" language="python" />
+              </section>
 
-              <v-card elevation="2">
-                <v-card-text>
-                  <h3 class="subsection-title mb-3">The Factory Process</h3>
-                  
-                  <CodeSnippet :code="factoryImplementationCode" />
-                  
-                  <h3 class="subsection-title mt-6 mb-3">Handling Complex Types</h3>
-                  <p class="mb-4">
-                    The factory handles several complex scenarios:
-                  </p>
-                  
-                  <v-expansion-panels variant="accordion" class="modern-expansion">
-                    <v-expansion-panel>
-                      <v-expansion-panel-title class="expansion-title">
-                        <v-icon start>mdi-rotate-3d-variant</v-icon>
-                        Circular References
-                      </v-expansion-panel-title>
-                      <v-expansion-panel-text>
-                        <CodeSnippet :code="circularReferenceCode" />
-                      </v-expansion-panel-text>
-                    </v-expansion-panel>
+              <!-- Partial Updates -->
+              <section id="partial-updates" class="doc-section">
+                <h2>Partial Updates</h2>
+                <p>
+                  Models support partial updates - you only need to provide the key fields and the fields you want to change:
+                </p>
+                <CodeSnippet :code="partialUpdateExample" language="python" />
+              </section>
 
-                    <v-expansion-panel>
-                      <v-expansion-panel-title class="expansion-title">
-                        <v-icon start>mdi-wrap</v-icon>
-                        Primitive Wrappers
-                      </v-expansion-panel-title>
-                      <v-expansion-panel-text>
-                        <p class="mb-3">Acumatica wraps primitives in value objects:</p>
-                        <CodeSnippet :code="primitiveWrapperCode" />
-                      </v-expansion-panel-text>
-                    </v-expansion-panel>
+              <!-- Using with Services -->
+              <section id="using-with-services" class="doc-section">
+                <h2>Using with Services</h2>
+                <p>
+                  Models work seamlessly with <NuxtLink to="/python/service-factory">dynamic services</NuxtLink>.
+                  Services accept both model instances and plain dictionaries:
+                </p>
+                <CodeSnippet :code="serviceExample" language="python" />
+              </section>
 
-                    <v-expansion-panel>
-                      <v-expansion-panel-title class="expansion-title">
-                        <v-icon start>mdi-code-json</v-icon>
-                        Custom Fields
-                      </v-expansion-panel-title>
-                      <v-expansion-panel-text>
-                        <p class="mb-3">Custom fields are discovered and typed automatically:</p>
-                        <CodeSnippet :code="customFieldsCode" />
-                      </v-expansion-panel-text>
-                    </v-expansion-panel>
-                  </v-expansion-panels>
-                </v-card-text>
-              </v-card>
-            </section>
+              <!-- Type Hints and IDE Support -->
+              <section id="type-hints" class="doc-section">
+                <h2>Type Hints and IDE Support</h2>
+                <p>
+                  Models provide full type hints for IDE autocomplete and type checking. Generate stub files
+                  for enhanced IDE support:
+                </p>
+                <CodeSnippet :code="stubsExample" language="python" />
+                <p class="note">
+                  Stub generation creates <code>.pyi</code> files that provide type information to IDEs like
+                  VSCode and PyCharm without requiring runtime model generation.
+                </p>
+              </section>
 
-            <!-- Usage Patterns -->
-            <section id="usage" class="content-section">
-              <h2 class="section-title">
-                <v-icon class="section-icon">mdi-book-open-variant</v-icon>
-                Usage Patterns
-              </h2>
+              <!-- Data Validation -->
+              <section id="data-validation" class="doc-section">
+                <h2>Data Validation</h2>
+                <p>Models perform basic type validation when instantiated:</p>
+                <CodeSnippet :code="validationExample" language="python" />
+              </section>
 
-              <v-row>
-                <v-col cols="12" md="6">
-                  <v-card elevation="2" class="h-100">
-                    <v-card-text>
-                      <h3 class="subsection-title mb-3">Creating Entities</h3>
-                      <CodeSnippet :code="creatingEntitiesCode" />
-                    </v-card-text>
-                  </v-card>
-                </v-col>
-                
-                <v-col cols="12" md="6">
-                  <v-card elevation="2" class="h-100">
-                    <v-card-text>
-                      <h3 class="subsection-title mb-3">Updating Entities</h3>
-                      <CodeSnippet :code="updatingEntitiesCode" />
-                    </v-card-text>
-                  </v-card>
-                </v-col>
-              </v-row>
+              <!-- Converting to Dictionaries -->
+              <section id="converting" class="doc-section">
+                <h2>Converting to Dictionaries</h2>
+                <p>Use the <code>build()</code> method to convert models to API-ready dictionaries:</p>
+                <CodeSnippet :code="buildExample" language="python" />
+              </section>
 
-              <v-card elevation="2" class="mt-4">
-                <v-card-text>
-                  <h3 class="subsection-title mb-3">Working with Nested Data</h3>
-                  <CodeSnippet :code="nestedDataCode" />
-                </v-card-text>
-              </v-card>
-            </section>
+              <!-- Model Discovery -->
+              <section id="discovery" class="doc-section">
+                <h2>Model Discovery</h2>
+                <p>List all available models:</p>
+                <CodeSnippet :code="discoveryExample" language="python" />
+              </section>
 
-            <!-- Stub Generation -->
-            <section id="stubs" class="content-section">
-              <h2 class="section-title">
-                <v-icon class="section-icon">mdi-code-tags</v-icon>
-                Type Stub Generation
-              </h2>
-
-              <v-card elevation="2">
-                <v-card-text>
-                  <p class="mb-4">
-                    For optimal IDE support, generate type stubs after connecting:
-                  </p>
-                  
-                  <CodeSnippet :code="stubGenerationCode" />
-                  
-                  <v-alert type="success" variant="tonal" class="mt-4">
-                    <strong>Result:</strong> Full autocomplete for all your models, including custom fields!
-                  </v-alert>
-                  
-                  <h3 class="subsection-title mt-6 mb-3">Generated Stub Example</h3>
-                  <CodeSnippet :code="stubExampleCode" language="python" />
-                </v-card-text>
-              </v-card>
-            </section>
-
-            <!-- Best Practices -->
-            <section id="practices" class="content-section">
-              <h2 class="section-title">
-                <v-icon class="section-icon">mdi-lightbulb-outline</v-icon>
-                Best Practices
-              </h2>
-
-              <v-row>
-                <v-col cols="12" sm="6" md="4" v-for="practice in bestPractices" :key="practice.title">
-                  <v-card elevation="1" class="h-100 practice-card">
-                    <v-card-text>
-                      <v-icon :color="practice.color" size="40" class="mb-3">
-                        {{ practice.icon }}
-                      </v-icon>
-                      <h4 class="font-weight-bold mb-2">{{ practice.title }}</h4>
-                      <p class="text-body-2">{{ practice.description }}</p>
-                    </v-card-text>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </section>
+              <!-- Best Practices -->
+              <section id="best-practices" class="doc-section">
+                <h2>Best Practices</h2>
+                <ul>
+                  <li>Use models for better type safety and IDE support</li>
+                  <li>Generate stub files once after connecting to enable full autocomplete</li>
+                  <li>Leverage optional fields for partial updates</li>
+                  <li>Use <code>build()</code> when you need to inspect the API payload</li>
+                  <li>Models are thread-safe and can be shared across threads</li>
+                </ul>
+              </section>
+            </v-container>
           </v-col>
 
           <!-- Sticky Navigation -->
@@ -312,506 +167,347 @@ import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
 
-// SEO Configuration
-useSeoMeta({
-  title: 'Model Factory | Easy-Acumatica Python Docs',
-  description: 'Understand how Easy-Acumatica generates type-safe dataclass models dynamically from your Acumatica schema. Learn about the model structure, type mapping, and stub generation.',
-  ogTitle: 'Model Factory - Dynamic Type Generation',
-  ogDescription: 'Discover how Easy-Acumatica creates Python dataclasses that perfectly match your Acumatica instance structure.',
-  ogImage: 'https://www.easyacumatica.com/social-images/model-factory.png',
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'Easy-Acumatica Model Factory',
-  twitterDescription: 'Runtime model generation with full type safety and custom field support.',
-  twitterImage: 'https://www.easyacumatica.com/social-images/model-factory.png',
-});
-
 // Navigation items
 const navItems = ref([
-  { id: 'architecture', title: 'Architecture', icon: 'mdi-office-building' },
-  { id: 'structure', title: 'Model Structure', icon: 'mdi-file-tree' },
-  { id: 'implementation', title: 'Implementation', icon: 'mdi-cog-outline' },
-  { id: 'usage', title: 'Usage Patterns', icon: 'mdi-book-open-variant' },
-  { id: 'stubs', title: 'Type Stubs', icon: 'mdi-code-tags' },
-  { id: 'practices', title: 'Best Practices', icon: 'mdi-lightbulb-outline' }
+  { id: 'overview', title: 'Overview', icon: 'mdi-information' },
+  { id: 'accessing-models', title: 'Accessing Models', icon: 'mdi-folder-open' },
+  { id: 'creating-entities', title: 'Creating Entities', icon: 'mdi-plus-box' },
+  { id: 'field-types', title: 'Field Types', icon: 'mdi-format-list-bulleted-type' },
+  { id: 'complex-fields', title: 'Complex Fields', icon: 'mdi-sitemap' },
+  { id: 'custom-fields', title: 'Custom Fields', icon: 'mdi-puzzle' },
+  { id: 'partial-updates', title: 'Partial Updates', icon: 'mdi-pencil' },
+  { id: 'using-with-services', title: 'Using with Services', icon: 'mdi-api' },
+  { id: 'type-hints', title: 'Type Hints & IDE Support', icon: 'mdi-code-tags' },
+  { id: 'data-validation', title: 'Data Validation', icon: 'mdi-check-circle' },
+  { id: 'converting', title: 'Converting to Dictionaries', icon: 'mdi-swap-horizontal' },
+  { id: 'discovery', title: 'Model Discovery', icon: 'mdi-magnify' },
+  { id: 'best-practices', title: 'Best Practices', icon: 'mdi-star' },
 ]);
 
-// Tab state
-const structureTab = ref('anatomy');
+const overviewExample = `from easy_acumatica import AcumaticaClient
 
-// Code examples
-const modelAnatomyCode = `@dataclass
-class Bill(Entity):
-    """Represents the Bill entity.
-    
-    Attributes:
-        Type (str): The type of bill
-        Vendor (str): Vendor reference
-        ReferenceNbr (str): Reference number
-        Status (str): Current status
-        Balance (decimal): Outstanding balance
-        DueDate (datetime): Payment due date
-        DetailTotal (decimal): Total of detail lines
-        ApprovalStatus (str): Approval workflow status
-        TaxTotal (decimal): Total tax amount
-        custom (dict): Custom field container
-        files (List[FileLink]): Attached files
-    """
-    Type: Optional[str] = None
-    Vendor: Optional[str] = None
-    ReferenceNbr: Optional[str] = None
-    Status: Optional[str] = None
-    Balance: Optional[Union[str, int, float, Decimal]] = None
-    DueDate: Optional[datetime] = None
-    DetailTotal: Optional[Union[str, int, float, Decimal]] = None
-    ApprovalStatus: Optional[str] = None
-    TaxTotal: Optional[Union[str, int, float, Decimal]] = None`;
+# Initialize client
+client = AcumaticaClient()
 
-const inheritanceExample = `# Base class provides serialization
-class BaseDataClassModel:
-    def build(self) -> dict:
-        """Convert model to API-ready dictionary."""
-        
-    @classmethod
-    def from_dict(cls, data: dict) -> 'BaseDataClassModel':
-        """Create model from API response."""
-
-# Entity adds common fields
-@dataclass
-class Entity(BaseDataClassModel):
-    id: Optional[str] = None
-    custom: Optional[dict] = None
-    files: Optional[List['FileLink']] = None
-
-# Your models inherit everything
-@dataclass
-class Contact(Entity):
-    DisplayName: Optional[str] = None
-    Email: Optional[str] = None
-    # ... other fields`;
-
-const factoryImplementationCode = `class ModelFactory:
-    """Dynamically builds Python dataclasses from OpenAPI schema."""
-    
-    def __init__(self, schema: Dict[str, Any]):
-        self._schema = schema
-        self._models = {}
-        self._primitive_wrappers = {
-            "StringValue", "DecimalValue", "BooleanValue", 
-            "DateTimeValue", "IntValue", "GuidValue"
-        }
-
-    def build_models(self) -> Dict[str, Type[BaseDataClassModel]]:
-        """Build all models from schema definitions."""
-        definitions = self._schema.get("components", {}).get("schemas", {})
-        
-        # First pass: Create placeholder classes
-        for name in definitions:
-            if name not in self._primitive_wrappers:
-                # Create empty class to handle forward references
-                self._models[name] = type(name, (BaseDataClassModel,), {})
-        
-        # Second pass: Build complete models
-        for name, definition in definitions.items():
-            if name in self._primitive_wrappers:
-                continue
-                
-            model_class = self._create_model(name, definition)
-            self._models[name] = model_class
-        
-        # Third pass: Resolve forward references
-        self._resolve_forward_references()
-        
-        return self._models`;
-
-const circularReferenceCode = `# Models can reference each other
-@dataclass
-class SalesOrder(Entity):
-    Customer: Optional['Customer'] = None
-    Details: Optional[List['SalesOrderDetail']] = None
-
-@dataclass
-class Customer(Entity):
-    Orders: Optional[List['SalesOrder']] = None
-
-# Forward references are resolved after all models are created
-def _resolve_forward_references(self):
-    for model in self._models.values():
-        if hasattr(model, '__annotations__'):
-            # Update annotations with actual classes
-            for field, annotation in model.__annotations__.items():
-                resolved = self._resolve_type(annotation)
-                model.__annotations__[field] = resolved`;
-
-const primitiveWrapperCode = `# Acumatica wraps primitive values
-{
-  "Balance": {
-    "value": 1234.56
-  }
-}
-
-# Model Factory handles this automatically
-bill = client.models.Bill(
-    Balance=1234.56  # Just use the value!
+# Models are automatically generated and available
+customer = client.models.Customer(
+    CustomerID="CUST001",
+    CustomerName="Acme Corporation"
 )
 
-# The model's build() method wraps it properly
-data = bill.build()
-# {"Balance": {"value": 1234.56}}`;
+# Create in Acumatica
+created = client.customers.put_entity(customer)`;
 
-const customFieldsCode = `# Custom fields appear in the schema
-{
-  "custom": {
-    "Document": {
-      "AttributeCUSTFIELD": {
-        "type": "CustomStringField"
-      }
-    }
-  }
-}
+const accessingExample = `# Access models via client.models
+Customer = client.models.Customer
+Invoice = client.models.Invoice
+SalesOrder = client.models.SalesOrder
 
-# Access custom fields naturally
-bill = client.models.Bill()
-bill.custom = {
-    "Document": {
-        "AttributeCUSTFIELD": {"value": "Custom Value"}
-    }
-}`;
+# Check if a model exists
+if hasattr(client.models, 'Customer'):
+    print("Customer model available")`;
 
-const creatingEntitiesCode = `# Create new entities with models
-new_contact = client.models.Contact(
-    DisplayName="John Doe",
-    Email="john@example.com",
-    Phone1="555-0123"
+const creatingExample = `# Simple entity
+customer = client.models.Customer(
+    CustomerID="CUST001",
+    CustomerName="Acme Corporation",
+    Email="contact@acme.com",
+    Phone="555-0123"
 )
 
-# Models validate and format data
-created = client.contacts.put_entity(new_contact)`;
+# Only required fields need values
+# Optional fields can be omitted
+minimal_customer = client.models.Customer(
+    CustomerID="CUST002",
+    CustomerName="Minimal Corp"
+)`;
 
-const updatingEntitiesCode = `# Partial updates with type safety
-update = client.models.Contact(
-    id=contact_id,
-    Email="newemail@example.com"
-    # Only include fields to update
+const fieldTypesExample = `from datetime import datetime
+
+# String fields
+customer = client.models.Customer(
+    CustomerID="CUST001",  # str
+    CustomerName="Acme Corp",  # str
+    Email="contact@acme.com"  # Optional[str]
 )
 
-updated = client.contacts.put_entity(update)`;
-
-const nestedDataCode = `# Complex nested structures
+# Numeric fields
 invoice = client.models.Invoice(
-    Customer="CUST001",
+    RefNbr="INV001",
+    Amount=1500.50,  # float
+    TaxTotal=150.05  # Optional[float]
+)
+
+# Date/DateTime fields
+order = client.models.SalesOrder(
+    OrderNbr="SO001",
+    Date=datetime.now(),  # datetime
+    RequestedOn=datetime(2024, 3, 15)  # Optional[datetime]
+)
+
+# Boolean fields
+contact = client.models.Contact(
+    DisplayName="John Doe",
+    Active=True  # bool
+)`;
+
+const detailLinesExample = `# Create invoice with detail lines
+invoice = client.models.Invoice(
+    CustomerID="CUST001",
     Date=datetime.now(),
+    Description="March Services",
     Details=[
         client.models.InvoiceDetail(
-            InventoryID="ITEM001",
-            Quantity=5,
-            UnitPrice=10.00
+            InventoryID="SERVICE01",
+            Description="Consulting",
+            Quantity=10,
+            UnitPrice=150.00
         ),
         client.models.InvoiceDetail(
-            InventoryID="ITEM002", 
-            Quantity=3,
-            UnitPrice=25.00
+            InventoryID="SERVICE02",
+            Description="Support",
+            Quantity=5,
+            UnitPrice=100.00
         )
     ]
 )
 
-# Everything is properly typed!`;
+created = client.invoices.put_entity(invoice)`;
 
-const stubGenerationCode = `# Generate stubs for your instance
+const relatedEntitiesExample = `# Some entities include related objects
+sales_order = client.models.SalesOrder(
+    CustomerID="CUST001",
+    Date=datetime.now(),
+    # Shipping address as nested object
+    ShipToAddress=client.models.Address(
+        AddressLine1="123 Main St",
+        City="New York",
+        State="NY",
+        PostalCode="10001"
+    ),
+    Details=[...]
+)`;
+
+const customFieldsExample = `# Custom fields appear alongside standard fields
+# Assuming "UsrCustomerTier" is a custom field in your instance
+
+customer = client.models.Customer(
+    CustomerID="CUST001",
+    CustomerName="Acme Corp",
+    # Standard field
+    CreditLimit=50000.00,
+    # Custom field (if exists in your instance)
+    UsrCustomerTier="Gold",
+    UsrAccountManager="John Smith"
+)`;
+
+const partialUpdateExample = `# Partial update - only provide fields to change
+update = client.models.Customer(
+    CustomerID="CUST001",  # Required: identifies the record
+    Email="newemail@acme.com",  # Only field we want to update
+    Phone="555-9999"  # And this one
+)
+
+# CreditLimit, CustomerName, etc. are not affected
+updated = client.customers.put_entity(update)`;
+
+const serviceExample = `# Using a model instance
+customer = client.models.Customer(
+    CustomerID="CUST001",
+    CustomerName="Acme Corp"
+)
+created = client.customers.put_entity(customer)
+
+# Using a plain dictionary (also works)
+customer_dict = {
+    "CustomerID": {"value": "CUST002"},
+    "CustomerName": {"value": "Other Corp"}
+}
+created = client.customers.put_entity(customer_dict)
+
+# Models are preferred for type safety`;
+
+const stubsExample = `from easy_acumatica import AcumaticaClient
 from easy_acumatica.generate_stubs import generate_stubs_from_client
 
-# After connecting
-client = AcumaticaClient(...)
+# Initialize client
+client = AcumaticaClient()
 
-# Generate .pyi files
+# Generate stub files for IDE support
 generate_stubs_from_client(client)
 
-# Now your IDE knows about all models!`;
+# Now your IDE will provide autocomplete for all models
+# Example: typing "client.models." will show all available models
+# Example: typing "client.models.Customer(" will show all fields`;
 
-const stubExampleCode = `# Generated models.pyi
-from typing import Optional, List, Union
-from datetime import datetime
-from decimal import Decimal
+const validationExample = `# Type validation happens at instantiation
+try:
+    customer = client.models.Customer(
+        CustomerID="CUST001",
+        CustomerName=12345  # Wrong type - should be string
+    )
+except TypeError as e:
+    print(f"Type error: {e}")
 
-@dataclass
-class Bill(Entity):
-    """Represents the Bill entity."""
-    Type: Optional[str] = ...
-    Vendor: Optional[str] = ...
-    ReferenceNbr: Optional[str] = ...
-    Status: Optional[str] = ...
-    Balance: Optional[Union[str, int, float, Decimal]] = ...
-    # ... all fields from your schema`;
+# Field name validation
+try:
+    customer = client.models.Customer(
+        CustomerID="CUST001",
+        NonExistentField="value"  # Unknown field
+    )
+except TypeError as e:
+    print(f"Unknown field: {e}")`;
 
-// Data
-const typeMappings = ref([
-  { acumatica: 'string', python: 'Optional[str]', example: 'DisplayName: Optional[str]' },
-  { acumatica: 'integer', python: 'Optional[int]', example: 'LineNbr: Optional[int]' },
-  { acumatica: 'number', python: 'Optional[Union[str, int, float, Decimal]]', example: 'Amount: Optional[Union[str, int, float, Decimal]]' },
-  { acumatica: 'boolean', python: 'Optional[bool]', example: 'Active: Optional[bool]' },
-  { acumatica: 'date-time', python: 'Optional[datetime]', example: 'CreatedDate: Optional[datetime]' },
-  { acumatica: 'array', python: 'Optional[List[T]]', example: 'Details: Optional[List[OrderDetail]]' },
-  { acumatica: 'object', python: 'Optional[dict]', example: 'custom: Optional[dict]' }
-]);
+const buildExample = `# Create a model
+customer = client.models.Customer(
+    CustomerID="CUST001",
+    CustomerName="Acme Corp",
+    Email="contact@acme.com"
+)
 
-const bestPractices = ref([
-  {
-    icon: 'mdi-auto-fix',
-    title: 'Trust the Generation',
-    description: 'Models are built from your live schema - they\'re always correct',
-    color: 'primary'
-  },
-  {
-    icon: 'mdi-file-code',
-    title: 'Generate Stubs',
-    description: 'Run stub generation for the best IDE experience',
-    color: 'secondary'
-  },
-  {
-    icon: 'mdi-delta',
-    title: 'Use Partial Updates',
-    description: 'Only include fields you want to change when updating',
-    color: 'accent'
-  },
-  {
-    icon: 'mdi-package-variant',
-    title: 'Let Models Serialize',
-    description: 'Use model.build() to get API-ready dictionaries',
-    color: 'success'
-  },
-  {
-    icon: 'mdi-shield-check',
-    title: 'Type Safety First',
-    description: 'Leverage type hints for error prevention',
-    color: 'info'
-  },
-  {
-    icon: 'mdi-puzzle',
-    title: 'Embrace Custom Fields',
-    description: 'Custom fields are discovered automatically',
-    color: 'warning'
-  }
-]);
+# Convert to API-ready dictionary
+payload = customer.build()
+print(payload)
+# {
+#     "CustomerID": {"value": "CUST001"},
+#     "CustomerName": {"value": "Acme Corp"},
+#     "Email": {"value": "contact@acme.com"}
+# }
+
+# Useful for debugging what will be sent to the API`;
+
+const discoveryExample = `# List all available models using built-in method
+models = client.list_models()
+print(f"Found {len(models)} models")
+print("Sample models:", models[:10])
+
+# Get detailed model information
+model_info = client.get_model_info('Customer')
+print(f"Customer fields: {model_info['fields']}")
+print(f"Field count: {model_info['field_count']}")
+
+# Get model class directly
+Customer = client.models.Customer
+
+# Inspect model fields with dataclasses
+import dataclasses
+fields = dataclasses.fields(Customer)
+for field in fields:
+    print(f"{field.name}: {field.type}")`;
+
+useSeoMeta({
+  title: 'Dynamic Models | Easy-Acumatica Python',
+  description: 'Learn how to use automatically generated Python dataclass models for type-safe Acumatica data operations.',
+});
 </script>
 
 <style scoped>
-/* Hero Section */
-.hero-section {
-  background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
-  color: white;
-  padding: 80px 0 60px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  animation: rotate 30s linear infinite;
-}
-
-@keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-subtitle {
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 300;
-  margin-bottom: 2rem;
-}
-
-.hero-features {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.feature-pill {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.feature-pill:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-/* Content */
-.main-content {
-  background: #fafafa;
+.model-factory-page {
+  background: #f8f9fa;
   min-height: 100vh;
 }
 
-.content-container {
-  max-width: 1400px;
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 100%);
+  padding: 4rem 0 3rem;
+  margin-bottom: 3rem;
 }
 
-.content-section {
-  margin-bottom: 4rem;
-  scroll-margin-top: 80px;
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.section-icon {
-  color: #5e35b1;
-}
-
-.subsection-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-}
-
-/* Process List */
-.process-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.process-list li {
-  padding: 0.75rem 0;
-  padding-left: 2rem;
+.hero-content {
   position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
 }
 
-.process-list li::before {
-  content: counter(list-counter);
-  counter-increment: list-counter;
-  position: absolute;
-  left: 0;
-  top: 0.75rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 600;
+/* Main Content */
+.main-content {
+  background: #f8f9fa;
+  min-height: 100vh;
 }
 
-.process-list {
-  counter-reset: list-counter;
-}
-
-/* Inheritance Diagram */
-.inheritance-diagram {
-  text-align: center;
+.doc-section {
+  background: white;
+  border-radius: 8px;
   padding: 2rem;
-  background: #f5f5f5;
-  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  scroll-margin-top: 80px;
 }
 
-.inheritance-level {
-  margin: 1rem 0;
+.doc-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a237e;
+  margin-bottom: 1rem;
 }
 
-.inheritance-desc {
-  font-size: 0.875rem;
+.doc-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a237e;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.doc-section p {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.doc-section p.note {
   color: #666;
+  font-size: 0.95rem;
+  font-style: italic;
   margin-top: 0.5rem;
 }
 
-.inheritance-arrow {
-  font-size: 1.5rem;
-  color: #5e35b1;
-  margin: 0.5rem 0;
-}
-
-/* Type Mapping Table */
-.type-mapping-table {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.type-mapping-table th {
+.doc-section code {
   background: #f5f5f5;
-  font-weight: 600;
-}
-
-/* Code */
-code {
-  background: #f5f5f5;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Fira Code', monospace;
   font-size: 0.9em;
+  color: #d32f2f;
+}
+
+.doc-section ul {
+  margin-left: 1.5rem;
+  color: #444;
+  line-height: 1.8;
+}
+
+.doc-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.doc-section a {
   color: #5e35b1;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-/* Tabs */
-.modern-tabs {
-  background: #f5f5f5;
-  border-radius: 12px;
-  padding: 4px;
-}
-
-/* Expansion Panels */
-.modern-expansion {
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.expansion-title {
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-/* Practice Cards */
-.practice-card {
-  transition: all 0.3s ease;
-  text-align: center;
-}
-
-.practice-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+.doc-section a:hover {
+  text-decoration: underline;
 }
 
 /* Sticky Nav */
 .sticky-container {
   position: sticky;
-  top: 80px;
+  top: 100px;
 }
 </style>

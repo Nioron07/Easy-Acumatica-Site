@@ -27,8 +27,8 @@
           <v-col cols="12" md="10" class="text-center">
             <!-- Version Badge -->
             <div class="version-badge">
-              <v-icon size="small">mdi-rocket-launch</v-icon>
-              <span>Version 0.4.8 - Now with Dynamic Service Generation!</span>
+              <v-icon size="small">mdi-package-variant</v-icon>
+              <span>Version 0.5.4</span>
             </div>
 
             <!-- Main Title -->
@@ -39,8 +39,7 @@
 
             <!-- Subtitle -->
             <p class="hero-subtitle">
-              The revolutionary Python library that automatically adapts to your Acumatica instance.
-              Zero maintenance, full type safety, and complete API coverage.
+              Python client library for Acumatica ERP REST API with automatic schema discovery, type hints, and OData support.
             </p>
 
             <!-- CTA Buttons -->
@@ -78,10 +77,10 @@
         <v-row>
           <v-col cols="12" class="text-center mb-12">
             <h2 class="section-title">
-              <span class="gradient-text">See It In Action</span>
+              <span class="gradient-text">Quick Example</span>
             </h2>
             <p class="section-subtitle">
-              From zero to production-ready in minutes
+              Basic usage with automatic schema discovery
             </p>
           </v-col>
         </v-row>
@@ -135,15 +134,14 @@
               <v-tabs-window v-model="activeTab" class="showcase-content">
                 <v-tabs-window-item value="dynamic">
                   <div class="showcase-item">
-                    <h3>Adapts to Your Instance</h3>
+                    <h3>Schema Discovery</h3>
                     <p>
-                      Automatically discovers all endpoints, custom fields, and 
-                      extensions in your Acumatica instance. No manual schema 
-                      updates ever needed.
+                      Fetches the OpenAPI schema from your instance at runtime and generates
+                      models and services dynamically, including any custom fields or endpoints.
                     </p>
                     <div class="feature-highlights">
                       <v-chip color="primary" variant="tonal">
-                        <v-icon start size="small">mdi-refresh-auto</v-icon>
+                        <v-icon start size="small">mdi-auto-fix</v-icon>
                         Auto-Discovery
                       </v-chip>
                       <v-chip color="primary" variant="tonal">
@@ -151,7 +149,7 @@
                         Custom Fields
                       </v-chip>
                       <v-chip color="primary" variant="tonal">
-                        <v-icon start size="small">mdi-cog-sync</v-icon>
+                        <v-icon start size="small">mdi-cog</v-icon>
                         Zero Config
                       </v-chip>
                     </div>
@@ -160,10 +158,10 @@
                 
                 <v-tabs-window-item value="typesafe">
                   <div class="showcase-item">
-                    <h3>Full Type Safety</h3>
+                    <h3>Type Hints</h3>
                     <p>
-                      Get complete IntelliSense, autocomplete, and type checking 
-                      for all your API calls. Your IDE knows exactly what's available.
+                      Generated models are Python dataclasses with type annotations.
+                      IDEs provide autocomplete and type checking for all fields and methods.
                     </p>
                     <div class="feature-highlights">
                       <v-chip color="success" variant="tonal">
@@ -184,10 +182,10 @@
                 
                 <v-tabs-window-item value="complete">
                   <div class="showcase-item">
-                    <h3>Everything You Need</h3>
+                    <h3>Full API Support</h3>
                     <p>
-                      Complete API coverage with CRUD operations, OData filtering, 
-                      file attachments, actions, and more. No limitations.
+                      CRUD operations, OData filtering and queries, file attachments,
+                      actions, generic inquiries, and batch operations.
                     </p>
                     <div class="feature-highlights">
                       <v-chip color="info" variant="tonal">
@@ -218,10 +216,10 @@
         <v-row>
           <v-col cols="12" class="text-center mb-12">
             <h2 class="section-title">
-              <span class="gradient-text">Built for Developers</span>
+              <span class="gradient-text">Features</span>
             </h2>
             <p class="section-subtitle">
-              Everything you need to build robust Acumatica integrations
+              Core functionality for Acumatica API integration
             </p>
           </v-col>
         </v-row>
@@ -262,10 +260,10 @@
         <v-row>
           <v-col cols="12" class="text-center mb-12">
             <h2 class="section-title">
-              <span class="gradient-text">Get Started in Minutes</span>
+              <span class="gradient-text">Getting Started</span>
             </h2>
             <p class="section-subtitle">
-              Simple steps to integrate with your Acumatica instance
+              Installation and basic setup
             </p>
           </v-col>
         </v-row>
@@ -276,7 +274,7 @@
             :key="step.title"
             cols="12" 
             md="6"
-            lg="3"
+            lg="6"
           >
             <v-card class="quickstart-card h-100" elevation="0">
               <v-card-text class="text-center">
@@ -305,10 +303,10 @@
           <v-col cols="12" md="10">
             <div class="migration-card">
               <div class="migration-content text-center">
-                <h2 class="migration-title">Migrating from 0.3.x?</h2>
+                <h2 class="migration-title">Upgrading from 0.4.x?</h2>
                 <p class="migration-text">
-                  Version 0.4.8 introduces revolutionary dynamic service generation. 
-                  Your code gets cleaner, your types get stronger, and your development gets faster.
+                  Version 0.5.4 adds automatic .env file loading, differential caching for faster initialization,
+                  and a built-in task scheduler. Check the migration guide for details on new features.
                 </p>
                 <v-btn
                   to="/python/migration"
@@ -321,88 +319,6 @@
                 </v-btn>
               </div>
             </div>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
-
-    <!-- Resources Section -->
-    <section class="resources-section">
-      <v-container>
-        <v-row>
-          <v-col cols="12" class="text-center mb-12">
-            <h2 class="section-title">
-              <span class="gradient-text">Resources</span>
-            </h2>
-          </v-col>
-        </v-row>
-        
-        <v-row>
-          <v-col cols="12" md="4">
-            <v-card class="resource-card h-100" elevation="0">
-              <v-card-text class="text-center">
-                <v-icon size="48" color="primary" class="mb-4">mdi-book-open-variant</v-icon>
-                <h3 class="resource-title">Documentation</h3>
-                <p class="resource-description">
-                  Comprehensive guides covering every aspect of the library
-                </p>
-                <v-list class="resource-links">
-                  <v-list-item 
-                    v-for="doc in documentationLinks" 
-                    :key="doc.title"
-                    :to="doc.link"
-                    density="compact"
-                  >
-                    <v-list-item-title>{{ doc.title }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          
-          <v-col cols="12" md="4">
-            <v-card class="resource-card h-100" elevation="0">
-              <v-card-text class="text-center">
-                <v-icon size="48" color="secondary" class="mb-4">mdi-code-braces</v-icon>
-                <h3 class="resource-title">Examples</h3>
-                <p class="resource-description">
-                  Real-world code examples and common patterns
-                </p>
-                <v-list class="resource-links">
-                  <v-list-item 
-                    v-for="example in exampleLinks" 
-                    :key="example.title"
-                    :to="example.link"
-                    density="compact"
-                  >
-                    <v-list-item-title>{{ example.title }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          
-          <v-col cols="12" md="4">
-            <v-card class="resource-card h-100" elevation="0">
-              <v-card-text class="text-center">
-                <v-icon size="48" color="accent" class="mb-4">mdi-account-group</v-icon>
-                <h3 class="resource-title">Community</h3>
-                <p class="resource-description">
-                  Get help and connect with other developers
-                </p>
-                <v-list class="resource-links">
-                  <v-list-item 
-                    v-for="link in communityLinks" 
-                    :key="link.title"
-                    :href="link.link"
-                    target="_blank"
-                    density="compact"
-                  >
-                    <v-list-item-title>{{ link.title }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -433,30 +349,29 @@ useSeoMeta({
 const activeTab = ref('dynamic');
 
 const demoCode = `from easy_acumatica import AcumaticaClient
+from easy_acumatica.odata import QueryOptions, F
 
-# Initialize and connect
-client = AcumaticaClient(
-    base_url="https://your-instance.acumatica.com",
-    username="your_username",
-    password="your_password",
-    tenant="YourTenant"
-)
+# Initialize client (auto-loads from .env)
+client = AcumaticaClient()
 
-# Dynamic service discovery - no manual schema needed!
-customer_service = client.customers_service
+# Access dynamically generated services
+customers = client.customers.get_list()
 
-# Full type hints and autocomplete
+# Create entities with type hints
 new_customer = client.models.Customer(
-  CustomerID = "CUST001",
-  CustomerName = "Acme Corp",
-  CustomerClass = "DEFAULT"
+    CustomerID="CUST001",
+    CustomerName="Acme Corp"
 )
+client.customers.put_entity(new_customer)
 
-# OData filtering made simple
-opts = QueryOptions(filter=(F.Status == 'Active'), select=["CustomerID", "CustomerName", "Balance"])
-
-# API calls made as simple as a function call
-active_customers = customer_service.get_list(options=opts)`;
+# OData filtering with Python-style expressions
+active_customers = client.customers.get_list(
+    options=QueryOptions(
+    filter=F.Status == "Active",
+        select=["CustomerID", "CustomerName"],
+        top=10
+    )
+)`;
 
 const coreFeatures = ref([
   {
@@ -505,26 +420,27 @@ const quickstartSteps = ref([
     language: 'bash'
   },
   {
-    title: 'Connect',
-    description: 'Initialize your client',
-    code: `client = EasyAcumatica(
-    url="...", 
-    username="..."
-)`,
+    title: 'Configure',
+    description: 'Set up .env file',
+    code: `ACUMATICA_URL=https://...
+ACUMATICA_USERNAME=...
+ACUMATICA_PASSWORD=...
+ACUMATICA_TENANT=...`,
+    language: 'bash'
+  },
+  {
+    title: 'Initialize',
+    description: 'Create client instance',
+    code: `from easy_acumatica import AcumaticaClient
+
+client = AcumaticaClient()`,
     language: 'python'
   },
   {
-    title: 'Discover',
-    description: 'Access any service',
-    code: `service = client.service(
-    'YourEndpoint'
-)`,
-    language: 'python'
-  },
-  {
-    title: 'Execute',
-    description: 'Start making API calls',
-    code: `data = service.get_all()`,
+    title: 'Use Services',
+    description: 'Access endpoints',
+    code: `# Service endpoints are attributes
+customers = client.customers.get_list()`,
     language: 'python'
   }
 ]);
@@ -548,7 +464,7 @@ const communityLinks = ref([
   { title: 'GitHub Repository', link: 'https://github.com/Nioron07/Easy-Acumatica' },
   { title: 'Issue Tracker', link: 'https://github.com/Nioron07/Easy-Acumatica/issues' },
   { title: 'PyPI Package', link: 'https://pypi.org/project/easy-acumatica/' },
-  { title: 'Discord Community', link: 'https://discord.gg/easy-acumatica' }
+  { title: 'Contributing Guide', link: 'https://github.com/Nioron07/Easy-Acumatica/blob/main/CONTRIBUTING.md' }
 ]);
 </script>
 
@@ -565,121 +481,7 @@ const communityLinks = ref([
 
 /* Background Effects */
 .hero-background {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-/* Gradient Orbs */
-.gradient-orbs {
-  position: absolute;
-  inset: 0;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.3;
-}
-
-.orb-1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(102,126,234,0.8) 0%, transparent 70%);
-  top: -300px;
-  left: -300px;
-  animation: orb-float 20s ease-in-out infinite;
-}
-
-.orb-2 {
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(118,75,162,0.8) 0%, transparent 70%);
-  bottom: -400px;
-  right: -400px;
-  animation: orb-float 25s ease-in-out infinite reverse;
-}
-
-.orb-3 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: orb-pulse 15s ease-in-out infinite;
-}
-
-@keyframes orb-float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(100px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-50px, 100px) scale(0.9);
-  }
-}
-
-@keyframes orb-pulse {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 0.5;
-  }
-}
-
-/* Grid Overlay */
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: grid-move 20s linear infinite;
-}
-
-@keyframes grid-move {
-  to {
-    transform: translate(50px, 50px);
-  }
-}
-
-/* Floating Code Snippets */
-.floating-code {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.code-float {
-  position: absolute;
-  background: rgba(30, 30, 46, 0.8);
-  color: #667eea;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.875rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(102, 126, 234, 0.3);
-  animation: float-diagonal 20s infinite linear;
-}
-
-.code-1 { top: 10%; left: -300px; animation-delay: 0s; }
-.code-2 { top: 30%; left: -300px; animation-delay: 5s; }
-.code-3 { top: 50%; left: -300px; animation-delay: 10s; }
-.code-4 { top: 70%; left: -300px; animation-delay: 15s; }
-
-@keyframes float-diagonal {
-  to {
-    transform: translate(calc(100vw + 600px), -100px);
-  }
+  display: none;
 }
 
 /* Hero Content */
@@ -693,62 +495,37 @@ const communityLinks = ref([
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 50px;
   font-size: 0.875rem;
+  font-weight: 500;
   margin-bottom: 2rem;
-  animation: fadeInDown 0.8s ease;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
   color: white;
   margin-bottom: 1.5rem;
-  line-height: 1.1;
-  animation: fadeInUp 0.8s ease;
+  line-height: 1.2;
 }
 
 .gradient-text-hero {
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.95);
-  font-weight: 300;
-  margin-bottom: 3rem;
+  font-weight: 400;
+  max-width: 800px;
+  margin: 0 auto 3rem;
   line-height: 1.6;
-  animation: fadeInUp 0.8s ease 0.2s both;
 }
 
 .hero-buttons {
@@ -756,8 +533,6 @@ const communityLinks = ref([
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
-  animation: fadeInUp 0.8s ease 0.4s both;
 }
 
 .hero-btn-primary {

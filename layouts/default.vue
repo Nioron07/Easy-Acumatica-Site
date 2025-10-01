@@ -1,14 +1,27 @@
 <template>
   <v-app>
-    <v-app-bar 
+    <v-app-bar
       flat
+      fixed
+      app
       class="app-bar-style ps-4"
       height="72"
+      elevation="0"
     >
+        <!-- Mobile menu button -->
+        <v-btn
+          icon
+          @click="drawer = !drawer"
+          class="d-md-none mr-2"
+          variant="text"
+        >
+          <v-icon>mdi-menu</v-icon>
+        </v-btn>
+
         <div class="d-flex align-center" style="cursor: pointer;" @click="$router.push('/')">
-          <v-img 
-            src="../assets/EasyAcumaticaLogo.webp" 
-            alt="Easy-Acumatica Logo" 
+          <v-img
+            src="../assets/EasyAcumaticaLogo.webp"
+            alt="Easy-Acumatica Logo"
             width="36"
             height="36"
             class="mr-3"
@@ -93,9 +106,9 @@
         </div>
     </v-app-bar>
 
-    <ModernDocsSidebar v-model="drawer" />
+    <ModernDocsSidebar v-model="drawer" :permanent="!isMobile" />
 
-    <v-main class="main-content">
+    <v-main class="main-content" :class="{ 'with-sidebar': !isMobile }">
       <Head>
         <Link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
         <Link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -111,22 +124,51 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import ModernDocsSidebar from '~/components/DocsSidebar.vue';
 
-const drawer = ref(null);
+const drawer = ref(true);
+const windowWidth = ref(0);
+
+const isMobile = computed(() => windowWidth.value < 960);
+
+const updateWidth = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  updateWidth();
+  window.addEventListener('resize', updateWidth);
+  drawer.value = !isMobile.value;
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateWidth);
+});
 </script>
 
 <style scoped>
 .app-bar-style {
-  background-color: rgba(255, 255, 255, 0.7) !important;
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid #E0E0E0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
 }
 
 .main-content {
   background: #f8f9fa;
   min-height: 100vh;
+  padding-top: 72px !important;
+  transition: padding-left 0.2s ease;
+}
+
+@media (min-width: 960px) {
+  .main-content.with-sidebar {
+    padding-left: 250px !important;
+  }
 }
 
 /* Custom scrollbar for main content */

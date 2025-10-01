@@ -2,11 +2,11 @@
 <template>
   <v-navigation-drawer
     v-model="model"
-    :rail="rail"
-    :width="320"
+    :width="250"
+    :permanent="permanent"
+    fixed
+    app
     class="modern-sidebar"
-    @mouseenter="rail = false"
-    @mouseleave="rail = true"
   >
     <!-- Sidebar Header -->
     <div class="sidebar-header">
@@ -19,8 +19,8 @@
             class="mr-3"
           />
           <div>
-            <h3 class="text-h6 font-weight-bold" v-if="!rail">{{ currentTitle }}</h3>
-            <p class="text-caption text-grey-darken-1 mb-0" v-if="!rail">{{ currentSubtitle }}</p>
+            <h3 class="text-h6 font-weight-bold">{{ currentTitle }}</h3>
+            <p class="text-caption text-grey-darken-1 mb-0">{{ currentSubtitle }}</p>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
     <v-divider />
 
     <!-- Search Bar -->
-    <div class="pa-3" v-if="!rail">
+    <div class="pa-3">
       <v-text-field
         v-model="search"
         prepend-inner-icon="mdi-magnify"
@@ -80,11 +80,10 @@
           <template v-slot:activator="{ props, isOpen }">
             <v-list-item
               v-bind="props"
-              :prepend-icon="rail ? section.icon : undefined"
               rounded="lg"
               class="group-item"
             >
-              <template v-slot:prepend v-if="!rail">
+              <template v-slot:prepend>
                 <v-icon :icon="section.icon" :color="section.color || 'grey-darken-1'" />
               </template>
               <v-list-item-title class="font-weight-medium">
@@ -142,6 +141,10 @@ import { useRoute } from 'vue-router';
 // Props
 const props = defineProps({
   modelValue: Boolean,
+  permanent: {
+    type: Boolean,
+    default: false
+  },
   section: {
     type: String,
     default: 'python'
@@ -162,7 +165,6 @@ const model = computed({
 
 // State
 const search = ref('');
-const rail = ref(true);
 
 // Current section based on route
 const currentSection = computed(() => {
@@ -180,8 +182,8 @@ const currentTitle = computed(() => {
 });
 
 const currentSubtitle = computed(() => {
-  return currentSection.value === 'python' ? 'v0.4.8 - Dynamic Generation' : 
-         currentSection.value === 'npm' ? 'TypeScript Ready' : 
+  return currentSection.value === 'python' ? 'v0.5.4' :
+         currentSection.value === 'npm' ? 'TypeScript Ready' :
          'Choose your platform';
 });
 
@@ -208,16 +210,18 @@ const pythonNav = [
   { type: 'header', title: 'Getting Started', icon: 'mdi-rocket-launch', color: 'primary' },
   { type: 'item', title: 'Home', icon: 'mdi-home', link: '/python' },
   { type: 'item', title: 'Installation', icon: 'mdi-download', link: '/python/installation' },
-  { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/python/quickstart', badge: 'New' },
+  { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/python/quickstart'},
   { type: 'item', title: 'Migration Guide', icon: 'mdi-swap-horizontal', link: '/python/migration' },
-  { type: 'item', title: 'Examples', icon: 'mdi-code-brackets', link: '/python/examples' },
   
   { type: 'divider' },
   { type: 'header', title: 'Core Concepts', icon: 'mdi-cube-outline', color: 'deep-purple' },
   { type: 'item', title: 'AcumaticaClient', icon: 'mdi-connection', link: '/python/client' },
-  { type: 'item', title: 'Service Factory', icon: 'mdi-factory', link: '/python/service-factory' },
-  { type: 'item', title: 'Model Factory', icon: 'mdi-shape-outline', link: '/python/model-factory' },
-  
+  { type: 'item', title: 'Dynamic Services', icon: 'mdi-factory', link: '/python/service-factory' },
+  { type: 'item', title: 'Dynamic Models', icon: 'mdi-shape-outline', link: '/python/model-factory' },
+  { type: 'item', title: 'Batch Operations', icon: 'mdi-lightning-bolt-outline', link: '/python/batching' },
+  { type: 'item', title: 'Task Scheduler', icon: 'mdi-clock-outline', link: '/python/task-scheduler' },
+  { type: 'item', title: 'Generic Inquiries', icon: 'mdi-table-search', link: '/python/generic-inquiries' },
+
   { type: 'divider' },
   { type: 'header', title: 'OData & Queries', icon: 'mdi-database-search', color: 'blue' },
   { type: 'item', title: 'Query Options', icon: 'mdi-tune', link: '/python/odata/queryoptions' },
@@ -289,7 +293,7 @@ const isGroupActive = (group) => {
 
 // Close drawer on route change for mobile
 watch(() => route.path, () => {
-  if (window.innerWidth < 960) {
+  if (typeof window !== 'undefined' && window.innerWidth < 960) {
     model.value = false;
   }
 });
@@ -299,7 +303,11 @@ watch(() => route.path, () => {
 .modern-sidebar {
   background: white;
   border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
-  min-width:70px;
+  position: fixed !important;
+  top: 72px !important;
+  height: calc(100vh - 72px) !important;
+  z-index: 999 !important;
+  overflow-y: auto !important;
 }
 
 .sidebar-header {
@@ -357,15 +365,6 @@ watch(() => route.path, () => {
   background: linear-gradient(135deg, rgba(94, 53, 177, 0.15) 0%, rgba(126, 87, 194, 0.15) 100%);
 }
 
-/* Rail mode adjustments */
-.v-navigation-drawer--rail .section-header {
-  display: none;
-}
-
-.v-navigation-drawer--rail .nested-item {
-  margin-left: 0.5rem;
-}
-
 /* Custom scrollbar */
 .v-navigation-drawer__content {
   scrollbar-width: thin;
@@ -387,14 +386,5 @@ watch(() => route.path, () => {
 
 .v-navigation-drawer__content::-webkit-scrollbar-thumb:hover {
   background: #7e57c2;
-}
-.modern-sidebar.v-navigation-drawer--rail .nav-item.active-item,
-.modern-sidebar.v-navigation-drawer--rail .group-item.v-list-item--active {
-  width: 40px; /* Override Vuetify's default */
-}
-
-/* Ensure the icon prepend slot doesn't have extra margin */
-.modern-sidebar.v-navigation-drawer--rail .v-list-item__prepend {
-  margin-inline-end: 0;
 }
 </style>

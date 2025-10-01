@@ -12,25 +12,11 @@
         <v-row justify="center" align="center">
           <v-col cols="12" class="text-center">
             <h1 class="hero-title">
-              <span class="gradient-text">AcumaticaClient</span>
+              <span>AcumaticaClient</span>
             </h1>
             <p class="hero-subtitle">
-              The intelligent client that discovers your entire Acumatica instance
+              Main client class for Acumatica REST API integration
             </p>
-            <div class="hero-features">
-              <div class="feature-pill">
-                <v-icon>mdi-lightning-bolt</v-icon>
-                Dynamic Discovery
-              </div>
-              <div class="feature-pill">
-                <v-icon>mdi-shield-check</v-icon>
-                Type Safety
-              </div>
-              <div class="feature-pill">
-                <v-icon>mdi-auto-fix</v-icon>
-                Zero Configuration
-              </div>
-            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -49,8 +35,8 @@
                   Introduction
                 </h2>
                 <p class="text-body-1 mb-4">
-                  The <code>AcumaticaClient</code> is your gateway to seamless Acumatica integration. 
-                  It automatically discovers your endpoints, generates models, and creates type-safe services - all at runtime.
+                  The <code>AcumaticaClient</code> handles authentication, session management, and provides
+                  dynamically-generated services and models based on your Acumatica instance's schema.
                 </p>
 
                 <CodeSnippet :code="introExample" />
@@ -63,12 +49,31 @@
                   Initialization
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Initialize your client with credentials. The client will automatically discover and configure everything else.
+                  The client can be initialized with explicit credentials, environment variables, or automatic .env file loading.
                 </p>
 
                 <CodeSnippet :code="initExample" />
 
                 <ParameterTable :parameters="initializationParams" />
+              </section>
+
+              <!-- .env File Loading Section -->
+              <section id="env-loading" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-file-cog</v-icon>
+                  .env File Loading
+                </h2>
+                <p class="text-body-1 mb-4">
+                  As of v0.5.4, the client automatically searches for and loads credentials from .env files.
+                  This simplifies configuration management across different environments.
+                </p>
+
+                <CodeSnippet :code="envExample" />
+
+                <v-alert class="mt-4" type="info" variant="tonal">
+                  The client searches for .env files starting from your script's directory and walking up
+                  the directory tree. You can also specify an explicit path with the <code>env_file</code> parameter.
+                </v-alert>
               </section>
 
               <!-- Configuration Section -->
@@ -78,26 +83,46 @@
                   Configuration Options
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Configure advanced behaviors with optional parameters.
+                  Optional parameters control caching, rate limiting, session behavior, and performance tuning.
                 </p>
 
                 <CodeSnippet :code="configExample" />
               </section>
 
-              <!-- Dynamic Discovery Section -->
+              <!-- Differential Caching Section -->
+              <section id="caching" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-cached</v-icon>
+                  Differential Caching
+                </h2>
+                <p class="text-body-1 mb-4">
+                  Version 0.5.4 introduces differential caching, which dramatically reduces initialization time
+                  by caching generated models and services. The cache intelligently updates only changed components.
+                </p>
+
+                <CodeSnippet :code="cachingExample" />
+
+                <v-alert class="mt-4" type="success" variant="tonal">
+                  With caching enabled, subsequent client initializations can be 10-20x faster. The cache
+                  automatically invalidates when your schema changes or after the TTL expires.
+                </v-alert>
+              </section>
+
+              <!-- Schema Discovery Section -->
               <section id="discovery" class="content-section">
                 <h2 class="section-title">
                   <v-icon class="section-icon">mdi-magnify-scan</v-icon>
-                  Dynamic Discovery
+                  Schema Discovery
                 </h2>
                 <p class="text-body-1 mb-4">
-                  The client automatically discovers your Acumatica instance structure on initialization.
+                  On initialization, the client fetches the OpenAPI schema and generates models and services
+                  based on your instance configuration.
                 </p>
 
                 <CodeSnippet :code="discoveryExample" />
 
                 <v-alert class="mt-4" type="info" variant="tonal">
-                  Discovery happens once during initialization. The client caches the structure for optimal performance.
+                  Schema discovery happens once at initialization. Enable caching to skip this on subsequent runs.
                 </v-alert>
               </section>
 
@@ -108,14 +133,14 @@
                   Dynamic Models
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Models are generated dynamically based on your actual Acumatica entities. 
-                  They include all standard fields and your custom fields automatically.
+                  Models are Python dataclasses generated from the OpenAPI schema. They include standard
+                  fields and any custom fields defined in your instance.
                 </p>
 
                 <CodeSnippet :code="modelsExample" />
 
                 <v-alert class="mt-4" type="success" variant="tonal">
-                  Models provide full IDE support with autocompletion and type hints!
+                  Generated models support IDE autocompletion and type checking.
                 </v-alert>
               </section>
 
@@ -126,8 +151,8 @@
                   Dynamic Services
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Services are dynamically attached to the client based on your available endpoints.
-                  Each service provides methods that correspond exactly to your API operations.
+                  Service instances are created for each endpoint defined in your schema. They provide
+                  methods for CRUD operations, actions, and file attachments.
                 </p>
 
                 <CodeSnippet :code="servicesExample" />
@@ -143,7 +168,8 @@
                   OData Query Features
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Leverage the power of OData with our intuitive query builder and filter factory.
+                  The client supports OData filtering and query options through the <code>F</code> filter factory
+                  and <code>QueryOptions</code> class.
                 </p>
 
                 <v-tabs v-model="odataTab" class="mb-6 modern-tabs">
@@ -167,8 +193,7 @@
                 </v-tabs-window>
 
                 <v-alert class="mt-4" type="info" variant="tonal">
-                  The <code>F</code> factory creates filter expressions that work with both OData v3 and v4.
-                  Function names are automatically lowercased for compatibility.
+                  Filter expressions use Python operators and are automatically converted to OData query strings.
                 </v-alert>
               </section>
 
@@ -179,7 +204,8 @@
                   Session Management
                 </h2>
                 <p class="text-body-1 mb-4">
-                  The client handles all session complexity for you, with intelligent retry logic and automatic cleanup.
+                  Sessions can be persistent (default) or non-persistent. The client includes automatic retry logic
+                  for idle session timeouts.
                 </p>
 
                 <v-tabs v-model="sessionTab" class="mb-6 modern-tabs">
@@ -203,6 +229,27 @@
                 </v-tabs-window>
               </section>
 
+              <!-- Task Scheduler Section -->
+              <section id="scheduler" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-clock-outline</v-icon>
+                  Task Scheduler
+                </h2>
+                <p class="text-body-1 mb-4">
+                  Version 0.5.4 adds a built-in task scheduler for running periodic jobs. Access it via
+                  <code>client.scheduler</code> property. See the <NuxtLink to="/python/task-scheduler">Task Scheduler</NuxtLink>
+                  documentation for detailed information.
+                </p>
+
+                <CodeSnippet :code="schedulerExample" />
+
+                <v-alert class="mt-4" type="info" variant="tonal">
+                  The scheduler runs in a background thread and continues until explicitly stopped or the
+                  client is closed. Tasks can be scheduled with intervals or cron-like expressions.
+                  Learn more in the <NuxtLink to="/python/task-scheduler">Task Scheduler guide</NuxtLink>.
+                </v-alert>
+              </section>
+
               <!-- Exception Handling Section -->
               <section id="exceptions" class="content-section">
                 <h2 class="section-title">
@@ -210,7 +257,7 @@
                   Exception Handling
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Easy-Acumatica provides specific exception types for different error scenarios.
+                  The library defines specific exception types for authentication, network, timeout, and API errors.
                 </p>
 
                 <CodeSnippet :code="exceptionExample" />
@@ -288,123 +335,228 @@ const odataTab = ref('filters');
 const navItems = ref([
   { id: 'introduction', title: 'Introduction', icon: 'mdi-book-open-variant' },
   { id: 'initialization', title: 'Initialization', icon: 'mdi-power-plug' },
+  { id: 'env-loading', title: '.env File Loading', icon: 'mdi-file-cog' },
   { id: 'configuration', title: 'Configuration', icon: 'mdi-cog' },
-  { id: 'discovery', title: 'Dynamic Discovery', icon: 'mdi-magnify-scan' },
+  { id: 'caching', title: 'Differential Caching', icon: 'mdi-cached' },
+  { id: 'discovery', title: 'Schema Discovery', icon: 'mdi-magnify-scan' },
   { id: 'models', title: 'Dynamic Models', icon: 'mdi-cube-outline' },
   { id: 'services', title: 'Dynamic Services', icon: 'mdi-api' },
   { id: 'odata', title: 'OData Features', icon: 'mdi-filter' },
   { id: 'session', title: 'Session Management', icon: 'mdi-shield-key' },
+  { id: 'scheduler', title: 'Task Scheduler', icon: 'mdi-clock-outline' },
   { id: 'exceptions', title: 'Exception Handling', icon: 'mdi-alert-circle' },
   { id: 'advanced', title: 'Advanced Features', icon: 'mdi-rocket' },
 ]);
 
 // Code examples
-const introExample = ref(`# The v0.4.8 way - everything is dynamic!
-from easy_acumatica import AcumaticaClient
+const introExample = ref(`from easy_acumatica import AcumaticaClient
 
-# Initialize - this discovers your entire instance
-client = AcumaticaClient(
-    base_url="https://your-instance.acumatica.com",
-    username="your_username",
-    password="your_password",
-    tenant="YourTenant",
-    branch="YourBranch"
-)
+# Initialize client (loads from .env automatically)
+client = AcumaticaClient()
 
-# Models are generated and ready to use
-print(f"Available models: {dir(client.models)}")
-
-# Services are attached dynamically
-print(f"Available services: {[attr for attr in dir(client) if attr.endswith('s') and not attr.startswith('_')]}")
-
-# Use them immediately with full type safety!
+# Access dynamically generated services
 customer = client.customers.get_by_id("ABCCOMP")
-print(f"Customer: {customer.CustomerName}")`);
+print(f"Customer: {customer.CustomerName}")
+
+# Use dynamically generated models
+new_customer = client.models.Customer(
+    CustomerID="NEWCUST",
+    CustomerName="New Customer"
+)
+created = client.customers.put_entity(new_customer)`);
 
 const initExample = ref(`from easy_acumatica import AcumaticaClient
 
-# Method 1: Direct parameters
+# Method 1: Automatic .env loading (recommended)
+# Client searches for .env file in current directory and parent directories
+client = AcumaticaClient()
+
+# Method 2: Specify .env file location
+client = AcumaticaClient(env_file="config/.env")
+
+# Method 3: Explicit credentials
 client = AcumaticaClient(
     base_url="https://your-instance.acumatica.com",
     username="api_user",
     password="secure_password",
-    tenant="Company",
-    branch="MAIN"
+    tenant="Company"
 )
 
-# Method 2: Environment variables
-# Set: ACUMATICA_URL, ACUMATICA_USERNAME, etc.
+# Method 4: Environment variables (without .env file)
+# Set: ACUMATICA_URL, ACUMATICA_USERNAME, ACUMATICA_PASSWORD, ACUMATICA_TENANT
+import os
+os.environ['ACUMATICA_URL'] = 'https://your-instance.acumatica.com'
+os.environ['ACUMATICA_USERNAME'] = 'api_user'
+# ...
 client = AcumaticaClient()
 
-# Method 3: Mix of both (env vars as defaults)
-client = AcumaticaClient(
-    tenant="Company",  # Override specific values
-    branch="BRANCH01"
-)
-
-# Method 4: Using a config object
+# Method 5: Using a config object
 from easy_acumatica import AcumaticaConfig
-
 config = AcumaticaConfig(
     base_url="https://your-instance.acumatica.com",
     username="api_user",
     password="secure_password",
-    tenant="Company",
-    endpoint_name="Default",
-    endpoint_version="23.200.001"
+    tenant="Company"
 )
 client = AcumaticaClient(config=config)`);
 
-const configExample = ref(`# Configure advanced behaviors
+const envExample = ref(`# .env file in your project root
+ACUMATICA_URL=https://your-instance.acumatica.com
+ACUMATICA_USERNAME=your-username
+ACUMATICA_PASSWORD=your-password
+ACUMATICA_TENANT=your-tenant
+ACUMATICA_BRANCH=MAIN
+ACUMATICA_CACHE_METHODS=true
+ACUMATICA_CACHE_TTL_HOURS=24
+
+# Your Python script
+from easy_acumatica import AcumaticaClient
+
+# Automatically loads from .env - no credentials needed!
+client = AcumaticaClient()
+
+# Or specify a custom .env location
+client = AcumaticaClient(env_file="config/.env")
+
+# Disable auto-loading if needed
 client = AcumaticaClient(
+    base_url="...",
+    username="...",
+    password="...",
+    tenant="...",
+    auto_load_env=False  # Don't search for .env files
+)`);
+
+const configExample = ref(`client = AcumaticaClient(
     base_url="https://your-instance.acumatica.com",
     username="api_user",
     password="secure_password",
     tenant="Company",
-    
+
+    # Caching (new in v0.5.4)
+    cache_methods=True,         # Enable differential caching
+    cache_ttl_hours=24,        # Cache lifetime in hours
+    cache_dir=Path("~/.cache"), # Cache directory location
+    force_rebuild=False,       # Force rebuild ignoring cache
+
     # Session behavior
-    persistent_login=True,      # Keep session alive (default)
-    retry_on_idle_logout=True,  # Auto-retry on 401 (default)
-    
-    # Performance tuning
-    rate_limit_calls_per_second=10.0,  # API throttling
-    timeout=60,                        # Request timeout in seconds
-    
-    # SSL and security
-    verify_ssl=True,           # Verify SSL certificates
-    
-    # API targeting
-    endpoint_name="Default",   # Which endpoint to use
-    endpoint_version=None,     # Auto-detect latest version
-    
+    persistent_login=True,      # Maintain session (default)
+    retry_on_idle_logout=True,  # Auto-retry on session timeout
+
+    # Performance
+    rate_limit_calls_per_second=10.0,  # Rate limiting
+    timeout=60,                         # Request timeout (seconds)
+
+    # SSL verification
+    verify_ssl=True,
+
+    # API endpoint
+    endpoint_name="Default",
+    endpoint_version=None,  # Auto-detect latest
+
     # Localization
-    locale="en-US"            # API locale setting
+    branch="MAIN",
+    locale="en-US"
 )`);
 
-const discoveryExample = ref(`# The client discovers everything on initialization
-client = AcumaticaClient(...)
+const cachingExample = ref(`from easy_acumatica import AcumaticaClient
+from pathlib import Path
 
-# See what was discovered
+# Enable caching for faster subsequent initializations
+client = AcumaticaClient(
+    cache_methods=True,           # Enable differential caching
+    cache_ttl_hours=24,          # Cache valid for 24 hours
+    cache_dir=Path("~/.cache/acumatica")  # Custom cache location
+)
+
+# First run: Full schema discovery and model/service generation (~5-10 seconds)
+# Subsequent runs: Differential cache loading (~0.5-1 second)
+
+# Check cache statistics
+stats = client.get_cache_stats()
+print(f"Cache hits: {stats['hits']}")
+print(f"Cache misses: {stats['misses']}")
+print(f"Cache age: {stats['age_hours']:.1f} hours")
+
+# Force rebuild (ignores cache)
+client = AcumaticaClient(force_rebuild=True)
+
+# Clear cache manually
+client.clear_cache()
+
+# The cache intelligently tracks changes:
+# - Only rebuilds models/services that changed
+# - Removes models/services that were deleted
+# - Preserves unchanged components from cache
+# - Automatically invalidates on schema changes`);
+
+const schedulerExample = ref(`from easy_acumatica import AcumaticaClient
+import time
+
+client = AcumaticaClient()
+
+# Define a task function
+def sync_customers():
+    customers = client.customers.get_list()
+    # Process customers...
+    print(f"Synced {len(customers)} customers")
+
+# Schedule task to run every 5 minutes
+task_id = client.scheduler.schedule_task(
+    func=sync_customers,
+    interval_seconds=300,  # 5 minutes
+    task_name="customer_sync"
+)
+
+# Schedule with a cron-like expression
+task_id = client.scheduler.schedule_task(
+    func=sync_customers,
+    cron_expression="0 */6 * * *",  # Every 6 hours
+    task_name="hourly_sync"
+)
+
+# List scheduled tasks
+tasks = client.scheduler.list_tasks()
+for task in tasks:
+    print(f"{task['name']}: {task['status']}")
+
+# Stop a specific task
+client.scheduler.stop_task(task_id)
+
+# Stop all tasks
+client.scheduler.stop_all()
+
+# Scheduler automatically stops when client is closed
+client.close()`);
+
+const discoveryExample = ref(`# The client discovers everything on initialization
+client = AcumaticaClient()
+
+# Use built-in methods to see what was discovered
 print("\\nAvailable Services:")
-for attr in dir(client):
-    if attr.endswith('s') and not attr.startswith('_'):
-        service = getattr(client, attr)
-        print(f"  - client.{attr} -> {type(service).__name__}")
+services = client.list_services()
+print(f"Found {len(services)} services")
+for service in services[:10]:  # Show first 10
+    print(f"  - {service}")
 
 print("\\nAvailable Models:")
-for model_name in sorted(dir(client.models)):
-    if not model_name.startswith('_'):
-        model = getattr(client.models, model_name)
-        print(f"  - {model_name}: {len(model.__dataclass_fields__)} fields")
+models = client.list_models()
+print(f"Found {len(models)} models")
+for model in models[:10]:  # Show first 10
+    print(f"  - {model}")
 
-# Check if custom entities exist
-if hasattr(client, 'custom_entity'):
-    print("\\nCustom entity service available!")
+# Get detailed information about a specific service
+service_info = client.get_service_info('Customer')
+print(f"\\nCustomer service methods: {service_info['methods']}")
+
+# Get detailed information about a specific model
+model_info = client.get_model_info('Customer')
+print(f"\\nCustomer model fields: {model_info['field_count']} fields")
 
 # Check for custom fields
-customer_fields = client.models.Customer.__dataclass_fields__
-custom_fields = [f for f in customer_fields if f.startswith('Usr')]
-print(f"\\nCustom fields on Customer: {custom_fields}")`);
+customer_fields = model_info['fields']
+custom_fields = [name for name in customer_fields if name.startswith('Usr')]
+print(f"Custom fields on Customer: {custom_fields}")`);
 
 const modelsExample = ref(`# All models follow Python dataclass patterns
 
@@ -449,7 +601,7 @@ customer = client.customers.get_list(options=opts)
 all_customers = client.customers.get_list()
 
 # LIST - With OData parameters
-from easy_acumatica import F, QueryOptions
+from easy_acumatica.odata import QueryOptions, F
 
 # CREATE - Add new record
 new_customer = client.models.Customer(
@@ -465,7 +617,7 @@ updated = client.customers.put_entity(customer)
 # DELETE - Remove record
 client.customers.delete_by_id("PYTHN002")`);
 
-const filterExample = ref(`from easy_acumatica import F
+const filterExample = ref(`from easy_acumatica.odata import F
 
 # Simple equality filter
 active_filter = F.Status == "Active"
@@ -502,7 +654,7 @@ complex_filter = (
 # Use with list operations
 results = client.customers.get_list(filter=complex_filter)`);
 
-const queryOptionsExample = ref(`from easy_acumatica import QueryOptions, F
+const queryOptionsExample = ref(`from easy_acumatica.odata import QueryOptions, F
 
 # Basic QueryOptions
 options = QueryOptions(
@@ -554,7 +706,7 @@ def get_all_pages(service, page_size=100):
         
     return all_records`);
 
-const advancedOdataExample = ref(`from easy_acumatica import F, QueryOptions, CustomField
+const advancedOdataExample = ref(`from easy_acumatica.odata import F, QueryOptions, CustomField
 
 # Advanced filtering with arithmetic
 price_margin = (F.SalesPrice - F.Cost) / F.Cost > 0.3
@@ -662,44 +814,67 @@ for customer_id in large_customer_list:
     time.sleep(60)  # Even with delays, it just works`);
 
 const exceptionExample = ref(`from easy_acumatica import (
-    AcumaticaException,
+    AcumaticaError,
     AcumaticaAuthError,
-    AcumaticaAPIError,
-    AcumaticaNetworkError,
+    AcumaticaNotFoundError,
+    AcumaticaValidationError,
+    AcumaticaBusinessRuleError,
+    AcumaticaConcurrencyError,
+    AcumaticaServerError,
+    AcumaticaConnectionError,
     AcumaticaTimeoutError,
-    AcumaticaNotFoundError
+    AcumaticaRateLimitError
 )
 
 try:
-    # This might fail in various ways
     customer = client.customers.get_by_id("UNKNOWN")
-    
+
 except AcumaticaNotFoundError as e:
-    # Record doesn't exist
-    print(f"Customer not found: {e}")
-    
+    # 404 - Resource not found
+    print(f"Not found: {e}")
+    print(f"Suggestions: {e.suggestions}")
+
 except AcumaticaAuthError as e:
-    # Authentication failed
-    print(f"Auth error: {e}")
-    # Maybe refresh credentials
-    
+    # 401/403 - Authentication or authorization failed
+    print(f"Auth error: {e.message}")
+    print(f"Status: {e.status_code}")
+
+except AcumaticaValidationError as e:
+    # 400/422 - Data validation failed
+    print(f"Validation error: {e}")
+    if e.field_errors:
+        for field, errors in e.field_errors.items():
+            print(f"  {field}: {errors}")
+
+except AcumaticaBusinessRuleError as e:
+    # 422 - Business rule violation
+    print(f"Business rule error: {e}")
+
+except AcumaticaConcurrencyError as e:
+    # 412 - Concurrent modification
+    print(f"Concurrency conflict: {e}")
+
 except AcumaticaTimeoutError as e:
-    # Request timed out
-    print(f"Timeout after {e.timeout}s")
-    # Maybe retry with longer timeout
-    
-except AcumaticaAPIError as e:
-    # API returned an error
-    print(f"API error {e.status_code}: {e.message}")
-    print(f"Details: {e.details}")
-    
-except AcumaticaNetworkError as e:
-    # Network-level error
-    print(f"Network error: {e}")
-    
-except AcumaticaException as e:
-    # Catch-all for any Acumatica-related error
-    print(f"Acumatica error: {e}")`);
+    # Request timeout
+    print(f"Timeout: {e.timeout_seconds}s")
+
+except AcumaticaRateLimitError as e:
+    # 429 - Rate limit exceeded
+    print(f"Rate limited. Retry after: {e.retry_after}s")
+
+except AcumaticaServerError as e:
+    # 5xx - Server error
+    print(f"Server error: {e.status_code}")
+
+except AcumaticaConnectionError as e:
+    # Network/connection error
+    print(f"Connection error: {e}")
+
+except AcumaticaError as e:
+    # Catch-all for any Acumatica error
+    print(f"Error: {e}")
+    print(f"Detailed: {e.get_detailed_message()}")
+    print(f"Context: {e.context}")`);
 
 const fileExample = ref(`# Upload files to any entity
 
@@ -788,17 +963,23 @@ client.invoices.invoke_action_email_invoice(
 
 // Initialize parameters
 const initializationParams = ref([
-  { name: 'base_url', type: 'str', required: false, description: 'Root URL of your Acumatica instance (or use env var)' },
-  { name: 'username', type: 'str', required: false, description: 'API username (or use env var)' },
-  { name: 'password', type: 'str', required: false, description: 'API password (or use env var)' },
-  { name: 'tenant', type: 'str', required: false, description: 'Tenant/Company name (or use env var)' },
-  { name: 'branch', type: 'str', required: false, description: 'Branch code (optional)' },
-  { name: 'locale', type: 'str', required: false, description: 'Locale like "en-US" (optional)' },
+  { name: 'base_url', type: 'str', required: false, description: 'Root URL of your Acumatica instance' },
+  { name: 'username', type: 'str', required: false, description: 'API username' },
+  { name: 'password', type: 'str', required: false, description: 'API password' },
+  { name: 'tenant', type: 'str', required: false, description: 'Tenant/Company name' },
+  { name: 'branch', type: 'str', required: false, description: 'Branch code' },
+  { name: 'locale', type: 'str', required: false, description: 'Locale (e.g., "en-US")' },
+  { name: 'env_file', type: 'str | Path', required: false, description: 'Path to .env file (v0.5.4+)' },
+  { name: 'auto_load_env', type: 'bool', required: false, description: 'Auto-search for .env files (default: True, v0.5.4+)' },
+  { name: 'cache_methods', type: 'bool', required: false, description: 'Enable differential caching (v0.5.4+)' },
+  { name: 'cache_ttl_hours', type: 'int', required: false, description: 'Cache TTL in hours (default: 24, v0.5.4+)' },
+  { name: 'cache_dir', type: 'Path', required: false, description: 'Cache directory (default: ~/.easy_acumatica_cache, v0.5.4+)' },
+  { name: 'force_rebuild', type: 'bool', required: false, description: 'Force rebuild ignoring cache (v0.5.4+)' },
   { name: 'verify_ssl', type: 'bool', required: false, description: 'Verify SSL certificates (default: True)' },
-  { name: 'persistent_login', type: 'bool', required: false, description: 'Keep session alive (default: True)' },
+  { name: 'persistent_login', type: 'bool', required: false, description: 'Maintain session (default: True)' },
   { name: 'retry_on_idle_logout', type: 'bool', required: false, description: 'Auto-retry on timeout (default: True)' },
   { name: 'endpoint_name', type: 'str', required: false, description: 'API endpoint name (default: "Default")' },
-  { name: 'endpoint_version', type: 'str', required: false, description: 'Specific API version (optional)' },
+  { name: 'endpoint_version', type: 'str', required: false, description: 'Specific API version' },
   { name: 'config', type: 'AcumaticaConfig', required: false, description: 'Config object (overrides other params)' },
   { name: 'rate_limit_calls_per_second', type: 'float', required: false, description: 'API rate limit (default: 10.0)' },
   { name: 'timeout', type: 'int', required: false, description: 'Request timeout in seconds (default: 60)' },
@@ -806,17 +987,13 @@ const initializationParams = ref([
 
 // Service patterns
 const servicePatterns = ref([
-  { pattern: 'get(keys, select=None, expand=None)', description: 'Retrieve a single record by its keys' },
-  { pattern: 'list(top=None, skip=None, filter=None, select=None, orderby=None, expand=None)', description: 'List records with optional OData parameters' },
-  { pattern: 'create(entity)', description: 'Create a new record' },
-  { pattern: 'update(entity)', description: 'Update an existing record' },
-  { pattern: 'delete(keys)', description: 'Delete a record by its keys' },
-  { pattern: 'get_by_id(id)', description: 'Get a record by its internal ID' },
-  { pattern: 'invoke_action(name, payload)', description: 'Execute an action' },
-  { pattern: 'attach_file(keys, filename, content)', description: 'Attach a file to a record' },
-  { pattern: 'get_files(keys)', description: 'List files attached to a record' },
-  { pattern: 'get_file(keys, file_id)', description: 'Download a specific file' },
-  { pattern: 'delete_file(keys, file_id)', description: 'Delete a file attached to an entity' },
+  { pattern: 'get_by_id(entity_id, select=None, expand=None)', description: 'Retrieve a record by ID' },
+  { pattern: 'get_list(filter=None, options=None)', description: 'List records with OData filtering' },
+  { pattern: 'put_entity(entity)', description: 'Create or update a record' },
+  { pattern: 'delete_by_id(entity_id)', description: 'Delete a record by ID' },
+  { pattern: 'put_file(entity_id, filename, data, comment=None)', description: 'Attach a file to a record' },
+  { pattern: 'get_files(entity_id)', description: 'List files attached to a record' },
+  { pattern: 'invoke_action_<action_name>(entity, parameters=None)', description: 'Execute an action (dynamically generated)' },
 ]);
 </script>
 

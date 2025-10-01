@@ -39,20 +39,6 @@
             <v-icon start>mdi-npm</v-icon>
             Node.js Docs
           </v-btn>
-
-          <v-divider vertical class="mx-3" />
-
-          <v-btn
-            variant="outlined"
-            color="grey-darken-3"
-            class="mx-2"
-            href="https://github.com/Nioron07/Easy-Acumatica"
-            target="_blank"
-            rel="noopener"
-          >
-            <v-icon start>mdi-github</v-icon>
-            GitHub
-          </v-btn>
         </div>
 
         <v-menu>

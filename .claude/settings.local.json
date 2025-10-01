@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/matth/Programs/Easy-Acumatica/src/easy_acumatica/**)",
+      "Read(//c/Users/matth/Programs/Easy-Acumatica/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

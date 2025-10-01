@@ -20,7 +20,7 @@
               Filters & F Factory
             </h1>
             <p class="hero-subtitle">
-              Build type-safe OData filters with Python-like syntax
+              Type-safe OData filters using Python operators
             </p>
             <div class="hero-demo">
               <div class="demo-transform">
@@ -50,52 +50,36 @@
                 <v-icon color="primary" class="mr-3">mdi-swap-horizontal</v-icon>
                 Filter Translator
               </h2>
-              <p class="translator-subtitle">Convert OData syntax to Python F factory syntax</p>
+              <p class="translator-subtitle">Convert OData filters to Python syntax</p>
             </div>
           </v-card-title>
-          
+
           <v-card-text class="pa-6">
             <v-row>
               <v-col cols="12" md="6">
                 <div class="translator-input">
                   <label class="input-label">OData Filter Expression</label>
-                  <v-textarea
-                    v-model="odataInput"
-                    variant="outlined"
-                    rows="4"
+                  <v-textarea v-model="odataInput" variant="outlined" rows="4"
                     placeholder="Enter OData filter (e.g., Status eq 'Active' and Amount gt 1000)"
-                    @input="translateFilter"
-                    hide-details
-                  ></v-textarea>
-                  
+                    @input="translateFilter" hide-details></v-textarea>
+
                   <div class="input-examples">
                     <span class="examples-label">Try these:</span>
-                    <v-chip
-                      v-for="(example, i) in odataExamples"
-                      :key="i"
-                      size="small"
-                      class="example-chip"
-                      @click="odataInput = example; translateFilter()"
-                    >
+                    <v-chip v-for="(example, i) in odataExamples" :key="i" size="small" class="example-chip"
+                      @click="odataInput = example; translateFilter()">
                       {{ example.substring(0, 40) }}...
                     </v-chip>
                   </div>
                 </div>
               </v-col>
-              
+
               <v-col cols="12" md="6">
                 <div class="translator-output">
                   <label class="output-label">Python Syntax</label>
                   <div class="output-box">
                     <pre><code>{{ pythonOutput || 'Translation will appear here...' }}</code></pre>
-                    <v-btn
-                      v-if="pythonOutput"
-                      icon="mdi-content-copy"
-                      size="small"
-                      variant="text"
-                      @click="copyPythonCode"
-                      class="copy-btn"
-                    >
+                    <v-btn v-if="pythonOutput" icon="mdi-content-copy" size="small" variant="text"
+                      @click="copyPythonCode" class="copy-btn">
                       <v-tooltip text="Copy to clipboard" location="top">
                         <template v-slot:activator="{ props }">
                           <v-icon v-bind="props">mdi-content-copy</v-icon>
@@ -116,23 +100,18 @@
       <!-- Introduction -->
       <section class="content-section">
         <h2 class="section-title">The F Factory</h2>
-        
+
         <v-row>
           <v-col cols="12">
             <v-card class="info-card">
               <v-card-text>
                 <p class="text-body-1">
-                  The <code class="inline-code">F</code> factory is your gateway to building type-safe, readable OData filters 
-                  using familiar Python syntax. Instead of writing error-prone OData strings, you can use Python operators 
-                  and methods that get automatically translated to proper OData syntax.
-                </p>
-                
-                <div class="basic-example mt-4">
-                  <CodeSnippet
-                    :code="basicFilterExample"
-                    language="python"
-                  />
-                </div>
+                  The <code class="inline-code">F</code> factory builds OData filters using Python operators.
+                  Use standard comparison operators (==, !=, >, <) and methods that translate to OData syntax. </p>
+
+                    <div class="basic-example mt-4">
+                      <CodeSnippet :code="basicFilterExample" language="python" />
+                    </div>
               </v-card-text>
             </v-card>
           </v-col>
@@ -142,7 +121,7 @@
       <!-- Common Filter Patterns -->
       <section class="content-section">
         <h2 class="section-title">Common Filter Patterns</h2>
-        
+
         <v-row>
           <v-col v-for="example in filterExamples" :key="example.title" cols="12" md="6">
             <v-card class="example-card h-100" :color="example.color" variant="outlined">
@@ -152,10 +131,7 @@
               </v-card-title>
               <v-card-subtitle>{{ example.description }}</v-card-subtitle>
               <v-card-text>
-                <CodeSnippet
-                  :code="example.code"
-                  language="python"
-                />
+                <CodeSnippet :code="example.code" language="python" />
               </v-card-text>
             </v-card>
           </v-col>
@@ -165,22 +141,16 @@
       <!-- Advanced Features -->
       <section class="content-section">
         <h2 class="section-title">Advanced Features</h2>
-        
+
         <v-expansion-panels variant="accordion">
-          <v-expansion-panel
-            v-for="feature in advancedFeatures"
-            :key="feature.title"
-          >
+          <v-expansion-panel v-for="feature in advancedFeatures" :key="feature.title">
             <v-expansion-panel-title>
               <v-icon :icon="feature.icon" class="mr-3"></v-icon>
               {{ feature.title }}
             </v-expansion-panel-title>
             <v-expansion-panel-text>
               <p class="mb-4">{{ feature.description }}</p>
-              <CodeSnippet
-                :code="feature.code"
-                language="python"
-              />
+              <CodeSnippet :code="feature.code" language="python" />
               <v-alert v-if="feature.note" type="info" variant="tonal" class="mt-4">
                 {{ feature.note }}
               </v-alert>
@@ -192,7 +162,7 @@
       <!-- Best Practices -->
       <section class="content-section">
         <h2 class="section-title">Best Practices</h2>
-        
+
         <v-row>
           <v-col cols="12" md="6">
             <v-card class="best-practices-card h-100" color="success" variant="outlined">
@@ -212,7 +182,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          
+
           <v-col cols="12" md="6">
             <v-card class="best-practices-card h-100" color="error" variant="outlined">
               <v-card-title>
@@ -237,11 +207,11 @@
       <!-- Complete Function Reference -->
       <section class="content-section">
         <h2 class="section-title">Complete Function Reference</h2>
-        
+
         <v-card>
           <v-card-text>
             <p class="mb-4">All available filter operations and their OData equivalents:</p>
-            
+
             <v-table>
               <thead>
                 <tr>
@@ -322,54 +292,118 @@ const translateFilter = () => {
     pythonOutput.value = '';
     return;
   }
-  
+
   let translated = odataInput.value;
-  
-  // First, handle nested function calls by parsing from inside out
-  const functionPatterns = [
-    // Date/time functions
-    { pattern: /year\(([^)]+)\)/g, replacement: 'F.$1.year()' },
-    { pattern: /month\(([^)]+)\)/g, replacement: 'F.$1.month()' },
-    { pattern: /day\(([^)]+)\)/g, replacement: 'F.$1.day()' },
-    { pattern: /hour\(([^)]+)\)/g, replacement: 'F.$1.hour()' },
-    { pattern: /minute\(([^)]+)\)/g, replacement: 'F.$1.minute()' },
-    { pattern: /second\(([^)]+)\)/g, replacement: 'F.$1.second()' },
-    
-    // String functions with arguments
-    { pattern: /startswith\(([^,]+),\s*'([^']+)'\)/g, replacement: 'F.$1.startswith("$2")' },
-    { pattern: /endswith\(([^,]+),\s*'([^']+)'\)/g, replacement: 'F.$1.endswith("$2")' },
-    { pattern: /contains\(([^,]+),\s*'([^']+)'\)/g, replacement: 'F.$1.contains("$2")' },
-    { pattern: /substringof\('([^']+)',\s*([^)]+)\)/g, replacement: 'F.$2.substringof("$1")' },
-    { pattern: /indexof\(([^,]+),\s*'([^']+)'\)/g, replacement: 'F.$1.indexof("$2")' },
-    { pattern: /substring\(([^,]+),\s*(\d+)\)/g, replacement: 'F.$1.substring($2)' },
-    { pattern: /substring\(([^,]+),\s*(\d+),\s*(\d+)\)/g, replacement: 'F.$1.substring($2, $3)' },
-    { pattern: /replace\(([^,]+),\s*'([^']+)',\s*'([^']+)'\)/g, replacement: 'F.$1.replace("$2", "$$3")' },
-    
-    // String functions without arguments
-    { pattern: /tolower\(([^)]+)\)/g, replacement: 'F.$1.tolower()' },
-    { pattern: /toupper\(([^)]+)\)/g, replacement: 'F.$1.toupper()' },
-    { pattern: /trim\(([^)]+)\)/g, replacement: 'F.$1.trim()' },
-    { pattern: /length\(([^)]+)\)/g, replacement: 'F.$1.length()' },
-    
-    // Math functions
-    { pattern: /round\(([^)]+)\)/g, replacement: 'F.$1.round()' },
-    { pattern: /floor\(([^)]+)\)/g, replacement: 'F.$1.floor()' },
-    { pattern: /ceiling\(([^)]+)\)/g, replacement: 'F.$1.ceiling()' }
-  ];
-  
-  // Apply function transformations
-  functionPatterns.forEach(({ pattern, replacement }) => {
-    translated = translated.replace(pattern, replacement);
-  });
-  
-  // Handle 'in' operator for v4
+
+  // Step 1: Convert string literals from single to double quotes FIRST
+  translated = translated.replace(/'([^']*)'/g, '"$1"');
+
+  // Step 2: Handle null
+  translated = translated.replace(/\bnull\b/g, 'None');
+
+  // Step 3: Handle 'in' operator for v4 (before other transformations)
   translated = translated.replace(/(\w+)\s+in\s+\(([^)]+)\)/g, (match, field, values) => {
-    // Convert values to Python list format
-    const pythonValues = values.replace(/'/g, '"');
-    return `F.${field}.in_([${pythonValues}])`;
+    return `F.${field}.in_([${values}])`;
   });
-  
-  // Replace operators (order matters!)
+
+  // Step 4: Handle function calls with proper patterns
+  // Order matters - do most specific patterns first
+
+  // String functions with 2 arguments
+  translated = translated.replace(/startswith\(([^,]+),\s*"([^"]+)"\)/g, (match, field, value) => {
+    return `${field}.startswith("${value}")`;
+  });
+
+  translated = translated.replace(/endswith\(([^,]+),\s*"([^"]+)"\)/g, (match, field, value) => {
+    return `${field}.endswith("${value}")`;
+  });
+
+  translated = translated.replace(/contains\(([^,]+),\s*"([^"]+)"\)/g, (match, field, value) => {
+    return `${field}.contains("${value}")`;
+  });
+
+  translated = translated.replace(/indexof\(([^,]+),\s*"([^"]+)"\)/g, (match, field, value) => {
+    return `${field}.indexof("${value}")`;
+  });
+
+  // substringof is special - arguments are reversed
+  translated = translated.replace(/substringof\("([^"]+)",\s*([^)]+)\)/g, (match, value, field) => {
+    return `${field}.substringof("${value}")`;
+  });
+
+  // substring with 2 or 3 arguments
+  translated = translated.replace(/substring\(([^,]+),\s*(\d+),\s*(\d+)\)/g, (match, field, start, length) => {
+    return `${field}.substring(${start}, ${length})`;
+  });
+
+  translated = translated.replace(/substring\(([^,]+),\s*(\d+)\)/g, (match, field, start) => {
+    return `${field}.substring(${start})`;
+  });
+
+  // replace with 3 arguments
+  translated = translated.replace(/replace\(([^,]+),\s*"([^"]+)",\s*"([^"]+)"\)/g, (match, field, find, replaceWith) => {
+    return `${field}.replace("${find}", "${replaceWith}")`;
+  });
+
+  // String functions with no arguments
+  translated = translated.replace(/tolower\(([^)]+)\)/g, (match, field) => {
+    return `${field}.tolower()`;
+  });
+
+  translated = translated.replace(/toupper\(([^)]+)\)/g, (match, field) => {
+    return `${field}.toupper()`;
+  });
+
+  translated = translated.replace(/trim\(([^)]+)\)/g, (match, field) => {
+    return `${field}.trim()`;
+  });
+
+  translated = translated.replace(/length\(([^)]+)\)/g, (match, field) => {
+    return `${field}.length()`;
+  });
+
+  // Date/time functions
+  translated = translated.replace(/year\(([^)]+)\)/g, (match, field) => {
+    return `${field}.year()`;
+  });
+
+  translated = translated.replace(/month\(([^)]+)\)/g, (match, field) => {
+    return `${field}.month()`;
+  });
+
+  translated = translated.replace(/day\(([^)]+)\)/g, (match, field) => {
+    return `${field}.day()`;
+  });
+
+  translated = translated.replace(/hour\(([^)]+)\)/g, (match, field) => {
+    return `${field}.hour()`;
+  });
+
+  translated = translated.replace(/minute\(([^)]+)\)/g, (match, field) => {
+    return `${field}.minute()`;
+  });
+
+  translated = translated.replace(/second\(([^)]+)\)/g, (match, field) => {
+    return `${field}.second()`;
+  });
+
+  // Math functions
+  translated = translated.replace(/round\(([^)]+)\)/g, (match, field) => {
+    return `${field}.round()`;
+  });
+
+  translated = translated.replace(/floor\(([^)]+)\)/g, (match, field) => {
+    return `${field}.floor()`;
+  });
+
+  translated = translated.replace(/ceiling\(([^)]+)\)/g, (match, field) => {
+    return `${field}.ceiling()`;
+  });
+
+  // Step 5: Replace operators BUT preserve for wrapping
+  // First, mark where 'and' and 'or' are so we know to wrap
+  const hasLogicalOps = / and | or /.test(translated);
+
   const operatorReplacements = [
     [/ eq /g, ' == '],
     [/ ne /g, ' != '],
@@ -377,11 +411,7 @@ const translateFilter = () => {
     [/ ge /g, ' >= '],
     [/ lt /g, ' < '],
     [/ le /g, ' <= '],
-    [/ and /g, ' & '],
-    [/ or /g, ' | '],
-    [/^not\s+/g, '~'],
-    [/\s+not\s+/g, ' ~'],
-    
+
     // Arithmetic operators
     [/ add /g, ' + '],
     [/ sub /g, ' - '],
@@ -389,23 +419,43 @@ const translateFilter = () => {
     [/ div /g, ' / '],
     [/ mod /g, ' % ']
   ];
-  
+
   operatorReplacements.forEach(([pattern, replacement]) => {
     translated = translated.replace(pattern, replacement);
   });
-  
-  // Handle field references - add F. prefix to unquoted identifiers
-  translated = translated.replace(/(?<![F.])\b([A-Z][a-zA-Z0-9_]*)\b(?!\s*\()/g, 'F.$1');
-  
-  // Convert string literals from single to double quotes
-  translated = translated.replace(/'([^']*)'/g, '"$1"');
-  
-  // Handle null
-  translated = translated.replace(/\bnull\b/g, 'None');
-  
+
+  // Step 6: Add F. prefix to field names
+  translated = translated.replace(/(?<![\w.])([A-Z][a-zA-Z0-9_]*)(?![\w(])/g, 'F.$1');
+
   // Clean up any double F. prefixes
   translated = translated.replace(/F\.F\./g, 'F.');
-  
+
+  // Step 7: NOW replace logical operators and wrap comparison expressions
+  if (hasLogicalOps) {
+    // Split by 'and' and 'or' while preserving the operators
+    const parts = translated.split(/( and | or )/);
+
+    for (let i = 0; i < parts.length; i++) {
+      const part = parts[i].trim();
+
+      // If this part contains a comparison operator and isn't already wrapped
+      if ((part.includes('==') || part.includes('!=') || part.includes('>') ||
+        part.includes('<') || part.includes('>=') || part.includes('<=')) &&
+        !part.startsWith('(')) {
+        parts[i] = `(${part})`;
+      }
+    }
+
+    translated = parts.join('');
+  }
+
+  // Replace logical operators AFTER wrapping
+  translated = translated.replace(/ and /g, ' & ');
+  translated = translated.replace(/ or /g, ' | ');
+  translated = translated.replace(/^not\s+\(/g, '~(');
+  translated = translated.replace(/\(\s*not\s+\(/g, '(~(');
+  translated = translated.replace(/ not\s+\(/g, ' ~(');
+
   pythonOutput.value = translated;
 };
 
@@ -419,10 +469,10 @@ const copyPythonCode = async () => {
 };
 
 // Basic example
-const basicFilterExample = `from easy_acumatica import F
+const basicFilterExample = `from easy_acumatica.odata import F
 
 # Import the F factory
-from easy_acumatica import F
+from easy_acumatica.odata import F
 
 # Create simple filters
 active_filter = F.Status == "Active"
@@ -432,7 +482,7 @@ high_value_filter = F.Amount > 1000
 combined_filter = (F.Status == "Active") & (F.Amount > 1000)
 
 # Use the filter with QueryOptions
-from easy_acumatica import QueryOptions
+from easy_acumatica.odata import QueryOptions
 
 options = QueryOptions(filter=combined_filter)
 results = client.customers.get_list(options)`;
@@ -443,7 +493,7 @@ const filterExamples = ref([
     title: 'Basic Comparisons',
     icon: 'mdi-compare',
     color: 'primary',
-    description: 'Use standard Python operators for comparisons',
+    description: 'Standard comparison operators',
     code: `# Equality
 filter = F.CustomerID == "ABCDE"
 
@@ -461,7 +511,7 @@ filter = F.Description != None`
     title: 'Logical Operations',
     icon: 'mdi-brain',
     color: 'success',
-    description: 'Combine filters with &, |, and ~',
+    description: 'Logical AND (&), OR (|), NOT (~)',
     code: `# AND operation
 filter = (F.Status == "Active") & (F.Balance > 0)
 
@@ -481,7 +531,7 @@ filter = (
     title: 'String Functions',
     icon: 'mdi-format-text',
     color: 'info',
-    description: 'Built-in string manipulation functions',
+    description: 'String operations',
     code: `# String matching
 filter = F.CustomerName.startswith("ABC")
 filter = F.Email.endswith("@company.com")
@@ -499,7 +549,7 @@ filter = F.Code.trim().length() == 5`
     title: 'Date Functions',
     icon: 'mdi-calendar',
     color: 'warning',
-    description: 'Extract date components for filtering',
+    description: 'Date component extraction',
     code: `# Date component extraction
 filter = F.CreatedDate.year() == 2024
 filter = F.DueDate.month() == 12
@@ -516,7 +566,7 @@ filter = F.Timestamp.minute() == 0`
     title: 'Arithmetic Operations',
     icon: 'mdi-calculator',
     color: 'purple',
-    description: 'Perform calculations in filters',
+    description: 'Arithmetic operations in filters',
     code: `# Basic arithmetic
 filter = (F.Price * F.Quantity) > 1000
 filter = (F.Total - F.Discount) >= 500
@@ -532,7 +582,7 @@ filter = ((F.Price * 1.1) + F.Tax) <= F.MaxPrice`
     title: 'List Operations (v4)',
     icon: 'mdi-format-list-checks',
     color: 'teal',
-    description: 'Check if value is in a list',
+    description: 'Check membership in list (OData v4)',
     code: `# In operator (OData v4 only)
 filter = F.Status.in_(["Active", "Pending", "Processing"])
 filter = F.CustomerClass.in_(["WHOLESALE", "RETAIL"])
@@ -548,7 +598,7 @@ const advancedFeatures = ref([
   {
     title: 'Custom Fields',
     icon: 'mdi-puzzle',
-    description: 'Access custom fields using the cf() method',
+    description: 'Custom field access',
     code: `# Access a custom field
 filter = F.cf("String", "ItemSettings", "UsrRepairType") == "Warranty"
 
@@ -565,7 +615,7 @@ filter = (
   {
     title: 'Nested Properties',
     icon: 'mdi-file-tree',
-    description: 'Access properties through relationships',
+    description: 'Navigate related entity properties',
     code: `# Access nested properties
 filter = F.Customer.CustomerClass == "WHOLESALE"
 filter = F.MainContact.Email.endswith("@company.com")
@@ -580,7 +630,7 @@ filter = F.Customer.Balance > 1000`,
   {
     title: 'Complex Expressions',
     icon: 'mdi-code-braces',
-    description: 'Build sophisticated filter expressions',
+    description: 'Complex multi-condition filters',
     code: `# Multi-level conditions with proper parentheses
 filter = (
     ((F.CustomerClass == "WHOLESALE") | (F.CustomerClass == "RETAIL")) &
@@ -602,7 +652,7 @@ filter = (
   {
     title: 'Special Characters',
     icon: 'mdi-format-quote-close',
-    description: 'Handle special characters in string values',
+    description: 'Special character handling',
     code: `# Single quotes in strings are automatically escaped
 filter = F.CustomerName == "O'Brien's Company"
 
@@ -646,19 +696,19 @@ const apiReference = ref([
   { python: 'F.Field >= value', odata: 'Field ge value', desc: 'Greater or equal', version: 'v3+' },
   { python: 'F.Field < value', odata: 'Field lt value', desc: 'Less than', version: 'v3+' },
   { python: 'F.Field <= value', odata: 'Field le value', desc: 'Less or equal', version: 'v3+' },
-  
+
   // Logical operators
   { python: 'filter1 & filter2', odata: 'filter1 and filter2', desc: 'Logical AND', version: 'v3+' },
   { python: 'filter1 | filter2', odata: 'filter1 or filter2', desc: 'Logical OR', version: 'v3+' },
   { python: '~filter', odata: 'not filter', desc: 'Logical NOT', version: 'v3+' },
-  
+
   // Arithmetic operators
   { python: 'F.Field + value', odata: 'Field add value', desc: 'Addition', version: 'v3+' },
   { python: 'F.Field - value', odata: 'Field sub value', desc: 'Subtraction', version: 'v3+' },
   { python: 'F.Field * value', odata: 'Field mul value', desc: 'Multiplication', version: 'v3+' },
   { python: 'F.Field / value', odata: 'Field div value', desc: 'Division', version: 'v3+' },
   { python: 'F.Field % value', odata: 'Field mod value', desc: 'Modulo', version: 'v3+' },
-  
+
   // String functions
   { python: 'F.Field.startswith("val")', odata: 'startswith(Field, \'val\')', desc: 'String starts with', version: 'v3+' },
   { python: 'F.Field.endswith("val")', odata: 'endswith(Field, \'val\')', desc: 'String ends with', version: 'v3+' },
@@ -671,7 +721,7 @@ const apiReference = ref([
   { python: 'F.Field.toupper()', odata: 'toupper(Field)', desc: 'Convert to uppercase', version: 'v3+' },
   { python: 'F.Field.trim()', odata: 'trim(Field)', desc: 'Remove whitespace', version: 'v3+' },
   { python: 'F.Field.replace("a", "b")', odata: 'replace(Field, \'a\', \'b\')', desc: 'Replace substring', version: 'v4' },
-  
+
   // Date functions
   { python: 'F.Date.year()', odata: 'year(Date)', desc: 'Extract year', version: 'v3+' },
   { python: 'F.Date.month()', odata: 'month(Date)', desc: 'Extract month', version: 'v3+' },
@@ -679,7 +729,7 @@ const apiReference = ref([
   { python: 'F.Time.hour()', odata: 'hour(Time)', desc: 'Extract hour', version: 'v3+' },
   { python: 'F.Time.minute()', odata: 'minute(Time)', desc: 'Extract minute', version: 'v3+' },
   { python: 'F.Time.second()', odata: 'second(Time)', desc: 'Extract second', version: 'v3+' },
-  
+
   // Other
   { python: 'F.Field.in_([1,2,3])', odata: 'Field in (1,2,3)', desc: 'Value in list', version: 'v4' },
   { python: 'F.cf("Type", "View", "Field")', odata: 'cf.Type(f=\'View.Field\')', desc: 'Custom field', version: 'v3+' }
@@ -738,16 +788,48 @@ useSeoMeta({
   animation: float-symbol 20s ease-in-out infinite;
 }
 
-.symbol-1 { top: 20%; left: 10%; animation-delay: 0s; }
-.symbol-2 { top: 60%; right: 15%; animation-delay: 5s; }
-.symbol-3 { bottom: 30%; left: 60%; animation-delay: 10s; }
-.symbol-4 { top: 40%; right: 40%; animation-delay: 15s; }
+.symbol-1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.symbol-2 {
+  top: 60%;
+  right: 15%;
+  animation-delay: 5s;
+}
+
+.symbol-3 {
+  bottom: 30%;
+  left: 60%;
+  animation-delay: 10s;
+}
+
+.symbol-4 {
+  top: 40%;
+  right: 40%;
+  animation-delay: 15s;
+}
 
 @keyframes float-symbol {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-20px) rotate(10deg); }
-  50% { transform: translateY(0) rotate(-10deg); }
-  75% { transform: translateY(20px) rotate(5deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(-10deg);
+  }
+
+  75% {
+    transform: translateY(20px) rotate(5deg);
+  }
 }
 
 .hero-content {
@@ -791,7 +873,8 @@ useSeoMeta({
   gap: 2rem;
 }
 
-.demo-python, .demo-odata {
+.demo-python,
+.demo-odata {
   text-align: center;
 }
 
@@ -803,7 +886,8 @@ useSeoMeta({
   font-weight: 500;
 }
 
-.demo-python code, .demo-odata code {
+.demo-python code,
+.demo-odata code {
   font-size: 1.25rem;
   color: white;
   font-family: 'Fira Code', monospace;
@@ -820,8 +904,15 @@ useSeoMeta({
 }
 
 @keyframes pulse-arrow {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(5px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
 }
 
 /* Translator Section */
@@ -860,11 +951,13 @@ useSeoMeta({
   font-size: 1.1rem;
 }
 
-.translator-input, .translator-output {
+.translator-input,
+.translator-output {
   height: 100%;
 }
 
-.input-label, .output-label {
+.input-label,
+.output-label {
   display: block;
   font-weight: 600;
   color: #333;
@@ -1014,23 +1107,30 @@ useSeoMeta({
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.25rem;
   }
-  
+
   .demo-transform {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .transform-arrow {
     transform: rotate(90deg);
   }
-  
+
   @keyframes pulse-arrow {
-    0%, 100% { transform: rotate(90deg) translateX(0); }
-    50% { transform: rotate(90deg) translateX(5px); }
+
+    0%,
+    100% {
+      transform: rotate(90deg) translateX(0);
+    }
+
+    50% {
+      transform: rotate(90deg) translateX(5px);
+    }
   }
 }
 </style>

@@ -8,78 +8,57 @@
         <v-col cols="12" md="4" class="mb-4">
           <h3 class="footer-title mb-3">Easy-Acumatica Python</h3>
           <p class="footer-text">
-            A dynamic API wrapper that adapts to your Acumatica instance. 
-            Version 0.4.8 introduces fully dynamic service and model generation.
+            Dynamic API wrapper for Acumatica ERP. Automatically generates services and models from your instance.
           </p>
           <div class="version-info mt-3">
             <v-chip size="small" variant="outlined" color="white">
-              v0.4.8
+              v0.5.4
             </v-chip>
             <v-chip size="small" variant="outlined" color="white" class="ml-2">
-              Python 3.7+
+              Python 3.8+
             </v-chip>
           </div>
         </v-col>
 
         <!-- Quick Links -->
         <v-col cols="12" sm="6" md="2" class="mb-4">
-          <h4 class="footer-subtitle mb-3">Documentation</h4>
+          <h4 class="footer-subtitle mb-3">Getting Started</h4>
           <ul class="footer-links">
+            <li><a href="/python/installation">Installation</a></li>
             <li><a href="/python/quickstart">Quickstart</a></li>
             <li><a href="/python/client">Client Guide</a></li>
-            <li><a href="/python/service-factory">Services</a></li>
-            <li><a href="/python/model-factory">Models</a></li>
+            <li><a href="/python/migration">Migration</a></li>
           </ul>
         </v-col>
 
-        <!-- Resources -->
+        <!-- Core Concepts -->
         <v-col cols="12" sm="6" md="2" class="mb-4">
-          <h4 class="footer-subtitle mb-3">Resources</h4>
+          <h4 class="footer-subtitle mb-3">Core Concepts</h4>
           <ul class="footer-links">
-            <li><a href="/python/examples">Examples</a></li>
-            <li><a href="/python/migration">Migration Guide</a></li>
-            <li><a href="/python/changelog">Changelog</a></li>
-            <li><a href="https://github.com/Nioron07/Easy-Acumatica/issues" target="_blank">Support</a></li>
+            <li><a href="/python/service-factory">Services</a></li>
+            <li><a href="/python/model-factory">Models</a></li>
+            <li><a href="/python/batching">Batching</a></li>
+            <li><a href="/python/task-scheduler">Scheduler</a></li>
           </ul>
         </v-col>
 
         <!-- Community -->
         <v-col cols="12" md="4" class="mb-4">
-          <h4 class="footer-subtitle mb-3">Community & Support</h4>
+          <h4 class="footer-subtitle mb-3">Community</h4>
           <p class="footer-text mb-3">
-            Join our community and get help with your integration projects.
+            Open source and community-driven. Contributions welcome.
           </p>
           <div class="social-links">
-            <v-btn
-              icon
-              variant="outlined"
-              color="white"
-              size="small"
-              href="https://github.com/Nioron07/Easy-Acumatica"
-              target="_blank"
-            >
+            <v-btn icon variant="outlined" color="white" size="small" href="https://github.com/Nioron07/Easy-Acumatica"
+              target="_blank">
               <v-icon>mdi-github</v-icon>
             </v-btn>
-            <v-btn
-              icon
-              variant="outlined"
-              color="white"
-              size="small"
-              href="https://pypi.org/project/easy-acumatica/"
-              target="_blank"
-              class="ml-2"
-            >
+            <v-btn icon variant="outlined" color="white" size="small" href="https://pypi.org/project/easy-acumatica/"
+              target="_blank" class="ml-2">
               <v-icon>mdi-package-variant</v-icon>
             </v-btn>
-            <v-btn
-              icon
-              variant="outlined"
-              color="white"
-              size="small"
-              href="https://github.com/Nioron07/Easy-Acumatica/discussions"
-              target="_blank"
-              class="ml-2"
-            >
+            <v-btn icon variant="outlined" color="white" size="small"
+              href="https://github.com/Nioron07/Easy-Acumatica/discussions" target="_blank" class="ml-2">
               <v-icon>mdi-forum</v-icon>
             </v-btn>
           </div>
@@ -193,7 +172,7 @@
   .footer-content {
     padding: 2rem 0 1rem;
   }
-  
+
   .footer-title {
     font-size: 1.25rem;
   }

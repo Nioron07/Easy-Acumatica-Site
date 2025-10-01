@@ -18,17 +18,15 @@
           </div>
           
           <h1 class="hero-title">
-            <span class="gradient-text">Adapt.</span>
-            <span class="gradient-text-2">Evolve.</span>
-            <span class="gradient-text-3">Integrate.</span>
+            Easy-Acumatica
           </h1>
-          
+
           <p class="hero-subtitle">
-            The intelligent API wrapper that morphs to your Acumatica instance
+            API client libraries for Acumatica ERP
           </p>
-          
+
           <div class="hero-description">
-            <p>Easy-Acumatica isn't just another integration tool—it's a living, breathing extension of your ERP that grows with your business.</p>
+            <p>Python and Node.js libraries that provide type-safe wrappers around the Acumatica REST API with automatic schema discovery and OData query support.</p>
           </div>
 
           <v-row justify="center" class="mt-12 hero-buttons">
@@ -79,10 +77,10 @@
       <v-row justify="center">
         <v-col cols="12" md="10" class="text-center">
           <h2 class="section-title mb-4">
-            <span class="gradient-text">Living Integration</span>
+            <span class="gradient-text">Key Features</span>
           </h2>
           <p class="section-subtitle mb-12">
-            Your Acumatica instance is unique. Your integration should be too.
+            Built to handle the complexities of Acumatica API integration
           </p>
         </v-col>
       </v-row>
@@ -116,7 +114,7 @@
       <v-row justify="center" class="position-relative">
         <v-col cols="12" md="10" class="text-center">
           <h2 class="section-title mb-12">
-            <span class="gradient-text-2">Intelligent Flexibility</span>
+            <span class="gradient-text-2">Technical Capabilities</span>
           </h2>
           
           <v-row>
@@ -145,7 +143,7 @@
       <v-row justify="center">
         <v-col cols="12" md="10">
           <h2 class="section-title text-center mb-12">
-            <span class="gradient-text-3">Why Easy-Acumatica?</span>
+            <span class="gradient-text-3">Benefits</span>
           </h2>
           
           <div class="benefits-container">
@@ -172,10 +170,10 @@
       <v-row justify="center" class="position-relative">
         <v-col cols="12" md="10" class="text-center">
           <h2 class="section-title mb-4">
-            <span class="gradient-text">Built for Modern Development</span>
+            <span class="gradient-text">Available Languages</span>
           </h2>
           <p class="section-subtitle mb-12">
-            Choose your platform. We speak your language.
+            Python and Node.js implementations with language-specific features
           </p>
           
           <v-row justify="center">
@@ -184,10 +182,10 @@
                 <v-icon icon="mdi-language-python" size="80" class="mb-4"></v-icon>
                 <h3 class="text-h4 font-weight-bold mb-4">Python</h3>
                 <ul class="tech-features">
-                  <li>Type-safe with full hints</li>
-                  <li>Async support</li>
-                  <li>Pythonic API design</li>
-                  <li>Comprehensive error handling</li>
+                  <li>Dataclass-based models</li>
+                  <li>Automatic .env file loading</li>
+                  <li>Differential caching</li>
+                  <li>Built-in task scheduler</li>
                 </ul>
                 <v-btn
                   color="white"
@@ -239,14 +237,14 @@
       <v-row justify="center" class="position-relative">
         <v-col cols="12" md="8" class="text-center">
           <h2 class="cta-title mb-6">
-            Ready to transform your Acumatica integration?
+            Get Started
           </h2>
           <p class="cta-subtitle mb-8">
-            Join developers who are building smarter, more adaptive integrations.
+            View the source code, report issues, or contribute on GitHub
           </p>
-          
-          <v-row justify="center">
-            <v-col cols="12" sm="auto" class="mb-3 mb-sm-0">
+
+          <v-row justify="center" class="github-buttons">
+            <v-col cols="12" sm="6" md="auto" class="mb-3">
               <v-btn
                 size="x-large"
                 color="white"
@@ -257,8 +255,23 @@
                 elevation="12"
                 block
               >
-                <v-icon start>mdi-github</v-icon>
-                View on GitHub
+                <v-icon start>mdi-language-python</v-icon>
+                Python on GitHub
+              </v-btn>
+            </v-col>
+            <v-col cols="12" sm="6" md="auto" class="mb-3">
+              <v-btn
+                size="x-large"
+                color="white"
+                rounded="pill"
+                class="cta-btn"
+                href="https://github.com/joebewon/Easy-Acumatica"
+                target="_blank"
+                elevation="12"
+                block
+              >
+                <v-icon start>mdi-npm</v-icon>
+                NPM on GitHub
               </v-btn>
             </v-col>
           </v-row>
@@ -310,61 +323,61 @@ useSchemaOrg([
 // Page Content Data
 const adaptationFeatures = ref([
   {
-    icon: 'mdi-dna',
-    title: 'Self-Discovering',
-    description: 'Automatically detects and adapts to your custom fields, endpoints, and configurations.'
+    icon: 'mdi-api',
+    title: 'Schema Discovery',
+    description: 'Fetches OpenAPI schema from your Acumatica instance and generates models and services dynamically, including custom fields.'
   },
   {
-    icon: 'mdi-resize',
-    title: 'Elastic Scaling',
-    description: 'Grows with your business, supporting new modules and entities as you add them.'
+    icon: 'mdi-shield-check',
+    title: 'Type Safety',
+    description: 'Generates type hints and TypeScript definitions based on your actual schema for IDE autocomplete and type checking.'
   },
   {
-    icon: 'mdi-puzzle-outline',
-    title: 'Perfect Fit',
-    description: 'Molds itself to your unique Acumatica setup, no rigid structures or assumptions.'
+    icon: 'mdi-cached',
+    title: 'Intelligent Caching',
+    description: 'Differential caching system that only rebuilds changed components, reducing initialization time by 10-20x.'
   },
   {
     icon: 'mdi-sync',
-    title: 'Always Current',
-    description: 'Stays synchronized with your instance changes, no manual updates needed.'
+    title: 'Session Management',
+    description: 'Handles authentication, automatic re-login on timeout, connection pooling, and retry logic for reliable API access.'
   }
 ]);
 
 const morphingCapabilities = ref([
   {
-    icon: 'mdi-shape-outline',
-    title: 'Dynamic Typing',
-    description: 'Intelligent type inference that adapts to your custom fields and entities in real-time.'
+    icon: 'mdi-filter',
+    title: 'OData Queries',
+    description: 'Python-style filter expressions using operator overloading that compile to OData query strings. Supports filtering, sorting, pagination, and field selection.'
   },
   {
-    icon: 'mdi-api',
-    title: 'Smart Endpoints',
-    description: 'Discovers and utilizes new API endpoints as they become available in your instance.'
+    icon: 'mdi-file-upload',
+    title: 'File Operations',
+    description: 'Methods for uploading, downloading, and managing file attachments on any entity that supports them.'
   },
   {
-    icon: 'mdi-brain',
-    title: 'Context Aware',
-    description: 'Understands your business logic and provides relevant methods and helpers automatically.'
+    icon: 'mdi-clock-outline',
+    title: 'Task Scheduling',
+    description: 'Built-in scheduler for running periodic background tasks with interval or cron-based scheduling (Python only).'
   }
 ]);
 
 const benefits = ref([
   {
-    title: 'Zero Configuration Overhead',
-    description: 'Start integrating immediately. Easy-Acumatica learns your setup on the fly, eliminating complex configuration files.'
+    title: 'No Manual Schema Maintenance',
+    description: 'Schema is fetched from your instance at runtime. When you add custom fields or endpoints, they are automatically available without code changes.'
   },
   {
-    title: 'Future-Proof Architecture',
-    description: 'As Acumatica evolves, so does your integration. No breaking changes, just seamless adaptation.'
+    title: 'Reduced Boilerplate',
+    description: 'Generated models and services eliminate the need to manually define data structures and API calls for each endpoint.'
   },
   {
-    title: 'Developer Experience First',
-    description: 'Intuitive APIs, comprehensive type hints, and intelligent error messages make development a breeze.'
+    title: 'IDE Support',
+    description: 'Type hints and auto-generated documentation provide autocomplete, inline documentation, and type checking in your editor.'
   },
   {
-    title: 'Enterprise-Grade Reliability',
-    description: 'Battle-tested session management, automatic retries, and robust error handling for production use.'
+    title: 'Production Ready',
+    description: 'Includes session management, connection pooling, automatic retries, rate limiting, and detailed exception classes for error handling.'
   }
 ]);
 // Add scroll animations
@@ -845,6 +858,10 @@ onMounted(() => {
   background: white !important;
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+.github-buttons {
+  gap: 1rem;
 }
 
 /* Responsive */

@@ -19,10 +19,10 @@
               Query Options
             </h1>
             <p class="hero-subtitle">
-              Build powerful OData queries with a clean, type-safe API
+              Type-safe OData query construction
             </p>
             <div class="code-preview">
-              <pre><code class="language-python">from easy_acumatica import QueryOptions, F
+              <pre><code class="language-python">from easy_acumatica.odata import QueryOptions, F
 
 options = QueryOptions(
     filter=F.Amount > 1000,
@@ -50,14 +50,12 @@ options = QueryOptions(
                   <h3 class="text-h5 font-weight-bold">Overview</h3>
                 </div>
                 <p class="text-body-1">
-                  The <code class="inline-code">QueryOptions</code> class provides a clean, type-safe way to build 
-                  OData queries for the Acumatica REST API. It handles all the complex URL encoding and parameter 
-                  formatting, letting you focus on your business logic.
+                  <code class="inline-code">QueryOptions</code> builds OData queries for the Acumatica REST API.
+                  Handles URL encoding and parameter formatting.
                 </p>
-                
+
                 <v-alert type="info" variant="tonal" class="mt-4">
-                  <strong>Pro tip:</strong> QueryOptions works seamlessly with the F factory for building filters. 
-                  All parameters are optional and can be combined as needed.
+                  All parameters are optional. Use with the F factory for filter construction.
                 </v-alert>
               </v-card-text>
             </v-card>
@@ -68,7 +66,7 @@ options = QueryOptions(
       <!-- Quick Start Examples -->
       <section class="content-section">
         <h2 class="section-title">Quick Start Examples</h2>
-        
+
         <v-row>
           <v-col cols="12">
             <v-tabs v-model="quickStartTab" class="mb-4">
@@ -79,24 +77,15 @@ options = QueryOptions(
 
             <v-tabs-window v-model="quickStartTab">
               <v-tabs-window-item value="simple">
-                <CodeSnippet
-                  :code="simpleQueryExample"
-                  language="python"
-                />
+                <CodeSnippet :code="simpleQueryExample" language="python" />
               </v-tabs-window-item>
 
               <v-tabs-window-item value="filtered">
-                <CodeSnippet
-                  :code="filteredQueryExample"
-                  language="python"
-                />
+                <CodeSnippet :code="filteredQueryExample" language="python" />
               </v-tabs-window-item>
 
               <v-tabs-window-item value="complex">
-                <CodeSnippet
-                  :code="complexQueryExample"
-                  language="python"
-                />
+                <CodeSnippet :code="complexQueryExample" language="python" />
               </v-tabs-window-item>
             </v-tabs-window>
           </v-col>
@@ -106,11 +95,11 @@ options = QueryOptions(
       <!-- Parameters Reference -->
       <section class="content-section">
         <h2 class="section-title">Parameters Reference</h2>
-        
+
         <v-card>
           <v-card-text>
             <p class="mb-4">All QueryOptions parameters with examples:</p>
-            
+
             <v-expansion-panels variant="accordion">
               <v-expansion-panel v-for="param in allParameters" :key="param.name">
                 <v-expansion-panel-title>
@@ -124,10 +113,7 @@ options = QueryOptions(
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
                   <p class="mb-3">{{ param.description }}</p>
-                  <CodeSnippet
-                    :code="param.example"
-                    language="python"
-                  />
+                  <CodeSnippet :code="param.example" language="python" />
                   <v-alert v-if="param.note" type="info" variant="tonal" class="mt-3">
                     {{ param.note }}
                   </v-alert>
@@ -141,7 +127,7 @@ options = QueryOptions(
       <!-- Advanced Usage Patterns -->
       <section class="content-section">
         <h2 class="section-title">Advanced Usage Patterns</h2>
-        
+
         <v-row>
           <v-col v-for="pattern in advancedPatterns" :key="pattern.title" cols="12">
             <v-card class="pattern-card">
@@ -151,10 +137,7 @@ options = QueryOptions(
               </v-card-title>
               <v-card-subtitle>{{ pattern.description }}</v-card-subtitle>
               <v-card-text>
-                <CodeSnippet
-                  :code="pattern.code"
-                  language="python"
-                />
+                <CodeSnippet :code="pattern.code" language="python" />
                 <v-alert v-if="pattern.warning" type="warning" variant="tonal" class="mt-4">
                   <strong>Warning:</strong> {{ pattern.warning }}
                 </v-alert>
@@ -167,11 +150,11 @@ options = QueryOptions(
       <!-- QueryOptions Methods -->
       <section class="content-section">
         <h2 class="section-title">QueryOptions Methods</h2>
-        
+
         <v-card>
           <v-card-text>
             <p class="mb-4">Available methods on QueryOptions instances:</p>
-            
+
             <v-table>
               <thead>
                 <tr>
@@ -197,7 +180,7 @@ options = QueryOptions(
       <!-- Filter Functions Reference -->
       <section class="content-section">
         <h2 class="section-title">Filter Functions Reference</h2>
-        
+
         <v-card>
           <v-card-text>
             <div class="d-flex align-center mb-4">
@@ -210,25 +193,16 @@ options = QueryOptions(
                 </p>
               </div>
             </div>
-            
-            <v-btn
-              color="primary"
-              variant="flat"
-              size="large"
-              to="/python/odata/filters"
-              class="text-none"
-            >
+
+            <v-btn color="primary" variant="flat" size="large" to="/python/odata/filters" class="text-none">
               <v-icon start>mdi-book-open-variant</v-icon>
               View Complete Filter Reference
             </v-btn>
-            
+
             <v-divider class="my-4"></v-divider>
-            
+
             <h4 class="mb-3">Quick Examples</h4>
-            <CodeSnippet
-              :code="filterQuickExamples"
-              language="python"
-            />
+            <CodeSnippet :code="filterQuickExamples" language="python" />
           </v-card-text>
         </v-card>
       </section>
@@ -240,14 +214,7 @@ options = QueryOptions(
             <h2 class="text-h4 font-weight-bold mb-4">Next Steps</h2>
             <v-row>
               <v-col>
-                <v-btn
-                  size="large"
-                  color="primary"
-                  variant="flat"
-                  block
-                  to="/python/odata/filters"
-                  class="text-none"
-                >
+                <v-btn size="large" color="primary" variant="flat" block to="/python/odata/filters" class="text-none">
                   <v-icon start>mdi-filter</v-icon>
                   Learn About Filters
                 </v-btn>
@@ -271,7 +238,7 @@ import CodeSnippet from '~/components/CodeSnippet.vue';
 const quickStartTab = ref('simple');
 
 // Example code
-const simpleQueryExample = `from easy_acumatica import QueryOptions
+const simpleQueryExample = `from easy_acumatica.odata import QueryOptions
 
 # Get top 10 customers
 options = QueryOptions(top=10)
@@ -283,7 +250,7 @@ options = QueryOptions(
 )
 customers = client.customers.get_list(options)`;
 
-const filteredQueryExample = `from easy_acumatica import QueryOptions, F
+const filteredQueryExample = `from easy_acumatica.odata import QueryOptions, F
 
 # Filter active customers with balance > 1000
 options = QueryOptions(
@@ -303,7 +270,7 @@ options = QueryOptions(
     select=["CustomerID", "CustomerName", "Email", "Balance"]
 )`;
 
-const complexQueryExample = `from easy_acumatica import QueryOptions, F, CustomField
+const complexQueryExample = `from easy_acumatica.odata import QueryOptions, F, CustomField
 
 # Complex query with all features
 options = QueryOptions(
@@ -474,7 +441,7 @@ options = QueryOptions(
     type: 'List[CustomField | str]',
     required: false,
     description: 'List of custom fields to include in the response.',
-    example: `from easy_acumatica import CustomField
+    example: `from easy_acumatica.odata import CustomField
 
 # Single custom field
 options = QueryOptions(
@@ -816,7 +783,7 @@ const queryOptionsMethods = ref([
 ]);
 
 // Filter quick examples
-const filterQuickExamples = `from easy_acumatica import QueryOptions, F
+const filterQuickExamples = `from easy_acumatica.odata import QueryOptions, F
 
 # Basic comparisons
 options = QueryOptions(filter=F.Status == "Active")
@@ -906,14 +873,33 @@ useSeoMeta({
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  33% { transform: translateY(-20px) translateX(10px); }
-  66% { transform: translateY(20px) translateX(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  33% {
+    transform: translateY(-20px) translateX(10px);
+  }
+
+  66% {
+    transform: translateY(20px) translateX(-10px);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.05; }
-  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.02; }
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.05;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.02;
+  }
 }
 
 .hero-content {
@@ -1073,16 +1059,16 @@ useSeoMeta({
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.25rem;
   }
-  
+
   .code-preview {
     max-width: 100%;
     overflow-x: auto;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
