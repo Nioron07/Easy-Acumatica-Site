@@ -327,6 +327,36 @@ import OnPageNav from '~/components/OnPageNav.vue';
 import ParameterTable from '../../components/ParameterTable.vue';
 import MethodPatternTable from '../../components/MethodPatternTable.vue';
 
+// SEO Configuration
+useSeoMeta({
+  title: 'AcumaticaClient Documentation | Easy-Acumatica Python',
+  description: 'Complete guide to AcumaticaClient class for Acumatica ERP integration. Learn about initialization, configuration, session management, and advanced features.',
+  ogTitle: 'AcumaticaClient API Reference - Easy-Acumatica Python',
+  ogDescription: 'Comprehensive documentation for the AcumaticaClient class including configuration, caching, OData support, and session management.',
+  ogType: 'article',
+  ogUrl: 'https://www.easyacumatica.com/python/client',
+  robots: 'index, follow',
+  keywords: 'AcumaticaClient, Python Acumatica client, session management, API configuration, OData filters, schema discovery'
+});
+
+useSchemaOrg([
+  {
+    '@type': 'TechArticle',
+    'headline': 'AcumaticaClient API Reference',
+    'description': 'Complete documentation for the AcumaticaClient class in Easy-Acumatica Python library',
+    'url': 'https://www.easyacumatica.com/python/client',
+    'author': {
+      '@type': 'Organization',
+      'name': 'Easy-Acumatica Team'
+    },
+    'about': {
+      '@type': 'SoftwareSourceCode',
+      'name': 'AcumaticaClient',
+      'programmingLanguage': 'Python'
+    }
+  }
+]);
+
 // State
 const sessionTab = ref('persistent');
 const odataTab = ref('filters');

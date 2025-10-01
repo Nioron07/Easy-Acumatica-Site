@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
-  
+
   // Add the @nuxtjs/seo module to the modules array
   modules: [
     'vuetify-nuxt-module',
@@ -15,29 +15,48 @@ export default defineNuxtConfig({
   site: {
     url: 'https://easyacumatica.com', // Replace with your production domain
     name: 'Easy-Acumatica Docs',
-    description: 'A lightweight wrapper for Acumatica’s contract-based REST API, available for Python and Node.js.',
+    description: 'A lightweight wrapper for Acumatica contract-based REST API, available for Python and Node.js.',
     defaultLocale: 'en',
   },
   gtag: {
-    id: 'G-CYQE1J3RH4' 
+    id: 'G-CYQE1J3RH4'
   },
-vuetify: {
+  vuetify: {
     // Correctly configure ssr as a boolean
-    ssr: true, 
+    ssr: true,
     // Move client hints to their own object
     ssrClientHints: {
       clientWidthHints: true,
     }
   },
-ogImage: {
+  ogImage: {
     defaults: {
-      component: 'OgImageTemplate', 
+      component: 'OgImageTemplate',
       width: 1280,
       height: 640,
     }
   },
   devtools: { enabled: true },
   nitro: {
-    preset: 'node-server' // Ensure this is set for Node.js server deployment
+    preset: 'node-server', // Ensure this is set for Node.js server deployment
+    prerender: {
+      crawlLinks: true,
+      routes: [
+        '/',
+        '/python',
+        '/python/quickstart',
+        '/python/installation',
+        '/python/client',
+        '/python/model-factory',
+        '/python/service-factory',
+        '/python/batching',
+        '/python/task-scheduler',
+        '/python/generic-inquiries',
+        '/python/migration',
+        '/python/odata/filters',
+        '/python/odata/queryoptions',
+        '/npm'
+      ]
+    }
   },
 })

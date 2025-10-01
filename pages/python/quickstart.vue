@@ -293,7 +293,43 @@ for order in completed_orders:
 useSeoMeta({
   title: 'Quickstart Guide | Easy-Acumatica Python',
   description: 'Get started with Easy-Acumatica v0.5.4. Learn basic CRUD operations, querying, and working with the Acumatica REST API.',
+  ogTitle: 'Easy-Acumatica Python Quickstart Guide',
+  ogDescription: 'Step-by-step guide to using Easy-Acumatica Python library for Acumatica ERP integration. CRUD operations, OData queries, and more.',
+  ogType: 'article',
+  ogUrl: 'https://www.easyacumatica.com/python/quickstart',
+  robots: 'index, follow',
+  keywords: 'Acumatica Python tutorial, Easy-Acumatica quickstart, Acumatica CRUD, OData tutorial, Python ERP integration'
 });
+
+useSchemaOrg([
+  {
+    '@type': 'HowTo',
+    'name': 'How to Get Started with Easy-Acumatica Python',
+    'description': 'Step-by-step guide to using Easy-Acumatica Python library for Acumatica ERP integration',
+    'step': [
+      {
+        '@type': 'HowToStep',
+        'name': 'Install Easy-Acumatica',
+        'text': 'Install the package using pip: pip install easy-acumatica'
+      },
+      {
+        '@type': 'HowToStep',
+        'name': 'Configure credentials',
+        'text': 'Create a .env file with your Acumatica credentials'
+      },
+      {
+        '@type': 'HowToStep',
+        'name': 'Initialize client',
+        'text': 'Create an AcumaticaClient instance to connect to your instance'
+      },
+      {
+        '@type': 'HowToStep',
+        'name': 'Perform CRUD operations',
+        'text': 'Use the dynamically generated services for create, read, update, and delete operations'
+      }
+    ]
+  }
+]);
 </script>
 
 <style scoped>

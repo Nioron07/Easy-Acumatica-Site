@@ -94,6 +94,33 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+// SEO Configuration
+useSeoMeta({
+  title: 'Easy-Acumatica Node.js Documentation | Coming Soon',
+  description: 'Node.js/TypeScript library for Acumatica ERP REST API. Documentation currently in development. Python library available now.',
+  ogTitle: 'Easy-Acumatica Node.js - Coming Soon',
+  ogDescription: 'Node.js and TypeScript support for Acumatica ERP REST API integration. Documentation under construction.',
+  ogType: 'website',
+  ogUrl: 'https://www.easyacumatica.com/npm',
+  robots: 'index, follow',
+  keywords: 'Acumatica Node.js, Acumatica TypeScript, Node.js ERP, npm package, Acumatica SDK'
+});
+
+useSchemaOrg([
+  {
+    '@type': 'SoftwareSourceCode',
+    'name': 'Easy-Acumatica Node.js',
+    'description': 'Node.js library for Acumatica ERP REST API (in development)',
+    'codeRepository': 'https://github.com/joebewon/Easy-Acumatica',
+    'programmingLanguage': 'JavaScript',
+    'runtimePlatform': 'Node.js',
+    'targetProduct': {
+      '@type': 'SoftwareApplication',
+      'name': 'Acumatica ERP'
+    }
+  }
+]);
 </script>
 
 <style scoped>

@@ -133,7 +133,26 @@ pip install -e .`;
 useSeoMeta({
   title: 'Installation | Easy-Acumatica Python',
   description: 'Install Easy-Acumatica Python package via pip. Requirements: Python 3.7+, Acumatica instance with REST API.',
+  ogTitle: 'Install Easy-Acumatica Python Library',
+  ogDescription: 'How to install Easy-Acumatica Python library for Acumatica ERP integration. Support for pip, virtual environments, and development installation.',
+  ogType: 'article',
+  ogUrl: 'https://www.easyacumatica.com/python/installation',
+  robots: 'index, follow',
+  keywords: 'pip install easy-acumatica, Python Acumatica library, install Acumatica SDK, Python ERP package'
 });
+
+useSchemaOrg([
+  {
+    '@type': 'TechArticle',
+    'headline': 'Easy-Acumatica Python Installation Guide',
+    'description': 'Complete installation instructions for Easy-Acumatica Python library',
+    'url': 'https://www.easyacumatica.com/python/installation',
+    'author': {
+      '@type': 'Organization',
+      'name': 'Easy-Acumatica Team'
+    }
+  }
+]);
 </script>
 
 <style scoped>

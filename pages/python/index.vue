@@ -335,15 +335,59 @@ import CodeSnippet from '~/components/CodeSnippet.vue';
 
 // SEO Configuration
 useSeoMeta({
-  title: 'Easy-Acumatica Python | Dynamic API Integration for Acumatica ERP',
-  description: 'The revolutionary Python library that automatically adapts to your Acumatica instance. Zero maintenance, full type safety, and complete API coverage including custom fields.',
-  ogTitle: 'Easy-Acumatica Python - Self-Adapting Acumatica Integration',
-  ogDescription: 'Discover the Python library that eliminates API maintenance forever. Dynamic service generation, full type hints, and automatic discovery of custom fields.',
+  title: 'Easy-Acumatica Python Library | Acumatica REST API Wrapper',
+  description: 'Python library for Acumatica ERP REST API with automatic schema discovery, type hints, OData support, and intelligent caching. Install with pip install easy-acumatica.',
+  ogTitle: 'Easy-Acumatica Python - Acumatica REST API Wrapper',
+  ogDescription: 'Python client for Acumatica ERP with automatic schema discovery, type-safe dataclasses, OData queries, and intelligent caching.',
+  ogType: 'website',
+  ogUrl: 'https://www.easyacumatica.com/python',
   ogImage: 'https://www.easyacumatica.com/social-images/python-home.png',
+  ogImageAlt: 'Easy-Acumatica Python Library',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Easy-Acumatica Python',
-  twitterDescription: 'The self-adapting Python library for Acumatica integration'
+  twitterTitle: 'Easy-Acumatica Python Library',
+  twitterDescription: 'Python REST API wrapper for Acumatica ERP with automatic schema discovery and OData support.',
+  twitterImage: 'https://www.easyacumatica.com/social-images/python-home.png',
+  robots: 'index, follow',
+  keywords: 'Acumatica Python, Acumatica API, Python ERP, REST API, OData Python, Schema Discovery, Type Hints, Acumatica SDK'
 });
+
+// Structured Data for SEO
+useSchemaOrg([
+  {
+    '@type': 'SoftwareSourceCode',
+    'name': 'Easy-Acumatica Python',
+    'description': 'Python library for Acumatica ERP REST API with automatic schema discovery and type safety',
+    'codeRepository': 'https://github.com/Nioron07/Easy-Acumatica',
+    'programmingLanguage': 'Python',
+    'runtimePlatform': 'Python 3.7+',
+    'version': '0.5.4',
+    'license': 'https://opensource.org/licenses/MIT',
+    'targetProduct': {
+      '@type': 'SoftwareApplication',
+      'name': 'Acumatica ERP'
+    }
+  },
+  {
+    '@type': 'TechArticle',
+    'headline': 'Easy-Acumatica Python Documentation',
+    'description': 'Complete guide to using Easy-Acumatica Python library for Acumatica ERP integration',
+    'url': 'https://www.easyacumatica.com/python',
+    'datePublished': '2024-01-01',
+    'dateModified': '2024-12-01',
+    'author': {
+      '@type': 'Organization',
+      'name': 'Easy-Acumatica Team'
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'Easy-Acumatica',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://www.easyacumatica.com/assets/LargeEasyAcumaticaLogo.webp'
+      }
+    }
+  }
+]);
 
 // Data
 const activeTab = ref('dynamic');

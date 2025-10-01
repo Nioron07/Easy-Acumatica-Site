@@ -292,15 +292,22 @@ definePageMeta({
 
 // SEO Configuration
 useSeoMeta({
-  title: 'Easy-Acumatica | Adaptive API Integration for Acumatica ERP',
-  description: 'The intelligent API wrapper that morphs to your Acumatica instance. Available for Python and Node.js. Simplify session management, OData queries, and seamlessly adapt to your ERP configuration.',
-  ogTitle: 'Easy-Acumatica - The Living API Integration',
-  ogDescription: 'Transform your Acumatica ERP integration with an API wrapper that grows with your business. Smart, adaptive, and available for Python and Node.js.',
+  title: 'Easy-Acumatica | Python & Node.js API Wrapper for Acumatica ERP',
+  description: 'Type-safe API client libraries for Acumatica ERP with automatic schema discovery, OData queries, and intelligent caching. Available for Python and Node.js.',
+  ogTitle: 'Easy-Acumatica - API Wrapper for Acumatica ERP',
+  ogDescription: 'Type-safe Python and Node.js libraries for Acumatica REST API. Features automatic schema discovery, OData support, and intelligent caching.',
+  ogType: 'website',
+  ogUrl: 'https://www.easyacumatica.com',
   ogImage: 'https://www.easyacumatica.com/social-images/home.png',
+  ogImageAlt: 'Easy-Acumatica Logo',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Easy-Acumatica: Adaptive ERP Integration',
-  twitterDescription: 'The API wrapper that morphs to your Acumatica instance. Python & Node.js support.',
+  twitterTitle: 'Easy-Acumatica: Python & Node.js API Wrapper for Acumatica',
+  twitterDescription: 'Type-safe API clients for Acumatica ERP with automatic schema discovery and OData support.',
   twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
+  twitterSite: '@easyacumatica',
+  robots: 'index, follow',
+  author: 'Easy-Acumatica Team',
+  keywords: 'Acumatica, API, Python, Node.js, ERP, REST API, OData, Schema Discovery, Type Safety, API Wrapper'
 });
 
 // Structured Data for SEO
@@ -315,8 +322,45 @@ useSchemaOrg([
       'price': '0',
       'priceCurrency': 'USD'
     },
-    'description': 'Adaptive API wrapper for Acumatica ERP integration',
-    'url': 'https://www.easyacumatica.com'
+    'description': 'Type-safe API client libraries for Acumatica ERP with automatic schema discovery, OData queries, and intelligent caching',
+    'url': 'https://www.easyacumatica.com',
+    'softwareVersion': '0.5.4',
+    'programmingLanguage': ['Python', 'JavaScript'],
+    'screenshot': 'https://www.easyacumatica.com/social-images/home.png',
+    'featureList': [
+      'Automatic schema discovery',
+      'Type-safe models and services',
+      'OData query support',
+      'Intelligent caching',
+      'Session management',
+      'File attachments',
+      'Custom field support'
+    ]
+  },
+  {
+    '@type': 'WebSite',
+    'name': 'Easy-Acumatica Documentation',
+    'url': 'https://www.easyacumatica.com',
+    'description': 'Official documentation for Easy-Acumatica API wrapper libraries',
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': {
+        '@type': 'EntryPoint',
+        'urlTemplate': 'https://www.easyacumatica.com/search?q={search_term_string}'
+      },
+      'query-input': 'required name=search_term_string'
+    }
+  },
+  {
+    '@type': 'Organization',
+    'name': 'Easy-Acumatica',
+    'url': 'https://www.easyacumatica.com',
+    'logo': 'https://www.easyacumatica.com/assets/LargeEasyAcumaticaLogo.webp',
+    'sameAs': [
+      'https://github.com/Nioron07/Easy-Acumatica',
+      'https://github.com/joebewon/Easy-Acumatica',
+      'https://pypi.org/project/easy-acumatica/'
+    ]
   }
 ]);
 
