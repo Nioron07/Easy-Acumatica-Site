@@ -94,9 +94,9 @@
             <h2>Next Steps</h2>
             <ul>
               <li><NuxtLink to="/python/client">Client Configuration</NuxtLink> - Advanced client options and features</li>
-              <li><NuxtLink to="/python/dynamic-services">Dynamic Services</NuxtLink> - Service methods and patterns</li>
+              <li><NuxtLink to="/python/service-factory">Dynamic Services</NuxtLink> - Service methods and patterns</li>
               <li><NuxtLink to="/python/model-factory">Model Factory</NuxtLink> - Working with dynamic models</li>
-              <li><NuxtLink to="/python/odata">OData Queries</NuxtLink> - Advanced filtering and querying</li>
+              <li><NuxtLink to="/python/odata/filters">OData Queries</NuxtLink> - Advanced filtering and querying</li>
             </ul>
           </section>
             </v-container>

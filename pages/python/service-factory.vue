@@ -75,7 +75,7 @@
                 <h2>Query Options</h2>
                 <p>
                   Use <code>QueryOptions</code> to filter, sort, expand, and paginate results.
-                  See the <NuxtLink to="/python/odata">OData Queries</NuxtLink> page for detailed information.
+                  See the <NuxtLink to="/python/odata/filters">OData Queries</NuxtLink> page for detailed information.
                 </p>
                 <CodeSnippet :code="queryOptionsExample" language="python" />
               </section>

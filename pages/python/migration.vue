@@ -147,7 +147,7 @@
             <ul>
               <li><NuxtLink to="/python/client">Client Documentation</NuxtLink> - Learn about all client configuration options</li>
               <li><NuxtLink to="/python/quickstart">Quickstart Guide</NuxtLink> - See v0.5.x examples</li>
-              <li><NuxtLink to="/python/dynamic-services">Dynamic Services</NuxtLink> - Understand service usage patterns</li>
+              <li><NuxtLink to="/python/service-factory">Dynamic Services</NuxtLink> - Understand service usage patterns</li>
             </ul>
           </section>
             </v-container>
