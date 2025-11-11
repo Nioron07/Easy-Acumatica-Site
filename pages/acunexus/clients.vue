@@ -44,7 +44,13 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Client Management | AcuNexus Documentation',
-  description: 'Learn how to connect and manage multiple Acumatica instances with AcuNexus.',
+  description: 'Learn how to connect and manage multiple Acumatica instances with AcuNexus. Add, configure, and switch between different Acumatica ERP environments with encrypted credential storage.',
+  ogTitle: 'AcuNexus Client Management - Multi-Instance Connections',
+  ogDescription: 'Connect and manage multiple Acumatica instances from a single interface with secure credential storage.',
+  ogType: 'article',
+  ogUrl: 'https://easyacumatica.com/acunexus/clients',
+  robots: 'index, follow',
+  keywords: 'AcuNexus clients, Acumatica instances, multi-instance management, credential management, connection configuration'
 });
 </script>
 

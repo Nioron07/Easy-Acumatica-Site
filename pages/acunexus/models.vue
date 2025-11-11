@@ -44,7 +44,13 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Model Viewing | AcuNexus Documentation',
-  description: 'Browse and explore Acumatica data models and schemas in AcuNexus.',
+  description: 'Browse and explore Acumatica data models and schemas in AcuNexus. Interactive model viewer with field types, relationships, and schema inspection.',
+  ogTitle: 'AcuNexus Model Viewer - Browse Acumatica Schemas',
+  ogDescription: 'Interactively explore Acumatica data models, view field definitions, and understand entity relationships.',
+  ogType: 'article',
+  ogUrl: 'https://easyacumatica.com/acunexus/models',
+  robots: 'index, follow',
+  keywords: 'AcuNexus models, Acumatica schema, data models, model viewer, entity relationships, field types'
 });
 </script>
 

@@ -239,13 +239,13 @@
               </div>
               <h3 class="feature-title">{{ feature.title }}</h3>
               <p class="feature-description">{{ feature.description }}</p>
-              <v-btn 
-                :to="feature.link" 
-                variant="text" 
+              <v-btn
+                :to="feature.link"
+                variant="text"
                 color="primary"
                 class="feature-link"
               >
-                Learn more
+                {{ feature.linkText || `Learn about ${feature.title}` }}
                 <v-icon end size="small">mdi-arrow-right</v-icon>
               </v-btn>
             </div>
@@ -365,18 +365,18 @@ import CodeSnippet from '~/components/CodeSnippet.vue';
 
 // SEO Configuration
 useSeoMeta({
-  title: 'Easy-Acumatica Python Library | Acumatica REST API Wrapper',
-  description: 'Python library for Acumatica ERP REST API with automatic schema discovery, type hints, OData support, and intelligent caching. Install with pip install easy-acumatica.',
+  title: 'Easy-Acumatica Python | Acumatica REST API',
+  description: 'Python library for Acumatica ERP with schema discovery, type hints, OData support, and caching. Install: pip install easy-acumatica.',
   ogTitle: 'Easy-Acumatica Python - Acumatica REST API Wrapper',
   ogDescription: 'Python client for Acumatica ERP with automatic schema discovery, type-safe dataclasses, OData queries, and intelligent caching.',
   ogType: 'website',
-  ogUrl: 'https://www.easyacumatica.com/python',
-  ogImage: 'https://www.easyacumatica.com/social-images/python-home.png',
+  ogUrl: 'https://easyacumatica.com/python',
+  ogImage: 'https://easyacumatica.com/social-images/python-home.png',
   ogImageAlt: 'Easy-Acumatica Python Library',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Easy-Acumatica Python Library',
   twitterDescription: 'Python REST API wrapper for Acumatica ERP with automatic schema discovery and OData support.',
-  twitterImage: 'https://www.easyacumatica.com/social-images/python-home.png',
+  twitterImage: 'https://easyacumatica.com/social-images/python-home.png',
   robots: 'index, follow',
   keywords: 'Acumatica Python, Acumatica API, Python ERP, REST API, OData Python, Schema Discovery, Type Hints, Acumatica SDK'
 });
@@ -401,7 +401,7 @@ useSchemaOrg([
     '@type': 'TechArticle',
     'headline': 'Easy-Acumatica Python Documentation',
     'description': 'Complete guide to using Easy-Acumatica Python library for Acumatica ERP integration',
-    'url': 'https://www.easyacumatica.com/python',
+    'url': 'https://easyacumatica.com/python',
     'datePublished': '2024-01-01',
     'dateModified': '2024-12-01',
     'author': {
@@ -413,7 +413,7 @@ useSchemaOrg([
       'name': 'Easy-Acumatica',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://www.easyacumatica.com/assets/LargeEasyAcumaticaLogo.webp'
+        'url': 'https://easyacumatica.com/assets/LargeEasyAcumaticaLogo.webp'
       }
     }
   }
@@ -452,37 +452,43 @@ const coreFeatures = ref([
     icon: 'mdi-auto-fix',
     title: 'Dynamic Discovery',
     description: 'Automatically discovers and adapts to your Acumatica schema, including custom fields and endpoints.',
-    link: '/python/service-factory'
+    link: '/python/service-factory',
+    linkText: 'Explore Dynamic Services'
   },
   {
     icon: 'mdi-shield-check',
     title: 'Type Safety',
     description: 'Full type hints and IDE support with dynamically generated stubs for your exact instance.',
-    link: '/python/model-factory'
+    link: '/python/model-factory',
+    linkText: 'Explore Dynamic Models'
   },
   {
     icon: 'mdi-database-sync',
     title: 'Smart Client',
     description: 'Intelligent session management, automatic retries, and connection pooling.',
-    link: '/python/client'
+    link: '/python/client',
+    linkText: 'View Client Documentation'
   },
   {
     icon: 'mdi-filter-variant',
     title: 'OData Filters',
     description: 'Powerful filtering with simple, intuitive syntax for complex queries.',
-    link: '/python/odata/filters'
+    link: '/python/odata/filters',
+    linkText: 'View OData Filter Guide'
   },
   {
     icon: 'mdi-cog-outline',
     title: 'Query Options',
     description: 'Advanced query options for sorting, selection, and pagination.',
-    link: '/python/odata/queryoptions'
+    link: '/python/odata/queryoptions',
+    linkText: 'View Query Options Guide'
   },
   {
     icon: 'mdi-rocket-launch',
     title: 'Quick Start',
     description: 'Get up and running with Easy-Acumatica in minutes.',
-    link: '/python/quickstart'
+    link: '/python/quickstart',
+    linkText: 'View Quick Start Guide'
   }
 ]);
 

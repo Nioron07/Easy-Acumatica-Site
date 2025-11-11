@@ -335,7 +335,7 @@ useSeoMeta({
   ogTitle: 'AcumaticaClient API Reference - Easy-Acumatica Python',
   ogDescription: 'Comprehensive documentation for the AcumaticaClient class including configuration, caching, OData support, and session management.',
   ogType: 'article',
-  ogUrl: 'https://www.easyacumatica.com/python/client',
+  ogUrl: 'https://easyacumatica.com/python/client',
   robots: 'index, follow',
   keywords: 'AcumaticaClient, Python Acumatica client, session management, API configuration, OData filters, schema discovery'
 });
@@ -345,7 +345,7 @@ useSchemaOrg([
     '@type': 'TechArticle',
     'headline': 'AcumaticaClient API Reference',
     'description': 'Complete documentation for the AcumaticaClient class in Easy-Acumatica Python library',
-    'url': 'https://www.easyacumatica.com/python/client',
+    'url': 'https://easyacumatica.com/python/client',
     'author': {
       '@type': 'Organization',
       'name': 'Easy-Acumatica Team'

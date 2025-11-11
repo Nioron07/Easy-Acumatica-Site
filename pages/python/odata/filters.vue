@@ -749,8 +749,8 @@ const additionalFunctions = ref([
 
 // SEO
 useSeoMeta({
-  title: 'Filters & F Factory - OData Filter Builder | Easy-Acumatica Python',
-  description: 'Build type-safe OData filters using Python syntax. Complete guide to the F factory with examples, translator tool, and API reference.',
+  title: 'OData Filters & F Factory | Easy-Acumatica Python',
+  description: 'Build type-safe OData filters using Python syntax. Complete guide to F factory with examples, translator tool, and API reference.',
   ogTitle: 'OData Filters - Easy-Acumatica Python',
   ogDescription: 'Transform Python expressions into OData filters. Type-safe, readable, and powerful.',
 });

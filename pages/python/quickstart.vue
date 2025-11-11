@@ -296,7 +296,7 @@ useSeoMeta({
   ogTitle: 'Easy-Acumatica Python Quickstart Guide',
   ogDescription: 'Step-by-step guide to using Easy-Acumatica Python library for Acumatica ERP integration. CRUD operations, OData queries, and more.',
   ogType: 'article',
-  ogUrl: 'https://www.easyacumatica.com/python/quickstart',
+  ogUrl: 'https://easyacumatica.com/python/quickstart',
   robots: 'index, follow',
   keywords: 'Acumatica Python tutorial, Easy-Acumatica quickstart, Acumatica CRUD, OData tutorial, Python ERP integration'
 });

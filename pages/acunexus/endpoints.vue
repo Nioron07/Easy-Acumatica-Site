@@ -49,7 +49,13 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Deploying & Using Endpoints | AcuNexus Documentation',
-  description: 'Learn how to deploy service methods as REST API endpoints and use them in AcuNexus.',
+  description: 'Learn how to deploy service methods as custom REST API endpoints in AcuNexus. Automatic OpenAPI schema generation, testing interface, and secure deployment.',
+  ogTitle: 'AcuNexus Endpoint Deployment - Custom REST APIs',
+  ogDescription: 'Deploy Acumatica service methods as custom REST API endpoints with automatic documentation and testing.',
+  ogType: 'article',
+  ogUrl: 'https://easyacumatica.com/acunexus/endpoints',
+  robots: 'index, follow',
+  keywords: 'AcuNexus endpoints, REST API deployment, custom endpoints, OpenAPI schema, API documentation, endpoint testing'
 });
 </script>
 

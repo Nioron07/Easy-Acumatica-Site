@@ -369,7 +369,13 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Setup & Installation | AcuNexus Documentation',
-  description: 'Complete guide to installing and configuring AcuNexus, the self-hosted Acumatica management platform.',
+  description: 'Complete guide to installing and configuring AcuNexus, the self-hosted Acumatica management platform. Docker-based deployment with PostgreSQL and encrypted credential storage.',
+  ogTitle: 'AcuNexus Setup Guide - Installation and Configuration',
+  ogDescription: 'Step-by-step guide to deploy AcuNexus using Docker for managing multiple Acumatica ERP instances.',
+  ogType: 'article',
+  ogUrl: 'https://easyacumatica.com/acunexus/setup',
+  robots: 'index, follow',
+  keywords: 'AcuNexus setup, AcuNexus installation, Docker deployment, Acumatica management, PostgreSQL, self-hosted, configuration guide'
 });
 </script>
 

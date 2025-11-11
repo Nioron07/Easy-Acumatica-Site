@@ -808,8 +808,8 @@ options = QueryOptions(
 
 // SEO
 useSeoMeta({
-  title: 'QueryOptions - OData Query Builder | Easy-Acumatica Python',
-  description: 'Learn how to use QueryOptions to build powerful OData queries in Easy-Acumatica. Filter, select, expand, and paginate your Acumatica data efficiently.',
+  title: 'QueryOptions - OData Builder | Easy-Acumatica',
+  description: 'Build powerful OData queries with QueryOptions. Filter, select, expand, and paginate Acumatica data efficiently with complete examples.',
   ogTitle: 'QueryOptions - Easy-Acumatica OData Builder',
   ogDescription: 'Build type-safe OData queries with QueryOptions. Complete guide with examples and function reference.',
 });

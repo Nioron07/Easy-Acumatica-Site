@@ -84,6 +84,7 @@
 
           <v-divider vertical class="mx-3" />
 
+          <!-- GitHub button - different repos for Python, AcuNexus, and Node.js -->
           <v-btn v-if="$route.fullPath.includes('python')"
             icon
             variant="text"
@@ -94,7 +95,17 @@
           >
             <v-icon>mdi-github</v-icon>
           </v-btn>
-          
+
+          <v-btn v-else-if="$route.fullPath.includes('acunexus')"
+            icon
+            variant="text"
+            color="grey-darken-2"
+            href="https://github.com/Nioron07/AcuNexus"
+            target="_blank"
+            rel="noopener"
+          >
+            <v-icon>mdi-github</v-icon>
+          </v-btn>
 
           <v-btn v-else
             icon
@@ -107,6 +118,7 @@
             <v-icon>mdi-github</v-icon>
           </v-btn>
 
+          <!-- Package button - only show for Python and Node.js, not AcuNexus -->
           <v-btn v-if="$route.fullPath.includes('python')"
             icon
             variant="text"
@@ -118,9 +130,7 @@
             <v-icon>mdi-package-variant</v-icon>
           </v-btn>
 
-          
-
-          <v-btn v-else
+          <v-btn v-else-if="!$route.fullPath.includes('acunexus')"
             icon
             variant="text"
             color="grey-darken-2"

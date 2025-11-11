@@ -13,21 +13,13 @@ export default defineNuxtConfig({
 
   // Add the site configuration object
   site: {
-    url: 'https://easyacumatica.com', // Replace with your production domain
+    url: 'https://easyacumatica.com', // Production domain (non-www, redirects from www)
     name: 'Easy-Acumatica Docs',
     description: 'A lightweight wrapper for Acumatica contract-based REST API, available for Python and Node.js.',
     defaultLocale: 'en',
   },
   gtag: {
     id: 'G-CYQE1J3RH4'
-  },
-  vuetify: {
-    // Correctly configure ssr as a boolean
-    ssr: true,
-    // Move client hints to their own object
-    ssrClientHints: {
-      clientWidthHints: true,
-    }
   },
   ogImage: {
     defaults: {
@@ -37,6 +29,9 @@ export default defineNuxtConfig({
     }
   },
   devtools: { enabled: true },
+  sitemap: {
+    xsl: false, // Disable XSL stylesheet to prevent cross-origin errors
+  },
   nitro: {
     preset: 'node-server', // Ensure this is set for Node.js server deployment
     prerender: {
@@ -54,7 +49,13 @@ export default defineNuxtConfig({
         '/python/generic-inquiries',
         '/python/odata/filters',
         '/python/odata/queryoptions',
-        '/npm'
+        '/npm',
+        '/acunexus',
+        '/acunexus/setup',
+        '/acunexus/clients',
+        '/acunexus/models',
+        '/acunexus/services',
+        '/acunexus/endpoints'
       ]
     }
   },

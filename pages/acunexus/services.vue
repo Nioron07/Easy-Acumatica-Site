@@ -44,7 +44,13 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Service Viewing | AcuNexus Documentation',
-  description: 'Explore available REST API services and methods in AcuNexus.',
+  description: 'Explore available REST API services and methods in AcuNexus. Interactive service browser with method signatures, parameters, and testing capabilities.',
+  ogTitle: 'AcuNexus Service Browser - REST API Explorer',
+  ogDescription: 'Browse Acumatica REST API services, view method signatures, and test endpoints directly from the interface.',
+  ogType: 'article',
+  ogUrl: 'https://easyacumatica.com/acunexus/services',
+  robots: 'index, follow',
+  keywords: 'AcuNexus services, REST API browser, service methods, API explorer, method signatures, endpoint testing'
 });
 </script>
 

@@ -102,7 +102,7 @@ useSeoMeta({
   ogTitle: 'Easy-Acumatica Node.js - Coming Soon',
   ogDescription: 'Node.js and TypeScript support for Acumatica ERP REST API integration. Documentation under construction.',
   ogType: 'website',
-  ogUrl: 'https://www.easyacumatica.com/npm',
+  ogUrl: 'https://easyacumatica.com/npm',
   robots: 'index, follow',
   keywords: 'Acumatica Node.js, Acumatica TypeScript, Node.js ERP, npm package, Acumatica SDK'
 });

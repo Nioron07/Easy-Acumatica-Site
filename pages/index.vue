@@ -22,11 +22,12 @@
           </h1>
 
           <p class="hero-subtitle">
-            API client libraries for Acumatica ERP
+            API client libraries for Acumatica ERP + Multi-Instance Management
           </p>
 
           <div class="hero-description">
             <p>Python and Node.js libraries that provide type-safe wrappers around the Acumatica REST API with automatic schema discovery and OData query support.</p>
+            <p class="mt-4"><strong>Plus AcuNexus:</strong> A self-hosted web application for visually managing multiple Acumatica instances, browsing services and models, and deploying custom REST API endpoints.</p>
           </div>
 
           <v-row justify="center" class="mt-12 hero-buttons">
@@ -184,10 +185,10 @@
       <v-row justify="center" class="position-relative">
         <v-col cols="12" md="10" class="text-center">
           <h2 class="section-title mb-4">
-            <span class="gradient-text">Available Languages</span>
+            <span class="gradient-text">Choose Your Platform</span>
           </h2>
           <p class="section-subtitle mb-12">
-            Python and Node.js implementations with language-specific features
+            Python and Node.js client libraries, plus AcuNexus for visual multi-instance management
           </p>
           
           <v-row justify="center">
@@ -266,10 +267,11 @@
               </div>
 
               <p class="acunexus-description mb-8">
-                Built on Easy-Acumatica Python, AcuNexus is a self-hosted web application that provides a visual
-                interface for building integrations and utilizing the package. Manage multiple Acumatica instances,
-                browse services and models interactively, and deploy custom REST API endpoints with automatic
-                schema generation—all from a single interface.
+                Built on Easy-Acumatica Python, AcuNexus is a powerful self-hosted web application that provides a visual
+                interface for building integrations and working with multiple Acumatica instances. Perfect for teams managing
+                multiple Acumatica environments, AcuNexus lets you browse services and models interactively, test endpoints
+                in real-time, and deploy custom REST API endpoints with automatic schema generation—all from a single,
+                secure interface.
               </p>
 
               <div class="acunexus-features mb-8">
@@ -291,19 +293,32 @@
                 </div>
               </div>
 
-              <v-btn
-                href="https://github.com/Nioron07/AcuNexus"
-                target="_blank"
-                rel="noopener"
-                size="x-large"
-                rounded="pill"
-                class="acunexus-btn"
-                elevation="8"
-              >
-                <v-icon start>mdi-github</v-icon>
-                View on GitHub
-                <v-icon end>mdi-open-in-new</v-icon>
-              </v-btn>
+              <div class="d-flex gap-4 justify-center flex-wrap">
+                <v-btn
+                  to="/acunexus"
+                  size="x-large"
+                  rounded="pill"
+                  class="acunexus-btn"
+                  elevation="8"
+                >
+                  <v-icon start>mdi-book-open-variant</v-icon>
+                  View Documentation
+                  <v-icon end>mdi-arrow-right</v-icon>
+                </v-btn>
+                <v-btn
+                  href="https://github.com/Nioron07/AcuNexus"
+                  target="_blank"
+                  rel="noopener"
+                  size="x-large"
+                  rounded="pill"
+                  class="acunexus-btn-secondary"
+                  elevation="8"
+                >
+                  <v-icon start>mdi-github</v-icon>
+                  View on GitHub
+                  <v-icon end>mdi-open-in-new</v-icon>
+                </v-btn>
+              </div>
             </div>
           </div>
         </v-col>
@@ -371,22 +386,22 @@ definePageMeta({
 
 // SEO Configuration
 useSeoMeta({
-  title: 'Easy-Acumatica | Python & Node.js API Wrapper for Acumatica ERP',
-  description: 'Type-safe API client libraries for Acumatica ERP with automatic schema discovery, OData queries, and intelligent caching. Available for Python and Node.js.',
+  title: 'Easy-Acumatica | Acumatica API Libraries + AcuNexus',
+  description: 'Python & Node.js libraries for Acumatica ERP with schema discovery and OData support. Includes AcuNexus for managing multiple instances.',
   ogTitle: 'Easy-Acumatica - API Wrapper for Acumatica ERP',
-  ogDescription: 'Type-safe Python and Node.js libraries for Acumatica REST API. Features automatic schema discovery, OData support, and intelligent caching.',
+  ogDescription: 'Type-safe Python and Node.js libraries for Acumatica REST API. Features automatic schema discovery, OData support, intelligent caching, and AcuNexus multi-instance management platform.',
   ogType: 'website',
-  ogUrl: 'https://www.easyacumatica.com',
-  ogImage: 'https://www.easyacumatica.com/social-images/home.png',
+  ogUrl: 'https://easyacumatica.com',
+  ogImage: 'https://easyacumatica.com/social-images/home.png',
   ogImageAlt: 'Easy-Acumatica Logo',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Easy-Acumatica: Python & Node.js API Wrapper for Acumatica',
-  twitterDescription: 'Type-safe API clients for Acumatica ERP with automatic schema discovery and OData support.',
-  twitterImage: 'https://www.easyacumatica.com/social-images/home.png',
+  twitterTitle: 'Easy-Acumatica: Python & Node.js API Wrapper + AcuNexus Platform',
+  twitterDescription: 'Type-safe API clients for Acumatica ERP with automatic schema discovery, OData support, and AcuNexus multi-instance management.',
+  twitterImage: 'https://easyacumatica.com/social-images/home.png',
   twitterSite: '@easyacumatica',
   robots: 'index, follow',
   author: 'Easy-Acumatica Team',
-  keywords: 'Acumatica, API, Python, Node.js, ERP, REST API, OData, Schema Discovery, Type Safety, API Wrapper'
+  keywords: 'Acumatica, API, Python, Node.js, ERP, REST API, OData, Schema Discovery, Type Safety, API Wrapper, AcuNexus, Multi-Instance Management, Acumatica Integration, Self-Hosted'
 });
 
 // Structured Data for SEO
@@ -402,10 +417,10 @@ useSchemaOrg([
       'priceCurrency': 'USD'
     },
     'description': 'Type-safe API client libraries for Acumatica ERP with automatic schema discovery, OData queries, and intelligent caching',
-    'url': 'https://www.easyacumatica.com',
+    'url': 'https://easyacumatica.com',
     'softwareVersion': '0.5.10',
     'programmingLanguage': ['Python', 'JavaScript'],
-    'screenshot': 'https://www.easyacumatica.com/social-images/home.png',
+    'screenshot': 'https://easyacumatica.com/social-images/home.png',
     'featureList': [
       'Automatic schema discovery',
       'Type-safe models and services',
@@ -413,19 +428,22 @@ useSchemaOrg([
       'Intelligent caching',
       'Session management',
       'File attachments',
-      'Custom field support'
+      'Custom field support',
+      'AcuNexus multi-instance management',
+      'REST API endpoint deployment',
+      'Self-hosted web application'
     ]
   },
   {
     '@type': 'WebSite',
     'name': 'Easy-Acumatica Documentation',
-    'url': 'https://www.easyacumatica.com',
+    'url': 'https://easyacumatica.com',
     'description': 'Official documentation for Easy-Acumatica API wrapper libraries',
     'potentialAction': {
       '@type': 'SearchAction',
       'target': {
         '@type': 'EntryPoint',
-        'urlTemplate': 'https://www.easyacumatica.com/search?q={search_term_string}'
+        'urlTemplate': 'https://easyacumatica.com/search?q={search_term_string}'
       },
       'query-input': 'required name=search_term_string'
     }
@@ -433,11 +451,12 @@ useSchemaOrg([
   {
     '@type': 'Organization',
     'name': 'Easy-Acumatica',
-    'url': 'https://www.easyacumatica.com',
-    'logo': 'https://www.easyacumatica.com/assets/LargeEasyAcumaticaLogo.webp',
+    'url': 'https://easyacumatica.com',
+    'logo': 'https://easyacumatica.com/assets/LargeEasyAcumaticaLogo.webp',
     'sameAs': [
       'https://github.com/Nioron07/Easy-Acumatica',
       'https://github.com/joebewon/Easy-Acumatica',
+      'https://github.com/Nioron07/AcuNexus',
       'https://pypi.org/project/easy-acumatica/'
     ]
   }
@@ -1143,6 +1162,7 @@ onMounted(() => {
   font-weight: 600;
   min-width: 240px;
   height: 64px !important;
+  margin-right: 1vh;
   font-size: 1.125rem !important;
   transition: all 0.3s ease;
 }
@@ -1151,6 +1171,25 @@ onMounted(() => {
   background: rgba(255, 255, 255, 0.95) !important;
   transform: translateY(-4px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.acunexus-btn-secondary {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  font-weight: 600;
+  min-width: 240px;
+  height: 64px !important;
+  font-size: 1.125rem !important;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px);
+}
+
+.acunexus-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 @media (max-width: 960px) {
