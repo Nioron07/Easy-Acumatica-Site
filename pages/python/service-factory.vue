@@ -36,8 +36,23 @@
               <!-- Accessing Services -->
               <section id="accessing-services" class="doc-section">
                 <h2>Accessing Services</h2>
-                <p>Services are accessed as attributes on the client. The attribute name is the entity name in snake_case:</p>
+                <p>Services are accessed as attributes on the client. The attribute name is the entity name converted to snake_case:</p>
                 <CodeSnippet :code="accessingExample" language="python" />
+
+                <h3>Naming Convention</h3>
+                <p>
+                  Entity names from the OpenAPI schema are automatically converted from PascalCase to snake_case:
+                </p>
+                <ul>
+                  <li><code>Customer</code> → <code>client.customer</code></li>
+                  <li><code>SalesOrder</code> → <code>client.sales_order</code></li>
+                  <li><code>JournalTransaction</code> → <code>client.journal_transaction</code></li>
+                  <li><code>Inquiries</code> → <code>client.inquiries</code> (reserved for Generic Inquiries)</li>
+                </ul>
+                <p class="note">
+                  Extended Generic Inquiries published as custom endpoints follow a special naming pattern.
+                  For example, "PE All Items (GI908032)" becomes <code>client.pe_all_items</code>.
+                </p>
               </section>
 
               <!-- Common Methods -->
@@ -131,9 +146,40 @@
 
               <!-- Service Discovery -->
               <section id="service-discovery" class="doc-section">
-                <h2>Service Discovery</h2>
-                <p>List all available services and their methods:</p>
+                <h2>Service Discovery & Introspection</h2>
+                <p>
+                  Services provide introspection methods to discover available operations and inspect method signatures:
+                </p>
                 <CodeSnippet :code="discoveryExample" language="python" />
+              </section>
+
+              <!-- Method Signatures -->
+              <section id="method-signatures" class="doc-section">
+                <h2>Method Signatures</h2>
+                <p>
+                  Use the <code>get_signature()</code> method to inspect the signature of any service method.
+                  This is useful for understanding parameter types and return values:
+                </p>
+                <CodeSnippet :code="signatureExample" language="python" />
+                <p class="note">
+                  Method signatures are stored during service generation and provide full type information
+                  including parameter names, types, default values, and return types.
+                </p>
+              </section>
+
+              <!-- Schema Information -->
+              <section id="schema-info" class="doc-section">
+                <h2>Schema Information</h2>
+                <p>
+                  Services provide a <code>get_ad_hoc_schema()</code> method to retrieve Acumatica's native $adHocSchema
+                  information for the endpoint. This returns the raw schema data from Acumatica:
+                </p>
+                <CodeSnippet :code="schemaExample" language="python" />
+                <p class="note">
+                  The <code>get_ad_hoc_schema()</code> method calls Acumatica's $adHocSchema endpoint and returns
+                  the native schema structure. This is different from the model's <code>get_schema()</code>
+                  classmethod which returns simplified Python type information.
+                </p>
               </section>
 
               <!-- Working with Models -->
@@ -186,6 +232,8 @@ const navItems = ref([
   { id: 'generic-inquiries', title: 'Generic Inquiries', icon: 'mdi-table-search' },
   { id: 'custom-endpoints', title: 'Custom Endpoints', icon: 'mdi-api' },
   { id: 'service-discovery', title: 'Service Discovery', icon: 'mdi-magnify' },
+  { id: 'method-signatures', title: 'Method Signatures', icon: 'mdi-function-variant' },
+  { id: 'schema-info', title: 'Schema Information', icon: 'mdi-file-document-outline' },
   { id: 'working-with-models', title: 'Working with Models', icon: 'mdi-cube-outline' },
   { id: 'error-handling', title: 'Error Handling', icon: 'mdi-alert-circle' },
 ]);
@@ -360,6 +408,7 @@ print("Services:", services[:10])
 # Get detailed service information
 service_info = client.get_service_info('Customer')
 print(f"Customer service methods: {service_info['methods']}")
+print(f"Customer service actions: {service_info.get('actions', [])}")
 
 # List methods for a specific service
 methods = [m for m in dir(client.customers) if not m.startswith('_')]
@@ -369,6 +418,57 @@ print("Customer service methods:", methods)
 actions = [m for m in dir(client.invoices)
            if m.startswith('invoke_action_')]
 print("Invoice actions:", actions)`;
+
+const signatureExample = `# Get the signature of a specific method
+sig = client.sales_order.get_signature('get_list')
+print(sig)
+# Output: "sales_order.get_list(options: QueryOptions = None, api_version: str = None) -> list"
+
+# Get signature for get_by_id
+sig = client.customers.get_signature('get_by_id')
+print(sig)
+# Output: "customers.get_by_id(entity_id: str, options: QueryOptions = None, api_version: str = None) -> dict"
+
+# Get signature for put_entity
+sig = client.invoices.get_signature('put_entity')
+print(sig)
+# Output: "invoices.put_entity(data: Any, options: QueryOptions = None, api_version: str = None) -> dict"
+
+# Get signature for file operations
+sig = client.account_group.get_signature('get_files')
+print(sig)
+# Output: "account_group.get_files(entity_id: str, api_version: str = None) -> list"
+
+# List all available methods if method not found
+try:
+    sig = client.customers.get_signature('nonexistent_method')
+except ValueError as e:
+    print(f"Error: {e}")
+    # Prints: "Method 'nonexistent_method' not found. Available methods: get_list, get_by_id, ..."
+
+# Useful for debugging and understanding service capabilities
+for method_name in ['get_list', 'get_by_id', 'put_entity', 'delete_by_id']:
+    sig = client.customers.get_signature(method_name)
+    print(f"{method_name}: {sig}")
+
+# Get signatures for custom actions
+if hasattr(client.sales_orders, 'invoke_action_release'):
+    sig = client.sales_orders.get_signature('invoke_action_release')
+    print(f"Release action: {sig}")`;
+
+const schemaExample = `# Get the Acumatica native schema for a service
+schema = client.sales_order.get_ad_hoc_schema()
+print(schema)
+# Returns the $adHocSchema response from Acumatica
+
+# With specific API version
+schema = client.customers.get_ad_hoc_schema(api_version="23.200.001")
+
+# The schema contains Acumatica's field definitions, types, and metadata
+# This is the raw schema from Acumatica, not the Python model schema
+if schema:
+    print(f"Schema fields: {schema.keys()}")
+    # Explore the native Acumatica schema structure`;
 
 const modelsExample = `# Create entity using model
 customer = client.models.Customer(

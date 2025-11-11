@@ -28,7 +28,7 @@
             <!-- Version Badge -->
             <div class="version-badge">
               <v-icon size="small">mdi-package-variant</v-icon>
-              <span>Version 0.5.4</span>
+              <span>Version 0.5.10</span>
             </div>
 
             <!-- Main Title -->
@@ -296,25 +296,55 @@
       </v-container>
     </section>
 
-    <!-- Migration Section -->
-    <section class="migration-section">
+    <!-- AcuNexus Section -->
+    <section class="acunexus-section">
       <v-container>
         <v-row justify="center">
           <v-col cols="12" md="10">
-            <div class="migration-card">
-              <div class="migration-content text-center">
-                <h2 class="migration-title">Upgrading from 0.4.x?</h2>
-                <p class="migration-text">
-                  Version 0.5.4 adds automatic .env file loading, differential caching for faster initialization,
-                  and a built-in task scheduler. Check the migration guide for details on new features.
+            <div class="acunexus-card">
+              <div class="acunexus-content">
+                <div class="acunexus-icon-wrapper">
+                  <v-icon size="48" color="white">mdi-cloud-sync</v-icon>
+                </div>
+                <h2 class="acunexus-title">AcuNexus</h2>
+                <p class="acunexus-subtitle">
+                  Self-Hosted Multi-Instance Management Platform
                 </p>
+                <p class="acunexus-description">
+                  A web application for managing multiple Acumatica instances and deploying REST API endpoints.
+                  Connect to multiple ERP instances, browse services and models, and deploy custom API endpoints
+                  with automatic schema generation—all from a single interface.
+                </p>
+
+                <div class="acunexus-features">
+                  <div class="acunexus-feature">
+                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-server-network</v-icon>
+                    <span>Multi-Client Management</span>
+                  </div>
+                  <div class="acunexus-feature">
+                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-api</v-icon>
+                    <span>Endpoint Deployment</span>
+                  </div>
+                  <div class="acunexus-feature">
+                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-shield-lock</v-icon>
+                    <span>Encrypted Credentials</span>
+                  </div>
+                  <div class="acunexus-feature">
+                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-docker</v-icon>
+                    <span>Docker Deployment</span>
+                  </div>
+                </div>
+
                 <v-btn
-                  to="/python/migration"
+                  href="https://github.com/Nioron07/AcuNexus"
+                  target="_blank"
+                  rel="noopener"
                   size="large"
                   rounded="pill"
-                  class="migration-btn mt-6"
+                  class="acunexus-btn mt-6"
                 >
-                  View Migration Guide
+                  <v-icon start>mdi-github</v-icon>
+                  View on GitHub
                   <v-icon end>mdi-arrow-right</v-icon>
                 </v-btn>
               </div>
@@ -360,7 +390,7 @@ useSchemaOrg([
     'codeRepository': 'https://github.com/Nioron07/Easy-Acumatica',
     'programmingLanguage': 'Python',
     'runtimePlatform': 'Python 3.7+',
-    'version': '0.5.4',
+    'version': '0.5.10',
     'license': 'https://opensource.org/licenses/MIT',
     'targetProduct': {
       '@type': 'SoftwareApplication',
@@ -500,7 +530,6 @@ const documentationLinks = ref([
 const exampleLinks = ref([
   { title: 'OData Filters', link: '/python/odata/filters' },
   { title: 'Query Options', link: '/python/odata/queryoptions' },
-  { title: 'Migration Guide', link: '/python/migration' },
   { title: 'Basic Examples', link: '/python/examples' },
 ]);
 
@@ -918,67 +947,6 @@ const communityLinks = ref([
 .step-code :deep(.code-card),
 .quick-install :deep(.code-card) {
   background: rgba(30, 30, 46, 0.95) !important;
-}
-
-/* Migration Section */
-.migration-section {
-  padding: 4rem 0;
-  background: white;
-}
-
-.migration-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 24px;
-  padding: 3rem;
-  box-shadow: 0 20px 40px rgba(102,126,234,0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.migration-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  animation: rotate 30s linear infinite;
-}
-
-@keyframes rotate {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.migration-content {
-  position: relative;
-  z-index: 1;
-}
-
-.migration-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.migration-text {
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.95);
-  line-height: 1.6;
-}
-
-.migration-btn {
-  background: white !important;
-  color: #667eea !important;
-  font-weight: 600;
-}
-
-.migration-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Resources Section */

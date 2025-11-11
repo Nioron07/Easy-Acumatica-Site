@@ -34,6 +34,23 @@
 
         <v-spacer />
 
+        <div class="d-none d-md-flex align-center text-caption text-grey-darken-2 mx-4">
+          See an issue?
+          <v-btn
+            variant="text"
+            size="small"
+            color="grey-darken-3"
+            class="text-caption px-2 ml-1"
+            href="https://github.com/Nioron07/Easy-Acumatica-Site"
+            target="_blank"
+            rel="noopener"
+          >
+            Contribute to the docs
+          </v-btn>
+        </div>
+
+        <v-spacer />
+
         <div class="d-none d-md-flex align-center">
           <v-btn
             variant="text"
@@ -53,6 +70,16 @@
           >
             <v-icon start>mdi-npm</v-icon>
             Node.js
+          </v-btn>
+
+          <v-btn
+            variant="text"
+            color="grey-darken-3"
+            class="mx-1 font-weight-medium"
+            to="/acunexus"
+          >
+            <v-icon start>mdi-cloud-sync</v-icon>
+            AcuNexus
           </v-btn>
 
           <v-divider vertical class="mx-3" />

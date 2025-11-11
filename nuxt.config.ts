@@ -52,7 +52,6 @@ export default defineNuxtConfig({
         '/python/batching',
         '/python/task-scheduler',
         '/python/generic-inquiries',
-        '/python/migration',
         '/python/odata/filters',
         '/python/odata/queryoptions',
         '/npm'

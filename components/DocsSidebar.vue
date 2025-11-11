@@ -171,31 +171,36 @@ const currentSection = computed(() => {
   const path = route.path;
   if (path.startsWith('/python')) return 'python';
   if (path.startsWith('/npm')) return 'npm';
+  if (path.startsWith('/acunexus')) return 'acunexus';
   return 'home';
 });
 
 // Dynamic title based on current section
 const currentTitle = computed(() => {
-  return currentSection.value === 'python' ? 'Python Docs' : 
-         currentSection.value === 'npm' ? 'Node.js Docs' : 
+  return currentSection.value === 'python' ? 'Python Docs' :
+         currentSection.value === 'npm' ? 'Node.js Docs' :
+         currentSection.value === 'acunexus' ? 'AcuNexus Docs' :
          'Documentation';
 });
 
 const currentSubtitle = computed(() => {
-  return currentSection.value === 'python' ? 'v0.5.4' :
+  return currentSection.value === 'python' ? 'v0.5.10' :
          currentSection.value === 'npm' ? 'TypeScript Ready' :
+         currentSection.value === 'acunexus' ? 'Multi-Instance Platform' :
          'Choose your platform';
 });
 
 const currentIcon = computed(() => {
-  return currentSection.value === 'python' ? 'mdi-language-python' : 
-         currentSection.value === 'npm' ? 'mdi-npm' : 
+  return currentSection.value === 'python' ? 'mdi-language-python' :
+         currentSection.value === 'npm' ? 'mdi-npm' :
+         currentSection.value === 'acunexus' ? 'mdi-cloud-sync' :
          'mdi-book-open-variant';
 });
 
 const currentColor = computed(() => {
-  return currentSection.value === 'python' ? 'primary' : 
-         currentSection.value === 'npm' ? 'success' : 
+  return currentSection.value === 'python' ? 'primary' :
+         currentSection.value === 'npm' ? 'success' :
+         currentSection.value === 'acunexus' ? 'deep-purple' :
          'grey-darken-1';
 });
 
@@ -211,8 +216,7 @@ const pythonNav = [
   { type: 'item', title: 'Home', icon: 'mdi-home', link: '/python' },
   { type: 'item', title: 'Installation', icon: 'mdi-download', link: '/python/installation' },
   { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/python/quickstart'},
-  { type: 'item', title: 'Migration Guide', icon: 'mdi-swap-horizontal', link: '/python/migration' },
-  
+
   { type: 'divider' },
   { type: 'header', title: 'Core Concepts', icon: 'mdi-cube-outline', color: 'deep-purple' },
   { type: 'item', title: 'AcumaticaClient', icon: 'mdi-connection', link: '/python/client' },
@@ -233,12 +237,12 @@ const npmNav = [
 //   { type: 'item', title: 'Installation', icon: 'mdi-npm', link: '/npm/installation' },
 //   { type: 'item', title: 'Quickstart', icon: 'mdi-lightning-bolt', link: '/npm/quickstart' },
 //   { type: 'item', title: 'TypeScript Setup', icon: 'mdi-language-typescript', link: '/npm/typescript' },
-  
+
 //   { type: 'divider' },
 //   { type: 'header', title: 'Core', icon: 'mdi-cube-outline', color: 'teal' },
 //   { type: 'item', title: 'AcumaticaClient', icon: 'mdi-cog-outline', link: '/npm/client' },
 //   { type: 'item', title: 'Configuration', icon: 'mdi-tune', link: '/npm/configuration' },
-  
+
 //   { type: 'divider' },
 //   { type: 'header', title: 'API Reference', icon: 'mdi-api', color: 'cyan' },
 //   { type: 'item', title: 'Methods', icon: 'mdi-function', link: '/npm/api/methods' },
@@ -246,10 +250,24 @@ const npmNav = [
 //   { type: 'item', title: 'Interfaces', icon: 'mdi-share-variant', link: '/npm/api/interfaces' },
 ];
 
+const acunexusNav = [
+  { type: 'header', title: 'Getting Started', icon: 'mdi-rocket-launch', color: 'deep-purple' },
+  { type: 'item', title: 'Overview', icon: 'mdi-home', link: '/acunexus' },
+  { type: 'item', title: 'Setup & Installation', icon: 'mdi-download', link: '/acunexus/setup' },
+
+  { type: 'divider' },
+  { type: 'header', title: 'Features', icon: 'mdi-star', color: 'deep-purple' },
+  { type: 'item', title: 'Client Management', icon: 'mdi-server-network', link: '/acunexus/clients' },
+  { type: 'item', title: 'Model Viewing', icon: 'mdi-cube-outline', link: '/acunexus/models' },
+  { type: 'item', title: 'Service Viewing', icon: 'mdi-magnify', link: '/acunexus/services' },
+  { type: 'item', title: 'Deploying & Using Endpoints', icon: 'mdi-api', link: '/acunexus/endpoints' },
+];
+
 // Get navigation based on current section
 const navigation = computed(() => {
-  return currentSection.value === 'python' ? pythonNav : 
-         currentSection.value === 'npm' ? npmNav : 
+  return currentSection.value === 'python' ? pythonNav :
+         currentSection.value === 'npm' ? npmNav :
+         currentSection.value === 'acunexus' ? acunexusNav :
          [];
 });
 

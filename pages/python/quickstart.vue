@@ -7,7 +7,7 @@
           <v-col cols="12" lg="10" class="text-center">
             <div class="hero-content">
               <h1 class="hero-title">Quickstart Guide</h1>
-              <p class="hero-subtitle">Get started with Easy-Acumatica v0.5.4</p>
+              <p class="hero-subtitle">Get started with Easy-Acumatica v0.5.10</p>
             </div>
           </v-col>
         </v-row>
@@ -23,7 +23,7 @@
               <section id="prerequisites" class="doc-section">
             <h2>Prerequisites</h2>
             <ul>
-              <li>Easy-Acumatica v0.5.4 installed (<code>pip install easy-acumatica</code>)</li>
+              <li>Easy-Acumatica v0.5.10 installed (<code>pip install easy-acumatica</code>)</li>
               <li>Acumatica instance with REST API enabled</li>
               <li>API credentials (username, password, tenant, branch)</li>
             </ul>
@@ -292,7 +292,7 @@ for order in completed_orders:
 
 useSeoMeta({
   title: 'Quickstart Guide | Easy-Acumatica Python',
-  description: 'Get started with Easy-Acumatica v0.5.4. Learn basic CRUD operations, querying, and working with the Acumatica REST API.',
+  description: 'Get started with Easy-Acumatica v0.5.10. Learn basic CRUD operations, querying, and working with the Acumatica REST API.',
   ogTitle: 'Easy-Acumatica Python Quickstart Guide',
   ogDescription: 'Step-by-step guide to using Easy-Acumatica Python library for Acumatica ERP integration. CRUD operations, OData queries, and more.',
   ogType: 'article',

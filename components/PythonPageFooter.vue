@@ -12,7 +12,7 @@
           </p>
           <div class="version-info mt-3">
             <v-chip size="small" variant="outlined" color="white">
-              v0.5.4
+              v0.5.10
             </v-chip>
             <v-chip size="small" variant="outlined" color="white" class="ml-2">
               Python 3.8+
@@ -27,7 +27,6 @@
             <li><a href="/python/installation">Installation</a></li>
             <li><a href="/python/quickstart">Quickstart</a></li>
             <li><a href="/python/client">Client Guide</a></li>
-            <li><a href="/python/migration">Migration</a></li>
           </ul>
         </v-col>
 

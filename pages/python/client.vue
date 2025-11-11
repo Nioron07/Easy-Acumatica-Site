@@ -64,7 +64,7 @@
                   .env File Loading
                 </h2>
                 <p class="text-body-1 mb-4">
-                  As of v0.5.4, the client automatically searches for and loads credentials from .env files.
+                  As of v0.5.10, the client automatically searches for and loads credentials from .env files.
                   This simplifies configuration management across different environments.
                 </p>
 
@@ -96,7 +96,7 @@
                   Differential Caching
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Version 0.5.4 introduces differential caching, which dramatically reduces initialization time
+                  Version 0.5.10 introduces differential caching, which dramatically reduces initialization time
                   by caching generated models and services. The cache intelligently updates only changed components.
                 </p>
 
@@ -112,11 +112,12 @@
               <section id="discovery" class="content-section">
                 <h2 class="section-title">
                   <v-icon class="section-icon">mdi-magnify-scan</v-icon>
-                  Schema Discovery
+                  Schema Discovery & Introspection
                 </h2>
                 <p class="text-body-1 mb-4">
                   On initialization, the client fetches the OpenAPI schema and generates models and services
-                  based on your instance configuration.
+                  based on your instance configuration. The client provides powerful introspection methods
+                  to explore available services, models, and their schemas.
                 </p>
 
                 <CodeSnippet :code="discoveryExample" />
@@ -236,7 +237,7 @@
                   Task Scheduler
                 </h2>
                 <p class="text-body-1 mb-4">
-                  Version 0.5.4 adds a built-in task scheduler for running periodic jobs. Access it via
+                  Version 0.5.10 adds a built-in task scheduler for running periodic jobs. Access it via
                   <code>client.scheduler</code> property. See the <NuxtLink to="/python/task-scheduler">Task Scheduler</NuxtLink>
                   documentation for detailed information.
                 </p>
@@ -368,7 +369,7 @@ const navItems = ref([
   { id: 'env-loading', title: '.env File Loading', icon: 'mdi-file-cog' },
   { id: 'configuration', title: 'Configuration', icon: 'mdi-cog' },
   { id: 'caching', title: 'Differential Caching', icon: 'mdi-cached' },
-  { id: 'discovery', title: 'Schema Discovery', icon: 'mdi-magnify-scan' },
+  { id: 'discovery', title: 'Schema Discovery & Introspection', icon: 'mdi-magnify-scan' },
   { id: 'models', title: 'Dynamic Models', icon: 'mdi-cube-outline' },
   { id: 'services', title: 'Dynamic Services', icon: 'mdi-api' },
   { id: 'odata', title: 'OData Features', icon: 'mdi-filter' },
@@ -463,7 +464,7 @@ const configExample = ref(`client = AcumaticaClient(
     password="secure_password",
     tenant="Company",
 
-    # Caching (new in v0.5.4)
+    # Caching (new in v0.5.10)
     cache_methods=True,         # Enable differential caching
     cache_ttl_hours=24,        # Cache lifetime in hours
     cache_dir=Path("~/.cache"), # Cache directory location
@@ -577,16 +578,24 @@ for model in models[:10]:  # Show first 10
 
 # Get detailed information about a specific service
 service_info = client.get_service_info('Customer')
-print(f"\\nCustomer service methods: {service_info['methods']}")
+print(f"\\nCustomer service: {service_info['entity_name']}")
+print(f"Available methods: {service_info['methods']}")
+print(f"Available actions: {service_info.get('actions', [])}")
 
 # Get detailed information about a specific model
 model_info = client.get_model_info('Customer')
 print(f"\\nCustomer model fields: {model_info['field_count']} fields")
+print(f"Field names: {list(model_info['fields'].keys())[:10]}")
 
 # Check for custom fields
 customer_fields = model_info['fields']
 custom_fields = [name for name in customer_fields if name.startswith('Usr')]
-print(f"Custom fields on Customer: {custom_fields}")`);
+print(f"Custom fields on Customer: {custom_fields}")
+
+# Get complete schema information
+schema_info = client.get_schema_info()
+print(f"\\nSchema version: {schema_info.get('version')}")
+print(f"Total endpoints: {schema_info.get('endpoint_count')}")`);
 
 const modelsExample = ref(`# All models follow Python dataclass patterns
 
@@ -999,12 +1008,12 @@ const initializationParams = ref([
   { name: 'tenant', type: 'str', required: false, description: 'Tenant/Company name' },
   { name: 'branch', type: 'str', required: false, description: 'Branch code' },
   { name: 'locale', type: 'str', required: false, description: 'Locale (e.g., "en-US")' },
-  { name: 'env_file', type: 'str | Path', required: false, description: 'Path to .env file (v0.5.4+)' },
-  { name: 'auto_load_env', type: 'bool', required: false, description: 'Auto-search for .env files (default: True, v0.5.4+)' },
-  { name: 'cache_methods', type: 'bool', required: false, description: 'Enable differential caching (v0.5.4+)' },
-  { name: 'cache_ttl_hours', type: 'int', required: false, description: 'Cache TTL in hours (default: 24, v0.5.4+)' },
-  { name: 'cache_dir', type: 'Path', required: false, description: 'Cache directory (default: ~/.easy_acumatica_cache, v0.5.4+)' },
-  { name: 'force_rebuild', type: 'bool', required: false, description: 'Force rebuild ignoring cache (v0.5.4+)' },
+  { name: 'env_file', type: 'str | Path', required: false, description: 'Path to .env file (v0.5.10+)' },
+  { name: 'auto_load_env', type: 'bool', required: false, description: 'Auto-search for .env files (default: True, v0.5.10+)' },
+  { name: 'cache_methods', type: 'bool', required: false, description: 'Enable differential caching (v0.5.10+)' },
+  { name: 'cache_ttl_hours', type: 'int', required: false, description: 'Cache TTL in hours (default: 24, v0.5.10+)' },
+  { name: 'cache_dir', type: 'Path', required: false, description: 'Cache directory (default: ~/.easy_acumatica_cache, v0.5.10+)' },
+  { name: 'force_rebuild', type: 'bool', required: false, description: 'Force rebuild ignoring cache (v0.5.10+)' },
   { name: 'verify_ssl', type: 'bool', required: false, description: 'Verify SSL certificates (default: True)' },
   { name: 'persistent_login', type: 'bool', required: false, description: 'Maintain session (default: True)' },
   { name: 'retry_on_idle_logout', type: 'bool', required: false, description: 'Auto-retry on timeout (default: True)' },

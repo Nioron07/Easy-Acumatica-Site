@@ -129,21 +129,37 @@
               <!-- Model Discovery -->
               <section id="discovery" class="doc-section">
                 <h2>Model Discovery</h2>
-                <p>List all available models:</p>
+                <p>List all available models and inspect their structure:</p>
                 <CodeSnippet :code="discoveryExample" language="python" />
               </section>
 
-              <!-- Best Practices -->
-              <section id="best-practices" class="doc-section">
-                <h2>Best Practices</h2>
+              <!-- Schema Inspection -->
+              <section id="schema-inspection" class="doc-section">
+                <h2>Schema Inspection</h2>
+                <p>
+                  Models provide a <code>get_schema()</code> classmethod that returns a simplified schema
+                  showing Python types for all fields. This is useful for understanding model structure
+                  and for programmatically exploring field types:
+                </p>
+                <CodeSnippet :code="schemaInspectionExample" language="python" />
+
+                <h3>Schema Structure</h3>
+                <p>The <code>get_schema()</code> method returns a nested dictionary where each field has:</p>
                 <ul>
-                  <li>Use models for better type safety and IDE support</li>
-                  <li>Generate stub files once after connecting to enable full autocomplete</li>
-                  <li>Leverage optional fields for partial updates</li>
-                  <li>Use <code>build()</code> when you need to inspect the API payload</li>
-                  <li>Models are thread-safe and can be shared across threads</li>
+                  <li><strong>Primitive fields</strong>: <code>{'type': 'str', 'fields': {}}</code> (types: 'str', 'int', 'bool', 'float', 'datetime')</li>
+                  <li><strong>Nested models</strong>: <code>{'type': 'ModelName', 'fields': {...}}</code> with recursively expanded field schemas</li>
+                  <li><strong>Array fields</strong>: <code>{'type': 'List[TypeName]', 'fields': {...}}</code> with the item schema in 'fields'</li>
+                  <li><strong>Circular references</strong>: <code>{'type': '(circular: ClassName)', 'fields': {}}</code> to prevent infinite recursion</li>
+                  <li><strong>Any type</strong>: <code>{'type': 'Any', 'fields': {}}</code> for untyped or dynamic fields</li>
                 </ul>
+
+                <p class="note">
+                  This is different from the service's <code>get_schema()</code> method, which retrieves
+                  Acumatica's native $adHocSchema. The model's <code>get_schema()</code> returns simplified
+                  Python type information for the generated dataclass.
+                </p>
               </section>
+
             </v-container>
           </v-col>
 
@@ -181,7 +197,7 @@ const navItems = ref([
   { id: 'data-validation', title: 'Data Validation', icon: 'mdi-check-circle' },
   { id: 'converting', title: 'Converting to Dictionaries', icon: 'mdi-swap-horizontal' },
   { id: 'discovery', title: 'Model Discovery', icon: 'mdi-magnify' },
-  { id: 'best-practices', title: 'Best Practices', icon: 'mdi-star' },
+  { id: 'schema-inspection', title: 'Schema Inspection', icon: 'mdi-file-tree' },
 ]);
 
 const overviewExample = `from easy_acumatica import AcumaticaClient
@@ -394,6 +410,88 @@ import dataclasses
 fields = dataclasses.fields(Customer)
 for field in fields:
     print(f"{field.name}: {field.type}")`;
+
+const schemaInspectionExample = `# Get the simplified schema for a model
+schema = client.models.Customer.get_schema()
+print(schema)
+
+# Example output (each field has 'type' and 'fields' keys):
+# {
+#   'CustomerID': {'type': 'str', 'fields': {}},
+#   'CustomerName': {'type': 'str', 'fields': {}},
+#   'Email': {'type': 'str', 'fields': {}},
+#   'CreditLimit': {'type': 'float', 'fields': {}},
+#   'Status': {'type': 'str', 'fields': {}},
+#   'MainContact': {
+#     'type': 'Contact',
+#     'fields': {
+#       'Email': {'type': 'str', 'fields': {}},
+#       'DisplayName': {'type': 'str', 'fields': {}},
+#       'Phone': {'type': 'str', 'fields': {}}
+#     }
+#   },
+#   'Addresses': {
+#     'type': 'List[Address]',
+#     'fields': {
+#       'AddressLine1': {'type': 'str', 'fields': {}},
+#       'City': {'type': 'str', 'fields': {}},
+#       'State': {'type': 'str', 'fields': {}},
+#       'PostalCode': {'type': 'str', 'fields': {}}
+#     }
+#   }
+# }
+
+# Check field types programmatically
+customer_id_info = schema['CustomerID']
+print(f"CustomerID is a {customer_id_info['type']} field")
+
+# Check for nested models
+main_contact_info = schema.get('MainContact', {})
+if main_contact_info.get('type') and main_contact_info['type'] != 'str':
+    print(f"MainContact is a nested {main_contact_info['type']} model:")
+    for field_name, field_info in main_contact_info['fields'].items():
+        print(f"  {field_name}: {field_info['type']}")
+
+# Check for array fields
+addresses_info = schema.get('Addresses', {})
+if 'List[' in addresses_info.get('type', ''):
+    print(f"Addresses is an array: {addresses_info['type']}")
+    print(f"With fields: {list(addresses_info['fields'].keys())}")
+
+# Useful for generating documentation or validation
+def print_schema(model_class, indent=0):
+    """Recursively print a model's schema"""
+    schema = model_class.get_schema()
+    for field_name, field_info in schema.items():
+        field_type = field_info.get('type', 'unknown')
+        fields = field_info.get('fields', {})
+
+        if 'List[' in field_type:
+            # Array field
+            print("  " * indent + f"{field_name}: {field_type}")
+            if fields:
+                print_nested_fields(fields, indent + 1)
+        elif fields:
+            # Nested model
+            print("  " * indent + f"{field_name}: {field_type}")
+            print_nested_fields(fields, indent + 1)
+        else:
+            # Primitive field
+            print("  " * indent + f"{field_name}: {field_type}")
+
+def print_nested_fields(fields, indent):
+    for name, field_info in fields.items():
+        field_type = field_info.get('type', 'unknown')
+        nested_fields = field_info.get('fields', {})
+
+        if nested_fields:
+            print("  " * indent + f"{name}: {field_type}")
+            print_nested_fields(nested_fields, indent + 1)
+        else:
+            print("  " * indent + f"{name}: {field_type}")
+
+# Print the full schema
+print_schema(client.models.SalesOrder)`;
 
 useSeoMeta({
   title: 'Dynamic Models | Easy-Acumatica Python',

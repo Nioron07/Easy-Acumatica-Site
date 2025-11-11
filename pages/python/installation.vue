@@ -7,7 +7,7 @@
           <v-col cols="12" lg="10" class="text-center">
             <div class="hero-content">
               <h1 class="hero-title">Installation</h1>
-              <p class="hero-subtitle">Install Easy-Acumatica v0.5.4 via pip</p>
+              <p class="hero-subtitle">Install Easy-Acumatica v0.5.10 via pip</p>
             </div>
           </v-col>
         </v-row>
@@ -124,7 +124,7 @@ venv\\Scripts\\activate
 # Install package
 pip install easy-acumatica`;
 
-const specificVersion = `pip install easy-acumatica==0.5.4`;
+const specificVersion = `pip install easy-acumatica==0.5.10`;
 
 const devInstall = `git clone https://github.com/Nioron07/Easy-Acumatica.git
 cd Easy-Acumatica

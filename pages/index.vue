@@ -45,7 +45,7 @@
                 Python Docs
               </v-btn>
             </v-col>
-            <v-col cols="12" sm="auto">
+            <v-col cols="12" sm="auto" class="mb-3 mb-sm-0">
               <v-btn
                 size="x-large"
                 color="white"
@@ -58,6 +58,20 @@
               >
                 <v-icon start size="large">mdi-npm</v-icon>
                 NPM Docs
+              </v-btn>
+            </v-col>
+            <v-col cols="12" sm="auto">
+              <v-btn
+                size="x-large"
+                color="deep-purple-lighten-1"
+                variant="flat"
+                rounded="pill"
+                class="hero-btn hero-btn-acunexus"
+                to="/acunexus"
+                elevation="8"
+                block
+              >
+                AcuNexus Docs
               </v-btn>
             </v-col>
           </v-row>
@@ -231,6 +245,71 @@
       </v-row>
     </section>
 
+    <!-- AcuNexus Section -->
+    <section class="acunexus-section">
+      <v-row justify="center">
+        <v-col cols="12" md="10">
+          <div class="acunexus-container">
+            <div class="acunexus-glow"></div>
+            <div class="acunexus-content">
+              <div class="acunexus-header">
+                <v-img
+                  src="../assets/AcuNexus_Logo_Small.png"
+                  alt="AcuNexus Logo"
+                  max-width="200"
+                  class="mx-auto mb-4"
+                />
+                <h2 class="acunexus-title mb-3">AcuNexus</h2>
+                <p class="acunexus-subtitle mb-6">
+                  Self-Hosted Multi-Instance Management Platform
+                </p>
+              </div>
+
+              <p class="acunexus-description mb-8">
+                Built on Easy-Acumatica Python, AcuNexus is a self-hosted web application that provides a visual
+                interface for building integrations and utilizing the package. Manage multiple Acumatica instances,
+                browse services and models interactively, and deploy custom REST API endpoints with automatic
+                schema generation—all from a single interface.
+              </p>
+
+              <div class="acunexus-features mb-8">
+                <div class="acunexus-feature">
+                  <v-icon size="24">mdi-server-network</v-icon>
+                  <span>Multi-Client Management</span>
+                </div>
+                <div class="acunexus-feature">
+                  <v-icon size="24">mdi-api</v-icon>
+                  <span>Endpoint Deployment</span>
+                </div>
+                <div class="acunexus-feature">
+                  <v-icon size="24">mdi-shield-lock</v-icon>
+                  <span>Encrypted Credentials</span>
+                </div>
+                <div class="acunexus-feature">
+                  <v-icon size="24">mdi-docker</v-icon>
+                  <span>Docker Deployment</span>
+                </div>
+              </div>
+
+              <v-btn
+                href="https://github.com/Nioron07/AcuNexus"
+                target="_blank"
+                rel="noopener"
+                size="x-large"
+                rounded="pill"
+                class="acunexus-btn"
+                elevation="8"
+              >
+                <v-icon start>mdi-github</v-icon>
+                View on GitHub
+                <v-icon end>mdi-open-in-new</v-icon>
+              </v-btn>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="cta-gradient"></div>
@@ -324,7 +403,7 @@ useSchemaOrg([
     },
     'description': 'Type-safe API client libraries for Acumatica ERP with automatic schema discovery, OData queries, and intelligent caching',
     'url': 'https://www.easyacumatica.com',
-    'softwareVersion': '0.5.4',
+    'softwareVersion': '0.5.10',
     'programmingLanguage': ['Python', 'JavaScript'],
     'screenshot': 'https://www.easyacumatica.com/social-images/home.png',
     'featureList': [
@@ -447,7 +526,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Hero Section */
+/* Hero Section - Landing page header with animated gradient background */
 .hero-section {
   position: relative;
   min-height: 100vh;
@@ -497,11 +576,6 @@ onMounted(() => {
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
 .hero-title {
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 900;
@@ -546,7 +620,7 @@ onMounted(() => {
   line-height: 1.6;
 }
 
-/* Floating Shapes */
+/* Hero Decorative Elements - Blurred circular shapes in background */
 .floating-shapes {
   position: absolute;
   inset: 0;
@@ -566,7 +640,6 @@ onMounted(() => {
   height: 300px;
   top: 10%;
   left: -150px;
-  animation: float-1 20s ease-in-out infinite;
 }
 
 .shape-2 {
@@ -574,7 +647,6 @@ onMounted(() => {
   height: 200px;
   bottom: 20%;
   right: -100px;
-  animation: float-2 15s ease-in-out infinite;
 }
 
 .shape-3 {
@@ -582,26 +654,9 @@ onMounted(() => {
   height: 150px;
   top: 50%;
   right: 10%;
-  animation: float-3 25s ease-in-out infinite;
 }
 
-@keyframes float-1 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(30px, -30px) rotate(120deg); }
-  66% { transform: translate(-20px, 20px) rotate(240deg); }
-}
-
-@keyframes float-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-30px, -30px) scale(1.2); }
-}
-
-@keyframes float-3 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(20px, 20px) rotate(180deg); }
-}
-
-/* Adaptation Section */
+/* Dynamic Schema Adaptation Section - Cards showing schema generation features */
 .adaptation-section {
   background: #f8f9fa;
   position: relative;
@@ -670,7 +725,7 @@ onMounted(() => {
   opacity: 0.1;
 }
 
-/* Morphing Section */
+/* Additional Capabilities Section - OData, files, and scheduling features */
 .morphing-section {
   position: relative;
   padding: 8rem 0;
@@ -696,7 +751,6 @@ onMounted(() => {
   background: linear-gradient(135deg, #5e35b1 0%, #7e57c2 100%);
   top: -300px;
   left: -300px;
-  animation: morph-1 20s ease-in-out infinite;
 }
 
 .morph-2 {
@@ -705,17 +759,6 @@ onMounted(() => {
   background: linear-gradient(135deg, #1e88e5 0%, #3949ab 100%);
   bottom: -200px;
   right: -200px;
-  animation: morph-2 15s ease-in-out infinite;
-}
-
-@keyframes morph-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(100px, 100px) scale(1.2); }
-}
-
-@keyframes morph-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-50px, -50px) scale(0.8); }
 }
 
 .capability-card {
@@ -753,7 +796,7 @@ onMounted(() => {
   transform: rotate(0deg);
 }
 
-/* Benefits Section */
+/* Key Benefits Section - Why use Easy-Acumatica value propositions */
 .benefits-container {
   display: grid;
   gap: 3rem;
@@ -785,7 +828,7 @@ onMounted(() => {
   line-height: 1;
 }
 
-/* Tech Section */
+/* Technology Stack Section - Python and Node.js implementation cards */
 .tech-section {
   position: relative;
   padding: 8rem 0;
@@ -967,6 +1010,18 @@ onMounted(() => {
   color: white !important;
 }
 
+.hero-btn-acunexus {
+  background: linear-gradient(135deg, #7e57c2 0%, #9575cd 100%) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.hero-btn-acunexus:hover {
+  background: linear-gradient(135deg, #9575cd 0%, #b39ddb 100%) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-2px);
+}
+
 /* Button Styles */
 .border-thick {
   border-width: 2px !important;
@@ -985,6 +1040,128 @@ onMounted(() => {
   background: rgba(255, 255, 255, 0.3) !important;
   border-color: rgba(255, 255, 255, 0.6) !important;
   transform: translateY(-2px);
+}
+
+/* AcuNexus Section */
+.acunexus-section {
+  padding: 6rem 0;
+  background: #f8f9fa;
+  position: relative;
+}
+
+.acunexus-section :deep(.v-img) {
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.acunexus-container {
+  position: relative;
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 50%, #5e35b1 100%);
+  border-radius: 32px;
+  padding: 4rem;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(94, 53, 177, 0.3);
+}
+
+.acunexus-glow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #5e35b1, #7e57c2, #3949ab);
+  border-radius: 32px;
+  opacity: 0.5;
+  filter: blur(20px);
+  z-index: 0;
+}
+
+.acunexus-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.acunexus-header {
+  margin-bottom: 2rem;
+}
+
+.acunexus-icon {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.acunexus-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.acunexus-subtitle {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+}
+
+.acunexus-description {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.acunexus-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.acunexus-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  color: white;
+  font-weight: 500;
+}
+
+.acunexus-feature:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.acunexus-btn {
+  background: white !important;
+  color: #5e35b1 !important;
+  font-weight: 600;
+  min-width: 240px;
+  height: 64px !important;
+  font-size: 1.125rem !important;
+  transition: all 0.3s ease;
+}
+
+.acunexus-btn:hover {
+  background: rgba(255, 255, 255, 0.95) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+@media (max-width: 960px) {
+  .acunexus-container {
+    padding: 3rem 2rem;
+  }
+
+  .acunexus-features {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 /* Animations */
