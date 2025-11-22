@@ -1,5 +1,5 @@
 <template>
-  <div class="acunexus-page">
+  <div class="orbu-page">
     <v-container fluid class="pa-0">
       <!-- Hero Section -->
       <section class="hero-section">
@@ -7,8 +7,8 @@
           <v-row justify="center">
             <v-col cols="12" md="10" class="text-center">
               <v-img
-                src="../../assets/AcuNexus_Logo_Big.png"
-                alt="AcuNexus Logo"
+                src="../../assets/Orbu_Large_Logo.png"
+                alt="Orbu Logo"
                 max-width="400"
                 class="mx-auto mb-6"
               />
@@ -16,14 +16,14 @@
                 Self-Hosted Multi-Instance Management Platform
               </p>
               <p class="hero-description mb-8">
-                Built on Easy-Acumatica Python, AcuNexus is a self-hosted web application that provides a visual
+                Built on Easy-Acumatica Python, Orbu is a self-hosted web application that provides a visual
                 interface for building integrations and utilizing the package. Manage multiple Acumatica instances,
                 browse services and models interactively, and deploy custom REST API endpoints with automatic
                 schema generation—all from a single interface.
               </p>
               <div class="d-flex flex-wrap gap-3 justify-center">
                 <v-btn
-                  href="https://github.com/Nioron07/AcuNexus"
+                  href="https://github.com/Nioron07/Orbu"
                   target="_blank"
                   rel="noopener"
                   size="large"
@@ -44,7 +44,7 @@
       <!-- Documentation Section -->
       <section class="documentation-section">
         <v-container>
-          <h2 class="section-title text-center mb-12">Explore AcuNexus Features</h2>
+          <h2 class="section-title text-center mb-12">Explore Orbu Features</h2>
           <v-row>
             <v-col cols="12" md="4" v-for="doc in docPages" :key="doc.link">
               <v-card class="doc-card h-100" elevation="2" :to="doc.link">
@@ -69,32 +69,32 @@ const docPages = ref([
   {
     icon: 'mdi-download',
     title: 'Setup & Installation',
-    description: 'Get started with AcuNexus by following our setup guide',
-    link: '/acunexus/setup'
+    description: 'Get started with Orbu by following our setup guide',
+    link: '/orbu/setup'
   },
   {
     icon: 'mdi-server-network',
     title: 'Client Management',
     description: 'Connect and manage multiple Acumatica instances',
-    link: '/acunexus/clients'
+    link: '/orbu/clients'
   },
   {
     icon: 'mdi-cube-outline',
     title: 'Model Viewing',
     description: 'Browse and explore data models and schemas',
-    link: '/acunexus/models'
+    link: '/orbu/models'
   },
   {
     icon: 'mdi-magnify',
     title: 'Service Viewing',
     description: 'Explore available REST API services and methods',
-    link: '/acunexus/services'
+    link: '/orbu/services'
   },
   {
     icon: 'mdi-api',
     title: 'Deploying & Using Endpoints',
     description: 'Deploy service methods as REST API endpoints',
-    link: '/acunexus/endpoints'
+    link: '/orbu/endpoints'
   }
 ]);
 
@@ -103,23 +103,23 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: 'AcuNexus | Multi-Instance Acumatica Management',
+  title: 'Orbu | Multi-Instance Acumatica Management',
   description: 'Self-hosted platform for managing multiple Acumatica instances. Browse services and models, deploy REST API endpoints with automatic schema generation.',
-  ogTitle: 'AcuNexus - Multi-Instance Acumatica Management Platform',
+  ogTitle: 'Orbu - Multi-Instance Acumatica Management Platform',
   ogDescription: 'Self-hosted platform for managing multiple Acumatica ERP instances with visual interface for building integrations and deploying REST API endpoints.',
   ogType: 'article',
-  ogUrl: 'https://easyacumatica.com/acunexus',
+  ogUrl: 'https://easyacumatica.com/orbu',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'AcuNexus: Self-Hosted Acumatica Management Platform',
+  twitterTitle: 'Orbu: Self-Hosted Acumatica Management Platform',
   twitterDescription: 'Manage multiple Acumatica instances, browse services and models, and deploy REST API endpoints - all from a visual interface.',
   robots: 'index, follow',
-  keywords: 'AcuNexus, Acumatica management, multi-instance management, REST API endpoints, self-hosted, Easy-Acumatica, Acumatica integration, visual interface, schema generation, Docker deployment'
+  keywords: 'Orbu, Acumatica management, multi-instance management, REST API endpoints, self-hosted, Easy-Acumatica, Acumatica integration, visual interface, schema generation, Docker deployment'
 });
 
 useSchemaOrg([
   {
     '@type': 'SoftwareApplication',
-    'name': 'AcuNexus',
+    'name': 'Orbu',
     'applicationCategory': 'BusinessApplication',
     'operatingSystem': 'Cross-platform (Docker)',
     'offers': {
@@ -128,7 +128,7 @@ useSchemaOrg([
       'priceCurrency': 'USD'
     },
     'description': 'Self-hosted web application for managing multiple Acumatica instances and deploying REST API endpoints',
-    'url': 'https://easyacumatica.com/acunexus',
+    'url': 'https://easyacumatica.com/orbu',
     'programmingLanguage': ['Python', 'JavaScript'],
     'featureList': [
       'Multi-client management',
@@ -140,29 +140,29 @@ useSchemaOrg([
       'Docker deployment',
       'OpenAPI documentation'
     ],
-    'screenshot': 'https://easyacumatica.com/assets/AcuNexus_Logo_Small.png'
+    'screenshot': 'https://easyacumatica.com/assets/Orbu_Logo_Small.png'
   },
   {
     '@type': 'TechArticle',
-    'headline': 'AcuNexus Documentation',
-    'description': 'Complete guide to using AcuNexus for Acumatica multi-instance management',
-    'url': 'https://easyacumatica.com/acunexus',
+    'headline': 'Orbu Documentation',
+    'description': 'Complete guide to using Orbu for Acumatica multi-instance management',
+    'url': 'https://easyacumatica.com/orbu',
     'author': {
       '@type': 'Organization',
       'name': 'Easy-Acumatica Team'
     },
     'about': {
       '@type': 'SoftwareSourceCode',
-      'name': 'AcuNexus',
+      'name': 'Orbu',
       'programmingLanguage': 'Python',
-      'codeRepository': 'https://github.com/Nioron07/AcuNexus'
+      'codeRepository': 'https://github.com/Nioron07/Orbu'
     }
   }
 ]);
 </script>
 
 <style scoped>
-.acunexus-page {
+.orbu-page {
   background: #f8f9fa;
   min-height: 100vh;
 }

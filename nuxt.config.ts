@@ -50,12 +50,13 @@ export default defineNuxtConfig({
         '/python/odata/filters',
         '/python/odata/queryoptions',
         '/npm',
-        '/acunexus',
-        '/acunexus/setup',
-        '/acunexus/clients',
-        '/acunexus/models',
-        '/acunexus/services',
-        '/acunexus/endpoints'
+        '/orbu',
+        '/orbu/setup',
+        '/orbu/clients',
+        '/orbu/models',
+        '/orbu/services',
+        '/orbu/endpoints',
+        '/about'
       ]
     }
   },

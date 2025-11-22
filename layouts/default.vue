@@ -20,15 +20,19 @@
 
         <div class="d-flex align-center" style="cursor: pointer;" @click="$router.push('/')">
           <v-img
-            src="../assets/EasyAcumaticaLogo.webp"
-            alt="Easy-Acumatica Logo"
-            width="36"
-            height="36"
-            class="mr-3"
+            :src="isOrbuPage ? orbuLogo : easyAcumaticaLogo"
+            :alt="isOrbuPage ? 'Orbu Logo' : 'Easy-Acumatica Logo'"
+            width="50"
+            height="50"
+            class="mr-3 rounded-lg"
           />
           <div>
-            <div class="text-h6 font-weight-bold text-grey-darken-4">Easy-Acumatica</div>
-            <div class="text-caption text-grey-darken-1">Documentation</div>
+            <div class="text-h6 font-weight-bold text-grey-darken-4">
+              {{ isOrbuPage ? 'Orbu' : 'Easy-Acumatica' }}
+            </div>
+            <div class="text-caption text-grey-darken-1">
+              {{ headerSubtitle }}
+            </div>
           </div>
         </div>
 
@@ -76,15 +80,15 @@
             variant="text"
             color="grey-darken-3"
             class="mx-1 font-weight-medium"
-            to="/acunexus"
+            to="/orbu"
           >
             <v-icon start>mdi-cloud-sync</v-icon>
-            AcuNexus
+            Orbu
           </v-btn>
 
           <v-divider vertical class="mx-3" />
 
-          <!-- GitHub button - different repos for Python, AcuNexus, and Node.js -->
+          <!-- GitHub button - different repos for Python, Orbu, and Node.js -->
           <v-btn v-if="$route.fullPath.includes('python')"
             icon
             variant="text"
@@ -96,11 +100,11 @@
             <v-icon>mdi-github</v-icon>
           </v-btn>
 
-          <v-btn v-else-if="$route.fullPath.includes('acunexus')"
+          <v-btn v-else-if="$route.fullPath.includes('orbu')"
             icon
             variant="text"
             color="grey-darken-2"
-            href="https://github.com/Nioron07/AcuNexus"
+            href="https://github.com/Nioron07/Orbu"
             target="_blank"
             rel="noopener"
           >
@@ -118,7 +122,7 @@
             <v-icon>mdi-github</v-icon>
           </v-btn>
 
-          <!-- Package button - only show for Python and Node.js, not AcuNexus -->
+          <!-- Package button - only show for Python and Node.js, not Orbu -->
           <v-btn v-if="$route.fullPath.includes('python')"
             icon
             variant="text"
@@ -130,7 +134,7 @@
             <v-icon>mdi-package-variant</v-icon>
           </v-btn>
 
-          <v-btn v-else-if="!$route.fullPath.includes('acunexus')"
+          <v-btn v-else-if="!$route.fullPath.includes('orbu')"
             icon
             variant="text"
             color="grey-darken-2"
@@ -162,12 +166,30 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRoute } from 'vue-router';
 import ModernDocsSidebar from '~/components/DocsSidebar.vue';
+import orbuLogoUrl from '~/assets/Orbu_Small_Transparent_Logo.png';
+import easyAcumaticaLogoUrl from '~/assets/EasyAcumaticaLogo.webp';
 
+const route = useRoute();
 const drawer = ref(true);
 const windowWidth = ref(0);
 
 const isMobile = computed(() => windowWidth.value < 960);
+const isOrbuPage = computed(() => route.fullPath.includes('orbu'));
+const orbuLogo = orbuLogoUrl;
+const easyAcumaticaLogo = easyAcumaticaLogoUrl;
+
+const headerSubtitle = computed(() => {
+  if (route.fullPath.includes('orbu')) {
+    return 'Documentation';
+  } else if (route.fullPath.includes('python')) {
+    return 'For Python';
+  } else if (route.fullPath.includes('npm')) {
+    return 'For Node.js';
+  }
+  return 'Documentation';
+});
 
 const updateWidth = () => {
   windowWidth.value = window.innerWidth;

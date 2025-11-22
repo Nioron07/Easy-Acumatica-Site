@@ -1,11 +1,11 @@
 <template>
-  <div class="acunexus-clients-page">
+  <div class="orbu-clients-page">
     <v-container>
       <v-row>
         <v-col cols="12">
           <h1 class="page-title mb-4">Client Management</h1>
           <p class="text-body-1 mb-8">
-            Connect and manage multiple Acumatica instances with AcuNexus.
+            Connect and manage multiple Acumatica instances with Orbu.
           </p>
 
           <v-alert type="info" variant="tonal" class="mb-6">
@@ -43,19 +43,19 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: 'Client Management | AcuNexus Documentation',
-  description: 'Learn how to connect and manage multiple Acumatica instances with AcuNexus. Add, configure, and switch between different Acumatica ERP environments with encrypted credential storage.',
-  ogTitle: 'AcuNexus Client Management - Multi-Instance Connections',
+  title: 'Client Management | Orbu Documentation',
+  description: 'Learn how to connect and manage multiple Acumatica instances with Orbu. Add, configure, and switch between different Acumatica ERP environments with encrypted credential storage.',
+  ogTitle: 'Orbu Client Management - Multi-Instance Connections',
   ogDescription: 'Connect and manage multiple Acumatica instances from a single interface with secure credential storage.',
   ogType: 'article',
-  ogUrl: 'https://easyacumatica.com/acunexus/clients',
+  ogUrl: 'https://easyacumatica.com/orbu/clients',
   robots: 'index, follow',
-  keywords: 'AcuNexus clients, Acumatica instances, multi-instance management, credential management, connection configuration'
+  keywords: 'Orbu clients, Acumatica instances, multi-instance management, credential management, connection configuration'
 });
 </script>
 
 <style scoped>
-.acunexus-clients-page {
+.orbu-clients-page {
   padding: 2rem 0;
 }
 

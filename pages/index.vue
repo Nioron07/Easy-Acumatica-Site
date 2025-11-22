@@ -27,7 +27,7 @@
 
           <div class="hero-description">
             <p>Python and Node.js libraries that provide type-safe wrappers around the Acumatica REST API with automatic schema discovery and OData query support.</p>
-            <p class="mt-4"><strong>Plus AcuNexus:</strong> A self-hosted web application for visually managing multiple Acumatica instances, browsing services and models, and deploying custom REST API endpoints.</p>
+            <p class="mt-4"><strong>Plus Orbu:</strong> A self-hosted web application for visually managing multiple Acumatica instances, browsing services and models, and deploying custom REST API endpoints.</p>
           </div>
 
           <v-row justify="center" class="mt-12 hero-buttons">
@@ -67,12 +67,12 @@
                 color="deep-purple-lighten-1"
                 variant="flat"
                 rounded="pill"
-                class="hero-btn hero-btn-acunexus"
-                to="/acunexus"
+                class="hero-btn hero-btn-orbu"
+                to="/orbu"
                 elevation="8"
                 block
               >
-                AcuNexus Docs
+                Orbu Docs
               </v-btn>
             </v-col>
           </v-row>
@@ -119,40 +119,6 @@
       </v-row>
     </section>
 
-    <!-- Morphing Capabilities Section -->
-    <section class="morphing-section">
-      <div class="morph-background">
-        <div class="morph-shape morph-1"></div>
-        <div class="morph-shape morph-2"></div>
-      </div>
-      
-      <v-row justify="center" class="position-relative">
-        <v-col cols="12" md="10" class="text-center">
-          <h2 class="section-title mb-12">
-            <span class="gradient-text-2">Technical Capabilities</span>
-          </h2>
-          
-          <v-row>
-            <v-col 
-              v-for="(capability, i) in morphingCapabilities" 
-              :key="i"
-              cols="12" 
-              md="4"
-              class="mb-8"
-            >
-              <div class="capability-card">
-                <div class="capability-icon">
-                  <v-icon :icon="capability.icon" size="48"></v-icon>
-                </div>
-                <h3 class="text-h5 font-weight-bold mb-3">{{ capability.title }}</h3>
-                <p class="text-body-1 px-4">{{ capability.description }}</p>
-              </div>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </section>
-
     <!-- Benefits Showcase -->
     <section class="benefits-section py-16">
       <v-row justify="center">
@@ -188,7 +154,7 @@
             <span class="gradient-text">Choose Your Platform</span>
           </h2>
           <p class="section-subtitle mb-12">
-            Python and Node.js client libraries, plus AcuNexus for visual multi-instance management
+            Python and Node.js client libraries
           </p>
           
           <v-row justify="center">
@@ -246,48 +212,47 @@
       </v-row>
     </section>
 
-    <!-- AcuNexus Section -->
-    <section class="acunexus-section">
+    <!-- Orbu Section -->
+    <section class="orbu-section">
       <v-row justify="center">
         <v-col cols="12" md="10">
-          <div class="acunexus-container">
-            <div class="acunexus-glow"></div>
-            <div class="acunexus-content">
-              <div class="acunexus-header">
+          <div class="orbu-container">
+            <div class="orbu-glow"></div>
+            <div class="orbu-content">
+              <div class="orbu-header">
                 <v-img
-                  src="../assets/AcuNexus_Logo_Small.png"
-                  alt="AcuNexus Logo"
-                  max-width="200"
+                  src="../assets/Orbu_Large_Logo.png"
+                  alt="Orbu Logo"
+                  max-width="400"
                   class="mx-auto mb-4"
                 />
-                <h2 class="acunexus-title mb-3">AcuNexus</h2>
-                <p class="acunexus-subtitle mb-6">
+                <p class="orbu-subtitle mb-6">
                   Self-Hosted Multi-Instance Management Platform
                 </p>
               </div>
 
-              <p class="acunexus-description mb-8">
-                Built on Easy-Acumatica Python, AcuNexus is a powerful self-hosted web application that provides a visual
+              <p class="orbu-description mb-8">
+                Built on Easy-Acumatica Python, Orbu is a powerful self-hosted web application that provides a visual
                 interface for building integrations and working with multiple Acumatica instances. Perfect for teams managing
-                multiple Acumatica environments, AcuNexus lets you browse services and models interactively, test endpoints
+                multiple Acumatica environments, Orbu lets you browse services and models interactively, test endpoints
                 in real-time, and deploy custom REST API endpoints with automatic schema generation—all from a single,
                 secure interface.
               </p>
 
-              <div class="acunexus-features mb-8">
-                <div class="acunexus-feature">
+              <div class="orbu-features mb-8">
+                <div class="orbu-feature">
                   <v-icon size="24">mdi-server-network</v-icon>
                   <span>Multi-Client Management</span>
                 </div>
-                <div class="acunexus-feature">
+                <div class="orbu-feature">
                   <v-icon size="24">mdi-api</v-icon>
                   <span>Endpoint Deployment</span>
                 </div>
-                <div class="acunexus-feature">
+                <div class="orbu-feature">
                   <v-icon size="24">mdi-shield-lock</v-icon>
                   <span>Encrypted Credentials</span>
                 </div>
-                <div class="acunexus-feature">
+                <div class="orbu-feature">
                   <v-icon size="24">mdi-docker</v-icon>
                   <span>Docker Deployment</span>
                 </div>
@@ -295,10 +260,10 @@
 
               <div class="d-flex gap-4 justify-center flex-wrap">
                 <v-btn
-                  to="/acunexus"
+                  to="/orbu"
                   size="x-large"
                   rounded="pill"
-                  class="acunexus-btn"
+                  class="orbu-btn"
                   elevation="8"
                 >
                   <v-icon start>mdi-book-open-variant</v-icon>
@@ -306,12 +271,12 @@
                   <v-icon end>mdi-arrow-right</v-icon>
                 </v-btn>
                 <v-btn
-                  href="https://github.com/Nioron07/AcuNexus"
+                  href="https://github.com/Nioron07/Orbu"
                   target="_blank"
                   rel="noopener"
                   size="x-large"
                   rounded="pill"
-                  class="acunexus-btn-secondary"
+                  class="orbu-btn-secondary"
                   elevation="8"
                 >
                   <v-icon start>mdi-github</v-icon>
@@ -325,13 +290,39 @@
       </v-row>
     </section>
 
+    <!-- About the Team Section -->
+    <section class="about-section">
+      <v-row justify="center">
+        <v-col cols="12" md="10" class="text-center">
+          <h2 class="section-title mb-4">
+            <span class="gradient-text">About the Team</span>
+          </h2>
+          <p class="section-subtitle mb-8">
+            Meet the people behind Easy-Acumatica
+          </p>
+          <v-btn
+            to="/about"
+            size="large"
+            color="deep-purple"
+            variant="flat"
+            rounded="pill"
+            class="mt-4"
+          >
+            <v-icon start>mdi-account-group</v-icon>
+            Meet the Team
+            <v-icon end>mdi-arrow-right</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="cta-gradient"></div>
       <v-row justify="center" class="position-relative">
         <v-col cols="12" md="8" class="text-center">
           <h2 class="cta-title mb-6">
-            Get Started
+            Contribute
           </h2>
           <p class="cta-subtitle mb-8">
             View the source code, report issues, or contribute on GitHub
@@ -386,22 +377,22 @@ definePageMeta({
 
 // SEO Configuration
 useSeoMeta({
-  title: 'Easy-Acumatica | Acumatica API Libraries + AcuNexus',
-  description: 'Python & Node.js libraries for Acumatica ERP with schema discovery and OData support. Includes AcuNexus for managing multiple instances.',
+  title: 'Easy-Acumatica | Acumatica API Libraries + Orbu',
+  description: 'Python & Node.js libraries for Acumatica ERP with schema discovery and OData support. Includes Orbu for managing multiple instances.',
   ogTitle: 'Easy-Acumatica - API Wrapper for Acumatica ERP',
-  ogDescription: 'Type-safe Python and Node.js libraries for Acumatica REST API. Features automatic schema discovery, OData support, intelligent caching, and AcuNexus multi-instance management platform.',
+  ogDescription: 'Type-safe Python and Node.js libraries for Acumatica REST API. Features automatic schema discovery, OData support, intelligent caching, and Orbu multi-instance management platform.',
   ogType: 'website',
   ogUrl: 'https://easyacumatica.com',
   ogImage: 'https://easyacumatica.com/social-images/home.png',
   ogImageAlt: 'Easy-Acumatica Logo',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Easy-Acumatica: Python & Node.js API Wrapper + AcuNexus Platform',
-  twitterDescription: 'Type-safe API clients for Acumatica ERP with automatic schema discovery, OData support, and AcuNexus multi-instance management.',
+  twitterTitle: 'Easy-Acumatica: Python & Node.js API Wrapper + Orbu Platform',
+  twitterDescription: 'Type-safe API clients for Acumatica ERP with automatic schema discovery, OData support, and Orbu multi-instance management.',
   twitterImage: 'https://easyacumatica.com/social-images/home.png',
   twitterSite: '@easyacumatica',
   robots: 'index, follow',
   author: 'Easy-Acumatica Team',
-  keywords: 'Acumatica, API, Python, Node.js, ERP, REST API, OData, Schema Discovery, Type Safety, API Wrapper, AcuNexus, Multi-Instance Management, Acumatica Integration, Self-Hosted'
+  keywords: 'Acumatica, API, Python, Node.js, ERP, REST API, OData, Schema Discovery, Type Safety, API Wrapper, Orbu, Multi-Instance Management, Acumatica Integration, Self-Hosted'
 });
 
 // Structured Data for SEO
@@ -429,7 +420,7 @@ useSchemaOrg([
       'Session management',
       'File attachments',
       'Custom field support',
-      'AcuNexus multi-instance management',
+      'Orbu multi-instance management',
       'REST API endpoint deployment',
       'Self-hosted web application'
     ]
@@ -456,7 +447,7 @@ useSchemaOrg([
     'sameAs': [
       'https://github.com/Nioron07/Easy-Acumatica',
       'https://github.com/joebewon/Easy-Acumatica',
-      'https://github.com/Nioron07/AcuNexus',
+      'https://github.com/Nioron07/Orbu',
       'https://pypi.org/project/easy-acumatica/'
     ]
   }
@@ -920,6 +911,12 @@ onMounted(() => {
   color: #4caf50;
 }
 
+/* About the Team Section */
+.about-section {
+  padding: 6rem 0;
+  background: white;
+}
+
 /* CTA Section */
 .cta-section {
   position: relative;
@@ -1029,13 +1026,13 @@ onMounted(() => {
   color: white !important;
 }
 
-.hero-btn-acunexus {
+.hero-btn-orbu {
   background: linear-gradient(135deg, #7e57c2 0%, #9575cd 100%) !important;
   color: white !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
 }
 
-.hero-btn-acunexus:hover {
+.hero-btn-orbu:hover {
   background: linear-gradient(135deg, #9575cd 0%, #b39ddb 100%) !important;
   border-color: rgba(255, 255, 255, 0.5) !important;
   transform: translateY(-2px);
@@ -1061,20 +1058,20 @@ onMounted(() => {
   transform: translateY(-2px);
 }
 
-/* AcuNexus Section */
-.acunexus-section {
+/* Orbu Section */
+.orbu-section {
   padding: 6rem 0;
   background: #f8f9fa;
   position: relative;
 }
 
-.acunexus-section :deep(.v-img) {
+.orbu-section :deep(.v-img) {
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
-.acunexus-container {
+.orbu-container {
   position: relative;
   background: linear-gradient(135deg, #1a237e 0%, #3949ab 50%, #5e35b1 100%);
   border-radius: 32px;
@@ -1084,7 +1081,7 @@ onMounted(() => {
   box-shadow: 0 20px 60px rgba(94, 53, 177, 0.3);
 }
 
-.acunexus-glow {
+.orbu-glow {
   position: absolute;
   inset: -2px;
   background: linear-gradient(135deg, #5e35b1, #7e57c2, #3949ab);
@@ -1094,34 +1091,34 @@ onMounted(() => {
   z-index: 0;
 }
 
-.acunexus-content {
+.orbu-content {
   position: relative;
   z-index: 1;
   color: white;
 }
 
-.acunexus-header {
+.orbu-header {
   margin-bottom: 2rem;
 }
 
-.acunexus-icon {
+.orbu-icon {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.acunexus-title {
+.orbu-title {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 900;
   color: white;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.acunexus-subtitle {
+.orbu-subtitle {
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   color: rgba(255, 255, 255, 0.9);
   font-weight: 300;
 }
 
-.acunexus-description {
+.orbu-description {
   font-size: 1.25rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.95);
@@ -1129,7 +1126,7 @@ onMounted(() => {
   margin: 0 auto 2rem;
 }
 
-.acunexus-features {
+.orbu-features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
@@ -1137,7 +1134,7 @@ onMounted(() => {
   margin: 0 auto;
 }
 
-.acunexus-feature {
+.orbu-feature {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -1151,12 +1148,12 @@ onMounted(() => {
   font-weight: 500;
 }
 
-.acunexus-feature:hover {
+.orbu-feature:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
-.acunexus-btn {
+.orbu-btn {
   background: white !important;
   color: #5e35b1 !important;
   font-weight: 600;
@@ -1167,13 +1164,13 @@ onMounted(() => {
   transition: all 0.3s ease;
 }
 
-.acunexus-btn:hover {
+.orbu-btn:hover {
   background: rgba(255, 255, 255, 0.95) !important;
   transform: translateY(-4px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
-.acunexus-btn-secondary {
+.orbu-btn-secondary {
   background: rgba(255, 255, 255, 0.15) !important;
   color: white !important;
   font-weight: 600;
@@ -1185,7 +1182,7 @@ onMounted(() => {
   backdrop-filter: blur(10px);
 }
 
-.acunexus-btn-secondary:hover {
+.orbu-btn-secondary:hover {
   background: rgba(255, 255, 255, 0.25) !important;
   transform: translateY(-4px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3) !important;
@@ -1193,11 +1190,11 @@ onMounted(() => {
 }
 
 @media (max-width: 960px) {
-  .acunexus-container {
+  .orbu-container {
     padding: 3rem 2rem;
   }
 
-  .acunexus-features {
+  .orbu-features {
     grid-template-columns: 1fr;
     gap: 1rem;
   }

@@ -296,64 +296,6 @@
       </v-container>
     </section>
 
-    <!-- AcuNexus Section -->
-    <section class="acunexus-section">
-      <v-container>
-        <v-row justify="center">
-          <v-col cols="12" md="10">
-            <div class="acunexus-card">
-              <div class="acunexus-content">
-                <div class="acunexus-icon-wrapper">
-                  <v-icon size="48" color="white">mdi-cloud-sync</v-icon>
-                </div>
-                <h2 class="acunexus-title">AcuNexus</h2>
-                <p class="acunexus-subtitle">
-                  Self-Hosted Multi-Instance Management Platform
-                </p>
-                <p class="acunexus-description">
-                  A web application for managing multiple Acumatica instances and deploying REST API endpoints.
-                  Connect to multiple ERP instances, browse services and models, and deploy custom API endpoints
-                  with automatic schema generation—all from a single interface.
-                </p>
-
-                <div class="acunexus-features">
-                  <div class="acunexus-feature">
-                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-server-network</v-icon>
-                    <span>Multi-Client Management</span>
-                  </div>
-                  <div class="acunexus-feature">
-                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-api</v-icon>
-                    <span>Endpoint Deployment</span>
-                  </div>
-                  <div class="acunexus-feature">
-                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-shield-lock</v-icon>
-                    <span>Encrypted Credentials</span>
-                  </div>
-                  <div class="acunexus-feature">
-                    <v-icon size="20" color="rgba(255,255,255,0.9)">mdi-docker</v-icon>
-                    <span>Docker Deployment</span>
-                  </div>
-                </div>
-
-                <v-btn
-                  href="https://github.com/Nioron07/AcuNexus"
-                  target="_blank"
-                  rel="noopener"
-                  size="large"
-                  rounded="pill"
-                  class="acunexus-btn mt-6"
-                >
-                  <v-icon start>mdi-github</v-icon>
-                  View on GitHub
-                  <v-icon end>mdi-arrow-right</v-icon>
-                </v-btn>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
-
     <PageFooter />
   </div>
 </template>

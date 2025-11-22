@@ -1,34 +1,34 @@
 <template>
-  <div class="acunexus-models-page">
+  <div class="orbu-services-page">
     <v-container>
       <v-row>
         <v-col cols="12">
-          <h1 class="page-title mb-4">Model Viewing</h1>
+          <h1 class="page-title mb-4">Service Viewing</h1>
           <p class="text-body-1 mb-8">
-            Browse and explore Acumatica data models and their schemas.
+            Explore available REST API services and their methods.
           </p>
 
           <v-alert type="info" variant="tonal" class="mb-6">
-            This documentation is currently under development. Check back soon for detailed model viewing instructions.
+            This documentation is currently under development. Check back soon for detailed service viewing instructions.
           </v-alert>
 
           <section class="content-section">
-            <h2 class="section-title mb-4">Browsing Models</h2>
+            <h2 class="section-title mb-4">Browsing Services</h2>
             <p class="text-body-1">Content coming soon...</p>
           </section>
 
           <section class="content-section">
-            <h2 class="section-title mb-4">Model Details</h2>
+            <h2 class="section-title mb-4">Service Methods</h2>
             <p class="text-body-1">Content coming soon...</p>
           </section>
 
           <section class="content-section">
-            <h2 class="section-title mb-4">Field Definitions</h2>
+            <h2 class="section-title mb-4">Method Signatures</h2>
             <p class="text-body-1">Content coming soon...</p>
           </section>
 
           <section class="content-section">
-            <h2 class="section-title mb-4">Custom Fields</h2>
+            <h2 class="section-title mb-4">Custom Actions</h2>
             <p class="text-body-1">Content coming soon...</p>
           </section>
         </v-col>
@@ -43,19 +43,19 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: 'Model Viewing | AcuNexus Documentation',
-  description: 'Browse and explore Acumatica data models and schemas in AcuNexus. Interactive model viewer with field types, relationships, and schema inspection.',
-  ogTitle: 'AcuNexus Model Viewer - Browse Acumatica Schemas',
-  ogDescription: 'Interactively explore Acumatica data models, view field definitions, and understand entity relationships.',
+  title: 'Service Viewing | Orbu Documentation',
+  description: 'Explore available REST API services and methods in Orbu. Interactive service browser with method signatures, parameters, and testing capabilities.',
+  ogTitle: 'Orbu Service Browser - REST API Explorer',
+  ogDescription: 'Browse Acumatica REST API services, view method signatures, and test endpoints directly from the interface.',
   ogType: 'article',
-  ogUrl: 'https://easyacumatica.com/acunexus/models',
+  ogUrl: 'https://easyacumatica.com/orbu/services',
   robots: 'index, follow',
-  keywords: 'AcuNexus models, Acumatica schema, data models, model viewer, entity relationships, field types'
+  keywords: 'Orbu services, REST API browser, service methods, API explorer, method signatures, endpoint testing'
 });
 </script>
 
 <style scoped>
-.acunexus-models-page {
+.orbu-services-page {
   padding: 2rem 0;
 }
 

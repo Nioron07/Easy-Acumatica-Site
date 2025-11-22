@@ -1,5 +1,5 @@
 <template>
-  <div class="acunexus-endpoints-page">
+  <div class="orbu-endpoints-page">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -48,19 +48,19 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: 'Deploying & Using Endpoints | AcuNexus Documentation',
-  description: 'Learn how to deploy service methods as custom REST API endpoints in AcuNexus. Automatic OpenAPI schema generation, testing interface, and secure deployment.',
-  ogTitle: 'AcuNexus Endpoint Deployment - Custom REST APIs',
+  title: 'Deploying & Using Endpoints | Orbu Documentation',
+  description: 'Learn how to deploy service methods as custom REST API endpoints in Orbu. Automatic OpenAPI schema generation, testing interface, and secure deployment.',
+  ogTitle: 'Orbu Endpoint Deployment - Custom REST APIs',
   ogDescription: 'Deploy Acumatica service methods as custom REST API endpoints with automatic documentation and testing.',
   ogType: 'article',
-  ogUrl: 'https://easyacumatica.com/acunexus/endpoints',
+  ogUrl: 'https://easyacumatica.com/orbu/endpoints',
   robots: 'index, follow',
-  keywords: 'AcuNexus endpoints, REST API deployment, custom endpoints, OpenAPI schema, API documentation, endpoint testing'
+  keywords: 'Orbu endpoints, REST API deployment, custom endpoints, OpenAPI schema, API documentation, endpoint testing'
 });
 </script>
 
 <style scoped>
-.acunexus-endpoints-page {
+.orbu-endpoints-page {
   padding: 2rem 0;
 }
 

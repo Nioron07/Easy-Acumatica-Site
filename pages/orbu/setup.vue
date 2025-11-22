@@ -1,5 +1,5 @@
 <template>
-  <div class="acunexus-setup-page">
+  <div class="orbu-setup-page">
     <!-- Hero Section -->
     <section class="hero-section">
       <v-container>
@@ -7,7 +7,7 @@
           <v-col cols="12" lg="10" class="text-center">
             <div class="hero-content">
               <h1 class="hero-title">Setup & Installation</h1>
-              <p class="hero-subtitle">Get AcuNexus up and running in minutes</p>
+              <p class="hero-subtitle">Get Orbu up and running in minutes</p>
             </div>
           </v-col>
         </v-row>
@@ -26,7 +26,7 @@
                   Local Development Setup
                 </v-alert-title>
                 <p class="mt-2 mb-2">
-                  This guide covers running AcuNexus locally for development and testing purposes.
+                  This guide covers running Orbu locally for development and testing purposes.
                 </p>
                 <p class="mb-0">
                   <strong>For production deployment:</strong> Use a cloud service or dedicated server with proper security configurations.
@@ -38,24 +38,23 @@
               <!-- Prerequisites -->
               <section id="prerequisites" class="doc-section">
                 <h2>Prerequisites</h2>
-                <p>Before installing AcuNexus, ensure you have the following:</p>
+                <p>Before installing Orbu, ensure you have the following:</p>
                 <ul>
                   <li><strong>Docker</strong> and <strong>Docker Compose</strong> installed on your system</li>
                   <li><strong>Git</strong> for cloning the repository</li>
                   <li><strong>Python 3.x</strong> (for generating encryption keys)</li>
-                  <li>At least <strong>2GB RAM</strong> and <strong>5GB disk space</strong></li>
                   <li>Access to one or more Acumatica instances with REST API enabled</li>
                 </ul>
 
                 <v-alert type="info" variant="tonal" class="mt-4">
-                  <strong>Note:</strong> AcuNexus runs entirely in Docker containers, making installation consistent across Windows, macOS, and Linux.
+                  <strong>Note:</strong> Orbu runs entirely in Docker containers, making installation consistent across Windows, macOS, and Linux.
                 </v-alert>
               </section>
 
               <!-- Clone Repository -->
               <section id="clone" class="doc-section">
                 <h2>1. Clone Repository</h2>
-                <p>First, clone the AcuNexus repository from GitHub:</p>
+                <p>First, clone the Orbu repository from GitHub:</p>
                 <CodeSnippet :code="cloneCode" language="bash" />
                 <p class="mt-4">Navigate into the project directory:</p>
                 <CodeSnippet :code="cdCode" language="bash" />
@@ -64,11 +63,11 @@
               <!-- Environment Configuration -->
               <section id="configuration" class="doc-section">
                 <h2>2. Configure Environment</h2>
-                <p>AcuNexus requires environment variables for configuration. Start by copying the example environment file:</p>
+                <p>Orbu requires environment variables for configuration. Start by copying the example environment file:</p>
                 <CodeSnippet :code="copyEnvCode" language="bash" />
 
                 <h3 class="mt-6">Generate Encryption Keys</h3>
-                <p>AcuNexus uses encryption to securely store Acumatica credentials. Generate the required encryption key using Python:</p>
+                <p>Orbu uses encryption to securely store Acumatica credentials. Generate the required encryption key using Python:</p>
                 <CodeSnippet :code="generateKeyCode" language="bash" />
 
                 <h3 class="mt-6">Update .env File</h3>
@@ -105,7 +104,7 @@
               <!-- Build and Start Services -->
               <section id="start" class="doc-section">
                 <h2>3. Start Services</h2>
-                <p>With configuration complete, build and start all AcuNexus services using Docker Compose:</p>
+                <p>With configuration complete, build and start all Orbu services using Docker Compose:</p>
                 <CodeSnippet :code="dockerUpCode" language="bash" />
 
                 <p class="mt-4">This command will:</p>
@@ -122,9 +121,9 @@
 
                 <p class="mt-4">You should see three containers running:</p>
                 <ul>
-                  <li><code>acunexus-frontend</code> - Vue.js web interface</li>
-                  <li><code>acunexus-backend</code> - Flask API server</li>
-                  <li><code>acunexus-db</code> - PostgreSQL database</li>
+                  <li><code>orbu-frontend</code> - Vue.js web interface</li>
+                  <li><code>orbu-backend</code> - Flask API server</li>
+                  <li><code>orbu-db</code> - PostgreSQL database</li>
                 </ul>
 
                 <v-alert type="success" variant="tonal" class="mt-4">
@@ -145,14 +144,14 @@
                         http://localhost:8080
                       </a>
                     </h3>
-                    <p class="text-body-2 text-grey-darken-1 mb-0">Default AcuNexus web interface</p>
+                    <p class="text-body-2 text-grey-darken-1 mb-0">Default Orbu web interface</p>
                   </v-card-text>
                 </v-card>
 
-                <p class="mt-4">You should see the AcuNexus welcome page. You're now ready to add your first Acumatica client!</p>
+                <p class="mt-4">You should see the Orbu welcome page. You're now ready to add your first Acumatica client!</p>
 
                 <v-alert type="info" variant="tonal" class="mt-4">
-                  <strong>Next Steps:</strong> Head to the <NuxtLink to="/acunexus/clients">Client Management</NuxtLink> guide to learn how to connect your first Acumatica instance.
+                  <strong>Next Steps:</strong> Head to the <NuxtLink to="/orbu/clients">Client Management</NuxtLink> guide to learn how to connect your first Acumatica instance.
                 </v-alert>
               </section>
 
@@ -196,7 +195,7 @@
                 <h2>Service Management</h2>
 
                 <h3>Stop Services</h3>
-                <p>To stop all AcuNexus services:</p>
+                <p>To stop all Orbu services:</p>
                 <CodeSnippet :code="stopCode" language="bash" />
 
                 <h3 class="mt-6">Restart Services</h3>
@@ -208,17 +207,17 @@
                 <CodeSnippet :code="removeCode" language="bash" />
 
                 <v-alert type="error" variant="tonal" class="mt-4">
-                  <strong>Warning:</strong> The <code>--volumes</code> flag will delete all database data including saved clients and endpoints. Only use this if you want to completely reset AcuNexus.
+                  <strong>Warning:</strong> The <code>--volumes</code> flag will delete all database data including saved clients and endpoints. Only use this if you want to completely reset Orbu.
                 </v-alert>
               </section>
 
               <!-- Next Steps -->
               <section id="next-steps" class="doc-section">
                 <h2>Next Steps</h2>
-                <p>Now that AcuNexus is installed, you're ready to explore its features:</p>
+                <p>Now that Orbu is installed, you're ready to explore its features:</p>
                 <v-row class="mt-4">
                   <v-col cols="12" md="6">
-                    <v-card class="next-step-card" elevation="2" to="/acunexus/clients">
+                    <v-card class="next-step-card" elevation="2" to="/orbu/clients">
                       <v-card-text>
                         <v-icon icon="mdi-server-network" size="32" color="deep-purple" class="mb-3" />
                         <h3 class="text-h6 mb-2">Client Management</h3>
@@ -227,7 +226,7 @@
                     </v-card>
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-card class="next-step-card" elevation="2" to="/acunexus/services">
+                    <v-card class="next-step-card" elevation="2" to="/orbu/services">
                       <v-card-text>
                         <v-icon icon="mdi-magnify" size="32" color="deep-purple" class="mb-3" />
                         <h3 class="text-h6 mb-2">Browse Services</h3>
@@ -316,9 +315,9 @@ const commonIssues = ref([
 ]);
 
 // Code snippets
-const cloneCode = ref(`git clone https://github.com/Nioron07/AcuNexus.git`);
+const cloneCode = ref(`git clone https://github.com/Nioron07/Orbu.git`);
 
-const cdCode = ref(`cd AcuNexus`);
+const cdCode = ref(`cd Orbu`);
 
 const copyEnvCode = ref(`# Copy environment template
 cp .env.example .env`);
@@ -327,8 +326,8 @@ const generateKeyCode = ref(`# Generate encryption key
 python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"`);
 
 const envExample = ref(`# Database Configuration
-POSTGRES_DB=acunexus
-POSTGRES_USER=acunexus
+POSTGRES_DB=orbu
+POSTGRES_USER=orbu
 POSTGRES_PASSWORD=your-secure-password-here
 
 # Encryption (REQUIRED - Generate using the Python command above)
@@ -368,19 +367,19 @@ definePageMeta({
 });
 
 useSeoMeta({
-  title: 'Setup & Installation | AcuNexus Documentation',
-  description: 'Complete guide to installing and configuring AcuNexus, the self-hosted Acumatica management platform. Docker-based deployment with PostgreSQL and encrypted credential storage.',
-  ogTitle: 'AcuNexus Setup Guide - Installation and Configuration',
-  ogDescription: 'Step-by-step guide to deploy AcuNexus using Docker for managing multiple Acumatica ERP instances.',
+  title: 'Setup & Installation | Orbu Documentation',
+  description: 'Complete guide to installing and configuring Orbu, the self-hosted Acumatica management platform. Docker-based deployment with PostgreSQL and encrypted credential storage.',
+  ogTitle: 'Orbu Setup Guide - Installation and Configuration',
+  ogDescription: 'Step-by-step guide to deploy Orbu using Docker for managing multiple Acumatica ERP instances.',
   ogType: 'article',
-  ogUrl: 'https://easyacumatica.com/acunexus/setup',
+  ogUrl: 'https://easyacumatica.com/orbu/setup',
   robots: 'index, follow',
-  keywords: 'AcuNexus setup, AcuNexus installation, Docker deployment, Acumatica management, PostgreSQL, self-hosted, configuration guide'
+  keywords: 'Orbu setup, Orbu installation, Docker deployment, Acumatica management, PostgreSQL, self-hosted, configuration guide'
 });
 </script>
 
 <style scoped>
-.acunexus-setup-page {
+.orbu-setup-page {
   background: #f8f9fa;
 }
 
