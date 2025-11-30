@@ -56,7 +56,8 @@ export default defineNuxtConfig({
         '/orbu/models',
         '/orbu/services',
         '/orbu/endpoints',
-        '/about'
+        '/about',
+        '/contact'
       ]
     }
   },
