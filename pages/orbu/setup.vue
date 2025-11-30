@@ -42,7 +42,7 @@
                 <ul>
                   <li><strong>Docker</strong> and <strong>Docker Compose</strong> installed on your system</li>
                   <li><strong>Git</strong> for cloning the repository</li>
-                  <li><strong>Python 3.x</strong> (for generating encryption keys)</li>
+                  <li><strong>Python 3.x</strong> (for generating encryption keys during manual setup)</li>
                   <li>Access to one or more Acumatica instances with REST API enabled</li>
                 </ul>
 
@@ -51,32 +51,84 @@
                 </v-alert>
               </section>
 
-              <!-- Clone Repository -->
-              <section id="clone" class="doc-section">
-                <h2>1. Clone Repository</h2>
-                <p>First, clone the Orbu repository from GitHub:</p>
-                <CodeSnippet :code="cloneCode" language="bash" />
-                <p class="mt-4">Navigate into the project directory:</p>
-                <CodeSnippet :code="cdCode" language="bash" />
+              <!-- Automated Setup -->
+              <section id="automated-setup" class="doc-section">
+                <h2>Quick Start (Automated Setup)</h2>
+                <p>The fastest way to get Orbu running is using the automated setup scripts. Choose your platform:</p>
+
+                <v-tabs v-model="setupTab" color="deep-purple" class="mt-4">
+                  <v-tab value="windows">
+                    <v-icon start>mdi-microsoft-windows</v-icon>
+                    Windows (PowerShell)
+                  </v-tab>
+                  <v-tab value="linux">
+                    <v-icon start>mdi-linux</v-icon>
+                    Linux / macOS
+                  </v-tab>
+                </v-tabs>
+
+                <v-window v-model="setupTab" class="mt-4">
+                  <v-window-item value="windows">
+                    <CodeSnippet :code="automatedSetupWindows" language="powershell" />
+                  </v-window-item>
+                  <v-window-item value="linux">
+                    <CodeSnippet :code="automatedSetupLinux" language="bash" />
+                  </v-window-item>
+                </v-window>
+
+                <p class="mt-4">The setup script will automatically:</p>
+                <ul>
+                  <li>Check Docker and Docker Compose installation</li>
+                  <li>Create <code>.env</code> file from template</li>
+                  <li>Generate encryption and secret keys</li>
+                  <li>Start all services</li>
+                  <li>Wait for services to be healthy</li>
+                </ul>
+
+                <v-alert type="success" variant="tonal" class="mt-4">
+                  <strong>That's it!</strong> Once the script completes, access Orbu at <a href="http://localhost:8080" target="_blank" class="url-link">http://localhost:8080</a>
+                </v-alert>
               </section>
 
-              <!-- Environment Configuration -->
-              <section id="configuration" class="doc-section">
-                <h2>2. Configure Environment</h2>
-                <p>Orbu requires environment variables for configuration. Start by copying the example environment file:</p>
-                <CodeSnippet :code="copyEnvCode" language="bash" />
+              <!-- Manual Setup -->
+              <section id="manual-setup" class="doc-section">
+                <h2>Manual Setup</h2>
+                <p>If you prefer manual control or the automated script doesn't work for your environment, follow these steps:</p>
 
-                <h3 class="mt-6">Generate Encryption Keys</h3>
-                <p>Orbu uses encryption to securely store Acumatica credentials. Generate the required encryption key using Python:</p>
-                <CodeSnippet :code="generateKeyCode" language="bash" />
+                <h3>1. Clone Repository</h3>
+                <p>First, clone the Orbu repository from GitHub:</p>
+                <CodeSnippet :code="cloneCode" language="bash" />
 
-                <h3 class="mt-6">Update .env File</h3>
-                <p>Open the <code>.env</code> file and update the following required variables:</p>
-                <CodeSnippet :code="envExample" language="bash" />
+                <h3 class="mt-6">2. Configure Environment</h3>
+                <p>Create your environment file and generate the required encryption keys:</p>
+
+                <v-tabs v-model="manualTab" color="deep-purple" class="mt-4">
+                  <v-tab value="windows">
+                    <v-icon start>mdi-microsoft-windows</v-icon>
+                    Windows (PowerShell)
+                  </v-tab>
+                  <v-tab value="linux">
+                    <v-icon start>mdi-linux</v-icon>
+                    Linux / macOS
+                  </v-tab>
+                </v-tabs>
+
+                <v-window v-model="manualTab" class="mt-4">
+                  <v-window-item value="windows">
+                    <CodeSnippet :code="manualConfigWindows" language="powershell" />
+                  </v-window-item>
+                  <v-window-item value="linux">
+                    <CodeSnippet :code="manualConfigLinux" language="bash" />
+                  </v-window-item>
+                </v-window>
 
                 <v-alert type="warning" variant="tonal" class="mt-4">
-                  <strong>Security Warning:</strong> Keep your <code>.env</code> file secure and never commit it to version control. The encryption key protects sensitive Acumatica credentials stored in the database.
+                  <strong>Important:</strong> After running the generate_keys.py script, open the <code>.env</code> file and change <code>POSTGRES_PASSWORD</code> to a secure password of your choice.
                 </v-alert>
+
+                <h3 class="mt-6">Environment Variables</h3>
+                <p>Key environment variables in your <code>.env</code> file:</p>
+                <CodeSnippet :code="envExample" language="bash" />
 
                 <h3 class="mt-6">Configuration Options</h3>
                 <v-table>
@@ -99,31 +151,25 @@
                     </tr>
                   </tbody>
                 </v-table>
-              </section>
 
-              <!-- Build and Start Services -->
-              <section id="start" class="doc-section">
-                <h2>3. Start Services</h2>
-                <p>With configuration complete, build and start all Orbu services using Docker Compose:</p>
+                <v-alert type="warning" variant="tonal" class="mt-4">
+                  <strong>Security Warning:</strong> Keep your <code>.env</code> file secure and never commit it to version control. The encryption key protects sensitive Acumatica credentials stored in the database.
+                </v-alert>
+
+                <h3 class="mt-6">3. Start Services</h3>
+                <p>With configuration complete, start all Orbu services using Docker Compose:</p>
                 <CodeSnippet :code="dockerUpCode" language="bash" />
 
-                <p class="mt-4">This command will:</p>
-                <ul>
-                  <li>Build the frontend (Vue 3) and backend (Flask) containers</li>
-                  <li>Start a PostgreSQL database container</li>
-                  <li>Initialize the database schema</li>
-                  <li>Start all services in detached mode</li>
-                </ul>
-
-                <h3 class="mt-6">Verify Services</h3>
+                <h3 class="mt-6">4. Verify Services</h3>
                 <p>Check that all services are running correctly:</p>
                 <CodeSnippet :code="dockerPsCode" language="bash" />
 
-                <p class="mt-4">You should see three containers running:</p>
+                <p class="mt-4">You should see four containers running:</p>
                 <ul>
-                  <li><code>orbu-frontend</code> - Vue.js web interface</li>
+                  <li><code>orbu-nginx</code> - Nginx reverse proxy (serves frontend and routes API calls)</li>
                   <li><code>orbu-backend</code> - Flask API server</li>
-                  <li><code>orbu-db</code> - PostgreSQL database</li>
+                  <li><code>orbu-frontend</code> - Vue.js build container</li>
+                  <li><code>orbu-postgres</code> - PostgreSQL database</li>
                 </ul>
 
                 <v-alert type="success" variant="tonal" class="mt-4">
@@ -133,7 +179,7 @@
 
               <!-- Access Application -->
               <section id="access" class="doc-section">
-                <h2>4. Access Application</h2>
+                <h2>Access Application</h2>
                 <p>Once all services are running, open your web browser and navigate to:</p>
 
                 <v-card class="url-card" elevation="2">
@@ -257,15 +303,17 @@
 import { ref } from 'vue';
 import PageFooter from '~/components/PythonPageFooter.vue';
 import CodeSnippet from '~/components/CodeSnippet.vue';
-import DocScreenshot from '~/components/DocScreenshot.vue';
 import OnPageNav from '~/components/OnPageNav.vue';
+
+// Tab state
+const setupTab = ref('windows');
+const manualTab = ref('windows');
 
 // Navigation items
 const navItems = ref([
   { id: 'prerequisites', title: 'Prerequisites', icon: 'mdi-clipboard-list' },
-  { id: 'clone', title: 'Clone Repository', icon: 'mdi-git' },
-  { id: 'configuration', title: 'Configure Environment', icon: 'mdi-file-cog' },
-  { id: 'start', title: 'Start Services', icon: 'mdi-rocket-launch' },
+  { id: 'automated-setup', title: 'Quick Start', icon: 'mdi-rocket-launch' },
+  { id: 'manual-setup', title: 'Manual Setup', icon: 'mdi-file-cog' },
   { id: 'access', title: 'Access Application', icon: 'mdi-open-in-new' },
   { id: 'troubleshooting', title: 'Troubleshooting', icon: 'mdi-tools' },
   { id: 'management', title: 'Service Management', icon: 'mdi-cog' },
@@ -279,7 +327,6 @@ const configOptions = ref([
   { name: 'POSTGRES_PASSWORD', description: 'PostgreSQL password', required: true },
   { name: 'ENCRYPTION_KEY', description: 'Fernet encryption key for credential storage', required: true },
   { name: 'SECRET_KEY', description: 'Flask secret key for session management', required: true },
-  { name: 'FLASK_ENV', description: 'Flask environment (production/development)', required: false },
 ]);
 
 // Common issues
@@ -288,7 +335,7 @@ const commonIssues = ref([
     icon: 'mdi-alert-circle',
     title: 'Port Already in Use',
     problem: 'Docker reports that port 8080 is already in use.',
-    solution: 'Either stop the service using port 8080, or modify the port mapping in docker-compose.yml to use a different port (e.g., 8081:8080).',
+    solution: 'Either stop the service using port 8080, or modify the port mapping in docker-compose.yml to use a different port (e.g., 8081:80).',
     code: null,
   },
   {
@@ -296,14 +343,14 @@ const commonIssues = ref([
     title: 'Database Connection Failed',
     problem: 'Backend cannot connect to PostgreSQL database.',
     solution: 'Ensure the database container is running and credentials in .env match those in docker-compose.yml. Wait a few seconds for the database to fully initialize.',
-    code: 'docker compose logs db',
+    code: 'docker compose logs postgres',
   },
   {
-    icon: 'mdi-key-alert',
+    icon: 'mdi-key-minus',
     title: 'Invalid Encryption Key',
     problem: 'Application fails to start with encryption key error.',
-    solution: 'Regenerate the encryption key using the Python command and ensure it\'s properly set in the .env file without extra spaces or quotes.',
-    code: 'python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"',
+    solution: 'Regenerate the encryption key using the generate_keys.py script and ensure it\'s properly set in the .env file without extra spaces or quotes.',
+    code: 'python scripts/generate_keys.py',
   },
   {
     icon: 'mdi-docker',
@@ -314,42 +361,63 @@ const commonIssues = ref([
   },
 ]);
 
-// Code snippets
-const cloneCode = ref(`git clone https://github.com/Nioron07/Orbu.git`);
+// Code snippets - Automated Setup
+const automatedSetupWindows = ref(`# Clone repository
+git clone https://github.com/Nioron07/Orbu.git
+cd Orbu
 
-const cdCode = ref(`cd Orbu`);
+# Run setup script
+.\\scripts\\setup.ps1`);
 
-const copyEnvCode = ref(`# Copy environment template
-cp .env.example .env`);
+const automatedSetupLinux = ref(`# Clone repository
+git clone https://github.com/Nioron07/Orbu.git
+cd Orbu
 
-const generateKeyCode = ref(`# Generate encryption key
-python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"`);
+# Run setup script
+bash scripts/setup.sh`);
 
-const envExample = ref(`# Database Configuration
+// Code snippets - Manual Setup
+const cloneCode = ref(`git clone https://github.com/Nioron07/Orbu.git
+cd Orbu`);
+
+const manualConfigWindows = ref(`# 1. Create environment file from template
+Copy-Item .env.example .env
+
+# 2. Generate encryption keys (saves to .env automatically)
+python scripts/generate_keys.py
+
+# 3. Edit .env and change POSTGRES_PASSWORD to a secure password`);
+
+const manualConfigLinux = ref(`# 1. Create environment file from template
+cp .env.example .env
+
+# 2. Generate encryption keys (saves to .env automatically)
+python3 scripts/generate_keys.py
+
+# 3. Edit .env and change POSTGRES_PASSWORD to a secure password`);
+
+const envExample = ref(`# Database
 POSTGRES_DB=orbu
 POSTGRES_USER=orbu
-POSTGRES_PASSWORD=your-secure-password-here
+POSTGRES_PASSWORD=your-secure-password
 
-# Encryption (REQUIRED - Generate using the Python command above)
-ENCRYPTION_KEY=your-generated-fernet-key-here
+# Encryption (REQUIRED)
+ENCRYPTION_KEY=your-fernet-key
 
-# Flask Configuration
-SECRET_KEY=your-secret-key-here
-FLASK_ENV=production`);
+# Flask
+SECRET_KEY=your-secret-key`);
 
-const dockerUpCode = ref(`# Build and start all services
-docker compose up -d`);
+const dockerUpCode = ref(`docker compose up -d`);
 
-const dockerPsCode = ref(`# Check status
-docker compose ps`);
+const dockerPsCode = ref(`docker compose ps`);
 
 const logsCode = ref(`# View all logs
 docker compose logs`);
 
 const specificLogsCode = ref(`# View logs for a specific service
 docker compose logs backend
-docker compose logs frontend
-docker compose logs db`);
+docker compose logs nginx
+docker compose logs postgres`);
 
 const rebuildCode = ref(`# Rebuild and restart
 docker compose down
@@ -513,6 +581,12 @@ useSeoMeta({
 /* Expansion Panels */
 .v-expansion-panels {
   margin-top: 1rem;
+}
+
+/* Tabs */
+.v-tabs {
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 /* Sticky Nav */
