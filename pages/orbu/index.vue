@@ -59,11 +59,14 @@
         </v-container>
       </section>
     </v-container>
+
+    <OrbuPageFooter />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import OrbuPageFooter from '~/components/OrbuPageFooter.vue';
 
 const docPages = ref([
   {

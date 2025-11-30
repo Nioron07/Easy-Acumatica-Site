@@ -178,7 +178,8 @@ const pythonNav = [
   { type: 'item', title: 'Filters & F Factory', icon: 'mdi-filter', link: '/python/odata/filters' },
 
   { type: 'divider' },
-  { type: 'item', title: 'About the Team', icon: 'mdi-account-group', link: '/about' }
+  { type: 'item', title: 'About the Team', icon: 'mdi-account-group', link: '/about' },
+  { type: 'item', title: 'Contact Us', icon: 'mdi-email', link: '/contact' }
 ];
 
 const npmNav = [
@@ -199,7 +200,8 @@ const npmNav = [
 //   { type: 'item', title: 'Interfaces', icon: 'mdi-share-variant', link: '/npm/api/interfaces' },
 
 //   { type: 'divider' },
-  { type: 'item', title: 'About the Team', icon: 'mdi-account-group', link: '/about' }
+  { type: 'item', title: 'About the Team', icon: 'mdi-account-group', link: '/about' },
+  { type: 'item', title: 'Contact Us', icon: 'mdi-email', link: '/contact' }
 ];
 
 const orbuNav = [
@@ -215,7 +217,8 @@ const orbuNav = [
   { type: 'item', title: 'Deploying & Using Endpoints', icon: 'mdi-api', link: '/orbu/endpoints' },
 
   { type: 'divider' },
-  { type: 'item', title: 'About the Team', icon: 'mdi-account-group', link: '/about' }
+  { type: 'item', title: 'About the Team', icon: 'mdi-account-group', link: '/about' },
+  { type: 'item', title: 'Contact Us', icon: 'mdi-email', link: '/contact' }
 ];
 
 // Get navigation based on current section

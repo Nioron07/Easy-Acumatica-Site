@@ -6,16 +6,16 @@
       <v-row>
         <!-- About Section -->
         <v-col cols="12" md="4" class="mb-4">
-          <h3 class="footer-title mb-3">Easy-Acumatica Python</h3>
+          <h3 class="footer-title mb-3">Orbu</h3>
           <p class="footer-text">
-            Dynamic API wrapper for Acumatica ERP. Automatically generates services and models from your instance.
+            Self-hosted platform for managing multiple Acumatica instances. Built on Easy-Acumatica Python with visual interface for integrations and REST API deployment.
           </p>
           <div class="version-info mt-3">
             <v-chip size="small" variant="outlined" color="white">
-              v0.5.10
+              Docker
             </v-chip>
             <v-chip size="small" variant="outlined" color="white" class="ml-2">
-              Python 3.8+
+              Self-Hosted
             </v-chip>
           </div>
         </v-col>
@@ -24,20 +24,18 @@
         <v-col cols="12" sm="6" md="2" class="mb-4">
           <h4 class="footer-subtitle mb-3">Getting Started</h4>
           <ul class="footer-links">
-            <li><a href="/python/installation">Installation</a></li>
-            <li><a href="/python/quickstart">Quickstart</a></li>
-            <li><a href="/python/client">Client Guide</a></li>
+            <li><a href="/orbu/setup">Setup & Installation</a></li>
+            <li><a href="/orbu/clients">Client Management</a></li>
           </ul>
         </v-col>
 
-        <!-- Core Concepts -->
+        <!-- Core Features -->
         <v-col cols="12" sm="6" md="2" class="mb-4">
-          <h4 class="footer-subtitle mb-3">Core Concepts</h4>
+          <h4 class="footer-subtitle mb-3">Features</h4>
           <ul class="footer-links">
-            <li><a href="/python/service-factory">Services</a></li>
-            <li><a href="/python/model-factory">Models</a></li>
-            <li><a href="/python/batching">Batching</a></li>
-            <li><a href="/python/task-scheduler">Scheduler</a></li>
+            <li><a href="/orbu/models">Model Viewing</a></li>
+            <li><a href="/orbu/services">Service Viewing</a></li>
+            <li><a href="/orbu/endpoints">API Endpoints</a></li>
           </ul>
         </v-col>
 
@@ -48,17 +46,13 @@
             Open source and community-driven. Contributions welcome.
           </p>
           <div class="social-links mb-3">
-            <v-btn icon variant="outlined" color="white" size="small" href="https://github.com/Nioron07/Easy-Acumatica"
+            <v-btn icon variant="outlined" color="white" size="small" href="https://github.com/Nioron07/Orbu"
               target="_blank">
               <v-icon>mdi-github</v-icon>
             </v-btn>
-            <v-btn icon variant="outlined" color="white" size="small" href="https://pypi.org/project/easy-acumatica/"
-              target="_blank" class="ml-2">
-              <v-icon>mdi-package-variant</v-icon>
-            </v-btn>
-            <v-btn icon variant="outlined" color="white" size="small"
-              href="https://github.com/Nioron07/Easy-Acumatica/discussions" target="_blank" class="ml-2">
-              <v-icon>mdi-forum</v-icon>
+            <v-btn icon variant="outlined" color="white" size="small" href="https://github.com/Nioron07/Easy-Acumatica"
+              target="_blank" class="ml-2" title="Easy-Acumatica Python">
+              <v-icon>mdi-code-braces</v-icon>
             </v-btn>
           </div>
           <p class="footer-text">
@@ -72,9 +66,14 @@
 
       <!-- Bottom Bar -->
       <v-row align="center">
-        <v-col cols="12" md="12" class="text-md-end">
+        <v-col cols="12" md="6">
           <p class="footer-copyright mb-0">
-            © 2025 Easy-Acumatica. MIT License.
+            Created by <a href="https://github.com/Nioron07" target="_blank" class="footer-link">Matthew Hirstius</a>
+          </p>
+        </v-col>
+        <v-col cols="12" md="6" class="text-md-end">
+          <p class="footer-copyright mb-0">
+            © 2025 Orbu. AGPL-3.0 License.
           </p>
         </v-col>
       </v-row>
