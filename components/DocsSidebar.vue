@@ -166,16 +166,22 @@ const pythonNav = [
   { type: 'divider' },
   { type: 'header', title: 'Core Concepts', icon: 'mdi-cube-outline', color: 'deep-purple' },
   { type: 'item', title: 'AcumaticaClient', icon: 'mdi-connection', link: '/python/client' },
+  { type: 'item', title: 'Configuration', icon: 'mdi-cog', link: '/python/configuration' },
   { type: 'item', title: 'Dynamic Services', icon: 'mdi-factory', link: '/python/service-factory' },
   { type: 'item', title: 'Dynamic Models', icon: 'mdi-shape-outline', link: '/python/model-factory' },
   { type: 'item', title: 'Batch Operations', icon: 'mdi-lightning-bolt-outline', link: '/python/batching' },
   { type: 'item', title: 'Task Scheduler', icon: 'mdi-clock-outline', link: '/python/task-scheduler' },
   { type: 'item', title: 'Generic Inquiries', icon: 'mdi-table-search', link: '/python/generic-inquiries' },
+  { type: 'item', title: 'Error Handling', icon: 'mdi-alert-circle', link: '/python/error-handling' },
 
   { type: 'divider' },
   { type: 'header', title: 'OData & Queries', icon: 'mdi-database-search', color: 'blue' },
   { type: 'item', title: 'Query Options', icon: 'mdi-tune', link: '/python/odata/queryoptions' },
   { type: 'item', title: 'Filters & F Factory', icon: 'mdi-filter', link: '/python/odata/filters' },
+
+  { type: 'divider' },
+  { type: 'header', title: 'Tools', icon: 'mdi-tools', color: 'teal' },
+  { type: 'item', title: 'Debug TUI', icon: 'mdi-console', link: '/python/debug-tui' },
 
   { type: 'divider' },
   { type: 'item', title: 'About the Team', icon: 'mdi-account-group', link: '/about' },

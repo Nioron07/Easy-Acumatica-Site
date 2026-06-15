@@ -88,8 +88,10 @@
               <section id="method-naming" class="doc-section">
                 <h2>Method Naming</h2>
                 <p>
-                  Generic Inquiry names are converted to snake_case method names. The system removes special characters
-                  and converts spaces to underscores.
+                  An inquiry's method name mirrors its name in Acumatica: spaces and hyphens are
+                  replaced with underscores, and the original capitalization is preserved (names are
+                  <strong>not</strong> lowercased). If the resulting name would start with a digit, it
+                  is prefixed with <code>gi_</code> so it's a valid Python identifier.
                 </p>
                 <v-table>
                   <thead>
@@ -101,22 +103,26 @@
                   <tbody>
                     <tr>
                       <td>Customer Orders Summary</td>
-                      <td><code>client.inquiries.customer_orders_summary()</code></td>
+                      <td><code>client.inquiries.Customer_Orders_Summary()</code></td>
                     </tr>
                     <tr>
                       <td>AP-Invoice-Details</td>
-                      <td><code>client.inquiries.ap_invoice_details()</code></td>
+                      <td><code>client.inquiries.AP_Invoice_Details()</code></td>
                     </tr>
                     <tr>
                       <td>Open Sales Orders</td>
-                      <td><code>client.inquiries.open_sales_orders()</code></td>
+                      <td><code>client.inquiries.Open_Sales_Orders()</code></td>
                     </tr>
                     <tr>
-                      <td>Inventory by Location</td>
-                      <td><code>client.inquiries.inventory_by_location()</code></td>
+                      <td>401K Report</td>
+                      <td><code>client.inquiries.gi_401K_Report()</code></td>
                     </tr>
                   </tbody>
                 </v-table>
+                <p class="note">
+                  Tip: use <code>client.list_inquiries()</code> or <code>dir(client.inquiries)</code> to
+                  see the exact generated names for your instance.
+                </p>
               </section>
 
               <!-- Best Practices -->
@@ -199,14 +205,14 @@ from easy_acumatica.odata import QueryOptions, F
 client = AcumaticaClient()
 
 # Access a Generic Inquiry
-results = client.inquiries.customer_sales_summary()
+results = client.inquiries.Customer_Sales_Summary()
 
 # With filtering
 options = QueryOptions(
     filter=F.CustomerClass == "WHOLESALE",
     top=50
 )
-filtered_results = client.inquiries.customer_sales_summary(options=options)`;
+filtered_results = client.inquiries.Customer_Sales_Summary(options=options)`;
 
 const discoveryExample = `# List all available inquiries
 for service in dir(client.inquiries):
@@ -214,16 +220,16 @@ for service in dir(client.inquiries):
         print(service)
 
 # Check if specific inquiry exists
-if hasattr(client.inquiries, 'customer_sales_summary'):
-    results = client.inquiries.customer_sales_summary()
+if hasattr(client.inquiries, 'Customer_Sales_Summary'):
+    results = client.inquiries.Customer_Sales_Summary()
 
 # Get inquiry method info
 import inspect
-method = getattr(client.inquiries, 'customer_sales_summary')
+method = getattr(client.inquiries, 'Customer_Sales_Summary')
 print(inspect.getsource(method))`;
 
 const basicUsageExample = `# Call an inquiry without options
-all_results = client.inquiries.open_sales_orders()
+all_results = client.inquiries.Open_Sales_Orders()
 
 # Iterate through results
 for order in all_results:
@@ -241,7 +247,7 @@ const filteringExample = `from easy_acumatica.odata import QueryOptions, F
 options = QueryOptions(
     filter=F.CustomerClass == "WHOLESALE"
 )
-wholesale_customers = client.inquiries.customer_list(options=options)
+wholesale_customers = client.inquiries.Customer_List(options=options)
 
 # Complex filter
 options = QueryOptions(
@@ -251,21 +257,21 @@ options = QueryOptions(
         (F.OrderDate.year() == 2024)
     )
 )
-large_orders = client.inquiries.open_sales_orders(options=options)
+large_orders = client.inquiries.Open_Sales_Orders(options=options)
 
 # String operations
 options = QueryOptions(
     filter=F.CustomerName.startswith("ABC")
 )
-abc_customers = client.inquiries.customer_list(options=options)`;
+abc_customers = client.inquiries.Customer_List(options=options)`;
 
 const paginationExample = `# Get first 100 results
 options = QueryOptions(top=100)
-page1 = client.inquiries.inventory_summary(options=options)
+page1 = client.inquiries.Inventory_Summary(options=options)
 
 # Get next 100 results (skip first 100)
 options = QueryOptions(top=100, skip=100)
-page2 = client.inquiries.inventory_summary(options=options)
+page2 = client.inquiries.Inventory_Summary(options=options)
 
 # Pagination loop
 page_size = 100
@@ -274,7 +280,7 @@ all_results = []
 
 while True:
     options = QueryOptions(top=page_size, skip=page * page_size)
-    results = client.inquiries.inventory_summary(options=options)
+    results = client.inquiries.Inventory_Summary(options=options)
     
     if not results:
         break
@@ -289,7 +295,7 @@ options = QueryOptions(
     select=["CustomerID", "CustomerName", "Balance"],
     top=50
 )
-customers = client.inquiries.customer_list(options=options)
+customers = client.inquiries.Customer_List(options=options)
 
 # Result contains only selected fields
 for customer in customers:
@@ -299,19 +305,19 @@ const sortingExample = `# Sort ascending
 options = QueryOptions(
     orderby=["CustomerName"]
 )
-sorted_customers = client.inquiries.customer_list(options=options)
+sorted_customers = client.inquiries.Customer_List(options=options)
 
 # Sort descending
 options = QueryOptions(
     orderby=["OrderTotal desc"]
 )
-high_value_orders = client.inquiries.open_sales_orders(options=options)
+high_value_orders = client.inquiries.Open_Sales_Orders(options=options)
 
 # Multiple sort fields
 options = QueryOptions(
     orderby=["CustomerClass", "Balance desc"]
 )
-customers = client.inquiries.customer_list(options=options)`;
+customers = client.inquiries.Customer_List(options=options)`;
 
 const complexExample = `from easy_acumatica import AcumaticaClient
 from easy_acumatica.odata import QueryOptions, F
@@ -345,7 +351,7 @@ options = QueryOptions(
     top=50
 )
 
-orders = client.inquiries.open_sales_orders(options=options)
+orders = client.inquiries.Open_Sales_Orders(options=options)
 
 # Process results
 total_value = sum(order.get('OrderTotal', 0) for order in orders)
@@ -356,10 +362,10 @@ for order in orders:
     print(f"{order['OrderNbr']}: {order['CustomerName']} - \${order['OrderTotal']:,.2f}")`;
 
 const troubleshootingExample = `# Check if inquiry exists before calling
-if hasattr(client.inquiries, 'my_custom_inquiry'):
-    results = client.inquiries.my_custom_inquiry()
+if hasattr(client.inquiries, 'My_Custom_Inquiry'):
+    results = client.inquiries.My_Custom_Inquiry()
 else:
-    print("Inquiry 'my_custom_inquiry' not found")
+    print("Inquiry 'My_Custom_Inquiry' not found")
     print("Available inquiries:")
     for attr in dir(client.inquiries):
         if not attr.startswith('_'):
@@ -367,7 +373,7 @@ else:
 
 # Handle potential errors
 try:
-    results = client.inquiries.customer_sales_summary()
+    results = client.inquiries.Customer_Sales_Summary()
 except AttributeError:
     print("Inquiry not available - check Acumatica configuration")
 except Exception as e:

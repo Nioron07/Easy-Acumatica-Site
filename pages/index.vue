@@ -409,7 +409,7 @@ useSchemaOrg([
     },
     'description': 'Type-safe API client libraries for Acumatica ERP with automatic schema discovery, OData queries, and intelligent caching',
     'url': 'https://easyacumatica.com',
-    'softwareVersion': '0.5.10',
+    'softwareVersion': '0.6.1',
     'programmingLanguage': ['Python', 'JavaScript'],
     'screenshot': 'https://easyacumatica.com/social-images/home.png',
     'featureList': [

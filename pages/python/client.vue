@@ -258,10 +258,39 @@
                   Exception Handling
                 </h2>
                 <p class="text-body-1 mb-4">
-                  The library defines specific exception types for authentication, network, timeout, and API errors.
+                  The library raises typed exceptions for authentication, validation, concurrency,
+                  rate-limit, network, and server errors &mdash; each carrying rich context and suggested
+                  fixes. Catch the specific subclass you care about, or <code>AcumaticaError</code> as a
+                  catch-all.
                 </p>
 
                 <CodeSnippet :code="exceptionExample" />
+
+                <v-alert class="mt-4" type="info" variant="tonal">
+                  See the <NuxtLink to="/python/error-handling">Error Handling guide</NuxtLink> for the
+                  full exception hierarchy, attributes, suggestions, and the <code>ErrorCode</code> enum.
+                </v-alert>
+              </section>
+
+              <!-- Debugging & Introspection Section -->
+              <section id="debugging" class="content-section">
+                <h2 class="section-title">
+                  <v-icon class="section-icon">mdi-stethoscope</v-icon>
+                  Debugging &amp; Introspection
+                </h2>
+                <p class="text-body-1 mb-4">
+                  The client exposes a suite of methods for health checks, performance metrics, and
+                  request history &mdash; handy when diagnosing connectivity, slow startups, or failing
+                  calls. The built-in <code>help()</code> method prints guidance on any subsystem.
+                </p>
+
+                <CodeSnippet :code="debuggingExample" />
+
+                <v-alert class="mt-4" type="info" variant="tonal">
+                  Prefer the interactive
+                  <NuxtLink to="/python/debug-tui">Debug TUI (<code>ea-debug</code>)</NuxtLink> for
+                  exploring services, models, and inquiries without writing code.
+                </v-alert>
               </section>
 
               <!-- Advanced Features Section -->
@@ -376,6 +405,7 @@ const navItems = ref([
   { id: 'session', title: 'Session Management', icon: 'mdi-shield-key' },
   { id: 'scheduler', title: 'Task Scheduler', icon: 'mdi-clock-outline' },
   { id: 'exceptions', title: 'Exception Handling', icon: 'mdi-alert-circle' },
+  { id: 'debugging', title: 'Debugging & Introspection', icon: 'mdi-stethoscope' },
   { id: 'advanced', title: 'Advanced Features', icon: 'mdi-rocket' },
 ]);
 
@@ -422,7 +452,7 @@ os.environ['ACUMATICA_USERNAME'] = 'api_user'
 client = AcumaticaClient()
 
 # Method 5: Using a config object
-from easy_acumatica import AcumaticaConfig
+from easy_acumatica.config import AcumaticaConfig
 config = AcumaticaConfig(
     base_url="https://your-instance.acumatica.com",
     username="api_user",
@@ -505,9 +535,10 @@ client = AcumaticaClient(
 
 # Check cache statistics
 stats = client.get_cache_stats()
-print(f"Cache hits: {stats['hits']}")
-print(f"Cache misses: {stats['misses']}")
-print(f"Cache age: {stats['age_hours']:.1f} hours")
+print(f"Cache hits: {stats['cache_hits']}")
+print(f"Cache misses: {stats['cache_misses']}")
+print(f"Cache hit rate: {stats['cache_hit_rate']:.0%}")
+print(f"Startup time: {stats['startup_time']:.2f}s")
 
 # Force rebuild (ignores cache)
 client = AcumaticaClient(force_rebuild=True)
@@ -522,6 +553,7 @@ client.clear_cache()
 # - Automatically invalidates on schema changes`);
 
 const schedulerExample = ref(`from easy_acumatica import AcumaticaClient
+from easy_acumatica.scheduler import IntervalSchedule, CronSchedule
 import time
 
 client = AcumaticaClient()
@@ -532,33 +564,34 @@ def sync_customers():
     # Process customers...
     print(f"Synced {len(customers)} customers")
 
-# Schedule task to run every 5 minutes
-task_id = client.scheduler.schedule_task(
-    func=sync_customers,
-    interval_seconds=300,  # 5 minutes
-    task_name="customer_sync"
+# Schedule a task to run every 5 minutes
+client.scheduler.add_task(
+    name="customer_sync",
+    callable_obj=sync_customers,
+    schedule=IntervalSchedule(minutes=5)
 )
 
-# Schedule with a cron-like expression
-task_id = client.scheduler.schedule_task(
-    func=sync_customers,
-    cron_expression="0 */6 * * *",  # Every 6 hours
-    task_name="hourly_sync"
+# Schedule with a cron expression (every 6 hours)
+client.scheduler.add_task(
+    name="hourly_sync",
+    callable_obj=sync_customers,
+    schedule=CronSchedule("0 */6 * * *")
 )
+
+# Start the scheduler (runs in a background thread)
+client.scheduler.start()
 
 # List scheduled tasks
-tasks = client.scheduler.list_tasks()
-for task in tasks:
-    print(f"{task['name']}: {task['status']}")
+for task in client.scheduler.list_tasks():
+    print(f"{task.name}: {task.status}")
 
-# Stop a specific task
-client.scheduler.stop_task(task_id)
-
-# Stop all tasks
-client.scheduler.stop_all()
-
-# Scheduler automatically stops when client is closed
-client.close()`);
+# Keep the main thread alive so background tasks can run
+try:
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    client.scheduler.stop()
+    client.close()`);
 
 const discoveryExample = ref(`# The client discovers everything on initialization
 client = AcumaticaClient()
@@ -656,7 +689,7 @@ updated = client.customers.put_entity(customer)
 # DELETE - Remove record
 client.customers.delete_by_id("PYTHN002")`);
 
-const filterExample = ref(`from easy_acumatica.odata import F
+const filterExample = ref(`from easy_acumatica.odata import F, QueryOptions
 
 # Simple equality filter
 active_filter = F.Status == "Active"
@@ -687,11 +720,11 @@ complex_filter = (
     ((F.Status == "Active") | (F.Status == "OnHold")) &
     (F.Balance > 1000) &
     F.CustomerName.tolower().startswith("tech") &
-    (F.Terms == "30D" | F.Terms == "60D")
+    ((F.Terms == "30D") | (F.Terms == "60D"))
 )
 
-# Use with list operations
-results = client.customers.get_list(filter=complex_filter)`);
+# Use with list operations (filters are passed via QueryOptions)
+results = client.customers.get_list(QueryOptions(filter=complex_filter))`);
 
 const queryOptionsExample = ref(`from easy_acumatica.odata import QueryOptions, F
 
@@ -735,8 +768,8 @@ def get_all_pages(service, page_size=100):
     
     while True:
         options = QueryOptions(top=page_size, skip=skip)
-        records = service.list(options=options)
-        
+        records = service.get_list(options=options)
+
         if not records:
             break
             
@@ -749,7 +782,7 @@ const advancedOdataExample = ref(`from easy_acumatica.odata import F, QueryOptio
 
 # Advanced filtering with arithmetic
 price_margin = (F.SalesPrice - F.Cost) / F.Cost > 0.3
-high_margin_products = client.products.get_list(filter=price_margin)
+high_margin_products = client.products.get_list(QueryOptions(filter=price_margin))
 
 # Multiple navigation levels
 deep_filter = F.Orders.Details.Product.Category == "Electronics"
@@ -763,7 +796,7 @@ from datetime import datetime, timedelta
 # Last 30 days
 thirty_days_ago = (datetime.now() - timedelta(days=30)).isoformat()
 recent_orders = client.sales_orders.get_list(
-    filter=F.OrderDate > thirty_days_ago
+    QueryOptions(filter=F.OrderDate > thirty_days_ago)
 )
 
 # Custom fields with QueryOptions
@@ -853,67 +886,56 @@ for customer_id in large_customer_list:
     time.sleep(60)  # Even with delays, it just works`);
 
 const exceptionExample = ref(`from easy_acumatica import (
-    AcumaticaError,
-    AcumaticaAuthError,
     AcumaticaNotFoundError,
     AcumaticaValidationError,
-    AcumaticaBusinessRuleError,
-    AcumaticaConcurrencyError,
-    AcumaticaServerError,
-    AcumaticaConnectionError,
-    AcumaticaTimeoutError,
-    AcumaticaRateLimitError
+    AcumaticaRateLimitError,
+    AcumaticaError,
 )
 
 try:
     customer = client.customers.get_by_id("UNKNOWN")
 
-except AcumaticaNotFoundError as e:
-    # 404 - Resource not found
+except AcumaticaNotFoundError as e:          # 404
     print(f"Not found: {e}")
     print(f"Suggestions: {e.suggestions}")
 
-except AcumaticaAuthError as e:
-    # 401/403 - Authentication or authorization failed
-    print(f"Auth error: {e.message}")
-    print(f"Status: {e.status_code}")
+except AcumaticaValidationError as e:        # 400 / 422
+    for field, errors in e.field_errors.items():
+        print(f"  {field}: {errors}")
 
-except AcumaticaValidationError as e:
-    # 400/422 - Data validation failed
-    print(f"Validation error: {e}")
-    if e.field_errors:
-        for field, errors in e.field_errors.items():
-            print(f"  {field}: {errors}")
+except AcumaticaRateLimitError as e:         # 429
+    print(f"Rate limited. Retry after {e.retry_after}s")
 
-except AcumaticaBusinessRuleError as e:
-    # 422 - Business rule violation
-    print(f"Business rule error: {e}")
+except AcumaticaError as e:                  # catch-all
+    print(e.get_detailed_message())
 
-except AcumaticaConcurrencyError as e:
-    # 412 - Concurrent modification
-    print(f"Concurrency conflict: {e}")
+# See /python/error-handling for the full hierarchy and ErrorCode enum.`);
 
-except AcumaticaTimeoutError as e:
-    # Request timeout
-    print(f"Timeout: {e.timeout_seconds}s")
+const debuggingExample = ref(`# Verify connectivity and credentials
+print(client.test_connection())       # round-trip connectivity check
+print(client.validate_credentials())  # confirms auth works
 
-except AcumaticaRateLimitError as e:
-    # 429 - Rate limit exceeded
-    print(f"Rate limited. Retry after: {e.retry_after}s")
+# Health and performance
+print(client.get_health_status())     # overall health summary
+print(client.get_performance_stats()) # startup time, cache hit rate, counts
+print(client.get_session_info())      # auth status, uptime
+print(client.get_connection_stats())  # connection pool info
 
-except AcumaticaServerError as e:
-    # 5xx - Server error
-    print(f"Server error: {e.status_code}")
+# Opt-in request history (off by default)
+client.enable_request_history(max_items=100)
+client.customers.get_list()
+for entry in client.get_request_history(limit=5):
+    print(entry)
 
-except AcumaticaConnectionError as e:
-    # Network/connection error
-    print(f"Connection error: {e}")
+# Inspect recent errors and reset counters
+print(client.get_error_history(limit=10))
+client.reset_statistics()
 
-except AcumaticaError as e:
-    # Catch-all for any Acumatica error
-    print(f"Error: {e}")
-    print(f"Detailed: {e.get_detailed_message()}")
-    print(f"Context: {e.context}")`);
+# Built-in help on any subsystem
+client.help()              # general overview
+client.help('batch')       # batch calling
+client.help('cache')       # caching
+client.help('performance') # performance tips`);
 
 const fileExample = ref(`# Upload files to any entity
 
@@ -970,35 +992,30 @@ with ThreadPoolExecutor(max_workers=10) as executor:
     futures = [executor.submit(fetch_customer, cid) for cid in customer_ids]
     results = [f.result() for f in futures]`);
 
-const actionsExample = ref(`# Execute built-in and custom actions
+const actionsExample = ref(`# Actions are exposed as invoke_action_<action_name> methods. Each one
+# takes a single invocation model built from client.models, which carries
+# the target 'entity' and any 'parameters'.
 
 # Release a sales order
-client.sales_orders.invoke_action_release_sales_order(
-  "entity": {
-      "OrderType": "SO",
-      "OrderNbr": "SO001"
-  }
+invocation = client.models.ReleaseSalesOrder(
+    entity=client.models.SalesOrder(OrderType="SO", OrderNbr="SO001")
 )
+client.sales_orders.invoke_action_release_sales_order(invocation)
 
-# Run a custom action
-result = client.custom_endpoint.invoke_action_process_batch(
-    entity={
-        "BatchID": "BATCH001",
-        "ProcessDate": "2024-01-15"
-    }
-)
-
-# Actions return results
-print(f"Processed {result.get('RecordsProcessed', 0)} records")
-
-# Actions with parameters
-client.invoices.invoke_action_email_invoice(
-    "entity": {"Type": "INV", "ReferenceNbr": "INV001"},
-    "parameters": {
+# Action with parameters (e.g. emailing an invoice)
+email_invocation = client.models.EmailInvoice(
+    entity=client.models.Invoice(Type="INV", ReferenceNbr="INV001"),
+    parameters={
         "EmailTo": "customer@example.com",
-        "EmailCC": "accounting@company.com"
+        "EmailCC": "accounting@company.com",
     }
-)`);
+)
+client.invoices.invoke_action_email_invoice(email_invocation)
+
+# Tip: discover the available action methods for a service at runtime
+actions = [m["name"] for m in client.get_service_info("SalesOrder")["methods"]
+           if m["name"].startswith("invoke_action_")]
+print(actions)`);
 
 // Initialize parameters
 const initializationParams = ref([
@@ -1026,13 +1043,15 @@ const initializationParams = ref([
 
 // Service patterns
 const servicePatterns = ref([
-  { pattern: 'get_by_id(entity_id, select=None, expand=None)', description: 'Retrieve a record by ID' },
-  { pattern: 'get_list(filter=None, options=None)', description: 'List records with OData filtering' },
-  { pattern: 'put_entity(entity)', description: 'Create or update a record' },
-  { pattern: 'delete_by_id(entity_id)', description: 'Delete a record by ID' },
+  { pattern: 'get_by_id(entity_id, options=None, api_version=None)', description: 'Retrieve a record by its primary key' },
+  { pattern: 'get_by_keys(**key_fields, options=None)', description: 'Retrieve a record by composite key values' },
+  { pattern: 'get_list(options=None, api_version=None)', description: 'List records (pass filters/select/expand via QueryOptions)' },
+  { pattern: 'put_entity(data, options=None, api_version=None)', description: 'Create or update a record (accepts a model or dict)' },
+  { pattern: 'delete_by_id(entity_id, api_version=None)', description: 'Delete a record by ID' },
+  { pattern: 'delete_by_keys(**key_fields, api_version=None)', description: 'Delete a record by composite key values' },
   { pattern: 'put_file(entity_id, filename, data, comment=None)', description: 'Attach a file to a record' },
-  { pattern: 'get_files(entity_id)', description: 'List files attached to a record' },
-  { pattern: 'invoke_action_<action_name>(entity, parameters=None)', description: 'Execute an action (dynamically generated)' },
+  { pattern: 'get_files(entity_id, api_version=None)', description: 'List files attached to a record' },
+  { pattern: 'invoke_action_<action_name>(invocation, api_version=None)', description: 'Execute an action (pass an invocation model)' },
 ]);
 </script>
 

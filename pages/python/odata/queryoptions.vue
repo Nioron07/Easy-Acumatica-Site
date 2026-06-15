@@ -28,7 +28,7 @@ options = QueryOptions(
     filter=F.Amount > 1000,
     select=["CustomerID", "Amount", "Status"],
     expand=["Details"],
-    order_by="Amount desc",
+    orderby="Amount desc",
     top=50
 )</code></pre>
             </div>
@@ -255,7 +255,7 @@ const filteredQueryExample = `from easy_acumatica.odata import QueryOptions, F
 # Filter active customers with balance > 1000
 options = QueryOptions(
     filter=(F.Status == "Active") & (F.Balance > 1000),
-    order_by="Balance desc",
+    orderby="Balance desc",
     top=50
 )
 customers = client.customers.get_list(options)
@@ -300,7 +300,7 @@ options = QueryOptions(
     ],
     
     # Sort by multiple fields
-    order_by=["CustomerClass", "Balance desc"],
+    orderby=["CustomerClass", "Balance desc"],
     
     # Pagination
     top=20,
@@ -390,7 +390,7 @@ options = QueryOptions(
 # Combine with filter and sort
 options = QueryOptions(
     filter=F.Status == "Active",
-    order_by="CreatedDate desc",
+    orderby="CreatedDate desc",
     top=10
 )`,
     note: 'Always use top to limit results, especially during development and testing.'
@@ -411,28 +411,28 @@ def get_page(page_number, page_size=20):
     return QueryOptions(
         top=page_size,
         skip=(page_number - 1) * page_size,
-        order_by="CustomerID"  # Always use order_by with pagination
+        orderby="CustomerID"  # Always use orderby with pagination
     )`,
-    note: 'Always use order_by with skip to ensure consistent pagination results.'
+    note: 'Always use orderby with skip to ensure consistent pagination results.'
   },
   {
-    name: 'order_by',
+    name: 'orderby',
     type: 'str | List[str]',
     required: false,
     description: 'Field(s) to sort by. Use "field desc" for descending order.',
     example: `# Single field sort
 options = QueryOptions(
-    order_by="CustomerName"
+    orderby="CustomerName"
 )
 
 # Descending sort
 options = QueryOptions(
-    order_by="Balance desc"
+    orderby="Balance desc"
 )
 
 # Multiple fields
 options = QueryOptions(
-    order_by=["CustomerClass", "Balance desc"]
+    orderby=["CustomerClass", "Balance desc"]
 )`,
     note: 'Field names are case-sensitive. Use desc for descending, default is ascending.'
   },
@@ -514,7 +514,7 @@ const advancedPatterns = ref([
     # Start with base options
     options_dict = {
         "select": ["CustomerID", "CustomerName", "Balance", "Status"],
-        "order_by": "CustomerName",
+        "orderby": "CustomerName",
         "top": page_size,
         "skip": (page - 1) * page_size
     }
@@ -573,7 +573,7 @@ query3 = build_customer_query()  # No filters, just pagination`,
             options_dict = {
                 "top": self.page_size,
                 "skip": skip,
-                "order_by": "id"  # Consistent ordering required
+                "orderby": "id"  # Consistent ordering required
             }
             
             # Merge with base options
@@ -607,7 +607,7 @@ query3 = build_customer_query()  # No filters, just pagination`,
         options_dict = {
             "top": self.page_size,
             "skip": (page_number - 1) * self.page_size,
-            "order_by": "id"
+            "orderby": "id"
         }
         
         if base_options:
@@ -696,7 +696,7 @@ measure_query(QueryOptions(top=10, select=["CustomerID"]))  # Minimal`,
     code: `# Base query
 base_options = QueryOptions(
     select=["CustomerID", "CustomerName", "Balance"],
-    order_by="CustomerName"
+    orderby="CustomerName"
 )
 
 # Method 1: Using copy() method
@@ -722,7 +722,7 @@ class QueryTemplates:
                 "CreditLimit",
                 "Status"
             ],
-            "order_by": "Balance desc"
+            "orderby": "Balance desc"
         }
         
         filters = []

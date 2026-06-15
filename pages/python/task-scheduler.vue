@@ -247,22 +247,26 @@ IntervalSchedule(hours=1, minutes=30)  # Every 1.5 hours`;
 const dailyExample = `from easy_acumatica.scheduler import DailySchedule
 
 # Every day at 9:00 AM
-DailySchedule(time="09:00")
+DailySchedule(hour=9)
 
 # Every day at 5:30 PM
-DailySchedule(time="17:30:00")
+DailySchedule(hour=17, minute=30)
+
+# Run immediately on first check, then daily at the given time
+DailySchedule(hour=2, minute=0, run_immediately=True)
 
 # Note: For multiple times per day, create separate tasks`;
 
 const weeklyExample = `from easy_acumatica.scheduler import WeeklySchedule
 
-# Every Monday at 9:00 AM
-WeeklySchedule(day_of_week=0, time="09:00")  # 0 = Monday
+# Every Monday at 9:00 AM (weekday accepts an int or a name)
+WeeklySchedule(weekday=0, hour=9)          # 0 = Monday
+WeeklySchedule("monday", 9)                # same thing
 
 # Every Friday at 5:00 PM
-WeeklySchedule(day_of_week=4, time="17:00")  # 4 = Friday
+WeeklySchedule(weekday=4, hour=17)         # 4 = Friday
 
-# Day of week: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday`;
+# Weekday: 0=Monday, 1=Tuesday, 2=Wednesday, 3=Thursday, 4=Friday, 5=Saturday, 6=Sunday`;
 
 const cronExample = `from easy_acumatica.scheduler import CronSchedule
 
@@ -401,12 +405,15 @@ def process_pending_orders():
         processed = 0
         for order in orders:
             try:
-                # Process order (example: release it)
+                # Process order (example: release it). Actions take an
+                # invocation model built from client.models.
                 if hasattr(client.sales_orders, 'invoke_action_release'):
-                    client.sales_orders.invoke_action_release(order)
+                    client.sales_orders.invoke_action_release(
+                        client.models.ReleaseSalesOrder(entity=order)
+                    )
                     processed += 1
             except Exception as e:
-                logger.error(f"Failed to process order {order['OrderNbr']}: {e}")
+                logger.error(f"Failed to process order {order.OrderNbr}: {e}")
 
         return processed
     except Exception as e:
@@ -454,14 +461,15 @@ from easy_acumatica.scheduler import every
 
 client = AcumaticaClient()
 
-# Using the 'every' decorator (automatically creates IntervalSchedule)
-@every(hours=1, scheduler=client.scheduler)
+# Using the 'every' decorator (automatically creates IntervalSchedule).
+# start_immediately=True registers the task on the scheduler right away.
+@every(hours=1, scheduler=client.scheduler, start_immediately=True)
 def sync_customers():
     customers = client.customers.get_list()
     print(f"Synced {len(customers)} customers")
     return len(customers)
 
-# Task is automatically added to scheduler
+# The task is now registered - just start the scheduler
 client.scheduler.start()`;
 
 useSeoMeta({

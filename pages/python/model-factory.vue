@@ -73,10 +73,31 @@
               <section id="custom-fields" class="doc-section">
                 <h2>Custom Fields</h2>
                 <p>
-                  Custom fields defined in your Acumatica instance are included in the generated models.
-                  They appear alongside standard fields with appropriate type hints:
+                  Custom fields (<code>Usr*</code> and <code>Attribute*</code>) defined in your Acumatica
+                  instance are discovered automatically from the endpoint's <code>$adHocSchema</code> and
+                  included in the generated models. They appear alongside standard fields with
+                  appropriate type hints:
                 </p>
                 <CodeSnippet :code="customFieldsExample" language="python" />
+                <p class="note">
+                  Discovered custom fields are routed into the API payload's <code>custom</code> block
+                  automatically &mdash; you set them like any other field.
+                </p>
+
+                <h3>Ad-hoc Custom Fields with <code>set_custom()</code></h3>
+                <p>
+                  Some custom fields aren't exposed through the endpoint definition, so they don't show
+                  up as model attributes. For those, use <code>set_custom()</code> to attach a custom
+                  field to a model instance. The wrapper type is inferred from the Python value, or you
+                  can specify it explicitly:
+                </p>
+                <CodeSnippet :code="setCustomExample" language="python" />
+                <p class="note">
+                  Available wrapper types: <code>CustomStringField</code>, <code>CustomIntField</code>,
+                  <code>CustomShortField</code>, <code>CustomDecimalField</code>,
+                  <code>CustomDoubleField</code>, <code>CustomBooleanField</code>,
+                  <code>CustomDateTimeField</code>, and <code>CustomGuidField</code>.
+                </p>
               </section>
 
               <!-- Partial Updates -->
@@ -105,10 +126,12 @@
                   Models provide full type hints for IDE autocomplete and type checking. Generate stub files
                   for enhanced IDE support:
                 </p>
-                <CodeSnippet :code="stubsExample" language="python" />
+                <CodeSnippet :code="stubsExample" language="bash" />
                 <p class="note">
-                  Stub generation creates <code>.pyi</code> files that provide type information to IDEs like
-                  VSCode and PyCharm without requiring runtime model generation.
+                  Stub generation creates PEP 561 <code>.pyi</code> files inside the installed package, so
+                  IDEs like VSCode/Pylance and PyCharm (and type checkers like mypy) discover them
+                  automatically. Re-run <code>generate-stubs</code> whenever your schema changes. See the
+                  <NuxtLink to="/python/installation">Installation guide</NuxtLink> for more detail.
                 </p>
               </section>
 
@@ -154,9 +177,9 @@
                 </ul>
 
                 <p class="note">
-                  This is different from the service's <code>get_schema()</code> method, which retrieves
-                  Acumatica's native $adHocSchema. The model's <code>get_schema()</code> returns simplified
-                  Python type information for the generated dataclass.
+                  This is different from the service's <code>get_ad_hoc_schema()</code> method, which
+                  retrieves Acumatica's native $adHocSchema. The model's <code>get_schema()</code> returns
+                  simplified Python type information for the generated dataclass.
                 </p>
               </section>
 
@@ -317,6 +340,26 @@ customer = client.models.Customer(
     UsrAccountManager="John Smith"
 )`;
 
+const setCustomExample = `# Attach a custom field that wasn't discovered via $adHocSchema.
+customer = client.models.Customer(
+    CustomerID="CUST001",
+    CustomerName="Acme Corp",
+)
+
+# Type inferred from the value (str -> CustomStringField)
+customer.set_custom("CustomerSettings", "UsrLoyaltyId", "GOLD-12345")
+
+# Or specify the wrapper type explicitly
+customer.set_custom(
+    "CustomerSettings",
+    "UsrCreditScore",
+    720,
+    custom_type="CustomIntField",
+)
+
+# set_custom values are merged into the payload's "custom" block
+client.customers.put_entity(customer)`;
+
 const partialUpdateExample = `# Partial update - only provide fields to change
 update = client.models.Customer(
     CustomerID="CUST001",  # Required: identifies the record
@@ -343,18 +386,19 @@ created = client.customers.put_entity(customer_dict)
 
 # Models are preferred for type safety`;
 
-const stubsExample = `from easy_acumatica import AcumaticaClient
-from easy_acumatica.generate_stubs import generate_stubs_from_client
+const stubsExample = `# Stubs are generated with the 'generate-stubs' CLI command that ships
+# with the package. Run it once after install (and again after schema
+# changes). It writes .pyi files into the installed package.
+generate-stubs \\
+    --url "https://your-instance.acumatica.com" \\
+    --username "api_user" \\
+    --password "secure_password" \\
+    --tenant "Company" \\
+    --endpoint-version "24.109.0029"
 
-# Initialize client
-client = AcumaticaClient()
-
-# Generate stub files for IDE support
-generate_stubs_from_client(client)
-
-# Now your IDE will provide autocomplete for all models
-# Example: typing "client.models." will show all available models
-# Example: typing "client.models.Customer(" will show all fields`;
+# Now your IDE will autocomplete every model and service:
+#   typing "client.models."          lists all models
+#   typing "client.models.Customer(" shows all fields`;
 
 const validationExample = `# Type validation happens at instantiation
 try:

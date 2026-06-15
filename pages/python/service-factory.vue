@@ -123,7 +123,7 @@
               <section id="generic-inquiries" class="doc-section">
                 <h2>Generic Inquiries</h2>
                 <p>
-                  Generic Inquiries (GI) are exposed through the <code>client.Inquiries</code> service. Each inquiry
+                  Generic Inquiries (GI) are exposed through the <code>client.inquiries</code> service. Each inquiry
                   gets its own method based on the inquiry name:
                 </p>
                 <CodeSnippet :code="inquiryExample" language="python" />
@@ -332,19 +332,29 @@ options = QueryOptions(
 
 customers = client.customers.get_list(options=options)`;
 
-const customActionsExample = `# Check if action exists
+const customActionsExample = `# Action methods take a single invocation model built from client.models.
+# The invocation carries the target 'entity' and any 'parameters'.
+
+# Check if action exists
 if hasattr(client.invoices, 'invoke_action_release'):
     # Get the invoice
     invoice = client.invoices.get_by_id("INV001234")
 
     # Execute the release action
-    client.invoices.invoke_action_release(invoice)
+    client.invoices.invoke_action_release(
+        client.models.ReleaseInvoice(entity=invoice)
+    )
     print(f"Released invoice {invoice.RefNbr}")
 
 # Actions with parameters
 if hasattr(client.sales_orders, 'invoke_action_create_shipment'):
     order = client.sales_orders.get_by_id("SO001234")
-    client.sales_orders.invoke_action_create_shipment(order)`;
+    client.sales_orders.invoke_action_create_shipment(
+        client.models.CreateShipment(
+            entity=order,
+            parameters={"ShipmentDate": "2024-01-15"}
+        )
+    )`;
 
 const putFileExample = `# Upload a file to an entity
 with open('invoice.pdf', 'rb') as f:
@@ -365,12 +375,13 @@ for file_info in files:
 
 const inquiryExample = `from easy_acumatica.odata import QueryOptions
 
-# List available inquiry methods
-inquiries = [m for m in dir(client.Inquiries) if not m.startswith('_')]
+# List available inquiry methods (the service is client.inquiries)
+inquiries = [m for m in dir(client.inquiries) if not m.startswith('_')]
 print(inquiries)
 
-# Call an inquiry
-results = client.Inquiries.account_summary(
+# Call an inquiry. Method names mirror the inquiry's name with
+# spaces/hyphens replaced by underscores (case preserved).
+results = client.inquiries.Account_Summary(
     options=QueryOptions(
         filter="AccountCD eq '10000'",
         top=50

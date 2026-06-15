@@ -52,7 +52,7 @@
                 <p>Control batch execution behavior with various options:</p>
                 <CodeSnippet :code="configurationExample" language="python" />
                 <ul>
-                  <li><code>max_concurrent</code>: Maximum number of concurrent API calls (default: 10)</li>
+                  <li><code>max_concurrent</code>: Maximum number of concurrent API calls (default: 5)</li>
                   <li><code>timeout</code>: Total timeout for batch execution in seconds</li>
                   <li><code>fail_fast</code>: Stop execution on first failure (default: False)</li>
                   <li><code>return_exceptions</code>: Return exceptions instead of raising (default: True)</li>

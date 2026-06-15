@@ -7,7 +7,7 @@
           <v-col cols="12" lg="10" class="text-center">
             <div class="hero-content">
               <h1 class="hero-title">Installation</h1>
-              <p class="hero-subtitle">Install Easy-Acumatica v0.5.10 via pip</p>
+              <p class="hero-subtitle">Install Easy-Acumatica v0.6.1 via pip</p>
             </div>
           </v-col>
         </v-row>
@@ -23,7 +23,7 @@
               <section id="prerequisites" class="doc-section">
             <h2>Prerequisites</h2>
             <ul>
-              <li>Python 3.7 or higher</li>
+              <li>Python 3.8 or higher</li>
               <li>pip package manager</li>
               <li>Access to an Acumatica instance with REST API enabled</li>
               <li>API credentials (username, password, tenant)</li>
@@ -58,11 +58,38 @@
             <CodeSnippet :code="specificVersion" language="bash" />
           </section>
 
+          <!-- Optional Extras -->
+          <section id="extras" class="doc-section">
+            <h2>Optional Extras</h2>
+            <p>
+              The interactive <NuxtLink to="/python/debug-tui">Debug TUI</NuxtLink>
+              (<code>ea-debug</code>) ships as an optional extra. Install it with:
+            </p>
+            <CodeSnippet :code="tuiInstall" language="bash" />
+          </section>
+
           <!-- Development Installation -->
           <section id="development" class="doc-section">
             <h2>Development Installation</h2>
             <p>Install from source for development:</p>
             <CodeSnippet :code="devInstall" language="bash" />
+          </section>
+
+          <!-- Type Stubs / IDE Autocompletion -->
+          <section id="type-stubs" class="doc-section">
+            <h2>IDE Autocompletion (Type Stubs)</h2>
+            <p>
+              Models and services are generated dynamically at runtime, so IDEs can't see them by
+              default. The package includes a <code>generate-stubs</code> command that writes PEP 561
+              <code>.pyi</code> stub files into the installed package, giving VSCode/Pylance, PyCharm,
+              Pyright, and mypy full autocompletion and type checking.
+            </p>
+            <CodeSnippet :code="stubsInstall" language="bash" />
+            <p class="note">
+              Run this once after installation, and again whenever your Acumatica schema changes. See
+              <a href="https://github.com/Nioron07/Easy-Acumatica/blob/main/STUBSETUP.md" target="_blank" rel="noopener">STUBSETUP.md</a>
+              for advanced setups (AWS Lambda, read-only installs, multi-tenant).
+            </p>
           </section>
 
           <!-- Next Steps -->
@@ -104,7 +131,9 @@ const navItems = ref([
   { id: 'verify', title: 'Verify Installation', icon: 'mdi-check-circle' },
   { id: 'virtual-environment', title: 'Virtual Environment', icon: 'mdi-package-variant' },
   { id: 'specific-version', title: 'Specific Version', icon: 'mdi-tag' },
+  { id: 'extras', title: 'Optional Extras', icon: 'mdi-puzzle-plus' },
   { id: 'development', title: 'Development', icon: 'mdi-code-braces' },
+  { id: 'type-stubs', title: 'IDE Autocompletion', icon: 'mdi-code-tags' },
   { id: 'next-steps', title: 'Next Steps', icon: 'mdi-arrow-right' },
 ]);
 
@@ -124,11 +153,21 @@ venv\\Scripts\\activate
 # Install package
 pip install easy-acumatica`;
 
-const specificVersion = `pip install easy-acumatica==0.5.10`;
+const specificVersion = `pip install easy-acumatica==0.6.1`;
+
+const tuiInstall = `# Core package plus the interactive ea-debug TUI
+pip install easy-acumatica[tui]`;
 
 const devInstall = `git clone https://github.com/Nioron07/Easy-Acumatica.git
 cd Easy-Acumatica
 pip install -e .`;
+
+const stubsInstall = `generate-stubs \\
+    --url "https://your-instance.acumatica.com" \\
+    --username "api_user" \\
+    --password "secure_password" \\
+    --tenant "Company" \\
+    --endpoint-version "24.109.0029"`;
 
 useSeoMeta({
   title: 'Installation | Easy-Acumatica Python',

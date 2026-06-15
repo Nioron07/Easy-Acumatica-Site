@@ -7,7 +7,7 @@
           <v-col cols="12" lg="10" class="text-center">
             <div class="hero-content">
               <h1 class="hero-title">Quickstart Guide</h1>
-              <p class="hero-subtitle">Get started with Easy-Acumatica v0.5.10</p>
+              <p class="hero-subtitle">Get started with Easy-Acumatica v0.6.1</p>
             </div>
           </v-col>
         </v-row>
@@ -23,7 +23,7 @@
               <section id="prerequisites" class="doc-section">
             <h2>Prerequisites</h2>
             <ul>
-              <li>Easy-Acumatica v0.5.10 installed (<code>pip install easy-acumatica</code>)</li>
+              <li>Easy-Acumatica v0.6.1 installed (<code>pip install easy-acumatica</code>)</li>
               <li>Acumatica instance with REST API enabled</li>
               <li>API credentials (username, password, tenant, branch)</li>
             </ul>
@@ -232,8 +232,10 @@ if hasattr(client.invoices, 'invoke_action_release'):
     # Get the invoice
     invoice = client.invoices.get_by_id("INV001234")
 
-    # Execute the release action
-    client.invoices.invoke_action_release(entity=invoice)
+    # Build the invocation model (carries the target entity + any parameters)
+    # and pass it to the action method.
+    invocation = client.models.ReleaseInvoice(entity=invoice)
+    client.invoices.invoke_action_release(invocation)
     print(f"Released invoice {invoice.RefNbr}")`;
 
 const completeExample = `from easy_acumatica import AcumaticaClient
@@ -287,12 +289,14 @@ for order in completed_orders:
     print(f"Created invoice {created.RefNbr} for order {order.OrderNbr}")
 
     if hasattr(client.invoices, 'invoke_action_release'):
-        client.invoices.invoke_action_release(entity=created)
+        client.invoices.invoke_action_release(
+            client.models.ReleaseInvoice(entity=created)
+        )
         print(f"Released invoice {created.RefNbr}")`;
 
 useSeoMeta({
   title: 'Quickstart Guide | Easy-Acumatica Python',
-  description: 'Get started with Easy-Acumatica v0.5.10. Learn basic CRUD operations, querying, and working with the Acumatica REST API.',
+  description: 'Get started with Easy-Acumatica v0.6.1. Learn basic CRUD operations, querying, and working with the Acumatica REST API.',
   ogTitle: 'Easy-Acumatica Python Quickstart Guide',
   ogDescription: 'Step-by-step guide to using Easy-Acumatica Python library for Acumatica ERP integration. CRUD operations, OData queries, and more.',
   ogType: 'article',

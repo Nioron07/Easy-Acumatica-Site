@@ -28,7 +28,7 @@
             <!-- Version Badge -->
             <div class="version-badge">
               <v-icon size="small">mdi-package-variant</v-icon>
-              <span>Version 0.5.10</span>
+              <span>Version 0.6.1</span>
             </div>
 
             <!-- Main Title -->
@@ -331,8 +331,8 @@ useSchemaOrg([
     'description': 'Python library for Acumatica ERP REST API with automatic schema discovery and type safety',
     'codeRepository': 'https://github.com/Nioron07/Easy-Acumatica',
     'programmingLanguage': 'Python',
-    'runtimePlatform': 'Python 3.7+',
-    'version': '0.5.10',
+    'runtimePlatform': 'Python 3.8+',
+    'version': '0.6.1',
     'license': 'https://opensource.org/licenses/MIT',
     'targetProduct': {
       '@type': 'SoftwareApplication',
@@ -383,7 +383,7 @@ client.customers.put_entity(new_customer)
 # OData filtering with Python-style expressions
 active_customers = client.customers.get_list(
     options=QueryOptions(
-    filter=F.Status == "Active",
+        filter=F.Status == "Active",
         select=["CustomerID", "CustomerName"],
         top=10
     )

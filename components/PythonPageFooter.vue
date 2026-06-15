@@ -12,7 +12,7 @@
           </p>
           <div class="version-info mt-3">
             <v-chip size="small" variant="outlined" color="white">
-              v0.5.10
+              v0.6.1
             </v-chip>
             <v-chip size="small" variant="outlined" color="white" class="ml-2">
               Python 3.8+
@@ -38,6 +38,9 @@
             <li><a href="/python/model-factory">Models</a></li>
             <li><a href="/python/batching">Batching</a></li>
             <li><a href="/python/task-scheduler">Scheduler</a></li>
+            <li><a href="/python/configuration">Configuration</a></li>
+            <li><a href="/python/error-handling">Error Handling</a></li>
+            <li><a href="/python/debug-tui">Debug TUI</a></li>
           </ul>
         </v-col>
 
