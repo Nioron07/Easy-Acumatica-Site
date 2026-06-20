@@ -1,0 +1,27 @@
+# Dependencies and build artifacts (regenerated inside the image)
+node_modules
+.output
+.nuxt
+.nitro
+.cache
+.data
+dist
+
+# VCS / tooling
+.git
+.gitignore
+.gcloudignore
+.dockerignore
+.claude
+
+# Local env and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and OS/editor cruft
+*.log
+logs
+.DS_Store
+.idea
+.fleet
