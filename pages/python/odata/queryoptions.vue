@@ -28,7 +28,6 @@ options = QueryOptions(
     filter=F.Amount > 1000,
     select=["CustomerID", "Amount", "Status"],
     expand=["Details"],
-    orderby="Amount desc",
     top=50
 )</code></pre>
             </div>
@@ -56,6 +55,21 @@ options = QueryOptions(
 
                 <v-alert type="info" variant="tonal" class="mt-4">
                   All parameters are optional. Use with the F factory for filter construction.
+                </v-alert>
+
+                <v-alert type="warning" variant="tonal" class="mt-4">
+                  <strong>Entity endpoints vs. Generic Inquiries.</strong> The contract-based REST API
+                  (regular entity endpoints like <code class="inline-code">client.customers</code>) supports
+                  only <code class="inline-code">$filter</code>, <code class="inline-code">$select</code>,
+                  <code class="inline-code">$expand</code>, <code class="inline-code">$top</code>,
+                  <code class="inline-code">$skip</code> and <code class="inline-code">$custom</code>.
+                  The other OData v4 options — <code class="inline-code">orderby</code>,
+                  <code class="inline-code">count</code>, <code class="inline-code">search</code>,
+                  <code class="inline-code">apply</code>, <code class="inline-code">format</code>,
+                  <code class="inline-code">skiptoken</code>, <code class="inline-code">deltatoken</code> —
+                  are only honored by <NuxtLink to="/python/generic-inquiries">Generic Inquiries</NuxtLink>
+                  and the OData endpoint. Passing them to an entity endpoint will error, so sort/aggregate
+                  entity results in Python instead.
                 </v-alert>
               </v-card-text>
             </v-card>
@@ -253,9 +267,9 @@ customers = client.customers.get_list(options)`;
 const filteredQueryExample = `from easy_acumatica.odata import QueryOptions, F
 
 # Filter active customers with balance > 1000
+# (entity endpoints don't support $orderby — sort in Python if needed)
 options = QueryOptions(
     filter=(F.Status == "Active") & (F.Balance > 1000),
-    orderby="Balance desc",
     top=50
 )
 customers = client.customers.get_list(options)
@@ -298,10 +312,7 @@ options = QueryOptions(
         CustomField.field("CustomerSettings", "UsrVIPStatus"),
         CustomField.field("CustomerSettings", "UsrLoyaltyLevel")
     ],
-    
-    # Sort by multiple fields
-    orderby=["CustomerClass", "Balance desc"],
-    
+
     # Pagination
     top=20,
     skip=0
@@ -387,10 +398,9 @@ options = QueryOptions(
     top=50
 )
 
-# Combine with filter and sort
+# Combine with a filter
 options = QueryOptions(
     filter=F.Status == "Active",
-    orderby="CreatedDate desc",
     top=10
 )`,
     note: 'Always use top to limit results, especially during development and testing.'
@@ -410,31 +420,31 @@ options = QueryOptions(
 def get_page(page_number, page_size=20):
     return QueryOptions(
         top=page_size,
-        skip=(page_number - 1) * page_size,
-        orderby="CustomerID"  # Always use orderby with pagination
+        skip=(page_number - 1) * page_size
     )`,
-    note: 'Always use orderby with skip to ensure consistent pagination results.'
+    note: 'On entity endpoints, paginate with top + skip (no orderby). For Generic Inquiries you can add orderby for a stable sort.'
   },
   {
     name: 'orderby',
     type: 'str | List[str]',
     required: false,
-    description: 'Field(s) to sort by. Use "field desc" for descending order.',
-    example: `# Single field sort
+    description: 'Field(s) to sort by. Use "field desc" for descending order. Generic Inquiries / OData endpoint only — not supported on contract-based entity endpoints.',
+    example: `# Generic Inquiries support orderby
 options = QueryOptions(
     orderby="CustomerName"
 )
+results = client.inquiries.Customer_List(options=options)
 
 # Descending sort
-options = QueryOptions(
-    orderby="Balance desc"
-)
+options = QueryOptions(orderby="Balance desc")
 
 # Multiple fields
-options = QueryOptions(
-    orderby=["CustomerClass", "Balance desc"]
-)`,
-    note: 'Field names are case-sensitive. Use desc for descending, default is ascending.'
+options = QueryOptions(orderby=["CustomerClass", "Balance desc"])
+
+# Entity endpoints do NOT support orderby — sort in Python instead:
+customers = client.customers.get_list(QueryOptions(top=100))
+customers.sort(key=lambda c: c.CustomerName)`,
+    note: 'orderby only works with Generic Inquiries and the OData endpoint. Sending it to an entity endpoint (client.customers, client.sales_orders, ...) will error.'
   },
   {
     name: 'custom',
@@ -464,34 +474,36 @@ options = QueryOptions(
     name: 'count',
     type: 'bool',
     required: false,
-    description: 'Include total count of matching records (OData v4 only).',
-    example: `# Request count with results
+    description: 'Include total count of matching records. Generic Inquiries / OData endpoint only (OData v4).',
+    example: `# Generic Inquiries / OData endpoint only
 options = QueryOptions(
     filter=F.Status == "Active",
     top=10,
     count=True
 )
+results = client.inquiries.Customer_List(options=options)
 
 # The response will include @odata.count`,
-    note: 'Only available in OData v4. Check your Acumatica version.'
+    note: 'count is an OData v4 option supported by Generic Inquiries / the OData endpoint, not by contract-based entity endpoints.'
   },
   {
     name: 'search',
     type: 'str',
     required: false,
-    description: 'Free-text search across searchable fields (OData v4 only).',
-    example: `# Search across all searchable fields
+    description: 'Free-text search across searchable fields. Generic Inquiries / OData endpoint only (OData v4).',
+    example: `# Generic Inquiries / OData endpoint only
 options = QueryOptions(
     search="john smith",
     top=20
 )
+results = client.inquiries.Customer_List(options=options)
 
-# Combine with filter
+# Combine with a filter
 options = QueryOptions(
     search="urgent",
     filter=F.Status == "Open"
 )`,
-    note: 'Search behavior depends on Acumatica configuration. Not all fields are searchable.'
+    note: 'search is an OData v4 option for Generic Inquiries / the OData endpoint, not contract-based entity endpoints. Behavior also depends on Acumatica configuration.'
   }
 ]);
 
@@ -511,10 +523,9 @@ const advancedPatterns = ref([
 ):
     """Build a dynamic customer query based on parameters."""
     
-    # Start with base options
+    # Start with base options (no orderby — entity endpoints don't support it)
     options_dict = {
         "select": ["CustomerID", "CustomerName", "Balance", "Status"],
-        "orderby": "CustomerName",
         "top": page_size,
         "skip": (page - 1) * page_size
     }
@@ -569,11 +580,11 @@ query3 = build_customer_query()  # No filters, just pagination`,
         skip = 0
         
         while True:
-            # Build options for this page
+            # Build options for this page (entity endpoints page with top + skip;
+            # they don't accept orderby)
             options_dict = {
                 "top": self.page_size,
-                "skip": skip,
-                "orderby": "id"  # Consistent ordering required
+                "skip": skip
             }
             
             # Merge with base options
@@ -606,8 +617,7 @@ query3 = build_customer_query()  # No filters, just pagination`,
         """Get a specific page of results."""
         options_dict = {
             "top": self.page_size,
-            "skip": (page_number - 1) * self.page_size,
-            "orderby": "id"
+            "skip": (page_number - 1) * self.page_size
         }
         
         if base_options:
@@ -696,7 +706,7 @@ measure_query(QueryOptions(top=10, select=["CustomerID"]))  # Minimal`,
     code: `# Base query
 base_options = QueryOptions(
     select=["CustomerID", "CustomerName", "Balance"],
-    orderby="CustomerName"
+    top=100
 )
 
 # Method 1: Using copy() method
@@ -717,12 +727,12 @@ class QueryTemplates:
         options = {
             "select": [
                 "CustomerID",
-                "CustomerName", 
+                "CustomerName",
                 "Balance",
                 "CreditLimit",
                 "Status"
             ],
-            "orderby": "Balance desc"
+            "top": 100
         }
         
         filters = []

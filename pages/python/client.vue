@@ -735,28 +735,32 @@ options = QueryOptions(
     expand=["MainContact", "Orders"],
     top=50,
     skip=0,
-    orderby="CustomerName"
 )
 
 # Apply to any list operation
 customers = client.customers.get_list(options=options)
 
+# NOTE: Contract-based entity endpoints (customers, sales_orders, invoices, ...)
+# support only $filter, $select, $expand, $top, $skip and $custom. $orderby and
+# the other OData v4 options ($count, $search, $apply, ...) are NOT supported on
+# entity endpoints and will error — they only work with Generic Inquiries.
+
 # Complex query with multiple parameters
 complex_options = QueryOptions(
     filter=(
-        (F.Type == "Business") & 
-        (F.Balance > 5000) & 
+        (F.Type == "Business") &
+        (F.Balance > 5000) &
         F.CustomerName.contains("Corp")
     ),
     select=["CustomerID", "CustomerName", "Balance", "MainContact"],
     expand=["MainContact", "Orders", "Orders/Details"],
-    orderby=["Balance desc", "CustomerName"],  # Multiple sort fields
     top=20
 )
 
-# Use with generic inquiries
+# Generic Inquiries DO support the full OData v4 surface, including $orderby
 inquiry_options = QueryOptions(
     filter=F.AccountID == "1000",
+    orderby=["AccountID"],
     top=10
 )
 inquiry_results = client.inquiries.Account_Details(options=inquiry_options)
@@ -820,7 +824,6 @@ comprehensive_query = QueryOptions(
         "OrderTotal", "Status"
     ],
     expand=["Customer", "Details", "Details/InventoryItem"],
-    orderby=["OrderDate desc", "OrderTotal desc"],
     top=100,
     custom=[
         CustomField.field("Document", "UsrPriority"),

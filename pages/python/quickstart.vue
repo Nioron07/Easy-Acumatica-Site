@@ -205,18 +205,19 @@ active_customers = client.customers.get_list(options=options)
 options = QueryOptions(
     filter=(F.Status == "Active") & (F.CreditLimit > 10000),
     select=["CustomerID", "CustomerName", "CreditLimit"],
-    orderby=["CustomerName"],
     top=50
 )
-customers = client.customers.get_list(options=options)`;
+customers = client.customers.get_list(options=options)
+
+# NOTE: $orderby is not supported on contract-based entity endpoints — it only
+# works with Generic Inquiries. Sort entity results client-side if needed.`;
 
 const expandData = `from easy_acumatica.odata import QueryOptions, F
 
 # Get sales orders with details and customer information
 options = QueryOptions(
     filter=F.Status == "Open",
-    expand=["Details", "Customer"],
-    orderby=["Date desc"]
+    expand=["Details", "Customer"]
 )
 orders = client.sales_orders.get_list(options=options)
 
@@ -251,8 +252,7 @@ start_date = end_date - timedelta(days=30)
 
 options = QueryOptions(
     filter=(F.Status == "Completed") & (F.Date >= start_date),
-    expand=["Details", "Customer"],
-    orderby=["Date desc"]
+    expand=["Details", "Customer"]
 )
 completed_orders = client.sales_orders.get_list(options=options)
 

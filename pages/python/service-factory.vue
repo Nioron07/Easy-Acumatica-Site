@@ -267,10 +267,13 @@ all_customers = client.customers.get_list()
 options = QueryOptions(
     filter=F.Status == "Active",
     select=["CustomerID", "CustomerName", "Email"],
-    orderby=["CustomerName"],
     top=100
 )
-active_customers = client.customers.get_list(options=options)`;
+active_customers = client.customers.get_list(options=options)
+
+# NOTE: entity endpoints support $filter, $select, $expand, $top, $skip and
+# $custom only. $orderby (and other OData v4 options) work with Generic
+# Inquiries, not contract-based entity endpoints.`;
 
 const getByIdExample = `# Get by primary key ID
 customer = client.customers.get_by_id("ABCCOMP")
@@ -325,7 +328,6 @@ options = QueryOptions(
     filter=(F.Status == "Active") & (F.CreditLimit > 10000),
     select=["CustomerID", "CustomerName", "CreditLimit"],
     expand=["Contacts", "PrimaryContact"],
-    orderby=["CustomerName asc"],
     top=50,
     skip=0
 )
@@ -400,12 +402,12 @@ results = client.pe_all_items.query_custom_endpoint()
 options = QueryOptions(
     expand=['PEALLPRODSDetails'],  # Expand detail fields
     top=100,
-    orderby=['InventoryID']
+    skip=0
 )
 results = client.pe_all_items.query_custom_endpoint(options=options)
 
-# Note: OData filtering may be unstable for custom endpoints
-# Filtering is better done in Python after retrieving results
+# Note: custom endpoints support $filter, but not $orderby — sort the
+# results in Python after retrieving them.
 
 # The results structure depends on your GI configuration
 for item in results:
